@@ -46,11 +46,43 @@ Jev's Choice primitive can produce a probability distribution across multiple mu
 
 Status:
 
-UNTESTED
+SUPPORTED (conditions: 2026-09-21, `jev-1.13.0`, 3-way sky-color Choice, 9/9 answers had `choice` + `probabilities` + `confidence`)
 
 Experiment:
 
-003 (planned)
+003
+
+---
+
+## H008 — Choice tracks intended option on polar states
+
+Hypothesis:
+
+For a three-way sky-color Choice, a clearly blue state selects `blue` and a clearly grey state selects `grey`.
+
+Status:
+
+SUPPORTED (conditions: states `"The sky is blue."` and `"The sky is overcast and grey."`, n=3 each, labels 3/3 matching)
+
+Experiment:
+
+003
+
+---
+
+## H009 — Choice probabilities sum to 1
+
+Hypothesis:
+
+Each successful Choice answer's `probabilities` values sum to approximately 1.
+
+Status:
+
+SUPPORTED (conditions: 9 one-hot maps, sums exactly 1.0; does not test partial distributions)
+
+Experiment:
+
+003
 
 ---
 

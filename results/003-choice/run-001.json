@@ -1,0 +1,561 @@
+{
+  "experiment_id": "003-choice",
+  "run_id": "run-001",
+  "timestamp": "2026-09-21T17:46:09.899514+00:00",
+  "model_requested": "jev-1.13.0",
+  "api": {
+    "provider": "typesafe_direct",
+    "base_url": "https://api.typesafe.ai",
+    "endpoint": "/v1/systemone",
+    "method": "POST"
+  },
+  "design": {
+    "repeats_per_case": 3,
+    "question_id": "sky_color",
+    "questions": {
+      "sky_color": {
+        "type": "choice",
+        "instructions": "What color is the sky described as?",
+        "criteria": {
+          "blue": "The sky is described as blue",
+          "grey": "The sky is described as grey, gray, or overcast",
+          "unspecified": "The sky color is not stated"
+        }
+      }
+    },
+    "variable_changed": "state evidence for sky color",
+    "held_constant": [
+      "model",
+      "endpoint",
+      "question type",
+      "question instructions",
+      "criteria",
+      "question id"
+    ],
+    "cases": [
+      {
+        "case_id": "clear_blue",
+        "state": "The sky is blue.",
+        "intended": "blue"
+      },
+      {
+        "case_id": "clear_grey",
+        "state": "The sky is overcast and grey.",
+        "intended": "grey"
+      },
+      {
+        "case_id": "ambiguous",
+        "state": "The weather looks mixed today.",
+        "intended": "unspecified"
+      }
+    ]
+  },
+  "summary": {
+    "clear_blue": {
+      "n": 3,
+      "choices": [
+        "blue",
+        "blue",
+        "blue"
+      ],
+      "unique_choices": [
+        "blue"
+      ],
+      "confidence_min": 1.0,
+      "confidence_max": 1.0,
+      "confidence_mean": 1.0,
+      "probability_sum_min": 1.0,
+      "probability_sum_max": 1.0,
+      "mean_probabilities": {
+        "blue": 1.0,
+        "grey": 0.0,
+        "unspecified": 0.0
+      }
+    },
+    "clear_grey": {
+      "n": 3,
+      "choices": [
+        "grey",
+        "grey",
+        "grey"
+      ],
+      "unique_choices": [
+        "grey"
+      ],
+      "confidence_min": 1.0,
+      "confidence_max": 1.0,
+      "confidence_mean": 1.0,
+      "probability_sum_min": 1.0,
+      "probability_sum_max": 1.0,
+      "mean_probabilities": {
+        "blue": 0.0,
+        "grey": 1.0,
+        "unspecified": 0.0
+      }
+    },
+    "ambiguous": {
+      "n": 3,
+      "choices": [
+        "unspecified",
+        "unspecified",
+        "unspecified"
+      ],
+      "unique_choices": [
+        "unspecified"
+      ],
+      "confidence_min": 1.0,
+      "confidence_max": 1.0,
+      "confidence_mean": 1.0,
+      "probability_sum_min": 1.0,
+      "probability_sum_max": 1.0,
+      "mean_probabilities": {
+        "blue": 0.0,
+        "grey": 0.0,
+        "unspecified": 1.0
+      }
+    }
+  },
+  "trials": [
+    {
+      "case_id": "clear_blue",
+      "repeat": 1,
+      "state": "The sky is blue.",
+      "timestamp": "2026-09-21T17:46:09.917102+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0c5134913707d8ce304b4f91d80e6",
+      "latency_ms": 1363.7347459998637,
+      "input_tokens": 348,
+      "output_tokens": 41,
+      "estimated_cost_usd": 1.4616000000000002e-05,
+      "choice": "blue",
+      "confidence": 1.0,
+      "probabilities": {
+        "blue": 1.0,
+        "grey": 0.0,
+        "unspecified": 0.0
+      },
+      "probability_sum": 1.0,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Mon, 21 Sep 2026 17:46:09 GMT",
+        "server": "istio-envoy",
+        "content-length": "203",
+        "content-type": "application/json",
+        "x-typesafe-request-id": "req_01a0c5134913707d8ce304b4f91d80e6",
+        "x-envoy-upstream-service-time": "272"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "sky_color": {
+            "type": "choice",
+            "choice": "blue",
+            "confidence": 1.0,
+            "probabilities": {
+              "blue": 1.0,
+              "grey": 0.0,
+              "unspecified": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 348,
+          "output_tokens": 41
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "clear_blue",
+      "repeat": 2,
+      "state": "The sky is blue.",
+      "timestamp": "2026-09-21T17:46:11.282730+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0c5134c3c7e10803c590bef41f52d",
+      "latency_ms": 517.7126999997199,
+      "input_tokens": 348,
+      "output_tokens": 41,
+      "estimated_cost_usd": 1.4616000000000002e-05,
+      "choice": "blue",
+      "confidence": 1.0,
+      "probabilities": {
+        "blue": 1.0,
+        "grey": 0.0,
+        "unspecified": 0.0
+      },
+      "probability_sum": 1.0,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Mon, 21 Sep 2026 17:46:10 GMT",
+        "server": "istio-envoy",
+        "content-length": "203",
+        "content-type": "application/json",
+        "x-typesafe-request-id": "req_01a0c5134c3c7e10803c590bef41f52d",
+        "x-envoy-upstream-service-time": "254"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "sky_color": {
+            "type": "choice",
+            "choice": "blue",
+            "confidence": 1.0,
+            "probabilities": {
+              "blue": 1.0,
+              "grey": 0.0,
+              "unspecified": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 348,
+          "output_tokens": 41
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "clear_blue",
+      "repeat": 3,
+      "state": "The sky is blue.",
+      "timestamp": "2026-09-21T17:46:11.800694+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0c5134e517f518863b171670a0fc1",
+      "latency_ms": 546.160570000211,
+      "input_tokens": 348,
+      "output_tokens": 41,
+      "estimated_cost_usd": 1.4616000000000002e-05,
+      "choice": "blue",
+      "confidence": 1.0,
+      "probabilities": {
+        "blue": 1.0,
+        "unspecified": 0.0,
+        "grey": 0.0
+      },
+      "probability_sum": 1.0,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Mon, 21 Sep 2026 17:46:11 GMT",
+        "server": "istio-envoy",
+        "content-length": "203",
+        "content-type": "application/json",
+        "x-typesafe-request-id": "req_01a0c5134e517f518863b171670a0fc1",
+        "x-envoy-upstream-service-time": "301"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "sky_color": {
+            "type": "choice",
+            "choice": "blue",
+            "confidence": 1.0,
+            "probabilities": {
+              "blue": 1.0,
+              "unspecified": 0.0,
+              "grey": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 348,
+          "output_tokens": 41
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "clear_grey",
+      "repeat": 1,
+      "state": "The sky is overcast and grey.",
+      "timestamp": "2026-09-21T17:46:12.347052+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0c513505b726bb3a565ba625c45fe",
+      "latency_ms": 530.9042069993666,
+      "input_tokens": 351,
+      "output_tokens": 41,
+      "estimated_cost_usd": 1.4742e-05,
+      "choice": "grey",
+      "confidence": 1.0,
+      "probabilities": {
+        "grey": 1.0,
+        "blue": 0.0,
+        "unspecified": 0.0
+      },
+      "probability_sum": 1.0,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Mon, 21 Sep 2026 17:46:12 GMT",
+        "server": "istio-envoy",
+        "content-length": "203",
+        "content-type": "application/json",
+        "x-typesafe-request-id": "req_01a0c513505b726bb3a565ba625c45fe",
+        "x-envoy-upstream-service-time": "265"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "sky_color": {
+            "type": "choice",
+            "choice": "grey",
+            "confidence": 1.0,
+            "probabilities": {
+              "grey": 1.0,
+              "blue": 0.0,
+              "unspecified": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 351,
+          "output_tokens": 41
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "clear_grey",
+      "repeat": 2,
+      "state": "The sky is overcast and grey.",
+      "timestamp": "2026-09-21T17:46:12.878125+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0c513526b7d3b9cef3e779b97926b",
+      "latency_ms": 1990.5160560001605,
+      "input_tokens": 351,
+      "output_tokens": 41,
+      "estimated_cost_usd": 1.4742e-05,
+      "choice": "grey",
+      "confidence": 1.0,
+      "probabilities": {
+        "unspecified": 0.0,
+        "blue": 0.0,
+        "grey": 1.0
+      },
+      "probability_sum": 1.0,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Mon, 21 Sep 2026 17:46:12 GMT",
+        "server": "istio-envoy",
+        "content-length": "203",
+        "content-type": "application/json",
+        "x-typesafe-request-id": "req_01a0c513526b7d3b9cef3e779b97926b",
+        "x-envoy-upstream-service-time": "297"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "sky_color": {
+            "type": "choice",
+            "choice": "grey",
+            "confidence": 1.0,
+            "probabilities": {
+              "unspecified": 0.0,
+              "blue": 0.0,
+              "grey": 1.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 351,
+          "output_tokens": 41
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "clear_grey",
+      "repeat": 3,
+      "state": "The sky is overcast and grey.",
+      "timestamp": "2026-09-21T17:46:14.868890+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0c5135a33753a9d85573e4abf725d",
+      "latency_ms": 1216.6553830002158,
+      "input_tokens": 351,
+      "output_tokens": 41,
+      "estimated_cost_usd": 1.4742e-05,
+      "choice": "grey",
+      "confidence": 1.0,
+      "probabilities": {
+        "blue": 0.0,
+        "grey": 1.0,
+        "unspecified": 0.0
+      },
+      "probability_sum": 1.0,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Mon, 21 Sep 2026 17:46:14 GMT",
+        "server": "istio-envoy",
+        "content-length": "203",
+        "content-type": "application/json",
+        "x-typesafe-request-id": "req_01a0c5135a33753a9d85573e4abf725d",
+        "x-envoy-upstream-service-time": "364"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "sky_color": {
+            "type": "choice",
+            "choice": "grey",
+            "confidence": 1.0,
+            "probabilities": {
+              "blue": 0.0,
+              "grey": 1.0,
+              "unspecified": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 351,
+          "output_tokens": 41
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "ambiguous",
+      "repeat": 1,
+      "state": "The weather looks mixed today.",
+      "timestamp": "2026-09-21T17:46:16.085716+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0c5135f0d79d2981653dde5738d6d",
+      "latency_ms": 688.6725619997378,
+      "input_tokens": 349,
+      "output_tokens": 43,
+      "estimated_cost_usd": 1.4658000000000001e-05,
+      "choice": "unspecified",
+      "confidence": 1.0,
+      "probabilities": {
+        "unspecified": 1.0,
+        "blue": 0.0,
+        "grey": 0.0
+      },
+      "probability_sum": 1.0,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Mon, 21 Sep 2026 17:46:15 GMT",
+        "server": "istio-envoy",
+        "content-length": "210",
+        "content-type": "application/json",
+        "x-typesafe-request-id": "req_01a0c5135f0d79d2981653dde5738d6d",
+        "x-envoy-upstream-service-time": "259"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "sky_color": {
+            "type": "choice",
+            "choice": "unspecified",
+            "confidence": 1.0,
+            "probabilities": {
+              "unspecified": 1.0,
+              "blue": 0.0,
+              "grey": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 349,
+          "output_tokens": 43
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "ambiguous",
+      "repeat": 2,
+      "state": "The weather looks mixed today.",
+      "timestamp": "2026-09-21T17:46:16.774637+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0c51361a87eb4a8487b0b39f1886c",
+      "latency_ms": 574.4025849999161,
+      "input_tokens": 349,
+      "output_tokens": 43,
+      "estimated_cost_usd": 1.4658000000000001e-05,
+      "choice": "unspecified",
+      "confidence": 1.0,
+      "probabilities": {
+        "unspecified": 1.0,
+        "blue": 0.0,
+        "grey": 0.0
+      },
+      "probability_sum": 1.0,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Mon, 21 Sep 2026 17:46:16 GMT",
+        "server": "istio-envoy",
+        "content-length": "210",
+        "content-type": "application/json",
+        "x-typesafe-request-id": "req_01a0c51361a87eb4a8487b0b39f1886c",
+        "x-envoy-upstream-service-time": "289"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "sky_color": {
+            "type": "choice",
+            "choice": "unspecified",
+            "confidence": 1.0,
+            "probabilities": {
+              "unspecified": 1.0,
+              "blue": 0.0,
+              "grey": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 349,
+          "output_tokens": 43
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "ambiguous",
+      "repeat": 3,
+      "state": "The weather looks mixed today.",
+      "timestamp": "2026-09-21T17:46:17.349384+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0c51363ec7a09a7fae7a3310a7f23",
+      "latency_ms": 626.5526249999311,
+      "input_tokens": 349,
+      "output_tokens": 43,
+      "estimated_cost_usd": 1.4658000000000001e-05,
+      "choice": "unspecified",
+      "confidence": 1.0,
+      "probabilities": {
+        "grey": 0.0,
+        "unspecified": 1.0,
+        "blue": 0.0
+      },
+      "probability_sum": 1.0,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Mon, 21 Sep 2026 17:46:17 GMT",
+        "server": "istio-envoy",
+        "content-length": "210",
+        "content-type": "application/json",
+        "x-typesafe-request-id": "req_01a0c51363ec7a09a7fae7a3310a7f23",
+        "x-envoy-upstream-service-time": "276"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "sky_color": {
+            "type": "choice",
+            "choice": "unspecified",
+            "confidence": 1.0,
+            "probabilities": {
+              "grey": 0.0,
+              "unspecified": 1.0,
+              "blue": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 349,
+          "output_tokens": 43
+        }
+      },
+      "error": null
+    }
+  ]
+}

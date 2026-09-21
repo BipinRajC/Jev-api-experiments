@@ -66,3 +66,16 @@ Only findings measured in this repository.
 - **Limitations:** n=3 per cell. English one-liners. Immediate sequential repeats may share server-side caching; this was not tested. Not a calibration study.
 - **Confidence in the finding:** High for these 9 calls; low as a general stability or uncertainty-representation claim.
 - **Implications:** Treat Noul as a structured yes-weight on clear items. Do not interpret values near 0 as uniquely “no” versus “unmentioned” without a dedicated missing-information experiment. Next: Choice (003).
+
+---
+
+## F006 — Choice returned one-hot distributions that matched polar and unstated states
+
+- **Related hypothesis:** H003, H008, H009
+- **Experiment(s):** 003 (`results/003-choice/run-001.json`)
+- **Conditions:** 2026-09-21 UTC; `jev-1.13.0`; Choice `sky_color` with options `blue`/`grey`/`unspecified`; same three states as 002; 3 sequential repeats each
+- **Evidence:** 9/9 HTTP 200. Labels: blue×3, grey×3, unspecified×3. Each map one-hot (winning option 1.0, others 0.0), sum 1.0, confidence 1.0. JSON key order of `probabilities` varied.
+- **Interpretation:** Under these trivial items, Choice returned the documented schema and selected the intended option, including `unspecified` when color was unmentioned. That differs from Noul 002, where the same unmentioned state scored 0.05 rather than a dedicated unknown outcome. Confidence was constantly 1.0, so this run does not characterize confidence.
+- **Limitations:** n=3. Toy sentences. No partial (non-one-hot) distributions observed. Key order is not semantically meaningful.
+- **Confidence in the finding:** High for schema and polar labeling on these 9 calls; low for confidence behavior or non-trivial classification.
+- **Implications:** Prefer Choice when “unmentioned” is a real option. Next: Score (004).
