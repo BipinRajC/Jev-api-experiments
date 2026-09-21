@@ -135,6 +135,25 @@ def test_timeout_raises_timeout_error():
         )
 
 
+def test_request_id_reads_x_typesafe_request_id():
+    def handler(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(
+            200,
+            json={
+                "model": "jev-1.13.0",
+                "answers": {"q": {"type": "noul", "noul": 0.5}},
+                "usage": {"input_tokens": 1, "output_tokens": 1},
+            },
+            headers={"x-typesafe-request-id": "req_abc"},
+        )
+
+    client = JevClient(api_key="k", transport=httpx.MockTransport(handler))
+    result = client.system_one(
+        state="x", questions={"q": {"type": "noul", "instructions": "y"}}
+    )
+    assert result.request_id == "req_abc"
+
+
 def test_request_schema_requires_state_model_and_questions():
     req = SystemOneRequest(
         state="The sky is blue.",

@@ -128,8 +128,10 @@ class JevClient:
         except httpx.RequestError as exc:
             raise JevAPIError(f"Network error calling {url}: {exc}") from exc
         latency_ms = (time.perf_counter() - started) * 1000
-        request_id = response.headers.get("x-request-id") or response.headers.get(
-            "request-id"
+        request_id = (
+            response.headers.get("x-typesafe-request-id")
+            or response.headers.get("x-request-id")
+            or response.headers.get("request-id")
         )
         body = self._parse_json(response)
         if response.status_code == 401:
