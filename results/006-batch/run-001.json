@@ -1,0 +1,344 @@
+{
+  "experiment_id": "006-batch",
+  "run_id": "run-001",
+  "timestamp": "2026-09-21T23:00:46.646211+00:00",
+  "model_requested": "jev-1.13.0",
+  "api": {
+    "provider": "typesafe_direct",
+    "base_url": "https://api.typesafe.ai",
+    "endpoint": "/v1/systemone",
+    "method": "POST"
+  },
+  "design": {
+    "state": "The sky is blue.",
+    "batch_question_ids": [
+      "is_sky_blue",
+      "sky_color",
+      "sky_blueness"
+    ],
+    "separate_calls": [
+      "separate_noul",
+      "separate_choice",
+      "separate_score"
+    ],
+    "held_constant": [
+      "state",
+      "model",
+      "question wording"
+    ],
+    "variable": "one request with three questions vs three single-question requests"
+  },
+  "comparison": {
+    "answers_match": {
+      "is_sky_blue": {
+        "batch": {
+          "noul": 0.99
+        },
+        "separate": {
+          "noul": 1.0
+        },
+        "equal": false
+      },
+      "sky_color": {
+        "batch": {
+          "choice": "blue",
+          "probabilities": {
+            "unspecified": 0.0,
+            "blue": 1.0,
+            "grey": 0.0
+          },
+          "confidence": 1.0,
+          "probability_sum": 1.0
+        },
+        "separate": {
+          "choice": "blue",
+          "probabilities": {
+            "grey": 0.0,
+            "blue": 1.0,
+            "unspecified": 0.0
+          },
+          "confidence": 1.0,
+          "probability_sum": 1.0
+        },
+        "equal": true
+      },
+      "sky_blueness": {
+        "batch": {
+          "score": 2.0,
+          "confidence": 1.0,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 1.0
+          },
+          "probability_sum": 1.0
+        },
+        "separate": {
+          "score": 2.0,
+          "confidence": 1.0,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 1.0
+          },
+          "probability_sum": 1.0
+        },
+        "equal": true
+      }
+    },
+    "batch_input_tokens": 426,
+    "separate_input_tokens_sum": 954,
+    "input_token_ratio_separate_over_batch": 2.23943661971831,
+    "batch_output_tokens": 77,
+    "separate_output_tokens_sum": 84,
+    "batch_latency_ms": 894.1349699998682,
+    "separate_latency_ms_sum": 955.7550170029572,
+    "latency_ratio_separate_over_batch": 1.0689158226336881,
+    "batch_estimated_cost_usd": 1.7892e-05,
+    "separate_estimated_cost_usd_sum": 4.0068e-05
+  },
+  "calls": [
+    {
+      "call_id": "batch",
+      "question_ids": [
+        "is_sky_blue",
+        "sky_color",
+        "sky_blueness"
+      ],
+      "timestamp": "2026-09-21T23:00:46.673345+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0c63352307be0b0f889f69584b34c",
+      "latency_ms": 894.1349699998682,
+      "input_tokens": 426,
+      "output_tokens": 77,
+      "estimated_cost_usd": 1.7892e-05,
+      "model_returned": "jev-1.13.0",
+      "parsed": {
+        "is_sky_blue": {
+          "noul": 0.99
+        },
+        "sky_color": {
+          "choice": "blue",
+          "probabilities": {
+            "unspecified": 0.0,
+            "blue": 1.0,
+            "grey": 0.0
+          },
+          "confidence": 1.0,
+          "probability_sum": 1.0
+        },
+        "sky_blueness": {
+          "score": 2.0,
+          "confidence": 1.0,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 1.0
+          },
+          "probability_sum": 1.0
+        }
+      },
+      "response_headers": {
+        "date": "Mon, 21 Sep 2026 23:00:47 GMT",
+        "server": "istio-envoy",
+        "content-length": "492",
+        "content-type": "application/json",
+        "x-typesafe-request-id": "req_01a0c63352307be0b0f889f69584b34c",
+        "x-envoy-upstream-service-time": "150"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "is_sky_blue": {
+            "type": "noul",
+            "noul": 0.99
+          },
+          "sky_color": {
+            "type": "choice",
+            "choice": "blue",
+            "confidence": 1.0,
+            "probabilities": {
+              "unspecified": 0.0,
+              "blue": 1.0,
+              "grey": 0.0
+            }
+          },
+          "sky_blueness": {
+            "type": "score",
+            "score": 2.0,
+            "confidence": 1.0,
+            "legend": {
+              "0": "The sky is described as grey, gray, or overcast, not blue",
+              "1": "The sky color is not stated",
+              "2": "The sky is described as blue"
+            },
+            "probabilities": {
+              "0": 0.0,
+              "1": 0.0,
+              "2": 1.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 426,
+          "output_tokens": 77
+        }
+      },
+      "error": null
+    },
+    {
+      "call_id": "separate_noul",
+      "question_ids": [
+        "is_sky_blue"
+      ],
+      "timestamp": "2026-09-21T23:00:47.567949+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0c63353be781e9b62a47e8bd6a7fd",
+      "latency_ms": 312.1392580032989,
+      "input_tokens": 278,
+      "output_tokens": 23,
+      "estimated_cost_usd": 1.1676e-05,
+      "model_returned": "jev-1.13.0",
+      "parsed": {
+        "is_sky_blue": {
+          "noul": 1.0
+        }
+      },
+      "response_headers": {
+        "date": "Mon, 21 Sep 2026 23:00:46 GMT",
+        "server": "istio-envoy",
+        "content-length": "123",
+        "content-type": "application/json",
+        "x-typesafe-request-id": "req_01a0c63353be781e9b62a47e8bd6a7fd",
+        "x-envoy-upstream-service-time": "70"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "is_sky_blue": {
+            "type": "noul",
+            "noul": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 278,
+          "output_tokens": 23
+        }
+      },
+      "error": null
+    },
+    {
+      "call_id": "separate_choice",
+      "question_ids": [
+        "sky_color"
+      ],
+      "timestamp": "2026-09-21T23:00:47.880428+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0c63354f479f89096cc568ca7a105",
+      "latency_ms": 314.6707949999836,
+      "input_tokens": 348,
+      "output_tokens": 41,
+      "estimated_cost_usd": 1.4616000000000002e-05,
+      "model_returned": "jev-1.13.0",
+      "parsed": {
+        "sky_color": {
+          "choice": "blue",
+          "probabilities": {
+            "grey": 0.0,
+            "blue": 1.0,
+            "unspecified": 0.0
+          },
+          "confidence": 1.0,
+          "probability_sum": 1.0
+        }
+      },
+      "response_headers": {
+        "date": "Mon, 21 Sep 2026 23:00:47 GMT",
+        "server": "istio-envoy",
+        "content-length": "203",
+        "content-type": "application/json",
+        "x-typesafe-request-id": "req_01a0c63354f479f89096cc568ca7a105",
+        "x-envoy-upstream-service-time": "73"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "sky_color": {
+            "type": "choice",
+            "choice": "blue",
+            "confidence": 1.0,
+            "probabilities": {
+              "grey": 0.0,
+              "blue": 1.0,
+              "unspecified": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 348,
+          "output_tokens": 41
+        }
+      },
+      "error": null
+    },
+    {
+      "call_id": "separate_score",
+      "question_ids": [
+        "sky_blueness"
+      ],
+      "timestamp": "2026-09-21T23:00:48.195489+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0c63356317fdba0581fdae3cc626d",
+      "latency_ms": 328.94496399967466,
+      "input_tokens": 328,
+      "output_tokens": 20,
+      "estimated_cost_usd": 1.3776000000000002e-05,
+      "model_returned": "jev-1.13.0",
+      "parsed": {
+        "sky_blueness": {
+          "score": 2.0,
+          "confidence": 1.0,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 1.0
+          },
+          "probability_sum": 1.0
+        }
+      },
+      "response_headers": {
+        "date": "Mon, 21 Sep 2026 23:00:47 GMT",
+        "server": "istio-envoy",
+        "content-length": "329",
+        "content-type": "application/json",
+        "x-typesafe-request-id": "req_01a0c63356317fdba0581fdae3cc626d",
+        "x-envoy-upstream-service-time": "86"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "sky_blueness": {
+            "type": "score",
+            "score": 2.0,
+            "confidence": 1.0,
+            "legend": {
+              "0": "The sky is described as grey, gray, or overcast, not blue",
+              "1": "The sky color is not stated",
+              "2": "The sky is described as blue"
+            },
+            "probabilities": {
+              "0": 0.0,
+              "1": 0.0,
+              "2": 1.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 328,
+          "output_tokens": 20
+        }
+      },
+      "error": null
+    }
+  ]
+}

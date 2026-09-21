@@ -109,3 +109,16 @@ Only findings measured in this repository.
 - **Limitations:** n=1 per case. 429/529 untested. Behavior may change.
 - **Confidence in the finding:** High for these four calls on this date; treat as snapshot, not a contract.
 - **Implications:** Client should handle 400 and 403, not only the documented four codes. Next: batch questions (006).
+
+---
+
+## F009 — One request can return mixed Noul/Choice/Score; input tokens were 2.24× lower than three separate calls
+
+- **Related hypothesis:** H015, H016, H017
+- **Experiment(s):** 006 (`results/006-batch/run-001.json`)
+- **Conditions:** 2026-09-21 UTC; `jev-1.13.0`; state `"The sky is blue."`; questions copied from 002/003/004; batch first, then three separate calls; n=1
+- **Evidence:** Batch HTTP 200 with answers for `is_sky_blue` (noul 0.99), `sky_color` (blue, conf 1.0), `sky_blueness` (score 2.0). Separate: noul **1.0**, choice blue, score 2.0. Input tokens 426 vs 278+348+328=954. Output 77 vs 84. Client latency 894 ms vs 312+315+329=956 ms.
+- **Interpretation:** Mixed primitives work in one request. Input-token savings vs three calls were real on this item (state is not billed three times). Strict answer equality failed on Noul (0.99 vs 1.0); that is a 0.01 difference also consistent with jitter (002 recorded 0.99, this separate call recorded 1.0). Do not claim batching changes decisions.
+- **Limitations:** n=1. Toy state. Latency confounded by order/warmup. No test of many questions (cookbook-scale fan-out).
+- **Confidence in the finding:** High for batch schema and token inequality on this run; low for answer-identity and latency.
+- **Implications:** Prefer batching independent questions for cost. Do not assume identical Noul floats across batched vs separate. Phase 1 complete.

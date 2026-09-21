@@ -87,7 +87,7 @@ Named map; keys are not sent to the underlying model. VERIFIED FROM OFFICIAL DOC
 
 ## Batching
 
-Multiple questions in one request, evaluated in parallel against one `state`. VERIFIED FROM OFFICIAL DOCS. Efficiency claims (latency/cost vs N separate calls): UNVERIFIED here (see planned Experiment 006). Official cookbook claims exist; treat as UNTESTED in this repo.
+Multiple questions in one request, evaluated in parallel against one `state`. VERIFIED FROM OFFICIAL DOCS. VERIFIED EXPERIMENTALLY (006): one request returned Noul+Choice+Score together. Input tokens 426 vs 954 for three separate calls (n=1, 3 questions, same state). Output 77 vs 84. Noul 0.99 vs 1.0 across batch vs separate; Choice/Score matched. Large fan-out (cookbook 13-question claims): UNVERIFIED here.
 
 ## Errors
 

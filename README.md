@@ -26,7 +26,7 @@ Do not treat marketing claims, blog posts, or demos as facts until they are test
 - Early access to TypeSafe Jev
 - Direct TypeSafe API access
 - $5 promotional monthly credit, currently expiring 19 October (year of credit grant)
-- Experiments run: `001-api-sanity`, `002-noul`, `003-choice`, `004-score`, `005-error-handling`
+- Experiments run: `001`–`006` (Phase 1 API understanding complete)
 
 ## Long-term objective
 

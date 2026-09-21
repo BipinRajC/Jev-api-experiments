@@ -227,3 +227,51 @@ SUPPORTED (conditions: valid key, body `{state, model}` only, HTTP 422, FastAPI-
 Experiment:
 
 005
+
+---
+
+## H015 — Mixed primitives batch
+
+Hypothesis:
+
+One System One request containing Noul, Choice, and Score returns a structured answer for each question id.
+
+Status:
+
+SUPPORTED (conditions: 2026-09-21, `jev-1.13.0`, one request with Noul+Choice+Score, HTTP 200, all three ids present)
+
+Experiment:
+
+006
+
+---
+
+## H016 — Batched answers match separate answers
+
+Hypothesis:
+
+For the trivial state `"The sky is blue."`, batched Noul/Choice/Score values equal the corresponding separate-call values.
+
+Status:
+
+REJECTED under strict equality (Noul 0.99 batched vs 1.0 separate; Choice and Score matched). Cause unseparated from Noul jitter.
+
+Experiment:
+
+006
+
+---
+
+## H017 — Batch uses fewer input tokens than the sum of separate calls
+
+Hypothesis:
+
+`usage.input_tokens` for one three-question request is less than the sum of three single-question requests on the same state.
+
+Status:
+
+SUPPORTED (conditions: batch 426 vs separate sum 954, ratio 2.24; n=1)
+
+Experiment:
+
+006
