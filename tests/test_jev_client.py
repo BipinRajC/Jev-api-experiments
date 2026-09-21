@@ -154,6 +154,16 @@ def test_request_id_reads_x_typesafe_request_id():
     assert result.request_id == "req_abc"
 
 
+def test_post_raw_returns_error_status_without_raising():
+    def handler(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(401, json={"error": "unauthorized"})
+
+    client = JevClient(api_key="k", transport=httpx.MockTransport(handler))
+    result = client.post_raw({"state": "x"})
+    assert result.status_code == 401
+    assert result.body == {"error": "unauthorized"}
+
+
 def test_request_schema_requires_state_model_and_questions():
     req = SystemOneRequest(
         state="The sky is blue.",

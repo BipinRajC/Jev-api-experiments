@@ -113,6 +113,14 @@ class JevClient:
             model=model or self.model,
             questions=questions,
         ).to_payload()
+        return self._request(payload, raise_http_errors=True)
+
+    def post_raw(self, payload: dict[str, Any]) -> SystemOneResult:
+        return self._request(payload, raise_http_errors=False)
+
+    def _request(
+        self, payload: dict[str, Any], *, raise_http_errors: bool
+    ) -> SystemOneResult:
         url = f"{self.base_url}{SYSTEMONE_PATH}"
         headers = {
             "Authorization": f"Bearer {self.api_key}",
@@ -134,6 +142,18 @@ class JevClient:
             or response.headers.get("request-id")
         )
         body = self._parse_json(response)
+        if not raise_http_errors:
+            raw_text = response.text
+            return SystemOneResult(
+                status_code=response.status_code,
+                body=body if isinstance(body, dict) else {"_non_object": body},
+                headers=dict(response.headers),
+                latency_ms=latency_ms,
+                request_id=request_id,
+                model=body.get("model") if isinstance(body, dict) else None,
+                usage=(body.get("usage") or {}) if isinstance(body, dict) else {},
+                raw_text=raw_text,
+            )
         if response.status_code == 401:
             raise JevAuthError(
                 "Authentication failed. Check TYPESAFE_API_KEY.",
