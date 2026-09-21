@@ -79,3 +79,16 @@ Only findings measured in this repository.
 - **Limitations:** n=3. Toy sentences. No partial (non-one-hot) distributions observed. Key order is not semantically meaningful.
 - **Confidence in the finding:** High for schema and polar labeling on these 9 calls; low for confidence behavior or non-trivial classification.
 - **Implications:** Prefer Choice when “unmentioned” is a real option. Next: Score (004).
+
+---
+
+## F007 — Score landed on integer levels matching the rubric
+
+- **Related hypothesis:** H004, H010, H011
+- **Experiment(s):** 004 (`results/004-score/run-001.json`)
+- **Conditions:** 2026-09-21 UTC; `jev-1.13.0`; Score `sky_blueness` with three ordered criteria (grey / unstated / blue); same three states as 002/003; 3 sequential repeats each
+- **Evidence:** 9/9 HTTP 200. Scores: clear_blue 2.0×3, ambiguous 1.0×3, clear_grey 0.0×3. Confidence 1.0. Probability mass 1.0 on the matching level. Legend echoed the request criteria. Sums 1.0.
+- **Interpretation:** Under these trivial items, Score returned the documented schema and ordered the three states as intended. Between-level (non-integer) scores were not observed. Confidence was constantly 1.0.
+- **Limitations:** n=3. Toy sentences. Does not show Score interpolates. Does not characterize confidence.
+- **Confidence in the finding:** High for schema and ordering on these 9 calls; low for Score as a continuous scale.
+- **Implications:** Score is usable as an ordered-level output on clear items. Next: error handling (005).

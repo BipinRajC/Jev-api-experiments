@@ -69,7 +69,7 @@ Noul answer: `{ "type": "noul", "noul": <number 0–1> }` — no separate `confi
 
 Choice answer: `choice`, `probabilities`, `confidence`. VERIFIED EXPERIMENTALLY on 003: 9/9 answers had all three fields; maps were one-hot with sum 1.0; `confidence` was 1.0; probability key order was not stable.
 
-Score answer: `score`, `legend`, `probabilities`, `confidence`.
+Score answer: `score`, `legend`, `probabilities`, `confidence`. VERIFIED EXPERIMENTALLY on 004: 9/9 answers had all four fields; scores were integers 2.0 / 1.0 / 0.0; maps one-hot with sum 1.0; `confidence` 1.0; `legend` echoed request criteria. Between-level scores UNVERIFIED.
 
 Source: VERIFIED FROM OFFICIAL DOCS.
 

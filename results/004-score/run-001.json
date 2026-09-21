@@ -1,0 +1,654 @@
+{
+  "experiment_id": "004-score",
+  "run_id": "run-001",
+  "timestamp": "2026-09-21T17:59:13.887013+00:00",
+  "model_requested": "jev-1.13.0",
+  "api": {
+    "provider": "typesafe_direct",
+    "base_url": "https://api.typesafe.ai",
+    "endpoint": "/v1/systemone",
+    "method": "POST"
+  },
+  "design": {
+    "repeats_per_case": 3,
+    "question_id": "sky_blueness",
+    "questions": {
+      "sky_blueness": {
+        "type": "score",
+        "instructions": "How clearly is the sky described as blue?",
+        "criteria": [
+          "The sky is described as grey, gray, or overcast, not blue",
+          "The sky color is not stated",
+          "The sky is described as blue"
+        ]
+      }
+    },
+    "variable_changed": "state evidence for sky color",
+    "held_constant": [
+      "model",
+      "endpoint",
+      "question type",
+      "question instructions",
+      "criteria",
+      "question id"
+    ],
+    "cases": [
+      {
+        "case_id": "clear_blue",
+        "state": "The sky is blue.",
+        "intended_level": 2
+      },
+      {
+        "case_id": "clear_grey",
+        "state": "The sky is overcast and grey.",
+        "intended_level": 0
+      },
+      {
+        "case_id": "ambiguous",
+        "state": "The weather looks mixed today.",
+        "intended_level": 1
+      }
+    ]
+  },
+  "summary": {
+    "clear_blue": {
+      "n": 3,
+      "scores": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "score_min": 2.0,
+      "score_max": 2.0,
+      "score_mean": 2.0,
+      "score_range": 0.0,
+      "confidence_min": 1.0,
+      "confidence_max": 1.0,
+      "confidence_mean": 1.0,
+      "probability_sum_min": 1.0,
+      "probability_sum_max": 1.0,
+      "legend": {
+        "0": "The sky is described as grey, gray, or overcast, not blue",
+        "1": "The sky color is not stated",
+        "2": "The sky is described as blue"
+      }
+    },
+    "clear_grey": {
+      "n": 3,
+      "scores": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "score_min": 0.0,
+      "score_max": 0.0,
+      "score_mean": 0.0,
+      "score_range": 0.0,
+      "confidence_min": 1.0,
+      "confidence_max": 1.0,
+      "confidence_mean": 1.0,
+      "probability_sum_min": 1.0,
+      "probability_sum_max": 1.0,
+      "legend": {
+        "0": "The sky is described as grey, gray, or overcast, not blue",
+        "1": "The sky color is not stated",
+        "2": "The sky is described as blue"
+      }
+    },
+    "ambiguous": {
+      "n": 3,
+      "scores": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "score_min": 1.0,
+      "score_max": 1.0,
+      "score_mean": 1.0,
+      "score_range": 0.0,
+      "confidence_min": 1.0,
+      "confidence_max": 1.0,
+      "confidence_mean": 1.0,
+      "probability_sum_min": 1.0,
+      "probability_sum_max": 1.0,
+      "legend": {
+        "0": "The sky is described as grey, gray, or overcast, not blue",
+        "1": "The sky color is not stated",
+        "2": "The sky is described as blue"
+      }
+    }
+  },
+  "trials": [
+    {
+      "case_id": "clear_blue",
+      "repeat": 1,
+      "state": "The sky is blue.",
+      "timestamp": "2026-09-21T17:59:13.905535+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0c51f579579079060c467b1cbb7b8",
+      "latency_ms": 7791.62824299965,
+      "input_tokens": 328,
+      "output_tokens": 20,
+      "estimated_cost_usd": 1.3776000000000002e-05,
+      "score": 2.0,
+      "confidence": 1.0,
+      "legend": {
+        "0": "The sky is described as grey, gray, or overcast, not blue",
+        "1": "The sky color is not stated",
+        "2": "The sky is described as blue"
+      },
+      "probabilities": {
+        "0": 0.0,
+        "1": 0.0,
+        "2": 1.0
+      },
+      "probability_sum": 1.0,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Mon, 21 Sep 2026 17:59:20 GMT",
+        "server": "istio-envoy",
+        "content-length": "329",
+        "content-type": "application/json",
+        "x-typesafe-request-id": "req_01a0c51f579579079060c467b1cbb7b8",
+        "x-envoy-upstream-service-time": "89"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "sky_blueness": {
+            "type": "score",
+            "score": 2.0,
+            "confidence": 1.0,
+            "legend": {
+              "0": "The sky is described as grey, gray, or overcast, not blue",
+              "1": "The sky color is not stated",
+              "2": "The sky is described as blue"
+            },
+            "probabilities": {
+              "0": 0.0,
+              "1": 0.0,
+              "2": 1.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 328,
+          "output_tokens": 20
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "clear_blue",
+      "repeat": 2,
+      "state": "The sky is blue.",
+      "timestamp": "2026-09-21T17:59:21.697443+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0c51f5bbd7bdf95b6477fb661dfa8",
+      "latency_ms": 305.05576500036113,
+      "input_tokens": 328,
+      "output_tokens": 20,
+      "estimated_cost_usd": 1.3776000000000002e-05,
+      "score": 2.0,
+      "confidence": 1.0,
+      "legend": {
+        "0": "The sky is described as grey, gray, or overcast, not blue",
+        "1": "The sky color is not stated",
+        "2": "The sky is described as blue"
+      },
+      "probabilities": {
+        "0": 0.0,
+        "1": 0.0,
+        "2": 1.0
+      },
+      "probability_sum": 1.0,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Mon, 21 Sep 2026 17:59:21 GMT",
+        "server": "istio-envoy",
+        "content-length": "329",
+        "content-type": "application/json",
+        "x-typesafe-request-id": "req_01a0c51f5bbd7bdf95b6477fb661dfa8",
+        "x-envoy-upstream-service-time": "61"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "sky_blueness": {
+            "type": "score",
+            "score": 2.0,
+            "confidence": 1.0,
+            "legend": {
+              "0": "The sky is described as grey, gray, or overcast, not blue",
+              "1": "The sky color is not stated",
+              "2": "The sky is described as blue"
+            },
+            "probabilities": {
+              "0": 0.0,
+              "1": 0.0,
+              "2": 1.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 328,
+          "output_tokens": 20
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "clear_blue",
+      "repeat": 3,
+      "state": "The sky is blue.",
+      "timestamp": "2026-09-21T17:59:22.002668+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0c51f5cee7be684fc7204c0716414",
+      "latency_ms": 3064.9604079999335,
+      "input_tokens": 328,
+      "output_tokens": 20,
+      "estimated_cost_usd": 1.3776000000000002e-05,
+      "score": 2.0,
+      "confidence": 1.0,
+      "legend": {
+        "0": "The sky is described as grey, gray, or overcast, not blue",
+        "1": "The sky color is not stated",
+        "2": "The sky is described as blue"
+      },
+      "probabilities": {
+        "0": 0.0,
+        "1": 0.0,
+        "2": 1.0
+      },
+      "probability_sum": 1.0,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Mon, 21 Sep 2026 17:59:21 GMT",
+        "server": "istio-envoy",
+        "content-length": "329",
+        "content-type": "application/json",
+        "x-typesafe-request-id": "req_01a0c51f5cee7be684fc7204c0716414",
+        "x-envoy-upstream-service-time": "94"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "sky_blueness": {
+            "type": "score",
+            "score": 2.0,
+            "confidence": 1.0,
+            "legend": {
+              "0": "The sky is described as grey, gray, or overcast, not blue",
+              "1": "The sky color is not stated",
+              "2": "The sky is described as blue"
+            },
+            "probabilities": {
+              "0": 0.0,
+              "1": 0.0,
+              "2": 1.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 328,
+          "output_tokens": 20
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "clear_grey",
+      "repeat": 1,
+      "state": "The sky is overcast and grey.",
+      "timestamp": "2026-09-21T17:59:25.067761+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0c51f692c7c4abc6dfb284faa4e40",
+      "latency_ms": 460.0246210002297,
+      "input_tokens": 331,
+      "output_tokens": 20,
+      "estimated_cost_usd": 1.3902000000000002e-05,
+      "score": 0.0,
+      "confidence": 1.0,
+      "legend": {
+        "0": "The sky is described as grey, gray, or overcast, not blue",
+        "1": "The sky color is not stated",
+        "2": "The sky is described as blue"
+      },
+      "probabilities": {
+        "0": 1.0,
+        "1": 0.0,
+        "2": 0.0
+      },
+      "probability_sum": 1.0,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Mon, 21 Sep 2026 17:59:24 GMT",
+        "server": "istio-envoy",
+        "content-length": "329",
+        "content-type": "application/json",
+        "x-typesafe-request-id": "req_01a0c51f692c7c4abc6dfb284faa4e40",
+        "x-envoy-upstream-service-time": "84"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "sky_blueness": {
+            "type": "score",
+            "score": 0.0,
+            "confidence": 1.0,
+            "legend": {
+              "0": "The sky is described as grey, gray, or overcast, not blue",
+              "1": "The sky color is not stated",
+              "2": "The sky is described as blue"
+            },
+            "probabilities": {
+              "0": 1.0,
+              "1": 0.0,
+              "2": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 331,
+          "output_tokens": 20
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "clear_grey",
+      "repeat": 2,
+      "state": "The sky is overcast and grey.",
+      "timestamp": "2026-09-21T17:59:25.528034+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0c51f6ab77ab888e6af8520e6f419",
+      "latency_ms": 328.10060900010285,
+      "input_tokens": 331,
+      "output_tokens": 20,
+      "estimated_cost_usd": 1.3902000000000002e-05,
+      "score": 0.0,
+      "confidence": 1.0,
+      "legend": {
+        "0": "The sky is described as grey, gray, or overcast, not blue",
+        "1": "The sky color is not stated",
+        "2": "The sky is described as blue"
+      },
+      "probabilities": {
+        "0": 1.0,
+        "1": 0.0,
+        "2": 0.0
+      },
+      "probability_sum": 1.0,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Mon, 21 Sep 2026 17:59:25 GMT",
+        "server": "istio-envoy",
+        "content-length": "329",
+        "content-type": "application/json",
+        "x-typesafe-request-id": "req_01a0c51f6ab77ab888e6af8520e6f419",
+        "x-envoy-upstream-service-time": "78"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "sky_blueness": {
+            "type": "score",
+            "score": 0.0,
+            "confidence": 1.0,
+            "legend": {
+              "0": "The sky is described as grey, gray, or overcast, not blue",
+              "1": "The sky color is not stated",
+              "2": "The sky is described as blue"
+            },
+            "probabilities": {
+              "0": 1.0,
+              "1": 0.0,
+              "2": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 331,
+          "output_tokens": 20
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "clear_grey",
+      "repeat": 3,
+      "state": "The sky is overcast and grey.",
+      "timestamp": "2026-09-21T17:59:25.856306+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0c51f6bfd74ea945d0c255f0531a9",
+      "latency_ms": 349.2499730000418,
+      "input_tokens": 331,
+      "output_tokens": 20,
+      "estimated_cost_usd": 1.3902000000000002e-05,
+      "score": 0.0,
+      "confidence": 1.0,
+      "legend": {
+        "0": "The sky is described as grey, gray, or overcast, not blue",
+        "1": "The sky color is not stated",
+        "2": "The sky is described as blue"
+      },
+      "probabilities": {
+        "0": 1.0,
+        "1": 0.0,
+        "2": 0.0
+      },
+      "probability_sum": 1.0,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Mon, 21 Sep 2026 17:59:25 GMT",
+        "server": "istio-envoy",
+        "content-length": "329",
+        "content-type": "application/json",
+        "x-typesafe-request-id": "req_01a0c51f6bfd74ea945d0c255f0531a9",
+        "x-envoy-upstream-service-time": "93"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "sky_blueness": {
+            "type": "score",
+            "score": 0.0,
+            "confidence": 1.0,
+            "legend": {
+              "0": "The sky is described as grey, gray, or overcast, not blue",
+              "1": "The sky color is not stated",
+              "2": "The sky is described as blue"
+            },
+            "probabilities": {
+              "0": 1.0,
+              "1": 0.0,
+              "2": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 331,
+          "output_tokens": 20
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "ambiguous",
+      "repeat": 1,
+      "state": "The weather looks mixed today.",
+      "timestamp": "2026-09-21T17:59:26.205824+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0c51f6d5a7a6483b021d2a976ff80",
+      "latency_ms": 1338.8492649992259,
+      "input_tokens": 329,
+      "output_tokens": 20,
+      "estimated_cost_usd": 1.3818000000000002e-05,
+      "score": 1.0,
+      "confidence": 1.0,
+      "legend": {
+        "0": "The sky is described as grey, gray, or overcast, not blue",
+        "1": "The sky color is not stated",
+        "2": "The sky is described as blue"
+      },
+      "probabilities": {
+        "0": 0.0,
+        "1": 1.0,
+        "2": 0.0
+      },
+      "probability_sum": 1.0,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Mon, 21 Sep 2026 17:59:25 GMT",
+        "server": "istio-envoy",
+        "content-length": "329",
+        "content-type": "application/json",
+        "x-typesafe-request-id": "req_01a0c51f6d5a7a6483b021d2a976ff80",
+        "x-envoy-upstream-service-time": "108"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "sky_blueness": {
+            "type": "score",
+            "score": 1.0,
+            "confidence": 1.0,
+            "legend": {
+              "0": "The sky is described as grey, gray, or overcast, not blue",
+              "1": "The sky color is not stated",
+              "2": "The sky is described as blue"
+            },
+            "probabilities": {
+              "0": 0.0,
+              "1": 1.0,
+              "2": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 329,
+          "output_tokens": 20
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "ambiguous",
+      "repeat": 2,
+      "state": "The weather looks mixed today.",
+      "timestamp": "2026-09-21T17:59:27.544854+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0c51f72957329884e9ee231a4f735",
+      "latency_ms": 305.8285730003263,
+      "input_tokens": 329,
+      "output_tokens": 20,
+      "estimated_cost_usd": 1.3818000000000002e-05,
+      "score": 1.0,
+      "confidence": 1.0,
+      "legend": {
+        "0": "The sky is described as grey, gray, or overcast, not blue",
+        "1": "The sky color is not stated",
+        "2": "The sky is described as blue"
+      },
+      "probabilities": {
+        "0": 0.0,
+        "1": 1.0,
+        "2": 0.0
+      },
+      "probability_sum": 1.0,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Mon, 21 Sep 2026 17:59:27 GMT",
+        "server": "istio-envoy",
+        "content-length": "329",
+        "content-type": "application/json",
+        "x-typesafe-request-id": "req_01a0c51f72957329884e9ee231a4f735",
+        "x-envoy-upstream-service-time": "60"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "sky_blueness": {
+            "type": "score",
+            "score": 1.0,
+            "confidence": 1.0,
+            "legend": {
+              "0": "The sky is described as grey, gray, or overcast, not blue",
+              "1": "The sky color is not stated",
+              "2": "The sky is described as blue"
+            },
+            "probabilities": {
+              "0": 0.0,
+              "1": 1.0,
+              "2": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 329,
+          "output_tokens": 20
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "ambiguous",
+      "repeat": 3,
+      "state": "The weather looks mixed today.",
+      "timestamp": "2026-09-21T17:59:27.850896+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0c51f73c9798087a837d658668217",
+      "latency_ms": 343.2978060000096,
+      "input_tokens": 329,
+      "output_tokens": 20,
+      "estimated_cost_usd": 1.3818000000000002e-05,
+      "score": 1.0,
+      "confidence": 1.0,
+      "legend": {
+        "0": "The sky is described as grey, gray, or overcast, not blue",
+        "1": "The sky color is not stated",
+        "2": "The sky is described as blue"
+      },
+      "probabilities": {
+        "0": 0.0,
+        "1": 1.0,
+        "2": 0.0
+      },
+      "probability_sum": 1.0,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Mon, 21 Sep 2026 17:59:27 GMT",
+        "server": "istio-envoy",
+        "content-length": "329",
+        "content-type": "application/json",
+        "x-typesafe-request-id": "req_01a0c51f73c9798087a837d658668217",
+        "x-envoy-upstream-service-time": "86"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "sky_blueness": {
+            "type": "score",
+            "score": 1.0,
+            "confidence": 1.0,
+            "legend": {
+              "0": "The sky is described as grey, gray, or overcast, not blue",
+              "1": "The sky color is not stated",
+              "2": "The sky is described as blue"
+            },
+            "probabilities": {
+              "0": 0.0,
+              "1": 1.0,
+              "2": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 329,
+          "output_tokens": 20
+        }
+      },
+      "error": null
+    }
+  ]
+}

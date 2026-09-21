@@ -94,11 +94,43 @@ Jev's Score primitive can consistently represent a numerical judgment on a defin
 
 Status:
 
-UNTESTED
+SUPPORTED (conditions: 2026-09-21, `jev-1.13.0`, 3-level sky-blueness Score, 9/9 answers had numeric score + legend + probabilities + confidence)
 
 Experiment:
 
-004 (planned)
+004
+
+---
+
+## H010 — Score tracks ordered evidence
+
+Hypothesis:
+
+Under a three-level sky-blueness rubric (0 grey, 1 unstated, 2 blue), mean(clear_blue) > mean(ambiguous) > mean(clear_grey).
+
+Status:
+
+SUPPORTED (conditions: means 2.0 > 1.0 > 0.0, n=3 each, integer one-hot scores)
+
+Experiment:
+
+004
+
+---
+
+## H011 — Score probabilities sum to 1
+
+Hypothesis:
+
+Each successful Score answer's `probabilities` values sum to approximately 1.
+
+Status:
+
+SUPPORTED (conditions: 9 one-hot maps, sums exactly 1.0; between-level scores untested)
+
+Experiment:
+
+004
 
 ---
 
