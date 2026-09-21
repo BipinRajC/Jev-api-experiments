@@ -1,11 +1,28 @@
-# env vars
+# env vars / secrets
 .env
+*.env
+!.env.example
 
-# node_modules
+# python
+.venv/
+venv/
+__pycache__/
+**/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+dist/
+build/
+
+# node
 node_modules/
 
 # logs
 logs/
 
-# OS generated files
+# OS
 .DS_Store
