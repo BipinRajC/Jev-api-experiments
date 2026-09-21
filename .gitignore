@@ -1,0 +1,11 @@
+# env vars
+.env
+
+# node_modules
+node_modules/
+
+# logs
+logs/
+
+# OS generated files
+.DS_Store
