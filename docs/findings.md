@@ -92,3 +92,20 @@ Only findings measured in this repository.
 - **Limitations:** n=3. Toy sentences. Does not show Score interpolates. Does not characterize confidence.
 - **Confidence in the finding:** High for schema and ordering on these 9 calls; low for Score as a continuous scale.
 - **Implications:** Score is usable as an ordered-level output on clear items. Next: error handling (005).
+
+---
+
+## F008 — Documented 401/422 statuses are incomplete: missing auth is 403, unknown model is 400
+
+- **Related hypothesis:** H012, H013, H014
+- **Experiment(s):** 005 (`results/005-error-handling/run-001.json`)
+- **Conditions:** 2026-09-21 UTC; `POST /v1/systemone`; one call per case; placeholder invalid token (not the real key); real key used only for missing-questions and unknown-model cases; secrets not stored
+- **Evidence:**
+  - invalid bearer → HTTP 401, `detail.error_type=authentication_error`
+  - missing Authorization → HTTP **403**, same error_type, message “Must supply an API key!”
+  - missing `questions` → HTTP 422, `detail` list with `type=missing`, `loc=['body','questions']`
+  - unknown model `jev-does-not-exist-0.0.0` → HTTP **400**, `detail.error_type=api_usage_error`
+- **Interpretation:** Official status table (401, 422, 429, 529) understates the live surface. Missing credentials and invalid credentials are not the same status. Unknown model is a 400 usage error, not 422. Error bodies use a `detail` wrapper.
+- **Limitations:** n=1 per case. 429/529 untested. Behavior may change.
+- **Confidence in the finding:** High for these four calls on this date; treat as snapshot, not a contract.
+- **Implications:** Client should handle 400 and 403, not only the documented four codes. Next: batch questions (006).

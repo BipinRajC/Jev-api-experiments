@@ -1,0 +1,159 @@
+{
+  "experiment_id": "005-error-handling",
+  "run_id": "run-001",
+  "timestamp": "2026-09-21T18:18:44.590070+00:00",
+  "api": {
+    "provider": "typesafe_direct",
+    "base_url": "https://api.typesafe.ai",
+    "endpoint": "/v1/systemone",
+    "method": "POST"
+  },
+  "design": {
+    "note": "Authorization values are never written. Real key used only for valid-auth negative cases.",
+    "cases": [
+      {
+        "case_id": "invalid_bearer_token",
+        "expected_status": 401,
+        "sends_authorization": true,
+        "payload_keys": [
+          "model",
+          "questions",
+          "state"
+        ],
+        "model": "jev-1.13.0"
+      },
+      {
+        "case_id": "missing_authorization_header",
+        "expected_status": 401,
+        "sends_authorization": false,
+        "payload_keys": [
+          "model",
+          "questions",
+          "state"
+        ],
+        "model": "jev-1.13.0"
+      },
+      {
+        "case_id": "missing_questions",
+        "expected_status": 422,
+        "sends_authorization": true,
+        "payload_keys": [
+          "model",
+          "state"
+        ],
+        "model": "jev-1.13.0"
+      },
+      {
+        "case_id": "unknown_model",
+        "expected_status": null,
+        "sends_authorization": true,
+        "payload_keys": [
+          "model",
+          "questions",
+          "state"
+        ],
+        "model": "jev-does-not-exist-0.0.0"
+      }
+    ]
+  },
+  "trials": [
+    {
+      "case_id": "invalid_bearer_token",
+      "expected_status": 401,
+      "http_status": 401,
+      "request_id": "req_01a0c53130337c2f801c546e45ca7f9e",
+      "latency_ms": 5825.046982999993,
+      "response_headers": {
+        "date": "Mon, 21 Sep 2026 18:18:49 GMT",
+        "server": "istio-envoy",
+        "content-length": "138",
+        "content-type": "application/json",
+        "x-typesafe-request-id": "req_01a0c53130337c2f801c546e45ca7f9e",
+        "x-envoy-upstream-service-time": "3"
+      },
+      "raw_response": {
+        "detail": {
+          "error_type": "authentication_error",
+          "message": "Cannot authenticate with the server. Please check your API key and try again."
+        }
+      },
+      "matched_expected": true
+    },
+    {
+      "case_id": "missing_authorization_header",
+      "expected_status": 401,
+      "http_status": 403,
+      "request_id": "req_01a0c531313973df8a3010abfdbcd06d",
+      "latency_ms": 996.3765049997164,
+      "response_headers": {
+        "date": "Mon, 21 Sep 2026 18:18:49 GMT",
+        "server": "istio-envoy",
+        "content-length": "118",
+        "content-type": "application/json",
+        "x-typesafe-request-id": "req_01a0c531313973df8a3010abfdbcd06d",
+        "x-envoy-upstream-service-time": "5"
+      },
+      "raw_response": {
+        "detail": {
+          "error_type": "authentication_error",
+          "message": "Must supply an API key! Check your request and try again."
+        }
+      },
+      "matched_expected": false
+    },
+    {
+      "case_id": "missing_questions",
+      "expected_status": 422,
+      "http_status": 422,
+      "request_id": "req_01a0c53135127279ac97194a915a0a5b",
+      "latency_ms": 282.93103800024255,
+      "response_headers": {
+        "date": "Mon, 21 Sep 2026 18:18:51 GMT",
+        "server": "istio-envoy",
+        "content-length": "139",
+        "content-type": "application/json",
+        "x-typesafe-request-id": "req_01a0c53135127279ac97194a915a0a5b",
+        "x-envoy-upstream-service-time": "33"
+      },
+      "raw_response": {
+        "detail": [
+          {
+            "type": "missing",
+            "loc": [
+              "body",
+              "questions"
+            ],
+            "msg": "Field required",
+            "input": {
+              "state": "The sky is blue.",
+              "model": "jev-1.13.0"
+            }
+          }
+        ]
+      },
+      "matched_expected": true
+    },
+    {
+      "case_id": "unknown_model",
+      "expected_status": null,
+      "http_status": 400,
+      "request_id": "req_01a0c531363270e3b3ab85581d949af6",
+      "latency_ms": 257.1576850004931,
+      "response_headers": {
+        "date": "Mon, 21 Sep 2026 18:18:51 GMT",
+        "server": "istio-envoy",
+        "content-length": "95",
+        "content-type": "application/json",
+        "x-typesafe-request-id": "req_01a0c531363270e3b3ab85581d949af6",
+        "x-envoy-upstream-service-time": "4"
+      },
+      "raw_response": {
+        "detail": {
+          "error_type": "api_usage_error",
+          "message": "Unknown model: jev-does-not-exist-0.0.0"
+        }
+      },
+      "matched_expected": true
+    }
+  ]
+}

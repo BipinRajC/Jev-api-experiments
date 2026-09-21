@@ -179,3 +179,51 @@ SUPPORTED (conditions: request `model` was already `jev-1.13.0`; does not test a
 Experiment:
 
 001
+
+---
+
+## H012 — Invalid bearer token returns 401
+
+Hypothesis:
+
+A System One request with `Authorization: Bearer` plus a non-real token returns HTTP 401.
+
+Status:
+
+SUPPORTED (conditions: 2026-09-21, placeholder token, HTTP 401, `detail.error_type=authentication_error`)
+
+Experiment:
+
+005
+
+---
+
+## H013 — Missing Authorization returns 401
+
+Hypothesis:
+
+A System One request with no `Authorization` header returns HTTP 401.
+
+Status:
+
+REJECTED (conditions: 2026-09-21, no Authorization header, observed HTTP **403**, `detail.error_type=authentication_error`)
+
+Experiment:
+
+005
+
+---
+
+## H014 — Missing `questions` returns 422
+
+Hypothesis:
+
+An otherwise documented body that omits `questions` returns HTTP 422.
+
+Status:
+
+SUPPORTED (conditions: valid key, body `{state, model}` only, HTTP 422, FastAPI-style `detail` list, loc `body.questions`)
+
+Experiment:
+
+005

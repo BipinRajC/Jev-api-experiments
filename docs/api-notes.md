@@ -93,12 +93,14 @@ Multiple questions in one request, evaluated in parallel against one `state`. VE
 
 | Status | Meaning | Source |
 | --- | --- | --- |
-| 401 | missing/invalid API key | VERIFIED FROM OFFICIAL DOCS |
-| 422 | validation failure | VERIFIED FROM OFFICIAL DOCS |
-| 429 | rate limit | VERIFIED FROM OFFICIAL DOCS |
-| 529 | overloaded | VERIFIED FROM OFFICIAL DOCS |
+| 401 | invalid API key (Bearer present but rejected) | VERIFIED FROM OFFICIAL DOCS; VERIFIED EXPERIMENTALLY (005) |
+| 403 | missing Authorization header | VERIFIED EXPERIMENTALLY (005); official table said 401 for missing key |
+| 400 | unknown model | VERIFIED EXPERIMENTALLY (005); not in official status table |
+| 422 | validation failure (e.g. missing `questions`) | VERIFIED FROM OFFICIAL DOCS; VERIFIED EXPERIMENTALLY (005) |
+| 429 | rate limit | VERIFIED FROM OFFICIAL DOCS; UNVERIFIED experimentally |
+| 529 | overloaded | VERIFIED FROM OFFICIAL DOCS; UNVERIFIED experimentally |
 
-Exact error JSON schema: UNVERIFIED.
+Error JSON: `{"detail": ...}` — object with `error_type`/`message` for auth and unknown model; list of FastAPI validation errors for 422. VERIFIED EXPERIMENTALLY (005). Official docs did not specify this schema.
 
 ## Rate limits (Jev 1.13)
 
