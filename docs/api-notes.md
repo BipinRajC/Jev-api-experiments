@@ -15,20 +15,20 @@ Conflicts: official TypeSafe docs take precedence over blogs, OpenRouter, and co
 
 - Evaluation: `POST https://api.typesafe.ai/v1/systemone` — VERIFIED FROM OFFICIAL DOCS ([API reference](https://docs.typesafe.ai/api))
 - Models list: `GET https://api.typesafe.ai/v1/models` — VERIFIED FROM OFFICIAL DOCS ([Models](https://docs.typesafe.ai/models))
-- Experimental confirmation of evaluation endpoint: UNVERIFIED until Experiment 001
+- Experimental confirmation of evaluation endpoint: VERIFIED EXPERIMENTALLY (001, 2/2 HTTP 200, 2026-09-21)
 
 ## Authentication
 
 - Header: `Authorization: Bearer <API_KEY>` — VERIFIED FROM OFFICIAL DOCS
 - Env var used by official Python SDK: `TYPESAFE_API_KEY` — VERIFIED FROM OFFICIAL DOCS ([SDK constants](https://docs.typesafe.ai/sdk/python/api/constants.md))
 - Optional `TYPESAFE_BASE_URL`, `TYPESAFE_DEFAULT_MODEL` — VERIFIED FROM OFFICIAL DOCS (SDK); this repo uses `TYPESAFE_MODEL` for experiment pinning
-- Missing/invalid key → HTTP 401 — VERIFIED FROM OFFICIAL DOCS; UNVERIFIED experimentally
+- Missing/invalid key → HTTP 401 — VERIFIED FROM OFFICIAL DOCS; UNVERIFIED experimentally (001 used a valid key only)
 
 ## Headers
 
 - `Content-Type: application/json` required — VERIFIED FROM OFFICIAL DOCS
 - Other required headers: UNVERIFIED (none documented besides Authorization + Content-Type)
-- Request-id response header name: UNVERIFIED (client checks `x-request-id` then `request-id`)
+- Request-id response header: `x-typesafe-request-id` — VERIFIED EXPERIMENTALLY (001). Values like `req_01a0c4d9222678d8a5fc2c073a380d9b`. Also present: `server: istio-envoy`, `x-envoy-upstream-service-time` (124 on both 001 runs). `x-request-id` was not observed.
 
 ## Model identifier
 
@@ -36,7 +36,7 @@ Conflicts: official TypeSafe docs take precedence over blogs, OpenRouter, and co
 - Alias `jev-latest` currently points to `jev-1.13.0` — VERIFIED FROM OFFICIAL DOCS
 - Alias `jev-preview` currently also points to `jev-1.13.0` — VERIFIED FROM OFFICIAL DOCS
 - Experiments in this repo pin `jev-1.13.0` by default (not the moving alias) — INFERRED from reproducibility requirement
-- Response `model` field reports the versioned ID that answered — VERIFIED FROM OFFICIAL DOCS; UNVERIFIED experimentally
+- Response `model` field reports the versioned ID that answered — VERIFIED FROM OFFICIAL DOCS; VERIFIED EXPERIMENTALLY for request `jev-1.13.0` → response `jev-1.13.0` (001). Alias `jev-latest` resolution: UNVERIFIED experimentally.
 - `GET /v1/models` currently lists aliases; versioned IDs are still accepted — VERIFIED FROM OFFICIAL DOCS
 
 ## Request format
@@ -65,7 +65,7 @@ SDK Python client may reshape answers into `.nouls` / `.choices`; the HTTP body 
 - `answers`: map keyed by question id
 - `usage.input_tokens`, `usage.output_tokens`
 
-Noul answer: `{ "type": "noul", "noul": <number 0–1> }` — no separate `confidence` field in official HTTP docs.
+Noul answer: `{ "type": "noul", "noul": <number 0–1> }` — no separate `confidence` field in official HTTP docs. VERIFIED EXPERIMENTALLY on 001 (`noul: 0.99`, no `confidence` key).
 
 Choice answer: `choice`, `probabilities`, `confidence`.
 
@@ -113,7 +113,7 @@ VERIFIED FROM OFFICIAL DOCS.
 
 ## Token accounting
 
-`usage.input_tokens` and `usage.output_tokens` in the response. VERIFIED FROM OFFICIAL DOCS. Whether they match billed usage: UNVERIFIED.
+`usage.input_tokens` and `usage.output_tokens` in the response. VERIFIED FROM OFFICIAL DOCS. VERIFIED EXPERIMENTALLY on 001: both runs `278` / `23`. Whether they match billed usage: UNVERIFIED.
 
 ## Pricing (Jev 1.13)
 
@@ -125,7 +125,7 @@ VERIFIED FROM OFFICIAL DOCS. This account's remaining credit and billed amounts:
 
 ## Latency
 
-No official SLA found. UNVERIFIED until Experiment 001 records wall-clock time.
+No official SLA found. VERIFIED EXPERIMENTALLY (001, n=2): client wall-clock 1088.1 ms and 882.2 ms; `x-envoy-upstream-service-time` 124 on both. Not a latency distribution.
 
 ## Versioning
 

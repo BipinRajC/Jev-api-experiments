@@ -14,7 +14,7 @@ The TypeSafe HTTP API accepts authenticated requests using a Bearer `TYPESAFE_AP
 
 Status:
 
-UNTESTED
+SUPPORTED (conditions: this account, 2026-09-21, model `jev-1.13.0`, one Noul question, two successful calls)
 
 Experiment:
 
@@ -30,7 +30,7 @@ Given a binary question with sufficiently clear evidence, Jev returns a structur
 
 Status:
 
-UNTESTED
+SUPPORTED (conditions: trivial tautological state `"The sky is blue."`, one Noul, two runs, both `noul=0.99`)
 
 Experiment:
 
@@ -50,7 +50,7 @@ UNTESTED
 
 Experiment:
 
-002 (planned)
+002 (planned; originally listed as 002 Noul characterization — Choice is Phase 1 item 003 in the roadmap)
 
 ---
 
@@ -74,11 +74,11 @@ Experiment:
 
 Hypothesis:
 
-When the request sends a pinned model ID or the `jev-latest` alias, the response `model` field reports a versioned identifier such as `jev-1.13.0`.
+When the request sends a pinned model ID, the response `model` field reports a versioned identifier such as `jev-1.13.0`.
 
 Status:
 
-UNTESTED
+SUPPORTED (conditions: request `model` was already `jev-1.13.0`; does not test alias resolution from `jev-latest`)
 
 Experiment:
 

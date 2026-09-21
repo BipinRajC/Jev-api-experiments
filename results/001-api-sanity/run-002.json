@@ -1,0 +1,52 @@
+{
+  "experiment_id": "001-api-sanity",
+  "run_id": "run-002",
+  "timestamp": "2026-09-21T16:53:41.037575+00:00",
+  "model_requested": "jev-1.13.0",
+  "model_returned": "jev-1.13.0",
+  "api": {
+    "provider": "typesafe_direct",
+    "base_url": "https://api.typesafe.ai",
+    "endpoint": "/v1/systemone",
+    "method": "POST"
+  },
+  "http_status": 200,
+  "request_id": "req_01a0c4e33c7376648c03b94b45f88b2d",
+  "latency_ms": 882.1962969998367,
+  "input_tokens": 278,
+  "output_tokens": 23,
+  "estimated_cost_usd": 1.1676e-05,
+  "pricing_note": "Official docs (2026-09-21): $0.042 per million input tokens; output tokens free. UNVERIFIED experimentally until billed usage is compared.",
+  "request": {
+    "state": "The sky is blue.",
+    "model": "jev-1.13.0",
+    "questions": {
+      "is_sky_blue": {
+        "type": "noul",
+        "instructions": "Is the sky described as blue?"
+      }
+    }
+  },
+  "response_headers": {
+    "date": "Mon, 21 Sep 2026 16:53:40 GMT",
+    "server": "istio-envoy",
+    "content-length": "124",
+    "content-type": "application/json",
+    "x-typesafe-request-id": "req_01a0c4e33c7376648c03b94b45f88b2d",
+    "x-envoy-upstream-service-time": "124"
+  },
+  "raw_response": {
+    "model": "jev-1.13.0",
+    "answers": {
+      "is_sky_blue": {
+        "type": "noul",
+        "noul": 0.99
+      }
+    },
+    "usage": {
+      "input_tokens": 278,
+      "output_tokens": 23
+    }
+  },
+  "error": null
+}

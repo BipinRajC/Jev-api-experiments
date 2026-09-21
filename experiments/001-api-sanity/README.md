@@ -40,19 +40,32 @@ A 401 caused by a missing local key is a local config failure, not a rejection o
 
 ## Results
 
-Not yet run. After execution, see `results/001-api-sanity/run-*.json`.
+Artifacts: `results/001-api-sanity/run-001.json`, `run-002.json` (2026-09-21).
+
+| run | HTTP | model returned | noul | input_tokens | output_tokens | latency_ms (client) | x-envoy-upstream-service-time | request_id |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| run-001 | 200 | jev-1.13.0 | 0.99 | 278 | 23 | 1088.1 | 124 | req_01a0c4d9222678d8a5fc2c073a380d9b |
+| run-002 | 200 | jev-1.13.0 | 0.99 | 278 | 23 | 882.2 | 124 | req_01a0c4e33c7376648c03b94b45f88b2d |
+
+Raw `answers.is_sky_blue` both times: `{"type": "noul", "noul": 0.99}`.
 
 ## Analysis
 
-Pending raw artifact.
+2/2 calls with the documented request shape returned HTTP 200 and the documented Noul JSON. Token counts were identical. The Noul value was identical. Client RTT varied (~0.88–1.09 s) while envoy upstream time did not (124 ms). Estimated list-price input cost is ~$1.17e-5 per call using documented $0.042/Mtok; this is not a billed figure.
+
+This does not show calibration, robustness, or that 0.99 is a frequentist probability.
 
 ## Conclusion
 
-UNTESTED
+H001: **SUPPORTED** under the conditions above.
+
+H002: **SUPPORTED** as a schema/shape claim for this trivial item only.
+
+H005: **SUPPORTED** for echoing a already-pinned `jev-1.13.0` ID. Alias resolution untested.
 
 ## Limitations
 
-A single successful call does not establish stability, calibration, latency distribution, or correctness of Noul as probability.
+n=2. One tautological question. Valid key only. No Choice/Score. No error-path measurement. No OpenRouter comparison.
 
 ## Next experiment
 
