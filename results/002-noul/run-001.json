@@ -1,0 +1,396 @@
+{
+  "experiment_id": "002-noul",
+  "run_id": "run-001",
+  "timestamp": "2026-09-21T17:14:20.807141+00:00",
+  "model_requested": "jev-1.13.0",
+  "api": {
+    "provider": "typesafe_direct",
+    "base_url": "https://api.typesafe.ai",
+    "endpoint": "/v1/systemone",
+    "method": "POST"
+  },
+  "design": {
+    "repeats_per_case": 3,
+    "question_id": "is_sky_blue",
+    "questions": {
+      "is_sky_blue": {
+        "type": "noul",
+        "instructions": "Is the sky described as blue?"
+      }
+    },
+    "variable_changed": "state evidence strength",
+    "held_constant": [
+      "model",
+      "endpoint",
+      "question type",
+      "question instructions",
+      "question id"
+    ],
+    "cases": [
+      {
+        "case_id": "clear_yes",
+        "state": "The sky is blue.",
+        "intended": "clear evidence that the sky is blue"
+      },
+      {
+        "case_id": "clear_no",
+        "state": "The sky is overcast and grey.",
+        "intended": "clear evidence that the sky is not blue"
+      },
+      {
+        "case_id": "ambiguous",
+        "state": "The weather looks mixed today.",
+        "intended": "no color of the sky is stated"
+      }
+    ]
+  },
+  "summary": {
+    "clear_yes": {
+      "n": 3,
+      "min": 0.99,
+      "max": 0.99,
+      "mean": 0.9899999999999999,
+      "range": 0.0
+    },
+    "clear_no": {
+      "n": 3,
+      "min": 0.01,
+      "max": 0.01,
+      "mean": 0.01,
+      "range": 0.0
+    },
+    "ambiguous": {
+      "n": 3,
+      "min": 0.05,
+      "max": 0.05,
+      "mean": 0.05000000000000001,
+      "range": 0.0
+    }
+  },
+  "trials": [
+    {
+      "case_id": "clear_yes",
+      "repeat": 1,
+      "state": "The sky is blue.",
+      "timestamp": "2026-09-21T17:14:20.826190+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0c4f62926729f998e46d441a7fba7",
+      "latency_ms": 1290.872328000205,
+      "input_tokens": 278,
+      "output_tokens": 23,
+      "estimated_cost_usd": 1.1676e-05,
+      "noul": 0.99,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Mon, 21 Sep 2026 17:14:21 GMT",
+        "server": "istio-envoy",
+        "content-length": "124",
+        "content-type": "application/json",
+        "x-typesafe-request-id": "req_01a0c4f62926729f998e46d441a7fba7",
+        "x-envoy-upstream-service-time": "97"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "is_sky_blue": {
+            "type": "noul",
+            "noul": 0.99
+          }
+        },
+        "usage": {
+          "input_tokens": 278,
+          "output_tokens": 23
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "clear_yes",
+      "repeat": 2,
+      "state": "The sky is blue.",
+      "timestamp": "2026-09-21T17:14:22.117466+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0c4f62a8e76b0a5ca679621baea92",
+      "latency_ms": 340.57749100020374,
+      "input_tokens": 278,
+      "output_tokens": 23,
+      "estimated_cost_usd": 1.1676e-05,
+      "noul": 0.99,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Mon, 21 Sep 2026 17:14:22 GMT",
+        "server": "istio-envoy",
+        "content-length": "124",
+        "content-type": "application/json",
+        "x-typesafe-request-id": "req_01a0c4f62a8e76b0a5ca679621baea92",
+        "x-envoy-upstream-service-time": "91"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "is_sky_blue": {
+            "type": "noul",
+            "noul": 0.99
+          }
+        },
+        "usage": {
+          "input_tokens": 278,
+          "output_tokens": 23
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "clear_yes",
+      "repeat": 3,
+      "state": "The sky is blue.",
+      "timestamp": "2026-09-21T17:14:22.458221+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0c4f62beb789ea873a5645bf11b95",
+      "latency_ms": 348.39245100010885,
+      "input_tokens": 278,
+      "output_tokens": 23,
+      "estimated_cost_usd": 1.1676e-05,
+      "noul": 0.99,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Mon, 21 Sep 2026 17:14:22 GMT",
+        "server": "istio-envoy",
+        "content-length": "124",
+        "content-type": "application/json",
+        "x-typesafe-request-id": "req_01a0c4f62beb789ea873a5645bf11b95",
+        "x-envoy-upstream-service-time": "91"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "is_sky_blue": {
+            "type": "noul",
+            "noul": 0.99
+          }
+        },
+        "usage": {
+          "input_tokens": 278,
+          "output_tokens": 23
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "clear_no",
+      "repeat": 1,
+      "state": "The sky is overcast and grey.",
+      "timestamp": "2026-09-21T17:14:22.806733+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0c4f62d3c7101a0bd293b7204cb1e",
+      "latency_ms": 331.9191119999232,
+      "input_tokens": 281,
+      "output_tokens": 23,
+      "estimated_cost_usd": 1.1802000000000002e-05,
+      "noul": 0.01,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Mon, 21 Sep 2026 17:14:22 GMT",
+        "server": "istio-envoy",
+        "content-length": "124",
+        "content-type": "application/json",
+        "x-typesafe-request-id": "req_01a0c4f62d3c7101a0bd293b7204cb1e",
+        "x-envoy-upstream-service-time": "87"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "is_sky_blue": {
+            "type": "noul",
+            "noul": 0.01
+          }
+        },
+        "usage": {
+          "input_tokens": 281,
+          "output_tokens": 23
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "clear_no",
+      "repeat": 2,
+      "state": "The sky is overcast and grey.",
+      "timestamp": "2026-09-21T17:14:23.138927+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0c4f62e8b70e1aa63baa315f63f53",
+      "latency_ms": 401.6320559999258,
+      "input_tokens": 281,
+      "output_tokens": 23,
+      "estimated_cost_usd": 1.1802000000000002e-05,
+      "noul": 0.01,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Mon, 21 Sep 2026 17:14:22 GMT",
+        "server": "istio-envoy",
+        "content-length": "124",
+        "content-type": "application/json",
+        "x-typesafe-request-id": "req_01a0c4f62e8b70e1aa63baa315f63f53",
+        "x-envoy-upstream-service-time": "156"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "is_sky_blue": {
+            "type": "noul",
+            "noul": 0.01
+          }
+        },
+        "usage": {
+          "input_tokens": 281,
+          "output_tokens": 23
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "clear_no",
+      "repeat": 3,
+      "state": "The sky is overcast and grey.",
+      "timestamp": "2026-09-21T17:14:23.540803+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0c4f6301970ad88d727301047a7e0",
+      "latency_ms": 306.29165300024397,
+      "input_tokens": 281,
+      "output_tokens": 23,
+      "estimated_cost_usd": 1.1802000000000002e-05,
+      "noul": 0.01,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Mon, 21 Sep 2026 17:14:22 GMT",
+        "server": "istio-envoy",
+        "content-length": "124",
+        "content-type": "application/json",
+        "x-typesafe-request-id": "req_01a0c4f6301970ad88d727301047a7e0",
+        "x-envoy-upstream-service-time": "61"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "is_sky_blue": {
+            "type": "noul",
+            "noul": 0.01
+          }
+        },
+        "usage": {
+          "input_tokens": 281,
+          "output_tokens": 23
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "ambiguous",
+      "repeat": 1,
+      "state": "The weather looks mixed today.",
+      "timestamp": "2026-09-21T17:14:23.847245+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0c4f631547a3a8330d4e554af801a",
+      "latency_ms": 351.90625099994577,
+      "input_tokens": 279,
+      "output_tokens": 23,
+      "estimated_cost_usd": 1.1718e-05,
+      "noul": 0.05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Mon, 21 Sep 2026 17:14:23 GMT",
+        "server": "istio-envoy",
+        "content-length": "124",
+        "content-type": "application/json",
+        "x-typesafe-request-id": "req_01a0c4f631547a3a8330d4e554af801a",
+        "x-envoy-upstream-service-time": "99"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "is_sky_blue": {
+            "type": "noul",
+            "noul": 0.05
+          }
+        },
+        "usage": {
+          "input_tokens": 279,
+          "output_tokens": 23
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "ambiguous",
+      "repeat": 2,
+      "state": "The weather looks mixed today.",
+      "timestamp": "2026-09-21T17:14:24.199387+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0c4f632b777aa8e4ab5b3b0547cf5",
+      "latency_ms": 329.9834929998724,
+      "input_tokens": 279,
+      "output_tokens": 23,
+      "estimated_cost_usd": 1.1718e-05,
+      "noul": 0.05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Mon, 21 Sep 2026 17:14:24 GMT",
+        "server": "istio-envoy",
+        "content-length": "124",
+        "content-type": "application/json",
+        "x-typesafe-request-id": "req_01a0c4f632b777aa8e4ab5b3b0547cf5",
+        "x-envoy-upstream-service-time": "78"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "is_sky_blue": {
+            "type": "noul",
+            "noul": 0.05
+          }
+        },
+        "usage": {
+          "input_tokens": 279,
+          "output_tokens": 23
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "ambiguous",
+      "repeat": 3,
+      "state": "The weather looks mixed today.",
+      "timestamp": "2026-09-21T17:14:24.529623+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0c4f633fe73a5b867763951b5153c",
+      "latency_ms": 330.8122319999711,
+      "input_tokens": 279,
+      "output_tokens": 23,
+      "estimated_cost_usd": 1.1718e-05,
+      "noul": 0.05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Mon, 21 Sep 2026 17:14:24 GMT",
+        "server": "istio-envoy",
+        "content-length": "124",
+        "content-type": "application/json",
+        "x-typesafe-request-id": "req_01a0c4f633fe73a5b867763951b5153c",
+        "x-envoy-upstream-service-time": "81"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "is_sky_blue": {
+            "type": "noul",
+            "noul": 0.05
+          }
+        },
+        "usage": {
+          "input_tokens": 279,
+          "output_tokens": 23
+        }
+      },
+      "error": null
+    }
+  ]
+}

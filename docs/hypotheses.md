@@ -30,11 +30,11 @@ Given a binary question with sufficiently clear evidence, Jev returns a structur
 
 Status:
 
-SUPPORTED (conditions: trivial tautological state `"The sky is blue."`, one Noul, two runs, both `noul=0.99`)
+SUPPORTED (conditions: toy English sky-color states; 11 successful Noul calls across 001 and 002; values in {0.99, 0.01, 0.05})
 
 Experiment:
 
-001 (minimal single-question check; not a calibration study)
+001, 002 (schema/shape only; not a calibration study)
 
 ---
 
@@ -50,7 +50,7 @@ UNTESTED
 
 Experiment:
 
-002 (planned; originally listed as 002 Noul characterization — Choice is Phase 1 item 003 in the roadmap)
+003 (planned)
 
 ---
 
@@ -66,7 +66,39 @@ UNTESTED
 
 Experiment:
 
-003 (planned)
+004 (planned)
+
+---
+
+## H006 — Noul tracks evidence direction
+
+Hypothesis:
+
+For a fixed Noul question, a state with clear positive evidence yields a higher `noul` than a state with clear negative evidence.
+
+Status:
+
+SUPPORTED (conditions: 2026-09-21, `jev-1.13.0`, question `"Is the sky described as blue?"`, states `"The sky is blue."` vs `"The sky is overcast and grey."`, n=3 each; means 0.99 vs 0.01)
+
+Experiment:
+
+002
+
+---
+
+## H007 — Identical Noul repeats are stable
+
+Hypothesis:
+
+Repeating the same Noul request three times produces `noul` values whose within-case range is small relative to the gap between clear-yes and clear-no cases.
+
+Status:
+
+SUPPORTED (conditions: three sequential repeats per case, three toy states, within-case range 0.00 vs yes–no gap 0.98; n=3 is too small for a reliability claim)
+
+Experiment:
+
+002
 
 ---
 

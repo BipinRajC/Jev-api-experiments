@@ -65,7 +65,7 @@ SDK Python client may reshape answers into `.nouls` / `.choices`; the HTTP body 
 - `answers`: map keyed by question id
 - `usage.input_tokens`, `usage.output_tokens`
 
-Noul answer: `{ "type": "noul", "noul": <number 0–1> }` — no separate `confidence` field in official HTTP docs. VERIFIED EXPERIMENTALLY on 001 (`noul: 0.99`, no `confidence` key).
+Noul answer: `{ "type": "noul", "noul": <number 0–1> }` — no separate `confidence` field in official HTTP docs. VERIFIED EXPERIMENTALLY on 001 and 002 (values 0.99, 0.01, 0.05; no `confidence` key). Identical sequential repeats in 002 had range 0.00 (n=3 per case). An unmentioned-sky state returned 0.05, not ~0.5.
 
 Choice answer: `choice`, `probabilities`, `confidence`.
 

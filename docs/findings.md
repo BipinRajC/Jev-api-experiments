@@ -53,3 +53,16 @@ Only findings measured in this repository.
 - **Limitations:** n=2. Pricing vs billed credit is UNVERIFIED. Latency includes local client overhead and network, not only model time.
 - **Confidence in the finding:** High for the two recorded numbers; low as a latency or cost characterization.
 - **Implications:** Later experiments should keep recording `usage`, wall-clock, and `x-envoy-upstream-service-time` separately.
+
+---
+
+## F005 — Noul values separated polar evidence and were identical across 3 repeats
+
+- **Related hypothesis:** H002, H006, H007
+- **Experiment(s):** 002 (`results/002-noul/run-001.json`)
+- **Conditions:** 2026-09-21 UTC; `jev-1.13.0`; question held constant (`is_sky_blue` / `"Is the sky described as blue?"`); only `state` varied; 3 sequential repeats per case
+- **Evidence:** 9/9 HTTP 200. `clear_yes` noul 0.99×3; `clear_no` 0.01×3; `ambiguous` 0.05×3. Within-case range 0.00. Yes–no gap 0.98. All answers `{type: noul, noul: <float>}` with no `confidence` field.
+- **Interpretation:** Under these toy states, Noul moved with evidence direction and did not jitter across three immediate repeats. The ambiguous wording produced 0.05 (near no), not ~0.5, so a mid-range value should not be assumed to mean “unknown”.
+- **Limitations:** n=3 per cell. English one-liners. Immediate sequential repeats may share server-side caching; this was not tested. Not a calibration study.
+- **Confidence in the finding:** High for these 9 calls; low as a general stability or uncertainty-representation claim.
+- **Implications:** Treat Noul as a structured yes-weight on clear items. Do not interpret values near 0 as uniquely “no” versus “unmentioned” without a dedicated missing-information experiment. Next: Choice (003).
