@@ -451,3 +451,35 @@ REJECTED (conditions: 2026-09-23, `jev-1.13.0`, 70/30 bag state, 4 wordings × 3
 Experiment:
 
 009
+
+---
+
+## H029 — Appending irrelevant information changes the Noul value
+
+Hypothesis:
+
+Adding semantically-irrelevant context to a state shifts the Noul value beyond the ±0.02 jitter baseline.
+
+Status:
+
+SUPPORTED (conditions: 2026-09-23, `jev-1.13.0`, 70/30 bag state, 0/1/5/20 irrelevant facts × 2 repeats; max drift 0.045, dose-dependent and monotonic; baseline 0.665 → plus_1 0.675 → plus_5 0.70 → plus_20 0.71. Caveat: drift moved toward ground truth 0.70, not away; modest magnitude vs 009's wording effect of 0.207)
+
+Experiment:
+
+010
+
+---
+
+## H030 — Appending irrelevant information does NOT change the Noul value
+
+Hypothesis:
+
+Adding semantically-irrelevant context leaves the Noul value within the ±0.02 jitter baseline.
+
+Status:
+
+REJECTED (conditions: 2026-09-23, `jev-1.13.0`, 70/30 bag state, 0/1/5/20 irrelevant facts × 2 repeats; max drift 0.045 exceeds the 0.02 jitter baseline; drift monotonic with fact count)
+
+Experiment:
+
+010

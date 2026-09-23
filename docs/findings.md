@@ -226,3 +226,16 @@ Only findings measured in this repository.
 - **Limitations:** Single state. 4 wordings only. Noul only. n=3 per wording. The specific magnitudes may not generalize.
 - **Confidence in the finding:** High that wording sensitivity is real and large on this state; the exact cluster split (literal vs judgment) is a preliminary pattern.
 - **Implications:** Noul values are not frame-independent. Calibration claims must specify the exact question phrasing. Judgment-framed phrasings ("likely", "does evidence support") systematically inflate Noul. For production, standardize phrasing tightly; treat different phrasings as different measurements. Experiment 010 must hold phrasing constant to isolate the effect of added context.
+
+---
+
+## F018 — Irrelevant context shifts Noul dose-dependently but modestly, and here toward ground truth
+
+- **Related hypothesis:** H029, H030
+- **Experiment(s):** 010 (`results/010-irrelevant-information/run-001.json`)
+- **Conditions:** 2026-09-23 UTC; `jev-1.13.0`; state "A box contains 70 red balls and 30 blue balls. One ball is selected randomly."; question constant ("Will the selected ball be red?"); 0/1/5/20 appended irrelevant environmental facts × 2 repeats = 8 calls
+- **Evidence:** Noul means: baseline 0.665, plus_1 0.675, plus_5 0.70, plus_20 0.71. Max drift from baseline 0.045 (plus_20). Drift is monotonic (0.010 → 0.035 → 0.045) with fact count. Within-level jitter all ≤ 0.01. Ground truth is 0.70.
+- **Interpretation:** Irrelevant context does shift Noul (dose-dependent, monotonic), and the max drift (0.045) exceeds the 0.02 jitter baseline. But the direction is counterintuitive: adding context moved the answer from a slight underestimate (0.665) toward the correct value (0.70-0.71). There is no evidence of classic context pollution (distraction degrading accuracy) on this state. The context effect (0.045) is far weaker than the wording effect from 009 (0.207).
+- **Limitations:** Single state/composition. Neutral environmental facts only (no contradictory context — that is Experiment 012). Cannot separate "more context" from "particular context." n=2. Noul only.
+- **Confidence in the finding:** Moderate-high that context shifts Noul on this state; low that the "toward ground truth" direction generalizes.
+- **Implications:** Context is a weaker influence than wording. No evidence of catastrophic context pollution yet, but the dose-dependence warrants a test of contradictory context (012). The drift magnitude means an application should still control the amount of context fed to Jev.

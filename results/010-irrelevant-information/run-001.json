@@ -1,0 +1,497 @@
+{
+  "experiment_id": "010-irrelevant-information",
+  "run_id": "run-001",
+  "timestamp": "2026-09-23T10:51:57.825865+00:00",
+  "model_requested": "jev-1.13.0",
+  "api": {
+    "provider": "typesafe_direct",
+    "base_url": "https://api.typesafe.ai",
+    "endpoint": "/v1/systemone",
+    "method": "POST"
+  },
+  "design": {
+    "repeats_per_level": 2,
+    "base_state": "A box contains 70 red balls and 30 blue balls. One ball is selected randomly.",
+    "question_id": "is_red",
+    "question_text": "Will the selected ball be red?",
+    "ground_truth_p_red": 0.7,
+    "irrelevant_facts": [
+      "The experiment is being conducted on a Tuesday.",
+      "The observer is wearing a blue shirt.",
+      "The room temperature is 22 degrees Celsius.",
+      "The box is sitting on a wooden table.",
+      "A ceiling light illuminates the room.",
+      "The floor is tiled with ceramic squares.",
+      "A clock on the wall shows 3:15 PM.",
+      "The lab is on the third floor of the building.",
+      "A window faces west toward the parking lot.",
+      "The air in the room smells faintly of coffee.",
+      "Several papers are stacked on the corner of the desk.",
+      "A fan gently circulates the air.",
+      "The door to the hallway is slightly ajar.",
+      "The carpet under the table is dark grey.",
+      "A small plant sits on the windowsill.",
+      "The researcher writes notes with a black pen.",
+      "Background music plays softly from a speaker.",
+      "The power outlet is on the north wall.",
+      "A poster of a city skyline hangs on the wall.",
+      "The ceiling is white with two recessed lights."
+    ],
+    "levels": [
+      {
+        "id": "baseline",
+        "n_facts": 0
+      },
+      {
+        "id": "plus_1",
+        "n_facts": 1
+      },
+      {
+        "id": "plus_5",
+        "n_facts": 5
+      },
+      {
+        "id": "plus_20",
+        "n_facts": 20
+      }
+    ]
+  },
+  "analysis": {
+    "level_means": {
+      "baseline": 0.665,
+      "plus_1": 0.675,
+      "plus_5": 0.7,
+      "plus_20": 0.71
+    },
+    "level_details": {
+      "baseline": {
+        "values": [
+          0.66,
+          0.67
+        ],
+        "mean": 0.665,
+        "range": 0.01
+      },
+      "plus_1": {
+        "values": [
+          0.68,
+          0.67
+        ],
+        "mean": 0.675,
+        "range": 0.01
+      },
+      "plus_5": {
+        "values": [
+          0.7,
+          0.7
+        ],
+        "mean": 0.7,
+        "range": 0.0
+      },
+      "plus_20": {
+        "values": [
+          0.71,
+          0.71
+        ],
+        "mean": 0.71,
+        "range": 0.0
+      }
+    },
+    "ground_truth": 0.7,
+    "drift_from_baseline": {
+      "plus_1": 0.01,
+      "plus_5": 0.035,
+      "plus_20": 0.045
+    },
+    "max_abs_drift": 0.045,
+    "jitter_baseline": 0.02,
+    "exceeds_jitter_baseline": true,
+    "drift_monotonic_with_fact_count": true
+  },
+  "trials": [
+    {
+      "level": "baseline",
+      "n_facts": 0,
+      "repeat": 1,
+      "state": "A box contains 70 red balls and 30 blue balls. One ball is selected randomly.",
+      "timestamp": "2026-09-23T10:51:57.886060+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cde4cd137b079c40f911c1b8d2eb",
+      "latency_ms": 1697.5928100000601,
+      "input_tokens": 294,
+      "output_tokens": 21,
+      "estimated_cost_usd": 1.2348000000000001e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:51:59 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cde4cd137b079c40f911c1b8d2eb",
+        "x-envoy-upstream-service-time": "152",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=%2FudJB64FCfLuMPH%2FD8cyxmxB4S1NPSKyTyyuieuTSuHAKtVUqF8uh7p%2F4wekmy0mA3fc9gmerjo1NI%2BYLsgbzFILsL3MrxCxXO13maEGfk4QDL1ZK64VxbRSj4gA9jFsInlkZPdViVf1oNwaKw%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8ff4dfe54ac6b-FRA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "is_red": {
+            "type": "noul",
+            "noul": 0.66
+          }
+        },
+        "usage": {
+          "input_tokens": 294,
+          "output_tokens": 21
+        }
+      },
+      "parsed": {
+        "is_red": {
+          "type": "noul",
+          "noul": 0.66
+        }
+      },
+      "error": null
+    },
+    {
+      "level": "baseline",
+      "n_facts": 0,
+      "repeat": 2,
+      "state": "A box contains 70 red balls and 30 blue balls. One ball is selected randomly.",
+      "timestamp": "2026-09-23T10:51:59.584203+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cde4cf997a1087f8b1dfa6b72553",
+      "latency_ms": 492.47037199984334,
+      "input_tokens": 294,
+      "output_tokens": 21,
+      "estimated_cost_usd": 1.2348000000000001e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:51:59 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cde4cf997a1087f8b1dfa6b72553",
+        "x-envoy-upstream-service-time": "102",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=LqTQNVoATEaPNcyJmD3zpFb3h0hTlB64N0IMT3%2FM18mRZCtIBOqe8w5r%2BoX%2BI2TWMapXu%2BrsYbzB6xXByfOelPY54x%2FdeOzLH1iCoe3VrjkR7ZIAX6nj6mKTgPTHFwF48uJdn5bJ4SXCHBzUzQ%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8ff520a04ac6b-FRA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "is_red": {
+            "type": "noul",
+            "noul": 0.67
+          }
+        },
+        "usage": {
+          "input_tokens": 294,
+          "output_tokens": 21
+        }
+      },
+      "parsed": {
+        "is_red": {
+          "type": "noul",
+          "noul": 0.67
+        }
+      },
+      "error": null
+    },
+    {
+      "level": "plus_1",
+      "n_facts": 1,
+      "repeat": 1,
+      "state": "A box contains 70 red balls and 30 blue balls. One ball is selected randomly. The experiment is being conducted on a Tuesday.",
+      "timestamp": "2026-09-23T10:52:00.077043+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cde4d183788f84bcdc79ed64cfcb",
+      "latency_ms": 575.7687370005442,
+      "input_tokens": 303,
+      "output_tokens": 21,
+      "estimated_cost_usd": 1.2726000000000001e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:52:00 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cde4d183788f84bcdc79ed64cfcb",
+        "x-envoy-upstream-service-time": "141",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=8DUZ6pIcXEge7AnyJaxKe5MXpvDndkV5%2FiygDQfUx0X6s%2BvthTzl3M65fzeCAamy9fBJaoRzO4QFI8b4RQyElEAav04jY8EX95LM53JAPGbEe8hQC4uBt7X%2BoH4LB22NO52KKv9EiRLivAFcfA%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8ff5519d5ac6b-FRA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "is_red": {
+            "type": "noul",
+            "noul": 0.68
+          }
+        },
+        "usage": {
+          "input_tokens": 303,
+          "output_tokens": 21
+        }
+      },
+      "parsed": {
+        "is_red": {
+          "type": "noul",
+          "noul": 0.68
+        }
+      },
+      "error": null
+    },
+    {
+      "level": "plus_1",
+      "n_facts": 1,
+      "repeat": 2,
+      "state": "A box contains 70 red balls and 30 blue balls. One ball is selected randomly. The experiment is being conducted on a Tuesday.",
+      "timestamp": "2026-09-23T10:52:00.653121+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cde4d3be784dbb3972419fcf4897",
+      "latency_ms": 593.6775740001394,
+      "input_tokens": 303,
+      "output_tokens": 21,
+      "estimated_cost_usd": 1.2726000000000001e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:52:00 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cde4d3be784dbb3972419fcf4897",
+        "x-envoy-upstream-service-time": "61",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=1z%2FQt0h%2FOJko7zZco6t6Tf2R2apbPOh5AMxzHFFnVEy3h0tcbsPuI9oQ0muTOo7D5zmCCtkMIcncjH9TZf1lVDpQKW%2FbN7qO3RbMI6VUlFbAtPmFa03PcdiGFRKmu84ov35gm2arN7LfoA8hMw%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8ff58ac60ac6b-FRA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "is_red": {
+            "type": "noul",
+            "noul": 0.67
+          }
+        },
+        "usage": {
+          "input_tokens": 303,
+          "output_tokens": 21
+        }
+      },
+      "parsed": {
+        "is_red": {
+          "type": "noul",
+          "noul": 0.67
+        }
+      },
+      "error": null
+    },
+    {
+      "level": "plus_5",
+      "n_facts": 5,
+      "repeat": 1,
+      "state": "A box contains 70 red balls and 30 blue balls. One ball is selected randomly. The experiment is being conducted on a Tuesday. The observer is wearing a blue shirt. The room temperature is 22 degrees Celsius. The box is sitting on a wooden table. A ceiling light illuminates the room.",
+      "timestamp": "2026-09-23T10:52:01.247098+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cde4d614747d92073caa3523eeb4",
+      "latency_ms": 640.4594730001918,
+      "input_tokens": 339,
+      "output_tokens": 21,
+      "estimated_cost_usd": 1.4238000000000002e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:52:01 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cde4d614747d92073caa3523eeb4",
+        "x-envoy-upstream-service-time": "95",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=5NTBzLU%2Bmf6I8%2FXxneuo6L2dXWE971%2FYV6wjJ%2FStwWxK5Gozr9R%2B5i7lHucS54NdQ9nDaxtovP4cEt2k7MSvDQqVU5NSSTQH4C%2FYsT7ta9aIVxL2WIKoQSn%2FIhsFm7greeqaEw3YpozjS8DyZA%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8ff5c6efaac6b-FRA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "is_red": {
+            "type": "noul",
+            "noul": 0.7
+          }
+        },
+        "usage": {
+          "input_tokens": 339,
+          "output_tokens": 21
+        }
+      },
+      "parsed": {
+        "is_red": {
+          "type": "noul",
+          "noul": 0.7
+        }
+      },
+      "error": null
+    },
+    {
+      "level": "plus_5",
+      "n_facts": 5,
+      "repeat": 2,
+      "state": "A box contains 70 red balls and 30 blue balls. One ball is selected randomly. The experiment is being conducted on a Tuesday. The observer is wearing a blue shirt. The room temperature is 22 degrees Celsius. The box is sitting on a wooden table. A ceiling light illuminates the room.",
+      "timestamp": "2026-09-23T10:52:01.887959+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cde4d89f70e28abe8bcc761389b1",
+      "latency_ms": 591.3730749998649,
+      "input_tokens": 339,
+      "output_tokens": 21,
+      "estimated_cost_usd": 1.4238000000000002e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:52:02 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cde4d89f70e28abe8bcc761389b1",
+        "x-envoy-upstream-service-time": "55",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=xqFw8MIYdxWIJVpsL9%2FAYE8bIZ2UZrPXLdXTEO8d2rUjFYx607y4qRA7DkRkmB9j%2BPlw3ia5N9f9%2FZcw68O6No2UITLuv26auVF3KQ9lHT8Y%2FEZhGpd%2B%2BAV%2BIguD2lobnP6u%2BU7jk%2FpXax2O6w%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8ff607a88ac6b-FRA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "is_red": {
+            "type": "noul",
+            "noul": 0.7
+          }
+        },
+        "usage": {
+          "input_tokens": 339,
+          "output_tokens": 21
+        }
+      },
+      "parsed": {
+        "is_red": {
+          "type": "noul",
+          "noul": 0.7
+        }
+      },
+      "error": null
+    },
+    {
+      "level": "plus_20",
+      "n_facts": 20,
+      "repeat": 1,
+      "state": "A box contains 70 red balls and 30 blue balls. One ball is selected randomly. The experiment is being conducted on a Tuesday. The observer is wearing a blue shirt. The room temperature is 22 degrees Celsius. The box is sitting on a wooden table. A ceiling light illuminates the room. The floor is tiled with ceramic squares. A clock on the wall shows 3:15 PM. The lab is on the third floor of the building. A window faces west toward the parking lot. The air in the room smells faintly of coffee. Several papers are stacked on the corner of the desk. A fan gently circulates the air. The door to the hallway is slightly ajar. The carpet under the table is dark grey. A small plant sits on the windowsill. The researcher writes notes with a black pen. Background music plays softly from a speaker. The power outlet is on the north wall. A poster of a city skyline hangs on the wall. The ceiling is white with two recessed lights.",
+      "timestamp": "2026-09-23T10:52:02.479653+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cde4dae3732999728fae2419a633",
+      "latency_ms": 476.0429540001496,
+      "input_tokens": 489,
+      "output_tokens": 21,
+      "estimated_cost_usd": 2.0538e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:52:02 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cde4dae3732999728fae2419a633",
+        "x-envoy-upstream-service-time": "82",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=vBs54XUQ6egIk%2Fl8j4l809rh6xIXCQEkWB7iJWJg1RnLEYN2JlUWpHcSpUCWgpMN8M%2Bsj3pwKX21uWnVkWhVP0LehXpx%2FsKii3rKN44vhNymspxLOhOoUILL1IAZaeyY6WZaw4iElcsYZtm0Yw%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8ff641bd5ac6b-FRA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "is_red": {
+            "type": "noul",
+            "noul": 0.71
+          }
+        },
+        "usage": {
+          "input_tokens": 489,
+          "output_tokens": 21
+        }
+      },
+      "parsed": {
+        "is_red": {
+          "type": "noul",
+          "noul": 0.71
+        }
+      },
+      "error": null
+    },
+    {
+      "level": "plus_20",
+      "n_facts": 20,
+      "repeat": 2,
+      "state": "A box contains 70 red balls and 30 blue balls. One ball is selected randomly. The experiment is being conducted on a Tuesday. The observer is wearing a blue shirt. The room temperature is 22 degrees Celsius. The box is sitting on a wooden table. A ceiling light illuminates the room. The floor is tiled with ceramic squares. A clock on the wall shows 3:15 PM. The lab is on the third floor of the building. A window faces west toward the parking lot. The air in the room smells faintly of coffee. Several papers are stacked on the corner of the desk. A fan gently circulates the air. The door to the hallway is slightly ajar. The carpet under the table is dark grey. A small plant sits on the windowsill. The researcher writes notes with a black pen. Background music plays softly from a speaker. The power outlet is on the north wall. A poster of a city skyline hangs on the wall. The ceiling is white with two recessed lights.",
+      "timestamp": "2026-09-23T10:52:02.955987+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cde4dcc07f7c9c750e1894a6b871",
+      "latency_ms": 412.06575900014286,
+      "input_tokens": 489,
+      "output_tokens": 21,
+      "estimated_cost_usd": 2.0538e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:52:03 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cde4dcc07f7c9c750e1894a6b871",
+        "x-envoy-upstream-service-time": "67",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=VLWVl2Y6FzaQKjRoIg%2F5gY1JFQ5oba9Ztxlo67LlHRNQY%2FLLwOVhmbDvvrQ4b2Pjs5IAs32NnfuJN2ZzRy73M0OfQ2D58Sddxzdezd5VWgu2CrMnFA2yD9Xcfe5qdHb3npRTKnzIoGvAJUgShA%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8ff671ad0ac6b-FRA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "is_red": {
+            "type": "noul",
+            "noul": 0.71
+          }
+        },
+        "usage": {
+          "input_tokens": 489,
+          "output_tokens": 21
+        }
+      },
+      "parsed": {
+        "is_red": {
+          "type": "noul",
+          "noul": 0.71
+        }
+      },
+      "error": null
+    }
+  ]
+}
