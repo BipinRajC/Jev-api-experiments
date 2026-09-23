@@ -1,0 +1,1193 @@
+{
+  "experiment_id": "011-structured-state",
+  "run_id": "run-001",
+  "timestamp": "2026-09-23T11:06:01.266134+00:00",
+  "model_requested": "jev-1.13.0",
+  "api": {
+    "provider": "typesafe_direct",
+    "base_url": "https://api.typesafe.ai",
+    "endpoint": "/v1/systemone",
+    "method": "POST"
+  },
+  "design": {
+    "repeats_per_format": 3,
+    "formats": [
+      {
+        "id": "prose",
+        "description": "Format A \u2014 prose sentence",
+        "state": "Arun has 7 red balls and 3 blue balls."
+      },
+      {
+        "id": "json",
+        "description": "Format B \u2014 JSON object",
+        "state": {
+          "red": 7,
+          "blue": 3
+        }
+      },
+      {
+        "id": "compact",
+        "description": "Format C \u2014 compact structured text",
+        "state": "red=7, blue=3"
+      }
+    ],
+    "questions": {
+      "is_red": {
+        "type": "noul",
+        "instructions": "Will a randomly selected ball be red?"
+      },
+      "ball_color": {
+        "type": "choice",
+        "instructions": "What color will a randomly selected ball be?",
+        "criteria": {
+          "red": "The ball is red.",
+          "blue": "The ball is blue."
+        }
+      },
+      "red_likelihood": {
+        "type": "score",
+        "instructions": "How likely is it that a randomly selected ball is red?",
+        "criteria": [
+          {
+            "score": 0,
+            "label": "impossible"
+          },
+          {
+            "score": 1,
+            "label": "unlikely"
+          },
+          {
+            "score": 2,
+            "label": "even odds"
+          },
+          {
+            "score": 3,
+            "label": "likely"
+          },
+          {
+            "score": 4,
+            "label": "certain"
+          }
+        ]
+      }
+    },
+    "ground_truth_p_red": 0.7
+  },
+  "analysis": {
+    "noul_means": {
+      "prose": 0.7,
+      "json": 0.7033,
+      "compact": 0.68
+    },
+    "noul_all_values": {
+      "prose": [
+        0.7,
+        0.7,
+        0.7
+      ],
+      "json": [
+        0.7,
+        0.7,
+        0.71
+      ],
+      "compact": [
+        0.68,
+        0.68,
+        0.68
+      ]
+    },
+    "noul_range_across_formats": 0.0233,
+    "score_means": {
+      "prose": 3.0,
+      "json": 2.99,
+      "compact": 2.9667
+    },
+    "score_all_values": {
+      "prose": [
+        3.0,
+        3.0,
+        3.0
+      ],
+      "json": [
+        2.99,
+        2.99,
+        2.99
+      ],
+      "compact": [
+        2.97,
+        2.97,
+        2.96
+      ]
+    },
+    "score_range_across_formats": 0.0333,
+    "choice_labels": {
+      "prose": [
+        "red",
+        "red",
+        "red"
+      ],
+      "json": [
+        "red",
+        "red",
+        "red"
+      ],
+      "compact": [
+        "red",
+        "red",
+        "red"
+      ]
+    },
+    "confidence_means": {
+      "prose": 0.99,
+      "json": 0.9867,
+      "compact": 0.9667
+    },
+    "input_tokens_by_format": {
+      "prose": [
+        464,
+        464,
+        464
+      ],
+      "json": [
+        462,
+        462,
+        462
+      ],
+      "compact": [
+        458,
+        458,
+        458
+      ]
+    },
+    "latency_means_ms": {
+      "prose": 538.7,
+      "json": 475.6,
+      "compact": 430.9
+    },
+    "jitter_baseline": 0.02,
+    "noul_exceeds_jitter_baseline": true,
+    "score_exceeds_jitter_baseline": true,
+    "json_tokens_less_than_prose": true,
+    "compact_tokens_less_than_prose": true,
+    "ground_truth_p_red": 0.7
+  },
+  "trials": [
+    {
+      "format": "prose",
+      "format_description": "Format A \u2014 prose sentence",
+      "state": "Arun has 7 red balls and 3 blue balls.",
+      "repeat": 1,
+      "timestamp": "2026-09-23T11:06:01.284046+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdf1a8c5716b8a7eca39f0927943",
+      "latency_ms": 736.0812690003513,
+      "input_tokens": 464,
+      "output_tokens": 68,
+      "estimated_cost_usd": 1.9488e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 11:06:01 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdf1a8c5716b8a7eca39f0927943",
+        "x-envoy-upstream-service-time": "82",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=QWzmVvi%2BDexVntxlOIBW%2BqsjEgNVPtrPeuZABVAC693RS%2BzFv2%2BWQcwacanHmTKHUxwAswbqpDNISRqqbiJNN%2FYzBWMtCg2Su7s4x9HUc25HhUfIRyJpgSK30zXH7v0JZ445NOz3RBqo%2BVf3wA%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f913e0afccdc4f-FRA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "is_red": {
+            "type": "noul",
+            "noul": 0.7
+          },
+          "ball_color": {
+            "type": "choice",
+            "choice": "red",
+            "confidence": 1.0,
+            "probabilities": {
+              "red": 1.0,
+              "blue": 0.0
+            }
+          },
+          "red_likelihood": {
+            "type": "score",
+            "score": 3.0,
+            "confidence": 0.99,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "impossible"
+              },
+              "1": {
+                "score": 1,
+                "label": "unlikely"
+              },
+              "2": {
+                "score": 2,
+                "label": "even odds"
+              },
+              "3": {
+                "score": 3,
+                "label": "likely"
+              },
+              "4": {
+                "score": 4,
+                "label": "certain"
+              }
+            },
+            "probabilities": {
+              "0": 0.0,
+              "1": 0.0,
+              "2": 0.0,
+              "3": 1.0,
+              "4": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 464,
+          "output_tokens": 68
+        }
+      },
+      "parsed": {
+        "is_red": {
+          "type": "noul",
+          "noul": 0.7
+        },
+        "ball_color": {
+          "type": "choice",
+          "choice": "red",
+          "probabilities": {
+            "red": 1.0,
+            "blue": 0.0
+          },
+          "confidence": 1.0
+        },
+        "red_likelihood": {
+          "type": "score",
+          "score": 3.0,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 0.0,
+            "3": 1.0,
+            "4": 0.0
+          },
+          "confidence": 0.99
+        }
+      },
+      "error": null
+    },
+    {
+      "format": "prose",
+      "format_description": "Format A \u2014 prose sentence",
+      "state": "Arun has 7 red balls and 3 blue balls.",
+      "repeat": 2,
+      "timestamp": "2026-09-23T11:06:02.020331+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdf1aa6b730a893d6dd10fb6239a",
+      "latency_ms": 422.9772590006178,
+      "input_tokens": 464,
+      "output_tokens": 68,
+      "estimated_cost_usd": 1.9488e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 11:06:02 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdf1aa6b730a893d6dd10fb6239a",
+        "x-envoy-upstream-service-time": "84",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=K5eu%2FnPHmBdHOvpFBjswqQZFBQtunQ2Qq92i36wfXcS9hM0R6IXK8Ou58gdHSStuy2KX%2F%2BwTxDpelC7wjXRZTObA3iz3iamE%2F5G4ttDm3%2BXq1V4%2F31coN6SUHTkTwnUvJ9DCnN6%2F4Fb4ivlVlg%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f913e3485bdc4f-FRA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "is_red": {
+            "type": "noul",
+            "noul": 0.7
+          },
+          "ball_color": {
+            "type": "choice",
+            "choice": "red",
+            "confidence": 1.0,
+            "probabilities": {
+              "blue": 0.0,
+              "red": 1.0
+            }
+          },
+          "red_likelihood": {
+            "type": "score",
+            "score": 3.0,
+            "confidence": 0.99,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "impossible"
+              },
+              "1": {
+                "score": 1,
+                "label": "unlikely"
+              },
+              "2": {
+                "score": 2,
+                "label": "even odds"
+              },
+              "3": {
+                "score": 3,
+                "label": "likely"
+              },
+              "4": {
+                "score": 4,
+                "label": "certain"
+              }
+            },
+            "probabilities": {
+              "0": 0.0,
+              "1": 0.0,
+              "2": 0.0,
+              "3": 1.0,
+              "4": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 464,
+          "output_tokens": 68
+        }
+      },
+      "parsed": {
+        "is_red": {
+          "type": "noul",
+          "noul": 0.7
+        },
+        "ball_color": {
+          "type": "choice",
+          "choice": "red",
+          "probabilities": {
+            "blue": 0.0,
+            "red": 1.0
+          },
+          "confidence": 1.0
+        },
+        "red_likelihood": {
+          "type": "score",
+          "score": 3.0,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 0.0,
+            "3": 1.0,
+            "4": 0.0
+          },
+          "confidence": 0.99
+        }
+      },
+      "error": null
+    },
+    {
+      "format": "prose",
+      "format_description": "Format A \u2014 prose sentence",
+      "state": "Arun has 7 red balls and 3 blue balls.",
+      "repeat": 3,
+      "timestamp": "2026-09-23T11:06:02.443559+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdf1ac147aff9c84fe46926055cd",
+      "latency_ms": 457.04977400055213,
+      "input_tokens": 464,
+      "output_tokens": 68,
+      "estimated_cost_usd": 1.9488e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 11:06:02 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdf1ac147aff9c84fe46926055cd",
+        "x-envoy-upstream-service-time": "115",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=xjNHINSmI2B6Ma0%2BPHy7fiLtmYGcbuM%2B1DvJMpHv8NM58maTKHN1he%2Be4jUB1VFsf6sAeINqNg8J3g%2B%2BiOGREgWofKTLpZj1fWh4VSsyclqwJpBOwgFidAeKxujTT1egdCRQsaKsBIxlLxcN6w%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f913e5f908dc4f-FRA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "is_red": {
+            "type": "noul",
+            "noul": 0.7
+          },
+          "ball_color": {
+            "type": "choice",
+            "choice": "red",
+            "confidence": 1.0,
+            "probabilities": {
+              "red": 1.0,
+              "blue": 0.0
+            }
+          },
+          "red_likelihood": {
+            "type": "score",
+            "score": 3.0,
+            "confidence": 0.99,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "impossible"
+              },
+              "1": {
+                "score": 1,
+                "label": "unlikely"
+              },
+              "2": {
+                "score": 2,
+                "label": "even odds"
+              },
+              "3": {
+                "score": 3,
+                "label": "likely"
+              },
+              "4": {
+                "score": 4,
+                "label": "certain"
+              }
+            },
+            "probabilities": {
+              "0": 0.0,
+              "1": 0.0,
+              "2": 0.0,
+              "3": 1.0,
+              "4": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 464,
+          "output_tokens": 68
+        }
+      },
+      "parsed": {
+        "is_red": {
+          "type": "noul",
+          "noul": 0.7
+        },
+        "ball_color": {
+          "type": "choice",
+          "choice": "red",
+          "probabilities": {
+            "red": 1.0,
+            "blue": 0.0
+          },
+          "confidence": 1.0
+        },
+        "red_likelihood": {
+          "type": "score",
+          "score": 3.0,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 0.0,
+            "3": 1.0,
+            "4": 0.0
+          },
+          "confidence": 0.99
+        }
+      },
+      "error": null
+    },
+    {
+      "format": "json",
+      "format_description": "Format B \u2014 JSON object",
+      "state": {
+        "red": 7,
+        "blue": 3
+      },
+      "repeat": 1,
+      "timestamp": "2026-09-23T11:06:02.900862+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdf1addc7ddba23dec94da47aee6",
+      "latency_ms": 451.6861140000401,
+      "input_tokens": 462,
+      "output_tokens": 68,
+      "estimated_cost_usd": 1.9404e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 11:06:03 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdf1addc7ddba23dec94da47aee6",
+        "x-envoy-upstream-service-time": "114",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=ojH6OXBckbfXpBFTJeK6mjIWGCnvAH2YHFc10vrLiT26jfI2KoYHFhY2O5AUaEGl39FM0Icqk3T9HY0RzdbjONjltvDMANJdSgpHc3beDwboGuDpCCokfRnOU3Of6gHI8O%2FXwcvccqSRhJAtiw%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f913e8cab0dc4f-FRA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "is_red": {
+            "type": "noul",
+            "noul": 0.7
+          },
+          "ball_color": {
+            "type": "choice",
+            "choice": "red",
+            "confidence": 0.99,
+            "probabilities": {
+              "blue": 0.0,
+              "red": 1.0
+            }
+          },
+          "red_likelihood": {
+            "type": "score",
+            "score": 2.99,
+            "confidence": 0.98,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "impossible"
+              },
+              "1": {
+                "score": 1,
+                "label": "unlikely"
+              },
+              "2": {
+                "score": 2,
+                "label": "even odds"
+              },
+              "3": {
+                "score": 3,
+                "label": "likely"
+              },
+              "4": {
+                "score": 4,
+                "label": "certain"
+              }
+            },
+            "probabilities": {
+              "0": 0.0,
+              "1": 0.0,
+              "2": 0.01,
+              "3": 0.99,
+              "4": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 462,
+          "output_tokens": 68
+        }
+      },
+      "parsed": {
+        "is_red": {
+          "type": "noul",
+          "noul": 0.7
+        },
+        "ball_color": {
+          "type": "choice",
+          "choice": "red",
+          "probabilities": {
+            "blue": 0.0,
+            "red": 1.0
+          },
+          "confidence": 0.99
+        },
+        "red_likelihood": {
+          "type": "score",
+          "score": 2.99,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 0.01,
+            "3": 0.99,
+            "4": 0.0
+          },
+          "confidence": 0.98
+        }
+      },
+      "error": null
+    },
+    {
+      "format": "json",
+      "format_description": "Format B \u2014 JSON object",
+      "state": {
+        "red": 7,
+        "blue": 3
+      },
+      "repeat": 2,
+      "timestamp": "2026-09-23T11:06:03.352880+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdf1afa273efbef74591a2373d41",
+      "latency_ms": 479.3742639994889,
+      "input_tokens": 462,
+      "output_tokens": 68,
+      "estimated_cost_usd": 1.9404e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 11:06:03 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdf1afa273efbef74591a2373d41",
+        "x-envoy-upstream-service-time": "140",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=CPwbBCg1W93hWaf%2FOkbc03HxSHz7QofysU3DpNDaMDoHWcLUc3fFrzKNuPHB2mkSBpxuqjtCpDivBo0lmmdvHOrMO9FVdrXwkmYA2faI36%2F2QgNK9MnI%2F7kTYqtFUodrcwUiEcixOORJBMBVug%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f913ebac80dc4f-FRA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "is_red": {
+            "type": "noul",
+            "noul": 0.7
+          },
+          "ball_color": {
+            "type": "choice",
+            "choice": "red",
+            "confidence": 0.99,
+            "probabilities": {
+              "red": 1.0,
+              "blue": 0.0
+            }
+          },
+          "red_likelihood": {
+            "type": "score",
+            "score": 2.99,
+            "confidence": 0.99,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "impossible"
+              },
+              "1": {
+                "score": 1,
+                "label": "unlikely"
+              },
+              "2": {
+                "score": 2,
+                "label": "even odds"
+              },
+              "3": {
+                "score": 3,
+                "label": "likely"
+              },
+              "4": {
+                "score": 4,
+                "label": "certain"
+              }
+            },
+            "probabilities": {
+              "0": 0.0,
+              "1": 0.0,
+              "2": 0.01,
+              "3": 0.99,
+              "4": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 462,
+          "output_tokens": 68
+        }
+      },
+      "parsed": {
+        "is_red": {
+          "type": "noul",
+          "noul": 0.7
+        },
+        "ball_color": {
+          "type": "choice",
+          "choice": "red",
+          "probabilities": {
+            "red": 1.0,
+            "blue": 0.0
+          },
+          "confidence": 0.99
+        },
+        "red_likelihood": {
+          "type": "score",
+          "score": 2.99,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 0.01,
+            "3": 0.99,
+            "4": 0.0
+          },
+          "confidence": 0.99
+        }
+      },
+      "error": null
+    },
+    {
+      "format": "json",
+      "format_description": "Format B \u2014 JSON object",
+      "state": {
+        "red": 7,
+        "blue": 3
+      },
+      "repeat": 3,
+      "timestamp": "2026-09-23T11:06:03.832569+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdf1b188795393c987dc53301dc2",
+      "latency_ms": 495.7597460006582,
+      "input_tokens": 462,
+      "output_tokens": 68,
+      "estimated_cost_usd": 1.9404e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 11:06:04 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdf1b188795393c987dc53301dc2",
+        "x-envoy-upstream-service-time": "156",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=FU2hSFgY21PloAkJbwVttpOV5BsHDWVX0hXbSRLn0hfgj7gqhBLyPDeG7%2B5sB2yuKbXdI1wW2xbfikfQfNhICuggEp%2BsRWpZdE5MucIxIZDOdLztkygnI8VZO51CuX55DnPbKPP5BjE%2FzgImyg%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f913eeaf5bdc4f-FRA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "is_red": {
+            "type": "noul",
+            "noul": 0.71
+          },
+          "ball_color": {
+            "type": "choice",
+            "choice": "red",
+            "confidence": 0.99,
+            "probabilities": {
+              "red": 0.99,
+              "blue": 0.01
+            }
+          },
+          "red_likelihood": {
+            "type": "score",
+            "score": 2.99,
+            "confidence": 0.99,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "impossible"
+              },
+              "1": {
+                "score": 1,
+                "label": "unlikely"
+              },
+              "2": {
+                "score": 2,
+                "label": "even odds"
+              },
+              "3": {
+                "score": 3,
+                "label": "likely"
+              },
+              "4": {
+                "score": 4,
+                "label": "certain"
+              }
+            },
+            "probabilities": {
+              "0": 0.0,
+              "1": 0.0,
+              "2": 0.01,
+              "3": 0.99,
+              "4": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 462,
+          "output_tokens": 68
+        }
+      },
+      "parsed": {
+        "is_red": {
+          "type": "noul",
+          "noul": 0.71
+        },
+        "ball_color": {
+          "type": "choice",
+          "choice": "red",
+          "probabilities": {
+            "red": 0.99,
+            "blue": 0.01
+          },
+          "confidence": 0.99
+        },
+        "red_likelihood": {
+          "type": "score",
+          "score": 2.99,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 0.01,
+            "3": 0.99,
+            "4": 0.0
+          },
+          "confidence": 0.99
+        }
+      },
+      "error": null
+    },
+    {
+      "format": "compact",
+      "format_description": "Format C \u2014 compact structured text",
+      "state": "red=7, blue=3",
+      "repeat": 1,
+      "timestamp": "2026-09-23T11:06:04.328537+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdf1b37876db9108695908d2c4eb",
+      "latency_ms": 429.8876510001719,
+      "input_tokens": 458,
+      "output_tokens": 68,
+      "estimated_cost_usd": 1.9236e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 11:06:04 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdf1b37876db9108695908d2c4eb",
+        "x-envoy-upstream-service-time": "83",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=NdBhouEQJIONVVKqmUqsH5aRzv%2Bjyqv09L9dZzigxnHQEF7yZ%2BO%2FT8j4MWODvmhGq39tR2bGthBTunv6KcZ3MKIkmQurt58wDMO5c8%2FRcjJbItsCSjy1BJr8RNfYK5bhovm7VllmJIIsxtpNIQ%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f913f1c8f2dc4f-FRA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "is_red": {
+            "type": "noul",
+            "noul": 0.68
+          },
+          "ball_color": {
+            "type": "choice",
+            "choice": "red",
+            "confidence": 0.99,
+            "probabilities": {
+              "blue": 0.01,
+              "red": 0.99
+            }
+          },
+          "red_likelihood": {
+            "type": "score",
+            "score": 2.97,
+            "confidence": 0.97,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "impossible"
+              },
+              "1": {
+                "score": 1,
+                "label": "unlikely"
+              },
+              "2": {
+                "score": 2,
+                "label": "even odds"
+              },
+              "3": {
+                "score": 3,
+                "label": "likely"
+              },
+              "4": {
+                "score": 4,
+                "label": "certain"
+              }
+            },
+            "probabilities": {
+              "0": 0.0,
+              "1": 0.0,
+              "2": 0.02,
+              "3": 0.98,
+              "4": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 458,
+          "output_tokens": 68
+        }
+      },
+      "parsed": {
+        "is_red": {
+          "type": "noul",
+          "noul": 0.68
+        },
+        "ball_color": {
+          "type": "choice",
+          "choice": "red",
+          "probabilities": {
+            "blue": 0.01,
+            "red": 0.99
+          },
+          "confidence": 0.99
+        },
+        "red_likelihood": {
+          "type": "score",
+          "score": 2.97,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 0.02,
+            "3": 0.98,
+            "4": 0.0
+          },
+          "confidence": 0.97
+        }
+      },
+      "error": null
+    },
+    {
+      "format": "compact",
+      "format_description": "Format C \u2014 compact structured text",
+      "state": "red=7, blue=3",
+      "repeat": 2,
+      "timestamp": "2026-09-23T11:06:04.758611+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdf1b51f7dc6989cfb7148d46ef7",
+      "latency_ms": 419.61325499960367,
+      "input_tokens": 458,
+      "output_tokens": 68,
+      "estimated_cost_usd": 1.9236e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 11:06:05 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdf1b51f7dc6989cfb7148d46ef7",
+        "x-envoy-upstream-service-time": "81",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=sic4QH%2BpSq3YejNUhfvj8Ba70WJP8v%2B911dBcZ3%2Bwu7tBTO%2F%2BcNYsT3REpEFpebS6EyAcg%2FH4ZuRzGlei2yqh5WL%2FIU3UCn9e6gkGigT6ZaEU%2F8N22NdrGXucKYvA%2FbY%2BhkteTzejI6mIOCP5A%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f913f46a08dc4f-FRA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "is_red": {
+            "type": "noul",
+            "noul": 0.68
+          },
+          "ball_color": {
+            "type": "choice",
+            "choice": "red",
+            "confidence": 0.99,
+            "probabilities": {
+              "red": 0.99,
+              "blue": 0.01
+            }
+          },
+          "red_likelihood": {
+            "type": "score",
+            "score": 2.97,
+            "confidence": 0.97,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "impossible"
+              },
+              "1": {
+                "score": 1,
+                "label": "unlikely"
+              },
+              "2": {
+                "score": 2,
+                "label": "even odds"
+              },
+              "3": {
+                "score": 3,
+                "label": "likely"
+              },
+              "4": {
+                "score": 4,
+                "label": "certain"
+              }
+            },
+            "probabilities": {
+              "0": 0.0,
+              "1": 0.0,
+              "2": 0.03,
+              "3": 0.97,
+              "4": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 458,
+          "output_tokens": 68
+        }
+      },
+      "parsed": {
+        "is_red": {
+          "type": "noul",
+          "noul": 0.68
+        },
+        "ball_color": {
+          "type": "choice",
+          "choice": "red",
+          "probabilities": {
+            "red": 0.99,
+            "blue": 0.01
+          },
+          "confidence": 0.99
+        },
+        "red_likelihood": {
+          "type": "score",
+          "score": 2.97,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 0.03,
+            "3": 0.97,
+            "4": 0.0
+          },
+          "confidence": 0.97
+        }
+      },
+      "error": null
+    },
+    {
+      "format": "compact",
+      "format_description": "Format C \u2014 compact structured text",
+      "state": "red=7, blue=3",
+      "repeat": 3,
+      "timestamp": "2026-09-23T11:06:05.178377+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdf1b6c37c1aa6dfbf1ef16301fe",
+      "latency_ms": 443.2071850005741,
+      "input_tokens": 458,
+      "output_tokens": 68,
+      "estimated_cost_usd": 1.9236e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 11:06:05 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdf1b6c37c1aa6dfbf1ef16301fe",
+        "x-envoy-upstream-service-time": "103",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=jY60I0unL2%2F3djVc%2BMJwzIeeLLNOfKUp0Nol%2FW7roWTWXTGE6SqVaz9%2BXBaelARU9846g4%2Bj%2FVX3HPLx254G7TzdZjkNQeXbYaxWn%2BKdaZCvh6dzEiOe4UnSU3h%2BGfImMwH%2BKLqzGm34todcQA%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f913f70bd8dc4f-FRA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "is_red": {
+            "type": "noul",
+            "noul": 0.68
+          },
+          "ball_color": {
+            "type": "choice",
+            "choice": "red",
+            "confidence": 0.99,
+            "probabilities": {
+              "red": 0.99,
+              "blue": 0.01
+            }
+          },
+          "red_likelihood": {
+            "type": "score",
+            "score": 2.96,
+            "confidence": 0.96,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "impossible"
+              },
+              "1": {
+                "score": 1,
+                "label": "unlikely"
+              },
+              "2": {
+                "score": 2,
+                "label": "even odds"
+              },
+              "3": {
+                "score": 3,
+                "label": "likely"
+              },
+              "4": {
+                "score": 4,
+                "label": "certain"
+              }
+            },
+            "probabilities": {
+              "0": 0.0,
+              "1": 0.0,
+              "2": 0.04,
+              "3": 0.96,
+              "4": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 458,
+          "output_tokens": 68
+        }
+      },
+      "parsed": {
+        "is_red": {
+          "type": "noul",
+          "noul": 0.68
+        },
+        "ball_color": {
+          "type": "choice",
+          "choice": "red",
+          "probabilities": {
+            "red": 0.99,
+            "blue": 0.01
+          },
+          "confidence": 0.99
+        },
+        "red_likelihood": {
+          "type": "score",
+          "score": 2.96,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 0.04,
+            "3": 0.96,
+            "4": 0.0
+          },
+          "confidence": 0.96
+        }
+      },
+      "error": null
+    }
+  ]
+}

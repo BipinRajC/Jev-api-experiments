@@ -239,3 +239,16 @@ Only findings measured in this repository.
 - **Limitations:** Single state/composition. Neutral environmental facts only (no contradictory context — that is Experiment 012). Cannot separate "more context" from "particular context." n=2. Noul only.
 - **Confidence in the finding:** Moderate-high that context shifts Noul on this state; low that the "toward ground truth" direction generalizes.
 - **Implications:** Context is a weaker influence than wording. No evidence of catastrophic context pollution yet, but the dose-dependence warrants a test of contradictory context (012). The drift magnitude means an application should still control the amount of context fed to Jev.
+
+---
+
+## F019 — State representation format has only a small effect; prose and JSON are equivalent
+
+- **Related hypothesis:** H031, H032, H033
+- **Experiment(s):** 011 (`results/011-structured-state/run-001.json`)
+- **Conditions:** 2026-09-23 UTC; `jev-1.13.0`; facts 7 red / 3 blue; three representations (prose "Arun has 7 red balls and 3 blue balls.", JSON `{"red":7,"blue":3}`, compact "red=7, blue=3"); 3 batch calls per format (Noul + Choice + Score each); 27 answers total
+- **Evidence:** Noul means: prose 0.70, json 0.703, compact 0.68 (range 0.023). Score means: prose 3.00, json 2.99, compact 2.97 (range 0.033). Choice: "red" in all 9 calls. Input tokens: prose 464, json 462, compact 458. Latency means: prose 538.7, json 475.6, compact 430.9 ms. The compact form is consistently lower across all 3 repeats (Noul 0.68, Score 2.97).
+- **Interpretation:** Representation format has a small but consistent effect — the compact form is slightly lower than prose. But prose vs JSON are essentially equivalent on Noul (0.70 vs 0.703). The effect magnitude (≤ 0.033) is far below the wording-sensitivity effect from 009 (0.207). Choice is fully representation-insensitive. Token savings from compactness are minor (~1.3%).
+- **Limitations:** Single fact set. Three formats only. n=3. Latency confounded by network jitter (008). One specific compact syntax.
+- **Confidence in the finding:** Moderate that representation has a small effect; high that prose vs JSON are behaviorally equivalent on this state.
+- **Implications:** Prose and JSON state are interchangeable for decision output; the choice between them is a token/latency tradeoff, not a decision-quality one. Representation format matters far less than question wording. This narrows the design space for FootyQuant v2: JSON state is safe to use.

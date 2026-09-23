@@ -483,3 +483,51 @@ REJECTED (conditions: 2026-09-23, `jev-1.13.0`, 70/30 bag state, 0/1/5/20 irrele
 Experiment:
 
 010
+
+---
+
+## H031 — State representation format materially changes outputs
+
+Hypothesis:
+
+Representing identical facts as prose, JSON, or compact structured text produces materially different Jev outputs.
+
+Status:
+
+INCONCLUSIVE (conditions: 2026-09-23, `jev-1.13.0`, facts 7 red/3 blue, 3 formats × 3 batch calls; compact consistently lower (Noul 0.68 vs prose/json 0.70; Score 2.97 vs 3.00) but range ≤ 0.033, marginal vs the 0.02 jitter baseline; prose vs JSON essentially equivalent; Choice fully insensitive; magnitude far below 009's wording effect of 0.207)
+
+Experiment:
+
+011
+
+---
+
+## H032 — State representation format does not change outputs
+
+Hypothesis:
+
+Representing identical facts as prose, JSON, or compact structured text leaves outputs within the ±0.02 jitter baseline.
+
+Status:
+
+REJECTED under strict interpretation (conditions: 2026-09-23, `jev-1.13.0`, facts 7 red/3 blue, 3 formats × 3 batch calls; Noul range 0.023 and Score range 0.033 both marginally exceed the 0.02 baseline, driven by the compact form being consistently lower; deviation is small)
+
+Experiment:
+
+011
+
+---
+
+## H033 — JSON / structured representation uses fewer input tokens than prose
+
+Hypothesis:
+
+A structured (JSON or compact) state representation consumes fewer input tokens than the equivalent prose representation.
+
+Status:
+
+SUPPORTED (conditions: 2026-09-23, `jev-1.13.0`, facts 7 red/3 blue; prose 464 tokens, JSON 462, compact 458; savings ~1.3%; n=3 each, token counts fully deterministic)
+
+Experiment:
+
+011
