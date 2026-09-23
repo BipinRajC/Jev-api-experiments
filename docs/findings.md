@@ -213,3 +213,16 @@ Only findings measured in this repository.
 - **Limitations:** Client wall-clock, not `x-envoy-upstream-service-time`; includes network and local overhead.
 - **Confidence in the finding:** High for the observed latency distribution on this date/network.
 - **Implications:** For latency-sensitive use, variability (~2x) is the practical concern, not output determinism. Do not treat a single latency measurement as representative.
+
+---
+
+## F017 — Noul is highly wording-sensitive; phrasing dominates jitter
+
+- **Related hypothesis:** H027, H028
+- **Experiment(s):** 009 (`results/009-wording-sensitivity/run-001.json`)
+- **Conditions:** 2026-09-23 UTC; `jev-1.13.0`; state "A bag contains 70 red balls and 30 blue balls. One ball is selected randomly."; 4 Noul wordings × 3 repeats = 12 calls
+- **Evidence:** Noul means by wording: "Will the selected ball be red?" 0.66, "What is the chance that the selected ball is red?" 0.71, "Is the selected ball likely to be red?" 0.87, "Does the evidence support the ball being red?" 0.84. Range across wording means = 0.207. Global mean 0.772. Within-wording jitter all ≤ 0.03 (2 of 4 wordings exactly 0.00).
+- **Interpretation:** Wording is the dominant source of Noul variation — ~10x the ±0.02 jitter baseline from Experiment 008. The spread is systematic: literal outcome-phrasings ("will be", "chance") return 0.66–0.71 near the 0.70 ground truth, while judgment-framed phrasings ("likely", "evidence support") inflate to 0.84–0.87. This is not noise; it is a real, reproducible difference attributable to phrasing.
+- **Limitations:** Single state. 4 wordings only. Noul only. n=3 per wording. The specific magnitudes may not generalize.
+- **Confidence in the finding:** High that wording sensitivity is real and large on this state; the exact cluster split (literal vs judgment) is a preliminary pattern.
+- **Implications:** Noul values are not frame-independent. Calibration claims must specify the exact question phrasing. Judgment-framed phrasings ("likely", "does evidence support") systematically inflate Noul. For production, standardize phrasing tightly; treat different phrasings as different measurements. Experiment 010 must hold phrasing constant to isolate the effect of added context.

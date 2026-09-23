@@ -419,3 +419,35 @@ SUPPORTED (conditions: 2026-09-23, `jev-1.13.0`, n=20; Noul jitter range 0.02 vs
 Experiment:
 
 008
+
+---
+
+## H027 — Semantically equivalent Noul wordings produce materially different values
+
+Hypothesis:
+
+Different phrasings of the same underlying question produce Noul values that differ by more than the ±0.02 jitter baseline.
+
+Status:
+
+SUPPORTED (conditions: 2026-09-23, `jev-1.13.0`, 70/30 bag state, 4 wordings × 3 repeats; range across wording means = 0.207, ~10x the 0.02 jitter baseline; within-wording jitter ≤ 0.03. Literal/phrased-probability wordings returned 0.66–0.71 near ground truth 0.70; judgment-framed wordings "likely"/"evidence support" returned 0.84–0.87, inflated by ~0.14–0.17)
+
+Experiment:
+
+009
+
+---
+
+## H028 — Noul is wording-insensitive within the jitter baseline
+
+Hypothesis:
+
+Semantically equivalent wordings produce Noul values within the ±0.02 run-to-run jitter baseline.
+
+Status:
+
+REJECTED (conditions: 2026-09-23, `jev-1.13.0`, 70/30 bag state, 4 wordings × 3 repeats; cross-wording spread 0.207 vastly exceeds the 0.02 jitter baseline)
+
+Experiment:
+
+009

@@ -1,0 +1,676 @@
+{
+  "experiment_id": "009-wording-sensitivity",
+  "run_id": "run-001",
+  "timestamp": "2026-09-23T10:31:54.915958+00:00",
+  "model_requested": "jev-1.13.0",
+  "api": {
+    "provider": "typesafe_direct",
+    "base_url": "https://api.typesafe.ai",
+    "endpoint": "/v1/systemone",
+    "method": "POST"
+  },
+  "design": {
+    "repeats_per_wording": 3,
+    "state": "A bag contains 70 red balls and 30 blue balls. One ball is selected randomly.",
+    "question_id": "is_red",
+    "wordings": [
+      {
+        "id": "will_be_red",
+        "text": "Will the selected ball be red?"
+      },
+      {
+        "id": "likely_red",
+        "text": "Is the selected ball likely to be red?"
+      },
+      {
+        "id": "chance_red",
+        "text": "What is the chance that the selected ball is red?"
+      },
+      {
+        "id": "evidence_red",
+        "text": "Does the evidence support the ball being red?"
+      }
+    ],
+    "ground_truth_p_red": 0.7,
+    "jitter_baseline_from_008": 0.02
+  },
+  "analysis": {
+    "wording_means": {
+      "will_be_red": 0.6633,
+      "likely_red": 0.87,
+      "chance_red": 0.71,
+      "evidence_red": 0.8433
+    },
+    "global_mean": 0.7717,
+    "ground_truth": 0.7,
+    "overall_range_all_repeats": 0.21,
+    "range_across_wording_means": 0.2067,
+    "stdev_across_wording_means": 0.1006,
+    "jitter_baseline": 0.02,
+    "exceeds_jitter_baseline": true,
+    "by_wording": {
+      "will_be_red": {
+        "n": 3,
+        "values": [
+          0.66,
+          0.66,
+          0.67
+        ],
+        "mean": 0.6633,
+        "median": 0.66,
+        "range": 0.01
+      },
+      "likely_red": {
+        "n": 3,
+        "values": [
+          0.87,
+          0.87,
+          0.87
+        ],
+        "mean": 0.87,
+        "median": 0.87,
+        "range": 0.0
+      },
+      "chance_red": {
+        "n": 3,
+        "values": [
+          0.71,
+          0.71,
+          0.71
+        ],
+        "mean": 0.71,
+        "median": 0.71,
+        "range": 0.0
+      },
+      "evidence_red": {
+        "n": 3,
+        "values": [
+          0.86,
+          0.84,
+          0.83
+        ],
+        "mean": 0.8433,
+        "median": 0.84,
+        "range": 0.03
+      }
+    }
+  },
+  "trials": [
+    {
+      "wording_id": "will_be_red",
+      "wording": "Will the selected ball be red?",
+      "repeat": 1,
+      "state": "A bag contains 70 red balls and 30 blue balls. One ball is selected randomly.",
+      "timestamp": "2026-09-23T10:31:54.962354+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdd26e15715091f15df848cfd7c1",
+      "latency_ms": 563.2315929997276,
+      "input_tokens": 294,
+      "output_tokens": 21,
+      "estimated_cost_usd": 1.2348000000000001e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:31:55 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdd26e15715091f15df848cfd7c1",
+        "x-envoy-upstream-service-time": "133",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=Bnb%2BeciApzgxYR1aLE8FL2GnPvA5bHprF%2BvIFISNDrY79JTim0mYyseJw4ysMBPzBaSJCO1aHhTYrforsjeAWPxeTtpLrL3w77KaqU5HTyPNvEbbDiApKErVtN%2FGPVZCF9XZ7IlS%2BXrIuiaAkg%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8e1e8fc7c2f6d-MAA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "is_red": {
+            "type": "noul",
+            "noul": 0.66
+          }
+        },
+        "usage": {
+          "input_tokens": 294,
+          "output_tokens": 21
+        }
+      },
+      "parsed": {
+        "is_red": {
+          "type": "noul",
+          "noul": 0.66
+        }
+      },
+      "error": null
+    },
+    {
+      "wording_id": "will_be_red",
+      "wording": "Will the selected ball be red?",
+      "repeat": 2,
+      "state": "A bag contains 70 red balls and 30 blue balls. One ball is selected randomly.",
+      "timestamp": "2026-09-23T10:31:55.525961+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdd270097c4bbbd14bb0220f4f05",
+      "latency_ms": 405.5742150003425,
+      "input_tokens": 294,
+      "output_tokens": 21,
+      "estimated_cost_usd": 1.2348000000000001e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:31:55 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdd270097c4bbbd14bb0220f4f05",
+        "x-envoy-upstream-service-time": "76",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=n%2FiUdZPI778rFMHaTbYcd40YSpVnX6bukKyJ4iohjeAIRsFE8ORMnwXTSegD0%2FpAA7fTVS0hphvGDbAnnS3VMvIWkXWyJfQYUb8I6XiUTVn5CzuHy813Npri%2Ftz4GZCCW6B%2BecQGVrgR96ru7A%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8e1ec18382f6d-MAA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "is_red": {
+            "type": "noul",
+            "noul": 0.66
+          }
+        },
+        "usage": {
+          "input_tokens": 294,
+          "output_tokens": 21
+        }
+      },
+      "parsed": {
+        "is_red": {
+          "type": "noul",
+          "noul": 0.66
+        }
+      },
+      "error": null
+    },
+    {
+      "wording_id": "will_be_red",
+      "wording": "Will the selected ball be red?",
+      "repeat": 3,
+      "state": "A bag contains 70 red balls and 30 blue balls. One ball is selected randomly.",
+      "timestamp": "2026-09-23T10:31:55.931846+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdd271a07b30bd8b85dc62de112b",
+      "latency_ms": 410.922410999774,
+      "input_tokens": 294,
+      "output_tokens": 21,
+      "estimated_cost_usd": 1.2348000000000001e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:31:56 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdd271a07b30bd8b85dc62de112b",
+        "x-envoy-upstream-service-time": "63",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=n2uZPDfv3XCD2TsC%2FGcm0munEuaa0qrmln9J17T1msVtL8d4pJDSFPzpgbogI0jtqvYglkVmgvyGrNuSFtnq9R54ybYlRHzCYmPs7%2FSlGsYgUFVS0bnOCe4sU%2FQOHrbxKQie6NYutX8il8XXbQ%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8e1ee996f2f6d-MAA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "is_red": {
+            "type": "noul",
+            "noul": 0.67
+          }
+        },
+        "usage": {
+          "input_tokens": 294,
+          "output_tokens": 21
+        }
+      },
+      "parsed": {
+        "is_red": {
+          "type": "noul",
+          "noul": 0.67
+        }
+      },
+      "error": null
+    },
+    {
+      "wording_id": "likely_red",
+      "wording": "Is the selected ball likely to be red?",
+      "repeat": 1,
+      "state": "A bag contains 70 red balls and 30 blue balls. One ball is selected randomly.",
+      "timestamp": "2026-09-23T10:31:56.343067+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdd2733f793c9dd2d2d57021ae4e",
+      "latency_ms": 411.2397910002983,
+      "input_tokens": 296,
+      "output_tokens": 21,
+      "estimated_cost_usd": 1.2432e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:31:56 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdd2733f793c9dd2d2d57021ae4e",
+        "x-envoy-upstream-service-time": "74",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=7A56PDaA6cV1BmJGXaAIndK42nXwteJVXhZMnOT3w%2B4Df8IayfpBMP8V5uitebpBYQwgczebjFoldsLqs%2B84vX57Cgxz09HYy8vGY0L1qUEMjFDJ8m1ZXKNhAle42e40kKAPO5u2F4QEgH%2BJ4A%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8e1f12b5d2f6d-MAA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "is_red": {
+            "type": "noul",
+            "noul": 0.87
+          }
+        },
+        "usage": {
+          "input_tokens": 296,
+          "output_tokens": 21
+        }
+      },
+      "parsed": {
+        "is_red": {
+          "type": "noul",
+          "noul": 0.87
+        }
+      },
+      "error": null
+    },
+    {
+      "wording_id": "likely_red",
+      "wording": "Is the selected ball likely to be red?",
+      "repeat": 2,
+      "state": "A bag contains 70 red balls and 30 blue balls. One ball is selected randomly.",
+      "timestamp": "2026-09-23T10:31:56.754648+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdd274da7e0b9e2cbf90eaeef489",
+      "latency_ms": 365.6773159991644,
+      "input_tokens": 296,
+      "output_tokens": 21,
+      "estimated_cost_usd": 1.2432e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:31:57 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdd274da7e0b9e2cbf90eaeef489",
+        "x-envoy-upstream-service-time": "60",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=MmWmUUqcXSv0KLpIJ1LmUk0dm0x6mjXCQlvpzhtE7JkkQ3XViLwJK2UN6hjMlhM43O1dybkHdUwMTSbRkvZGqf8s81geVvOMATjFAkzkmDUo8RmhYFudNVAgq1m6RiiA3WXFXCbFM2pl9uyWZA%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8e1f3cd392f6d-MAA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "is_red": {
+            "type": "noul",
+            "noul": 0.87
+          }
+        },
+        "usage": {
+          "input_tokens": 296,
+          "output_tokens": 21
+        }
+      },
+      "parsed": {
+        "is_red": {
+          "type": "noul",
+          "noul": 0.87
+        }
+      },
+      "error": null
+    },
+    {
+      "wording_id": "likely_red",
+      "wording": "Is the selected ball likely to be red?",
+      "repeat": 3,
+      "state": "A bag contains 70 red balls and 30 blue balls. One ball is selected randomly.",
+      "timestamp": "2026-09-23T10:31:57.120592+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdd27659733593e8184ef9df9970",
+      "latency_ms": 457.3100079996948,
+      "input_tokens": 296,
+      "output_tokens": 21,
+      "estimated_cost_usd": 1.2432e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:31:57 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdd27659733593e8184ef9df9970",
+        "x-envoy-upstream-service-time": "64",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=vWKyUZV5cia3v6vwD3XNecx887lw8YsEu9qCDxRDAN1G%2FujWEB5ZyDUhF7HL8GZsqHOD0C%2BzWZuEKrYdmoIJnD7fchuDHZMNK8btLMbPstE1EkugNIFuRc48dKQOVCrnetxas%2FIPHiXXMz4y1g%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8e1f60e362f6d-MAA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "is_red": {
+            "type": "noul",
+            "noul": 0.87
+          }
+        },
+        "usage": {
+          "input_tokens": 296,
+          "output_tokens": 21
+        }
+      },
+      "parsed": {
+        "is_red": {
+          "type": "noul",
+          "noul": 0.87
+        }
+      },
+      "error": null
+    },
+    {
+      "wording_id": "chance_red",
+      "wording": "What is the chance that the selected ball is red?",
+      "repeat": 1,
+      "state": "A bag contains 70 red balls and 30 blue balls. One ball is selected randomly.",
+      "timestamp": "2026-09-23T10:31:57.578189+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdd2780c7b878ded9867e0df02fd",
+      "latency_ms": 825.066899000376,
+      "input_tokens": 298,
+      "output_tokens": 21,
+      "estimated_cost_usd": 1.2516e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:31:58 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdd2780c7b878ded9867e0df02fd",
+        "x-envoy-upstream-service-time": "79",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=i1UuDHU4GvdZuYdglCKxtcYzWYidXq2DmXpgcRVTJjVqFxOlMcIGhQ4MTkcsIdlDRCTpi%2FFX5JQcHBMUm%2B1R%2BW5JqdNQvOZF1OQJyg7VOijaG75YK3ABhZB07jVlYWIu%2BjgcWLFG%2F9%2FmQGDE5Q%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8e1f8e8db2f6d-MAA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "is_red": {
+            "type": "noul",
+            "noul": 0.71
+          }
+        },
+        "usage": {
+          "input_tokens": 298,
+          "output_tokens": 21
+        }
+      },
+      "parsed": {
+        "is_red": {
+          "type": "noul",
+          "noul": 0.71
+        }
+      },
+      "error": null
+    },
+    {
+      "wording_id": "chance_red",
+      "wording": "What is the chance that the selected ball is red?",
+      "repeat": 2,
+      "state": "A bag contains 70 red balls and 30 blue balls. One ball is selected randomly.",
+      "timestamp": "2026-09-23T10:31:58.403560+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdd27b477afd8fa6ff9370970d1c",
+      "latency_ms": 407.09854399938195,
+      "input_tokens": 298,
+      "output_tokens": 21,
+      "estimated_cost_usd": 1.2516e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:31:58 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdd27b477afd8fa6ff9370970d1c",
+        "x-envoy-upstream-service-time": "109",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=bVJ1G6Otfig9Wjy9%2Frx8GzIts%2Fp6BExANEn42uzAP6em0ZlKrMi%2BWmMPHzREWXntgO4p6SQsd8VizAD7j4eyUTMcZ6DWP6pjpNeh7wPwSXNLSWQ3zPCD4TtA%2BJE45Os0QG34D2tlZ4I4fupmxA%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8e1fe1d882f6d-MAA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "is_red": {
+            "type": "noul",
+            "noul": 0.71
+          }
+        },
+        "usage": {
+          "input_tokens": 298,
+          "output_tokens": 21
+        }
+      },
+      "parsed": {
+        "is_red": {
+          "type": "noul",
+          "noul": 0.71
+        }
+      },
+      "error": null
+    },
+    {
+      "wording_id": "chance_red",
+      "wording": "What is the chance that the selected ball is red?",
+      "repeat": 3,
+      "state": "A bag contains 70 red balls and 30 blue balls. One ball is selected randomly.",
+      "timestamp": "2026-09-23T10:31:58.810941+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdd27cde785684107d4878eb8154",
+      "latency_ms": 337.81314299994847,
+      "input_tokens": 298,
+      "output_tokens": 21,
+      "estimated_cost_usd": 1.2516e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:31:59 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdd27cde785684107d4878eb8154",
+        "x-envoy-upstream-service-time": "46",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=7kdyuqN7wsGFxraBFtCv0h2ILQHovfQG%2BFTw8wi7e7DQky9CSVvDK1ERQzEH4OeNIz1HnM894epWgUBJau7xqiDYjrMZrUFr7usvzBs6Vb5F0S0WMUIdY6y0qbJ5nvRRQkOuEJkoNz8csmFKvw%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8e200981d2f6d-MAA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "is_red": {
+            "type": "noul",
+            "noul": 0.71
+          }
+        },
+        "usage": {
+          "input_tokens": 298,
+          "output_tokens": 21
+        }
+      },
+      "parsed": {
+        "is_red": {
+          "type": "noul",
+          "noul": 0.71
+        }
+      },
+      "error": null
+    },
+    {
+      "wording_id": "evidence_red",
+      "wording": "Does the evidence support the ball being red?",
+      "repeat": 1,
+      "state": "A bag contains 70 red balls and 30 blue balls. One ball is selected randomly.",
+      "timestamp": "2026-09-23T10:31:59.149132+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdd27e3b76ceb7b2998446aebd7e",
+      "latency_ms": 432.49308800022845,
+      "input_tokens": 296,
+      "output_tokens": 21,
+      "estimated_cost_usd": 1.2432e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:31:59 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdd27e3b76ceb7b2998446aebd7e",
+        "x-envoy-upstream-service-time": "59",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=uyZnmzE4mjhfZhC6hUF9%2FSqBNZrtt91N8Pvl1%2B4S27vCdNVzwVOSzJKFHctQk3LCbkDOiA30Lf3hS7KyJGTOkACWPqlZsebh9W2ksf4DxbtBYWfZH7auFQIOKsjLOTJSuibvob%2BCzJYfdzzK3A%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8e202c8a32f6d-MAA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "is_red": {
+            "type": "noul",
+            "noul": 0.86
+          }
+        },
+        "usage": {
+          "input_tokens": 296,
+          "output_tokens": 21
+        }
+      },
+      "parsed": {
+        "is_red": {
+          "type": "noul",
+          "noul": 0.86
+        }
+      },
+      "error": null
+    },
+    {
+      "wording_id": "evidence_red",
+      "wording": "Does the evidence support the ball being red?",
+      "repeat": 2,
+      "state": "A bag contains 70 red balls and 30 blue balls. One ball is selected randomly.",
+      "timestamp": "2026-09-23T10:31:59.581942+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdd27fe77b42b7231d24ef5421b0",
+      "latency_ms": 462.0919299995876,
+      "input_tokens": 296,
+      "output_tokens": 21,
+      "estimated_cost_usd": 1.2432e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:31:59 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdd27fe77b42b7231d24ef5421b0",
+        "x-envoy-upstream-service-time": "54",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=ARvSCPDc0PfvX7XaG3Xd%2BUCeMXvDJk%2B8fNaIga38KISPzQOJYpZAh2WoMfQ5jz4kbGGuB0QIQCjOnK%2BhiSJ0UJSMH6CSk3wFBIo%2BbiyfCT%2B9LMctqb2whJ5xN6grjqd%2FtBu48seB5U1QqytD7A%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8e2057ab92f6d-MAA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "is_red": {
+            "type": "noul",
+            "noul": 0.84
+          }
+        },
+        "usage": {
+          "input_tokens": 296,
+          "output_tokens": 21
+        }
+      },
+      "parsed": {
+        "is_red": {
+          "type": "noul",
+          "noul": 0.84
+        }
+      },
+      "error": null
+    },
+    {
+      "wording_id": "evidence_red",
+      "wording": "Does the evidence support the ball being red?",
+      "repeat": 3,
+      "state": "A bag contains 70 red balls and 30 blue balls. One ball is selected randomly.",
+      "timestamp": "2026-09-23T10:32:00.044310+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdd281b17148816f7d65e3d605c8",
+      "latency_ms": 353.1410519999554,
+      "input_tokens": 296,
+      "output_tokens": 21,
+      "estimated_cost_usd": 1.2432e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:32:00 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdd281b17148816f7d65e3d605c8",
+        "x-envoy-upstream-service-time": "55",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=pVnx1V3ZqMDFR8lzB52RwFxpG80UbN3VeMPBa5IfTw%2B82R9nMugFqfN72mCMZJYZ5D0LHgavJE0Gx%2BmbGTXxC%2FNHVwokPLENIMJHJWDXeATfiPou6Aww3xIDO7XY7wIuzQ4fGixGV%2FcE8q2A9w%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8e2085e3a2f6d-MAA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "is_red": {
+            "type": "noul",
+            "noul": 0.83
+          }
+        },
+        "usage": {
+          "input_tokens": 296,
+          "output_tokens": 21
+        }
+      },
+      "parsed": {
+        "is_red": {
+          "type": "noul",
+          "noul": 0.83
+        }
+      },
+      "error": null
+    }
+  ]
+}
