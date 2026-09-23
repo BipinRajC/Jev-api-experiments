@@ -1,0 +1,1580 @@
+{
+  "experiment_id": "013-missing-information",
+  "run_id": "run-001",
+  "timestamp": "2026-09-23T14:23:45.353980+00:00",
+  "model_requested": "jev-1.13.0",
+  "api": {
+    "provider": "typesafe_direct",
+    "base_url": "https://api.typesafe.ai",
+    "endpoint": "/v1/systemone",
+    "method": "POST"
+  },
+  "design": {
+    "repeats_per_case": 3,
+    "cases": [
+      {
+        "case_id": "unknown",
+        "state": "The color of the ball is unknown.",
+        "kind": "explicitly unknown"
+      },
+      {
+        "case_id": "unmentioned",
+        "state": "There is a ball on the table.",
+        "kind": "unmentioned (no color info)"
+      },
+      {
+        "case_id": "insufficient",
+        "state": "There is not enough information to determine the color of the ball.",
+        "kind": "explicitly insufficient"
+      },
+      {
+        "case_id": "control_blue",
+        "state": "The ball is blue.",
+        "kind": "positive control (known)"
+      }
+    ],
+    "questions": {
+      "is_blue": {
+        "type": "noul",
+        "instructions": "Is the color blue?"
+      },
+      "color_choice": {
+        "type": "choice",
+        "instructions": "What is the color of the ball?",
+        "criteria": {
+          "blue": "The ball is blue.",
+          "not_blue": "The ball is a color other than blue.",
+          "unknown": "The color of the ball is unknown."
+        }
+      },
+      "blue_certainty": {
+        "type": "score",
+        "instructions": "How certain is the color of the ball being blue?",
+        "criteria": [
+          {
+            "score": 0,
+            "label": "certainly not blue"
+          },
+          {
+            "score": 1,
+            "label": "likely not blue"
+          },
+          {
+            "score": 2,
+            "label": "unknown / even chance"
+          },
+          {
+            "score": 3,
+            "label": "likely blue"
+          },
+          {
+            "score": 4,
+            "label": "certainly blue"
+          }
+        ]
+      }
+    }
+  },
+  "analysis": {
+    "by_case": {
+      "unknown": {
+        "nouls": [
+          0.24,
+          0.22,
+          0.26
+        ],
+        "noul_mean": 0.24,
+        "choices": [
+          "unknown",
+          "unknown",
+          "unknown"
+        ],
+        "choice_set": [
+          "unknown"
+        ],
+        "scores": [
+          1.99,
+          1.99,
+          1.99
+        ],
+        "score_mean": 1.99,
+        "confidences": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "conf_mean": 1.0
+      },
+      "unmentioned": {
+        "nouls": [
+          0.2,
+          0.2,
+          0.2
+        ],
+        "noul_mean": 0.2,
+        "choices": [
+          "unknown",
+          "unknown",
+          "unknown"
+        ],
+        "choice_set": [
+          "unknown"
+        ],
+        "scores": [
+          1.96,
+          1.96,
+          1.96
+        ],
+        "score_mean": 1.96,
+        "confidences": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "conf_mean": 1.0
+      },
+      "insufficient": {
+        "nouls": [
+          0.29,
+          0.29,
+          0.29
+        ],
+        "noul_mean": 0.29,
+        "choices": [
+          "unknown",
+          "unknown",
+          "unknown"
+        ],
+        "choice_set": [
+          "unknown"
+        ],
+        "scores": [
+          1.99,
+          1.99,
+          1.99
+        ],
+        "score_mean": 1.99,
+        "confidences": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "conf_mean": 1.0
+      },
+      "control_blue": {
+        "nouls": [
+          0.9,
+          0.88,
+          0.88
+        ],
+        "noul_mean": 0.8867,
+        "choices": [
+          "blue",
+          "blue",
+          "blue"
+        ],
+        "choice_set": [
+          "blue"
+        ],
+        "scores": [
+          3.98,
+          3.98,
+          3.97
+        ],
+        "score_mean": 3.9767,
+        "confidences": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "conf_mean": 1.0
+      }
+    },
+    "missing_cases": [
+      "unknown",
+      "unmentioned",
+      "insufficient"
+    ],
+    "missing_noul_means": [
+      0.24,
+      0.2,
+      0.29
+    ],
+    "noul_range_across_missing": 0.09,
+    "jitter_baseline": 0.02,
+    "missing_nouls_equivalent": false,
+    "missing_choices_all_same": true,
+    "missing_nouls_near_zero": false,
+    "control_blue_noul_mean": 0.8867
+  },
+  "trials": [
+    {
+      "case_id": "unknown",
+      "kind": "explicitly unknown",
+      "state": "The color of the ball is unknown.",
+      "repeat": 1,
+      "timestamp": "2026-09-23T14:23:45.380267+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cea6b01f7aad86637788ed34f8d0",
+      "latency_ms": 575.9702690002086,
+      "input_tokens": 487,
+      "output_tokens": 74,
+      "estimated_cost_usd": 2.0454e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 14:23:45 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cea6b01f7aad86637788ed34f8d0",
+        "x-envoy-upstream-service-time": "142",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=6mWoflyU2RR4ECgKtUIMswdcKCSuGXXC5t213gd9wraNqsvNqVFwnl4QaRlICMY13eevVbN9ALbC3MzoW1xp6MUI5D0TJ7xF9kaoj%2FfLthQkQd%2BHPDOcd0WelmpLV3ziOoHfJ8Ys%2B80WMB1nGw%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3fa3585cacc7f6a-MAA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "is_blue": {
+            "type": "noul",
+            "noul": 0.24
+          },
+          "color_choice": {
+            "type": "choice",
+            "choice": "unknown",
+            "confidence": 1.0,
+            "probabilities": {
+              "blue": 0.0,
+              "unknown": 1.0,
+              "not_blue": 0.0
+            }
+          },
+          "blue_certainty": {
+            "type": "score",
+            "score": 1.99,
+            "confidence": 0.99,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "certainly not blue"
+              },
+              "1": {
+                "score": 1,
+                "label": "likely not blue"
+              },
+              "2": {
+                "score": 2,
+                "label": "unknown / even chance"
+              },
+              "3": {
+                "score": 3,
+                "label": "likely blue"
+              },
+              "4": {
+                "score": 4,
+                "label": "certainly blue"
+              }
+            },
+            "probabilities": {
+              "0": 0.0,
+              "1": 0.0,
+              "2": 1.0,
+              "3": 0.0,
+              "4": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 487,
+          "output_tokens": 74
+        }
+      },
+      "parsed": {
+        "is_blue": {
+          "type": "noul",
+          "noul": 0.24
+        },
+        "color_choice": {
+          "type": "choice",
+          "choice": "unknown",
+          "probabilities": {
+            "blue": 0.0,
+            "unknown": 1.0,
+            "not_blue": 0.0
+          },
+          "confidence": 1.0
+        },
+        "blue_certainty": {
+          "type": "score",
+          "score": 1.99,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 1.0,
+            "3": 0.0,
+            "4": 0.0
+          },
+          "confidence": 0.99
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "unknown",
+      "kind": "explicitly unknown",
+      "state": "The color of the ball is unknown.",
+      "repeat": 2,
+      "timestamp": "2026-09-23T14:23:45.957478+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cea6b1b4700ba267d20f6b511687",
+      "latency_ms": 359.46912899999006,
+      "input_tokens": 487,
+      "output_tokens": 74,
+      "estimated_cost_usd": 2.0454e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 14:23:46 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cea6b1b4700ba267d20f6b511687",
+        "x-envoy-upstream-service-time": "99",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=bhkpeNFYb60E%2B54%2F%2BoaXOPfbAaGcGuAkRvTMzlVKSCT3mce88tpucHRUYXiCyYmgtZ0KDPHsNHIKNi5V4IhzLEyIyY7n4Msiw9bPpgLJA9qNcBi5lU87JHTrDO27u1n%2F2DslZH%2BhDCtLlUMwVw%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3fa35885d487f6a-MAA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "is_blue": {
+            "type": "noul",
+            "noul": 0.22
+          },
+          "color_choice": {
+            "type": "choice",
+            "choice": "unknown",
+            "confidence": 1.0,
+            "probabilities": {
+              "not_blue": 0.0,
+              "unknown": 1.0,
+              "blue": 0.0
+            }
+          },
+          "blue_certainty": {
+            "type": "score",
+            "score": 1.99,
+            "confidence": 0.99,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "certainly not blue"
+              },
+              "1": {
+                "score": 1,
+                "label": "likely not blue"
+              },
+              "2": {
+                "score": 2,
+                "label": "unknown / even chance"
+              },
+              "3": {
+                "score": 3,
+                "label": "likely blue"
+              },
+              "4": {
+                "score": 4,
+                "label": "certainly blue"
+              }
+            },
+            "probabilities": {
+              "0": 0.0,
+              "1": 0.0,
+              "2": 1.0,
+              "3": 0.0,
+              "4": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 487,
+          "output_tokens": 74
+        }
+      },
+      "parsed": {
+        "is_blue": {
+          "type": "noul",
+          "noul": 0.22
+        },
+        "color_choice": {
+          "type": "choice",
+          "choice": "unknown",
+          "probabilities": {
+            "not_blue": 0.0,
+            "unknown": 1.0,
+            "blue": 0.0
+          },
+          "confidence": 1.0
+        },
+        "blue_certainty": {
+          "type": "score",
+          "score": 1.99,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 1.0,
+            "3": 0.0,
+            "4": 0.0
+          },
+          "confidence": 0.99
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "unknown",
+      "kind": "explicitly unknown",
+      "state": "The color of the ball is unknown.",
+      "repeat": 3,
+      "timestamp": "2026-09-23T14:23:46.317184+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cea6b31d7c7c95b223a8cf37f951",
+      "latency_ms": 399.5404029999463,
+      "input_tokens": 487,
+      "output_tokens": 74,
+      "estimated_cost_usd": 2.0454e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 14:23:46 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cea6b31d7c7c95b223a8cf37f951",
+        "x-envoy-upstream-service-time": "140",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=nu%2BPkERONJ0Gh4X%2BineUsj68Pu%2B3PYb%2FQS6Tb%2BxEw%2BB4RBgU8xbscexmbTWvWmCIiQGAD9lfmwbhtxnNTUHW8i03l%2BmpdPeEUpl6a40fYo3LJgVC6oh%2F05jcu9T%2Fw%2BBmPAE8DaGo2K5nXs%2FDeQ%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3fa358a9f427f6a-MAA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "is_blue": {
+            "type": "noul",
+            "noul": 0.26
+          },
+          "color_choice": {
+            "type": "choice",
+            "choice": "unknown",
+            "confidence": 1.0,
+            "probabilities": {
+              "blue": 0.0,
+              "not_blue": 0.0,
+              "unknown": 1.0
+            }
+          },
+          "blue_certainty": {
+            "type": "score",
+            "score": 1.99,
+            "confidence": 0.99,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "certainly not blue"
+              },
+              "1": {
+                "score": 1,
+                "label": "likely not blue"
+              },
+              "2": {
+                "score": 2,
+                "label": "unknown / even chance"
+              },
+              "3": {
+                "score": 3,
+                "label": "likely blue"
+              },
+              "4": {
+                "score": 4,
+                "label": "certainly blue"
+              }
+            },
+            "probabilities": {
+              "0": 0.0,
+              "1": 0.0,
+              "2": 1.0,
+              "3": 0.0,
+              "4": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 487,
+          "output_tokens": 74
+        }
+      },
+      "parsed": {
+        "is_blue": {
+          "type": "noul",
+          "noul": 0.26
+        },
+        "color_choice": {
+          "type": "choice",
+          "choice": "unknown",
+          "probabilities": {
+            "blue": 0.0,
+            "not_blue": 0.0,
+            "unknown": 1.0
+          },
+          "confidence": 1.0
+        },
+        "blue_certainty": {
+          "type": "score",
+          "score": 1.99,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 1.0,
+            "3": 0.0,
+            "4": 0.0
+          },
+          "confidence": 0.99
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "unmentioned",
+      "kind": "unmentioned (no color info)",
+      "state": "There is a ball on the table.",
+      "repeat": 1,
+      "timestamp": "2026-09-23T14:23:46.717019+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cea6b4ab7b269f864108e8ce5169",
+      "latency_ms": 348.09550399995715,
+      "input_tokens": 487,
+      "output_tokens": 74,
+      "estimated_cost_usd": 2.0454e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 14:23:47 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cea6b4ab7b269f864108e8ce5169",
+        "x-envoy-upstream-service-time": "88",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=pJrtv0v7NG2DAl5N1Uq8XfmplpCf2YoI0%2Fz7%2FnQMnD5epfQofnQVZ3PJkbWjAPsFsnrXBTIQ9cM%2FRlxsI4AI3SFwavMR5kgNpV6JXvxFpymF%2B5ArkfTaXKguo8GZ3GbEUV5wnILCaprZ%2FjbJNw%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3fa358d19907f6a-MAA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "is_blue": {
+            "type": "noul",
+            "noul": 0.2
+          },
+          "color_choice": {
+            "type": "choice",
+            "choice": "unknown",
+            "confidence": 1.0,
+            "probabilities": {
+              "unknown": 1.0,
+              "not_blue": 0.0,
+              "blue": 0.0
+            }
+          },
+          "blue_certainty": {
+            "type": "score",
+            "score": 1.96,
+            "confidence": 0.97,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "certainly not blue"
+              },
+              "1": {
+                "score": 1,
+                "label": "likely not blue"
+              },
+              "2": {
+                "score": 2,
+                "label": "unknown / even chance"
+              },
+              "3": {
+                "score": 3,
+                "label": "likely blue"
+              },
+              "4": {
+                "score": 4,
+                "label": "certainly blue"
+              }
+            },
+            "probabilities": {
+              "0": 0.01,
+              "1": 0.01,
+              "2": 0.98,
+              "3": 0.0,
+              "4": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 487,
+          "output_tokens": 74
+        }
+      },
+      "parsed": {
+        "is_blue": {
+          "type": "noul",
+          "noul": 0.2
+        },
+        "color_choice": {
+          "type": "choice",
+          "choice": "unknown",
+          "probabilities": {
+            "unknown": 1.0,
+            "not_blue": 0.0,
+            "blue": 0.0
+          },
+          "confidence": 1.0
+        },
+        "blue_certainty": {
+          "type": "score",
+          "score": 1.96,
+          "probabilities": {
+            "0": 0.01,
+            "1": 0.01,
+            "2": 0.98,
+            "3": 0.0,
+            "4": 0.0
+          },
+          "confidence": 0.97
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "unmentioned",
+      "kind": "unmentioned (no color info)",
+      "state": "There is a ball on the table.",
+      "repeat": 2,
+      "timestamp": "2026-09-23T14:23:47.065503+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cea6b6067e1b869c16eb07d9a332",
+      "latency_ms": 365.0965209999413,
+      "input_tokens": 487,
+      "output_tokens": 74,
+      "estimated_cost_usd": 2.0454e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 14:23:47 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cea6b6067e1b869c16eb07d9a332",
+        "x-envoy-upstream-service-time": "107",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=mnNsIueRnb0%2BNIvbh0MPDi9M2LRv9qO0ZEDdwqfWQ%2FSme1NyHU6Nu3rxzl%2BRyvukxdAGUMe%2BQ6DBUXJPp%2BXVl5dfJpvOHgxfb%2B6Iv8enuSU7YvpG4PVRWOo7HO5a%2F7qBXHq6ANBs%2BGW8s%2BMXVQ%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3fa358f4bd27f6a-MAA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "is_blue": {
+            "type": "noul",
+            "noul": 0.2
+          },
+          "color_choice": {
+            "type": "choice",
+            "choice": "unknown",
+            "confidence": 1.0,
+            "probabilities": {
+              "unknown": 1.0,
+              "blue": 0.0,
+              "not_blue": 0.0
+            }
+          },
+          "blue_certainty": {
+            "type": "score",
+            "score": 1.96,
+            "confidence": 0.97,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "certainly not blue"
+              },
+              "1": {
+                "score": 1,
+                "label": "likely not blue"
+              },
+              "2": {
+                "score": 2,
+                "label": "unknown / even chance"
+              },
+              "3": {
+                "score": 3,
+                "label": "likely blue"
+              },
+              "4": {
+                "score": 4,
+                "label": "certainly blue"
+              }
+            },
+            "probabilities": {
+              "0": 0.01,
+              "1": 0.01,
+              "2": 0.98,
+              "3": 0.0,
+              "4": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 487,
+          "output_tokens": 74
+        }
+      },
+      "parsed": {
+        "is_blue": {
+          "type": "noul",
+          "noul": 0.2
+        },
+        "color_choice": {
+          "type": "choice",
+          "choice": "unknown",
+          "probabilities": {
+            "unknown": 1.0,
+            "blue": 0.0,
+            "not_blue": 0.0
+          },
+          "confidence": 1.0
+        },
+        "blue_certainty": {
+          "type": "score",
+          "score": 1.96,
+          "probabilities": {
+            "0": 0.01,
+            "1": 0.01,
+            "2": 0.98,
+            "3": 0.0,
+            "4": 0.0
+          },
+          "confidence": 0.97
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "unmentioned",
+      "kind": "unmentioned (no color info)",
+      "state": "There is a ball on the table.",
+      "repeat": 3,
+      "timestamp": "2026-09-23T14:23:47.431000+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cea6b77573e489b326f2c37b3f64",
+      "latency_ms": 353.8007459999335,
+      "input_tokens": 487,
+      "output_tokens": 74,
+      "estimated_cost_usd": 2.0454e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 14:23:47 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cea6b77573e489b326f2c37b3f64",
+        "x-envoy-upstream-service-time": "95",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=73CfzNOaXUFFQFlcUl%2BOxcDRTxSi4ceNvRPDXXSIosYoOvJhNuLMb%2BYw7zRRP09DDjdyCkDE%2BO9vXV6SI15BNblJUsZWOf6TM3%2FIigrheFCUXIkJ62bquwlKt3UwnkTkWbJ4rswMVyO3fN5g4A%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3fa35919db97f6a-MAA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "is_blue": {
+            "type": "noul",
+            "noul": 0.2
+          },
+          "color_choice": {
+            "type": "choice",
+            "choice": "unknown",
+            "confidence": 1.0,
+            "probabilities": {
+              "blue": 0.0,
+              "not_blue": 0.0,
+              "unknown": 1.0
+            }
+          },
+          "blue_certainty": {
+            "type": "score",
+            "score": 1.96,
+            "confidence": 0.97,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "certainly not blue"
+              },
+              "1": {
+                "score": 1,
+                "label": "likely not blue"
+              },
+              "2": {
+                "score": 2,
+                "label": "unknown / even chance"
+              },
+              "3": {
+                "score": 3,
+                "label": "likely blue"
+              },
+              "4": {
+                "score": 4,
+                "label": "certainly blue"
+              }
+            },
+            "probabilities": {
+              "0": 0.01,
+              "1": 0.01,
+              "2": 0.98,
+              "3": 0.0,
+              "4": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 487,
+          "output_tokens": 74
+        }
+      },
+      "parsed": {
+        "is_blue": {
+          "type": "noul",
+          "noul": 0.2
+        },
+        "color_choice": {
+          "type": "choice",
+          "choice": "unknown",
+          "probabilities": {
+            "blue": 0.0,
+            "not_blue": 0.0,
+            "unknown": 1.0
+          },
+          "confidence": 1.0
+        },
+        "blue_certainty": {
+          "type": "score",
+          "score": 1.96,
+          "probabilities": {
+            "0": 0.01,
+            "1": 0.01,
+            "2": 0.98,
+            "3": 0.0,
+            "4": 0.0
+          },
+          "confidence": 0.97
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "insufficient",
+      "kind": "explicitly insufficient",
+      "state": "There is not enough information to determine the color of the ball.",
+      "repeat": 1,
+      "timestamp": "2026-09-23T14:23:47.785123+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cea6b8d577cdb74f8cade9eacc02",
+      "latency_ms": 323.03180600001724,
+      "input_tokens": 492,
+      "output_tokens": 74,
+      "estimated_cost_usd": 2.0664e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 14:23:48 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cea6b8d577cdb74f8cade9eacc02",
+        "x-envoy-upstream-service-time": "64",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=9MA%2BwT0Ao%2FDbZlqrSeIQ0ETkBrAODQ3JXrL8UpPO2eOTjoejuAtmobT1WXZPKdB1GyzOgTcASSFYKzXLkwOkaEaXhaI2UY9FVgt9GllynaD8lTzS35SG4fuoUbLZp9K8brFnHtp%2FgOXcoHL2gw%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3fa3593cf9b7f6a-MAA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "is_blue": {
+            "type": "noul",
+            "noul": 0.29
+          },
+          "color_choice": {
+            "type": "choice",
+            "choice": "unknown",
+            "confidence": 1.0,
+            "probabilities": {
+              "not_blue": 0.0,
+              "blue": 0.0,
+              "unknown": 1.0
+            }
+          },
+          "blue_certainty": {
+            "type": "score",
+            "score": 1.99,
+            "confidence": 0.99,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "certainly not blue"
+              },
+              "1": {
+                "score": 1,
+                "label": "likely not blue"
+              },
+              "2": {
+                "score": 2,
+                "label": "unknown / even chance"
+              },
+              "3": {
+                "score": 3,
+                "label": "likely blue"
+              },
+              "4": {
+                "score": 4,
+                "label": "certainly blue"
+              }
+            },
+            "probabilities": {
+              "0": 0.01,
+              "1": 0.0,
+              "2": 0.99,
+              "3": 0.0,
+              "4": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 492,
+          "output_tokens": 74
+        }
+      },
+      "parsed": {
+        "is_blue": {
+          "type": "noul",
+          "noul": 0.29
+        },
+        "color_choice": {
+          "type": "choice",
+          "choice": "unknown",
+          "probabilities": {
+            "not_blue": 0.0,
+            "blue": 0.0,
+            "unknown": 1.0
+          },
+          "confidence": 1.0
+        },
+        "blue_certainty": {
+          "type": "score",
+          "score": 1.99,
+          "probabilities": {
+            "0": 0.01,
+            "1": 0.0,
+            "2": 0.99,
+            "3": 0.0,
+            "4": 0.0
+          },
+          "confidence": 0.99
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "insufficient",
+      "kind": "explicitly insufficient",
+      "state": "There is not enough information to determine the color of the ball.",
+      "repeat": 2,
+      "timestamp": "2026-09-23T14:23:48.108532+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cea6ba1b712ab185d2ed89012ff6",
+      "latency_ms": 357.44617499995,
+      "input_tokens": 492,
+      "output_tokens": 74,
+      "estimated_cost_usd": 2.0664e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 14:23:48 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cea6ba1b712ab185d2ed89012ff6",
+        "x-envoy-upstream-service-time": "95",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=puV2gM6Ev0vXLZDiFThCImeg0ARQaitt%2Fv7hr8F86hL54VoTGqy0nVXv0B6RK7wumDJtHPt5AW2xi3J%2Bq3Ogdbv6%2BBywCKIsuF%2FaPqu9XoB7ZbX8qfm7AbWpM0r6UDNPXR1HgSKgXB%2FgIQ6eQA%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3fa3595d9457f6a-MAA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "is_blue": {
+            "type": "noul",
+            "noul": 0.29
+          },
+          "color_choice": {
+            "type": "choice",
+            "choice": "unknown",
+            "confidence": 1.0,
+            "probabilities": {
+              "unknown": 1.0,
+              "blue": 0.0,
+              "not_blue": 0.0
+            }
+          },
+          "blue_certainty": {
+            "type": "score",
+            "score": 1.99,
+            "confidence": 0.99,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "certainly not blue"
+              },
+              "1": {
+                "score": 1,
+                "label": "likely not blue"
+              },
+              "2": {
+                "score": 2,
+                "label": "unknown / even chance"
+              },
+              "3": {
+                "score": 3,
+                "label": "likely blue"
+              },
+              "4": {
+                "score": 4,
+                "label": "certainly blue"
+              }
+            },
+            "probabilities": {
+              "0": 0.0,
+              "1": 0.0,
+              "2": 1.0,
+              "3": 0.0,
+              "4": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 492,
+          "output_tokens": 74
+        }
+      },
+      "parsed": {
+        "is_blue": {
+          "type": "noul",
+          "noul": 0.29
+        },
+        "color_choice": {
+          "type": "choice",
+          "choice": "unknown",
+          "probabilities": {
+            "unknown": 1.0,
+            "blue": 0.0,
+            "not_blue": 0.0
+          },
+          "confidence": 1.0
+        },
+        "blue_certainty": {
+          "type": "score",
+          "score": 1.99,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 1.0,
+            "3": 0.0,
+            "4": 0.0
+          },
+          "confidence": 0.99
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "insufficient",
+      "kind": "explicitly insufficient",
+      "state": "There is not enough information to determine the color of the ball.",
+      "repeat": 3,
+      "timestamp": "2026-09-23T14:23:48.466340+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cea6bb8076fc958c5c7d68b20eb2",
+      "latency_ms": 403.08410400007233,
+      "input_tokens": 492,
+      "output_tokens": 74,
+      "estimated_cost_usd": 2.0664e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 14:23:48 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cea6bb8076fc958c5c7d68b20eb2",
+        "x-envoy-upstream-service-time": "144",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=e1K3Kvh65RzCCqVarmr%2BYXGaI84gsfvUtEo%2B0Q7KZuL%2FAPsghpWQU%2BMIo%2FSqdpuLmCnBY%2Bj03lOQVTNkewUB2shtHOduydgrvPqSdBL9ypmuSbLdPdK1JjtUvdQkLzAxclW%2BIzfpcL%2BZ2NmOzg%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3fa35980b367f6a-MAA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "is_blue": {
+            "type": "noul",
+            "noul": 0.29
+          },
+          "color_choice": {
+            "type": "choice",
+            "choice": "unknown",
+            "confidence": 1.0,
+            "probabilities": {
+              "blue": 0.0,
+              "not_blue": 0.0,
+              "unknown": 1.0
+            }
+          },
+          "blue_certainty": {
+            "type": "score",
+            "score": 1.99,
+            "confidence": 0.99,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "certainly not blue"
+              },
+              "1": {
+                "score": 1,
+                "label": "likely not blue"
+              },
+              "2": {
+                "score": 2,
+                "label": "unknown / even chance"
+              },
+              "3": {
+                "score": 3,
+                "label": "likely blue"
+              },
+              "4": {
+                "score": 4,
+                "label": "certainly blue"
+              }
+            },
+            "probabilities": {
+              "0": 0.01,
+              "1": 0.0,
+              "2": 0.99,
+              "3": 0.0,
+              "4": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 492,
+          "output_tokens": 74
+        }
+      },
+      "parsed": {
+        "is_blue": {
+          "type": "noul",
+          "noul": 0.29
+        },
+        "color_choice": {
+          "type": "choice",
+          "choice": "unknown",
+          "probabilities": {
+            "blue": 0.0,
+            "not_blue": 0.0,
+            "unknown": 1.0
+          },
+          "confidence": 1.0
+        },
+        "blue_certainty": {
+          "type": "score",
+          "score": 1.99,
+          "probabilities": {
+            "0": 0.01,
+            "1": 0.0,
+            "2": 0.99,
+            "3": 0.0,
+            "4": 0.0
+          },
+          "confidence": 0.99
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "control_blue",
+      "kind": "positive control (known)",
+      "state": "The ball is blue.",
+      "repeat": 1,
+      "timestamp": "2026-09-23T14:23:48.869775+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cea6bd1872079aaa6b159cbe2243",
+      "latency_ms": 368.1881780000822,
+      "input_tokens": 484,
+      "output_tokens": 74,
+      "estimated_cost_usd": 2.0328000000000003e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 14:23:49 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cea6bd1872079aaa6b159cbe2243",
+        "x-envoy-upstream-service-time": "102",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=8qhb6MN4xqlMa69K5QsSTGy0q8NpZ7GWFByohoMshXwu4QybNKTZcv4gdB5VDuB9xL8tvpmCQZt4slzsjlYwBNr8oWTsTf%2F%2FPsuBaiz1Pp8narD8KKOop0dsYb33jfDfWOBXrYPsNvZsaleJ0Q%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3fa359a9d327f6a-MAA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "is_blue": {
+            "type": "noul",
+            "noul": 0.9
+          },
+          "color_choice": {
+            "type": "choice",
+            "choice": "blue",
+            "confidence": 1.0,
+            "probabilities": {
+              "not_blue": 0.0,
+              "blue": 1.0,
+              "unknown": 0.0
+            }
+          },
+          "blue_certainty": {
+            "type": "score",
+            "score": 3.98,
+            "confidence": 0.98,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "certainly not blue"
+              },
+              "1": {
+                "score": 1,
+                "label": "likely not blue"
+              },
+              "2": {
+                "score": 2,
+                "label": "unknown / even chance"
+              },
+              "3": {
+                "score": 3,
+                "label": "likely blue"
+              },
+              "4": {
+                "score": 4,
+                "label": "certainly blue"
+              }
+            },
+            "probabilities": {
+              "0": 0.0,
+              "1": 0.0,
+              "2": 0.01,
+              "3": 0.0,
+              "4": 0.99
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 484,
+          "output_tokens": 74
+        }
+      },
+      "parsed": {
+        "is_blue": {
+          "type": "noul",
+          "noul": 0.9
+        },
+        "color_choice": {
+          "type": "choice",
+          "choice": "blue",
+          "probabilities": {
+            "not_blue": 0.0,
+            "blue": 1.0,
+            "unknown": 0.0
+          },
+          "confidence": 1.0
+        },
+        "blue_certainty": {
+          "type": "score",
+          "score": 3.98,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 0.01,
+            "3": 0.0,
+            "4": 0.99
+          },
+          "confidence": 0.98
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "control_blue",
+      "kind": "positive control (known)",
+      "state": "The ball is blue.",
+      "repeat": 2,
+      "timestamp": "2026-09-23T14:23:49.238311+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cea6be8c7cbbb87cb2fe9fffb3f6",
+      "latency_ms": 429.8548680001204,
+      "input_tokens": 484,
+      "output_tokens": 74,
+      "estimated_cost_usd": 2.0328000000000003e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 14:23:49 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cea6be8c7cbbb87cb2fe9fffb3f6",
+        "x-envoy-upstream-service-time": "162",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=eexefjtHBHEmJFtp2Jxdf%2Bmadf9pZ6hbX2ndyjg56F%2F9YKbciH%2Bx9vPKLQatRsPcLnvKY096EhC5AbGlOOxMdwEeO7IrAIsZOylU8r2WmYz2QtNSfJA8iPXFliFBEMgmQcYY8pmZoeEAQdc0Lw%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3fa359cef6f7f6a-MAA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "is_blue": {
+            "type": "noul",
+            "noul": 0.88
+          },
+          "color_choice": {
+            "type": "choice",
+            "choice": "blue",
+            "confidence": 1.0,
+            "probabilities": {
+              "not_blue": 0.0,
+              "blue": 1.0,
+              "unknown": 0.0
+            }
+          },
+          "blue_certainty": {
+            "type": "score",
+            "score": 3.98,
+            "confidence": 0.98,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "certainly not blue"
+              },
+              "1": {
+                "score": 1,
+                "label": "likely not blue"
+              },
+              "2": {
+                "score": 2,
+                "label": "unknown / even chance"
+              },
+              "3": {
+                "score": 3,
+                "label": "likely blue"
+              },
+              "4": {
+                "score": 4,
+                "label": "certainly blue"
+              }
+            },
+            "probabilities": {
+              "0": 0.0,
+              "1": 0.0,
+              "2": 0.01,
+              "3": 0.01,
+              "4": 0.98
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 484,
+          "output_tokens": 74
+        }
+      },
+      "parsed": {
+        "is_blue": {
+          "type": "noul",
+          "noul": 0.88
+        },
+        "color_choice": {
+          "type": "choice",
+          "choice": "blue",
+          "probabilities": {
+            "not_blue": 0.0,
+            "blue": 1.0,
+            "unknown": 0.0
+          },
+          "confidence": 1.0
+        },
+        "blue_certainty": {
+          "type": "score",
+          "score": 3.98,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 0.01,
+            "3": 0.01,
+            "4": 0.98
+          },
+          "confidence": 0.98
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "control_blue",
+      "kind": "positive control (known)",
+      "state": "The ball is blue.",
+      "repeat": 3,
+      "timestamp": "2026-09-23T14:23:49.668594+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cea6c0357869bde7dfe9c05615ce",
+      "latency_ms": 405.5113710001024,
+      "input_tokens": 484,
+      "output_tokens": 74,
+      "estimated_cost_usd": 2.0328000000000003e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 14:23:50 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cea6c0357869bde7dfe9c05615ce",
+        "x-envoy-upstream-service-time": "144",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=xIJSYjX55IcU42jMJ7%2BLej%2BySOoFbBKZWrhhOVMZsY4xNYSOt6gkwWPV%2B1CCm71KsXw8KC6nh4JJZRBvFYOpw4gmCb6zORLwS2WCZQcCexIC0Sl8qZDXSKw7qI8mgHY2yPsSWEsM2trC9AB2pw%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3fa359f998b7f6a-MAA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "is_blue": {
+            "type": "noul",
+            "noul": 0.88
+          },
+          "color_choice": {
+            "type": "choice",
+            "choice": "blue",
+            "confidence": 1.0,
+            "probabilities": {
+              "not_blue": 0.0,
+              "unknown": 0.0,
+              "blue": 1.0
+            }
+          },
+          "blue_certainty": {
+            "type": "score",
+            "score": 3.97,
+            "confidence": 0.98,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "certainly not blue"
+              },
+              "1": {
+                "score": 1,
+                "label": "likely not blue"
+              },
+              "2": {
+                "score": 2,
+                "label": "unknown / even chance"
+              },
+              "3": {
+                "score": 3,
+                "label": "likely blue"
+              },
+              "4": {
+                "score": 4,
+                "label": "certainly blue"
+              }
+            },
+            "probabilities": {
+              "0": 0.0,
+              "1": 0.0,
+              "2": 0.01,
+              "3": 0.01,
+              "4": 0.98
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 484,
+          "output_tokens": 74
+        }
+      },
+      "parsed": {
+        "is_blue": {
+          "type": "noul",
+          "noul": 0.88
+        },
+        "color_choice": {
+          "type": "choice",
+          "choice": "blue",
+          "probabilities": {
+            "not_blue": 0.0,
+            "unknown": 0.0,
+            "blue": 1.0
+          },
+          "confidence": 1.0
+        },
+        "blue_certainty": {
+          "type": "score",
+          "score": 3.97,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 0.01,
+            "3": 0.01,
+            "4": 0.98
+          },
+          "confidence": 0.98
+        }
+      },
+      "error": null
+    }
+  ]
+}

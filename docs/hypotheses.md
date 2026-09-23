@@ -595,3 +595,51 @@ SUPPORTED (conditions: 2026-09-23, `jev-1.13.0`, 3 contradictory pairs × 3 repe
 Experiment:
 
 012
+
+---
+
+## H038 — "Unknown", "unmentioned", and "not enough information" are treated as equivalent
+
+Hypothesis:
+
+Jev returns the same output for explicitly-unknown, unmentioned, and explicitly-insufficient information states.
+
+Status:
+
+REJECTED for Noul / PARTIAL overall (conditions: 2026-09-23, `jev-1.13.0`, color question, 3 missing framings × 3 repeats; Choice and Score treat them identically — all "unknown", Score ~2.0 — but Noul distinguishes them: unknown 0.24, unmentioned 0.20, insufficient 0.29; Noul range 0.09 exceeds jitter)
+
+Experiment:
+
+013
+
+---
+
+## H039 — Jev distinguishes the missing-information framings
+
+Hypothesis:
+
+Jev returns materially different outputs for explicitly-unknown vs unmentioned vs explicitly-insufficient information.
+
+Status:
+
+PARTIAL / primitive-dependent (conditions: 2026-09-23, `jev-1.13.0`, color question, 3 missing framings × 3 repeats; Noul distinguishes them 0.20–0.29 (range 0.09 > jitter), but Choice (all "unknown") and Score (~2.0) do not)
+
+Experiment:
+
+013
+
+---
+
+## H040 — Missing information produces Noul near 0
+
+Hypothesis:
+
+A color question with missing color information produces a Noul value near 0, consistent with Phase 1's unmentioned case (0.05).
+
+Status:
+
+REJECTED (conditions: 2026-09-23, `jev-1.13.0`, color question, 3 missing framings × 3 repeats; Noul means 0.20 (unmentioned), 0.24 (unknown), 0.29 (insufficient) — low but clearly above 0 and below 0.5; Phase 1's 0.05 likely reflected a "mixed/negative" phrasing rather than neutral absence; Score at ~2.0 "even chance" is the clearer uncertainty signal)
+
+Experiment:
+
+013

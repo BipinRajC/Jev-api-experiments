@@ -265,3 +265,16 @@ Only findings measured in this repository.
 - **Limitations:** Explicit, maximal contradiction only. Three pairs. n=3. Tie-breaker framed as simultaneous.
 - **Confidence in the finding:** High that Choice/Score detect explicit contradiction on these cases; high that Noul does not reliably signal uncertainty via 0.5.
 - **Implications:** To handle conflict in an application, prefer Choice with an explicit "uncertain/conflicting" option over Noul. Do not rely on Noul ≈ 0.5 to detect contradiction. Score is useful for rating the *degree* of conflict. This is directly relevant to FootyQuant v2: when match data conflicts, use Choice with an explicit uncertain category rather than expecting Noul to reflect it.
+
+---
+
+## F021 — Missing info: Choice/Score collapse to "unknown" but Noul distinguishes the framings and is not near 0
+
+- **Related hypothesis:** H038, H039, H040
+- **Experiment(s):** 013 (`results/013-missing-information/run-001.json`)
+- **Conditions:** 2026-09-23 UTC; `jev-1.13.0`; color question ("Is the color blue?"); three missing-info framings (explicitly unknown / unmentioned / explicitly insufficient) plus a positive control (blue ball); Noul+Choice+Score per call; 3 repeats per case = 12 batch calls
+- **Evidence:** Noul means: unknown 0.24, unmentioned 0.20, insufficient 0.29 (range 0.09 > jitter). Choice: all three → "unknown" (confidence 1.0). Score: 1.99, 1.96, 1.99 (all ≈ 2.0 = "unknown/even chance"). Control: Noul 0.887, "blue", Score 3.98.
+- **Interpretation:** Whether Jev distinguishes the missing framings depends on the primitive. Choice and Score collapse all three to "unknown" (Score ≈ 2.0, the "even chance" level). Noul distinguishes them (0.20-0.29). Critically, Noul on missing info is NOT near 0 — contradicting the implication from Phase 1's 0.05. The Phase 1 value likely reflected a "mixed/negative" phrasing, not neutral absence. Score's ~2.0 is the clearest, most interpretable "unknown" signal.
+- **Limitations:** Single question. Three framings + one control. n=3. State-specific Noul values may vary with wording (009).
+- **Confidence in the finding:** High that Noul is not near 0 on neutral missing-info; moderate that the exact 0.20-0.29 band generalizes.
+- **Implications:** For "unknown" signals, prefer a Score rubric with an explicit "unknown/even chance" level (returns ~2.0) over Noul, whose low-but-nonzero values are ambiguous. Do not assume missing info → Noul ≈ 0. For FootyQuant v2, an explicit Score/Choice "unknown" category is more reliable than interpreting low Noul as absence of information.
