@@ -334,7 +334,7 @@ For a given state in a single batch call, the direction indicated by Noul (>0.5 
 
 Status:
 
-INCONCLUSIVE (conditions: 2026-09-23, `jev-1.13.0`, 7 coin-flip batch calls; 6/7 consistent, 1/7 inconsistent: fair coin noul=0.45, slightly <0.5 but Choice selected "heads"; n=1 precludes distinguishing jitter from genuine inconsistency)
+INCONCLUSIVE (conditions: 2026-09-23, `jev-1.13.0`, 7 coin-flip batch calls; 6/7 consistent, 1/7 inconsistent: fair coin noul=0.45, slightly <0.5 but Choice selected "heads"; n=1 precludes distinguishing jitter from genuine inconsistency. Note: Experiment 008 established the fair-coin Noul central tendency is 0.46 — the 0.45 reading was a slightly-low draw — but the Noul-vs-Choice comparison still requires both primitives in the same batch, which was not tested in 008)
 
 Experiment:
 
@@ -355,3 +355,67 @@ SUPPORTED (conditions: 2026-09-23, `jev-1.13.0`, 20 confidence observations acro
 Experiment:
 
 007
+
+---
+
+## H023 — Repeated identical Noul requests are deterministic
+
+Hypothesis:
+
+Repeating the exact same Noul request produces identical Noul values.
+
+Status:
+
+REJECTED (conditions: 2026-09-23, `jev-1.13.0`, fair-coin state, n=20 identical calls; observed 3 unique values {0.45, 0.46, 0.47}; range 0.02, stdev 0.003, mean 0.46; 0.46 appeared 18/20 times; jitter is real but tiny)
+
+Experiment:
+
+008
+
+---
+
+## H024 — Repeated identical Score requests are deterministic
+
+Hypothesis:
+
+Repeating the exact same Score request produces identical Score values.
+
+Status:
+
+SUPPORTED (conditions: 2026-09-23, `jev-1.13.0`, fair-coin state, n=20 identical calls; all 20 returned exactly 2.0, stdev 0.0; caveat: only tested at an obvious integer level, not graded evidence from 007)
+
+Experiment:
+
+008
+
+---
+
+## H025 — Confidence values are stable across identical repeats
+
+Hypothesis:
+
+Repeating the exact same request produces identical confidence values.
+
+Status:
+
+SUPPORTED (conditions: 2026-09-23, `jev-1.13.0`, fair-coin Score, n=20; confidence exactly 0.99 in all 20, stdev 0.0; Noul has no confidence field)
+
+Experiment:
+
+008
+
+---
+
+## H026 — Noul jitter is small relative to meaningful output differences
+
+Hypothesis:
+
+The run-to-run Noul jitter (output noise) is an order of magnitude smaller than the differences between meaningful evidence states (e.g., 30% vs 70% vs fair).
+
+Status:
+
+SUPPORTED (conditions: 2026-09-23, `jev-1.13.0`, n=20; Noul jitter range 0.02 vs signal differences of 0.19+ between adjacent probability levels in 007; jitter is ~20x smaller than the fair-coin distinction from extreme cases)
+
+Experiment:
+
+008

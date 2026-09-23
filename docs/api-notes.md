@@ -65,7 +65,7 @@ SDK Python client may reshape answers into `.nouls` / `.choices`; the HTTP body 
 - `answers`: map keyed by question id
 - `usage.input_tokens`, `usage.output_tokens`
 
-Noul answer: `{ "type": "noul", "noul": <number 0–1> }` — no separate `confidence` field in official HTTP docs. VERIFIED EXPERIMENTALLY on 001 and 002 (values 0.99, 0.01, 0.05; no `confidence` key). Identical sequential repeats in 002 had range 0.00 (n=3 per case). An unmentioned-sky state returned 0.05, not ~0.5. Now VERIFIED EXPERIMENTALLY on 007: explicitly probabilistic states produce intermediate Noul values (0.08–0.84) that track ground-truth probabilities with r=0.999; fair coin (50%) returned 0.45, clearly distinguishable from the 0.05 "unknown" result. Noul distinguishes between "unmentioned/unstated" and "explicitly 50%."
+Noul answer: `{ "type": "noul", "noul": <number 0–1> }` — no separate `confidence` field in official HTTP docs. VERIFIED EXPERIMENTALLY on 001 and 002 (values 0.99, 0.01, 0.05; no `confidence` key). Identical sequential repeats in 002 had range 0.00 (n=3 per case). An unmentioned-sky state returned 0.05, not ~0.5. Now VERIFIED EXPERIMENTALLY on 007: explicitly probabilistic states produce intermediate Noul values (0.08–0.84) that track ground-truth probabilities with r=0.999; fair coin (50%) returned 0.45, clearly distinguishable from the 0.05 "unknown" result. Noul distinguishes between "unmentioned/unstated" and "explicitly 50%." VERIFIED EXPERIMENTALLY on 008: Noul has small output jitter — n=20 identical calls returned {0.45, 0.46, 0.47} (mean 0.46, stdev 0.003, range 0.02); a single call reliably estimates the central tendency within ±0.01.
 
 Choice answer: `choice`, `probabilities`, `confidence`. VERIFIED EXPERIMENTALLY on 003: 9/9 answers had all three fields; maps were one-hot with sum 1.0; `confidence` was 1.0; probability key order was not stable.
 
@@ -127,7 +127,7 @@ VERIFIED FROM OFFICIAL DOCS. This account's remaining credit and billed amounts:
 
 ## Latency
 
-No official SLA found. VERIFIED EXPERIMENTALLY (001, n=2): client wall-clock 1088.1 ms and 882.2 ms; `x-envoy-upstream-service-time` 124 on both. Not a latency distribution.
+No official SLA found. VERIFIED EXPERIMENTALLY (001, n=2): client wall-clock 1088.1 ms and 882.2 ms; `x-envoy-upstream-service-time` 124 on both. Not a latency distribution. Now VERIFIED EXPERIMENTALLY (008, n=20 each): Noul latency median 451.9 ms (range 400.6–875.7 ms, stdev 114.4 ms); Score latency median 466.1 ms (range 422.6–779.3 ms, stdev 91.3 ms). Client wall-clock varies ~2x around the median; token usage is fully deterministic across identical repeats.
 
 ## Versioning
 

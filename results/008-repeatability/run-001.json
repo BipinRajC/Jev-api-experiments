@@ -1,0 +1,2914 @@
+{
+  "experiment_id": "008-repeatability",
+  "run_id": "run-001",
+  "timestamp": "2026-09-23T10:20:07.113680+00:00",
+  "model_requested": "jev-1.13.0",
+  "api": {
+    "provider": "typesafe_direct",
+    "base_url": "https://api.typesafe.ai",
+    "endpoint": "/v1/systemone",
+    "method": "POST"
+  },
+  "design": {
+    "repeats": 20,
+    "state": "A biased coin lands heads 50% of the time and tails 50% of the time. The coin is flipped once.",
+    "noul_questions": {
+      "heads_noul": {
+        "type": "noul",
+        "instructions": "Will the next flip land heads?"
+      }
+    },
+    "score_questions": {
+      "coin_score": {
+        "type": "score",
+        "instructions": "How likely is it that the coin lands heads?",
+        "criteria": [
+          {
+            "score": 0,
+            "label": "impossible"
+          },
+          {
+            "score": 1,
+            "label": "unlikely"
+          },
+          {
+            "score": 2,
+            "label": "even odds"
+          },
+          {
+            "score": 3,
+            "label": "likely"
+          },
+          {
+            "score": 4,
+            "label": "certain"
+          }
+        ]
+      }
+    },
+    "ordering": "interleaved noul/score per repeat"
+  },
+  "analysis": {
+    "noul": {
+      "n": 20,
+      "min": 0.45,
+      "max": 0.47,
+      "mean": 0.46,
+      "median": 0.46,
+      "stdev": 0.003244,
+      "range": 0.02,
+      "unique_count": 3,
+      "unique_values": [
+        0.45,
+        0.46,
+        0.47
+      ],
+      "frequency": {
+        "0.45": 1,
+        "0.46": 18,
+        "0.47": 1
+      }
+    },
+    "score": {
+      "n": 20,
+      "min": 2.0,
+      "max": 2.0,
+      "mean": 2.0,
+      "median": 2.0,
+      "stdev": 0.0,
+      "range": 0.0,
+      "unique_count": 1,
+      "unique_values": [
+        2.0
+      ],
+      "frequency": {
+        "2.0": 20
+      }
+    },
+    "score_confidence": {
+      "n": 20,
+      "min": 0.99,
+      "max": 0.99,
+      "mean": 0.99,
+      "median": 0.99,
+      "stdev": 0.0,
+      "range": 0.0,
+      "unique_count": 1,
+      "unique_values": [
+        0.99
+      ],
+      "frequency": {
+        "0.99": 20
+      }
+    },
+    "noul_latency_ms": {
+      "n": 20,
+      "min": 400.602506,
+      "max": 875.654562,
+      "mean": 493.407336,
+      "median": 451.915526,
+      "stdev": 114.385966,
+      "range": 475.052056,
+      "unique_count": 20,
+      "unique_values": [
+        400.6025060002685,
+        405.95625200012364,
+        411.0092370001439,
+        418.1256229999235,
+        418.7092480001411,
+        427.8894720000608,
+        428.7925650000943,
+        439.61188299999776,
+        439.8179340000752,
+        449.41044199958924,
+        454.42061099993225,
+        468.2211549998101,
+        469.34592999969027,
+        475.49244700030613,
+        514.1925050002101,
+        541.0870149999027,
+        552.9920799999672,
+        620.2468370001952,
+        656.5684110000802,
+        875.6545619999088
+      ],
+      "frequency": {
+        "400.602506": 1,
+        "405.956252": 1,
+        "411.009237": 1,
+        "418.125623": 1,
+        "418.709248": 1,
+        "427.889472": 1,
+        "428.792565": 1,
+        "439.611883": 1,
+        "439.817934": 1,
+        "449.410442": 1,
+        "454.420611": 1,
+        "468.221155": 1,
+        "469.34593": 1,
+        "475.492447": 1,
+        "514.192505": 1,
+        "541.087015": 1,
+        "552.99208": 1,
+        "620.246837": 1,
+        "656.568411": 1,
+        "875.654562": 1
+      }
+    },
+    "score_latency_ms": {
+      "n": 20,
+      "min": 422.602098,
+      "max": 779.272151,
+      "mean": 505.094619,
+      "median": 466.080762,
+      "stdev": 91.33114,
+      "range": 356.670053,
+      "unique_count": 20,
+      "unique_values": [
+        422.6020979999703,
+        424.81501899965224,
+        425.1225550001436,
+        429.1323010002088,
+        429.6692839998286,
+        430.27927800039834,
+        444.7037480003928,
+        448.2615780002561,
+        453.26228099975197,
+        465.47789199985345,
+        466.6836310002509,
+        518.0684580000161,
+        522.3421860000599,
+        536.7083150003964,
+        538.5417239999697,
+        574.3105590004234,
+        574.760501000128,
+        598.7716270001329,
+        619.1071869998268,
+        779.2721509999865
+      ],
+      "frequency": {
+        "422.602098": 1,
+        "424.815019": 1,
+        "425.122555": 1,
+        "429.132301": 1,
+        "429.669284": 1,
+        "430.279278": 1,
+        "444.703748": 1,
+        "448.261578": 1,
+        "453.262281": 1,
+        "465.477892": 1,
+        "466.683631": 1,
+        "518.068458": 1,
+        "522.342186": 1,
+        "536.708315": 1,
+        "538.541724": 1,
+        "574.310559": 1,
+        "574.760501": 1,
+        "598.771627": 1,
+        "619.107187": 1,
+        "779.272151": 1
+      }
+    },
+    "noul_input_tokens": {
+      "n": 20,
+      "min": 301,
+      "max": 301,
+      "mean": 301,
+      "median": 301.0,
+      "stdev": 0.0,
+      "range": 0,
+      "unique_count": 1,
+      "unique_values": [
+        301
+      ],
+      "frequency": {
+        "301": 20
+      }
+    },
+    "noul_deterministic": false,
+    "score_deterministic": true,
+    "score_confidence_deterministic": true
+  },
+  "trials": [
+    {
+      "case_id": "repeat_1",
+      "repeat": 1,
+      "qtype": "noul",
+      "state": "A biased coin lands heads 50% of the time and tails 50% of the time. The coin is flipped once.",
+      "timestamp": "2026-09-23T10:20:07.162434+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdc7a2ed7a18958d0e397b0f5e03",
+      "latency_ms": 875.6545619999088,
+      "input_tokens": 301,
+      "output_tokens": 22,
+      "estimated_cost_usd": 1.2642000000000002e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:20:07 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdc7a2ed7a18958d0e397b0f5e03",
+        "x-envoy-upstream-service-time": "82",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=mGjBfTK3UaOTnRI1swa9mZX5WuYdboaS%2Ff6XJqXuIMmouhLBHBilatMcFSa7d%2FTFw%2F%2FNeni2VIm1e5hYYZvhLsbHP9oa7yfeZDxk8wnv9VEaCnypAfMyfo9zUjzLXLYVvf%2FvohM01u0Ng6o7lw%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8d0a3fcee9025-FRA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "heads_noul": {
+            "type": "noul",
+            "noul": 0.46
+          }
+        },
+        "usage": {
+          "input_tokens": 301,
+          "output_tokens": 22
+        }
+      },
+      "parsed": {
+        "heads_noul": {
+          "type": "noul",
+          "noul": 0.46
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "repeat_1",
+      "repeat": 1,
+      "qtype": "score",
+      "state": "A biased coin lands heads 50% of the time and tails 50% of the time. The coin is flipped once.",
+      "timestamp": "2026-09-23T10:20:08.038533+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdc7a4ad77e7974cf84a673d4582",
+      "latency_ms": 425.1225550001436,
+      "input_tokens": 404,
+      "output_tokens": 18,
+      "estimated_cost_usd": 1.6968e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:20:08 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdc7a4ad77e7974cf84a673d4582",
+        "x-envoy-upstream-service-time": "65",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=735DDKfzLwFWR2dkkffppXMhxlWScWUbOTqUYMJAJh0H%2BgtjsyaofCq6d4yaKguElZhZ7XIf72RR269AV%2FZTRwCIUvvvHgQDCz3i5hoWOzcptNi%2Bw%2FUJNOe%2FAd7TdPJbHroFh3tHmZEIDQg3QA%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8d0a6ceba9025-FRA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "coin_score": {
+            "type": "score",
+            "score": 2.0,
+            "confidence": 0.99,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "impossible"
+              },
+              "1": {
+                "score": 1,
+                "label": "unlikely"
+              },
+              "2": {
+                "score": 2,
+                "label": "even odds"
+              },
+              "3": {
+                "score": 3,
+                "label": "likely"
+              },
+              "4": {
+                "score": 4,
+                "label": "certain"
+              }
+            },
+            "probabilities": {
+              "0": 0.0,
+              "1": 0.0,
+              "2": 1.0,
+              "3": 0.0,
+              "4": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 404,
+          "output_tokens": 18
+        }
+      },
+      "parsed": {
+        "coin_score": {
+          "type": "score",
+          "score": 2.0,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 1.0,
+            "3": 0.0,
+            "4": 0.0
+          },
+          "confidence": 0.99
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "repeat_2",
+      "repeat": 2,
+      "qtype": "noul",
+      "state": "A biased coin lands heads 50% of the time and tails 50% of the time. The coin is flipped once.",
+      "timestamp": "2026-09-23T10:20:08.464075+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdc7a65979d9822694fcdc7b3301",
+      "latency_ms": 428.7925650000943,
+      "input_tokens": 301,
+      "output_tokens": 22,
+      "estimated_cost_usd": 1.2642000000000002e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:20:08 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdc7a65979d9822694fcdc7b3301",
+        "x-envoy-upstream-service-time": "65",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=qAwch2c39wVzzcRYvP6qrREZnBfCCEcivuoPMmcby1mNBQYAE1r2ryXgitw9LV8r9K4RC%2B6DP49RFHL%2BjCGrJX%2F28GgVmnFjWK1mJzPiP8cEw2nMsiA3ZcuYw7kdWzQuOIVicHJVYWZjONYEew%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8d0a978109025-FRA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "heads_noul": {
+            "type": "noul",
+            "noul": 0.46
+          }
+        },
+        "usage": {
+          "input_tokens": 301,
+          "output_tokens": 22
+        }
+      },
+      "parsed": {
+        "heads_noul": {
+          "type": "noul",
+          "noul": 0.46
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "repeat_2",
+      "repeat": 2,
+      "qtype": "score",
+      "state": "A biased coin lands heads 50% of the time and tails 50% of the time. The coin is flipped once.",
+      "timestamp": "2026-09-23T10:20:08.893138+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdc7a808733d8e44a6e57eacfaa4",
+      "latency_ms": 538.5417239999697,
+      "input_tokens": 404,
+      "output_tokens": 18,
+      "estimated_cost_usd": 1.6968e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:20:09 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdc7a808733d8e44a6e57eacfaa4",
+        "x-envoy-upstream-service-time": "102",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=Zwb6kFue85Rcdi2AIJ8GmbJwRFe4K1awke2ta5XzrDqUF9b5BRGYCQ%2BrP5Lxdtv%2ByuV%2FMF1EVf9FmVtff0B9UEpDcWXnWFEonkWu%2FCdqjJfG%2B7DjOIB8g6mVQAxCRC8H9NKEanSZGiGQ0CXsiA%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8d0ac29679025-FRA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "coin_score": {
+            "type": "score",
+            "score": 2.0,
+            "confidence": 0.99,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "impossible"
+              },
+              "1": {
+                "score": 1,
+                "label": "unlikely"
+              },
+              "2": {
+                "score": 2,
+                "label": "even odds"
+              },
+              "3": {
+                "score": 3,
+                "label": "likely"
+              },
+              "4": {
+                "score": 4,
+                "label": "certain"
+              }
+            },
+            "probabilities": {
+              "0": 0.0,
+              "1": 0.0,
+              "2": 1.0,
+              "3": 0.0,
+              "4": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 404,
+          "output_tokens": 18
+        }
+      },
+      "parsed": {
+        "coin_score": {
+          "type": "score",
+          "score": 2.0,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 1.0,
+            "3": 0.0,
+            "4": 0.0
+          },
+          "confidence": 0.99
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "repeat_3",
+      "repeat": 3,
+      "qtype": "noul",
+      "state": "A biased coin lands heads 50% of the time and tails 50% of the time. The coin is flipped once.",
+      "timestamp": "2026-09-23T10:20:09.432096+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdc7aa237f1f95c9095ebb16baa8",
+      "latency_ms": 439.61188299999776,
+      "input_tokens": 301,
+      "output_tokens": 22,
+      "estimated_cost_usd": 1.2642000000000002e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:20:09 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdc7aa237f1f95c9095ebb16baa8",
+        "x-envoy-upstream-service-time": "75",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=rcx9indAp00HObUksojbc4r96Lsh7gw4af2z%2Bu0yqdHxhmw65vV%2FHMV%2By7rRMxEi5SpqBMawikWKKtkXXT34FNDW2bxhcGbgH%2BVjNpnI7wds8h%2BNj29mSivlnIU2hWM0Z4l%2Bo7Z0TKZsYWzcCg%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8d0af8b529025-FRA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "heads_noul": {
+            "type": "noul",
+            "noul": 0.46
+          }
+        },
+        "usage": {
+          "input_tokens": 301,
+          "output_tokens": 22
+        }
+      },
+      "parsed": {
+        "heads_noul": {
+          "type": "noul",
+          "noul": 0.46
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "repeat_3",
+      "repeat": 3,
+      "qtype": "score",
+      "state": "A biased coin lands heads 50% of the time and tails 50% of the time. The coin is flipped once.",
+      "timestamp": "2026-09-23T10:20:09.872054+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdc7abc17b539981c42194382c59",
+      "latency_ms": 422.6020979999703,
+      "input_tokens": 404,
+      "output_tokens": 18,
+      "estimated_cost_usd": 1.6968e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:20:10 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdc7abc17b539981c42194382c59",
+        "x-envoy-upstream-service-time": "93",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=Me2avkS%2FryKcsCVORWz23mfaMP6KZor64avBCjQ0fK90Vp9eR0s3YBHNfRr1UDYwSbmVXJSrEWOBSvhE4gZH9hiP2p9eHItt%2BKxNnmLaGBN5W4YeI7xIc1pfM%2B7WDbSNF%2FeElKqMA%2FYixrO0QA%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8d0b24c9b9025-FRA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "coin_score": {
+            "type": "score",
+            "score": 2.0,
+            "confidence": 0.99,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "impossible"
+              },
+              "1": {
+                "score": 1,
+                "label": "unlikely"
+              },
+              "2": {
+                "score": 2,
+                "label": "even odds"
+              },
+              "3": {
+                "score": 3,
+                "label": "likely"
+              },
+              "4": {
+                "score": 4,
+                "label": "certain"
+              }
+            },
+            "probabilities": {
+              "0": 0.0,
+              "1": 0.0,
+              "2": 1.0,
+              "3": 0.0,
+              "4": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 404,
+          "output_tokens": 18
+        }
+      },
+      "parsed": {
+        "coin_score": {
+          "type": "score",
+          "score": 2.0,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 1.0,
+            "3": 0.0,
+            "4": 0.0
+          },
+          "confidence": 0.99
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "repeat_4",
+      "repeat": 4,
+      "qtype": "noul",
+      "state": "A biased coin lands heads 50% of the time and tails 50% of the time. The coin is flipped once.",
+      "timestamp": "2026-09-23T10:20:10.295006+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdc7ad677e528a05d7efb34e8332",
+      "latency_ms": 405.95625200012364,
+      "input_tokens": 301,
+      "output_tokens": 22,
+      "estimated_cost_usd": 1.2642000000000002e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:20:10 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdc7ad677e528a05d7efb34e8332",
+        "x-envoy-upstream-service-time": "77",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=LPYh1iYKsRd6puOM2%2FBFlThyczrMt8SlVxH51YYyFVoiOXkBpalMiDoiyhBG8gJBsKhH0mnnVTmw%2FaaZHnYocyaxe3rEqpr1JCBWKKMMmWXVYyjkKane%2BJgVDlzniGDmG8gWNo9kF4RWckw5UA%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8d0b4edf99025-FRA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "heads_noul": {
+            "type": "noul",
+            "noul": 0.46
+          }
+        },
+        "usage": {
+          "input_tokens": 301,
+          "output_tokens": 22
+        }
+      },
+      "parsed": {
+        "heads_noul": {
+          "type": "noul",
+          "noul": 0.46
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "repeat_4",
+      "repeat": 4,
+      "qtype": "score",
+      "state": "A biased coin lands heads 50% of the time and tails 50% of the time. The coin is flipped once.",
+      "timestamp": "2026-09-23T10:20:10.701415+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdc7af0c74618bf4ff588a0dabf8",
+      "latency_ms": 429.6692839998286,
+      "input_tokens": 404,
+      "output_tokens": 18,
+      "estimated_cost_usd": 1.6968e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:20:11 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdc7af0c74618bf4ff588a0dabf8",
+        "x-envoy-upstream-service-time": "92",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=d0SmjZ%2B2QrzBVsXovgxgtv6zOeEVXlFwuMbxvRnTffZ9X96OBcjXTwYVBAA11AOJJ3xJRYhyGCqA8xo%2F0WFEFBzBMikQAIGWe2aUVZ7Hu7kfNUuNDRE%2Bvg0GmeZV6c%2FxwzhaNt0ZkwOnEfAKMw%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8d0b77f3a9025-FRA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "coin_score": {
+            "type": "score",
+            "score": 2.0,
+            "confidence": 0.99,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "impossible"
+              },
+              "1": {
+                "score": 1,
+                "label": "unlikely"
+              },
+              "2": {
+                "score": 2,
+                "label": "even odds"
+              },
+              "3": {
+                "score": 3,
+                "label": "likely"
+              },
+              "4": {
+                "score": 4,
+                "label": "certain"
+              }
+            },
+            "probabilities": {
+              "0": 0.0,
+              "1": 0.0,
+              "2": 1.0,
+              "3": 0.0,
+              "4": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 404,
+          "output_tokens": 18
+        }
+      },
+      "parsed": {
+        "coin_score": {
+          "type": "score",
+          "score": 2.0,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 1.0,
+            "3": 0.0,
+            "4": 0.0
+          },
+          "confidence": 0.99
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "repeat_5",
+      "repeat": 5,
+      "qtype": "noul",
+      "state": "A biased coin lands heads 50% of the time and tails 50% of the time. The coin is flipped once.",
+      "timestamp": "2026-09-23T10:20:11.131516+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdc7b0ad7a31a2ea1ef69e3f7287",
+      "latency_ms": 418.1256229999235,
+      "input_tokens": 301,
+      "output_tokens": 22,
+      "estimated_cost_usd": 1.2642000000000002e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:20:11 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdc7b0ad7a31a2ea1ef69e3f7287",
+        "x-envoy-upstream-service-time": "92",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=cN7Wu5AGVAQsPEUOxVu9abtL5X59kGmjiQwjtVdTdiqu0DAy%2FD%2B4bV5CavGrDIdQTYwDQK5aL3vcfG1JE4coJ77GAbDGt6HlO%2F6QL38uYhnDVNizU%2BSwsm6QacGZY7cEbd9g4IkgPITsKVbVYA%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8d0ba28a29025-FRA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "heads_noul": {
+            "type": "noul",
+            "noul": 0.46
+          }
+        },
+        "usage": {
+          "input_tokens": 301,
+          "output_tokens": 22
+        }
+      },
+      "parsed": {
+        "heads_noul": {
+          "type": "noul",
+          "noul": 0.46
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "repeat_5",
+      "repeat": 5,
+      "qtype": "score",
+      "state": "A biased coin lands heads 50% of the time and tails 50% of the time. The coin is flipped once.",
+      "timestamp": "2026-09-23T10:20:11.550046+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdc7b2657e8fb6e658d5b96ee50d",
+      "latency_ms": 466.6836310002509,
+      "input_tokens": 404,
+      "output_tokens": 18,
+      "estimated_cost_usd": 1.6968e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:20:11 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdc7b2657e8fb6e658d5b96ee50d",
+        "x-envoy-upstream-service-time": "106",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=ztyFVoWP%2F%2FrVUFuYMYOPGWY5fOHoMvxLghGObBMQOD7xwZgPRDsXnoKItK%2B5zGX9d1C%2FwbmwBq8U3yE4OkX4p18EFdqCxioBB2UV2thVWv6w1yoYWotD3WzwP9JCWZW3znNhVAgrLvErzscqMQ%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8d0bcc9e49025-FRA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "coin_score": {
+            "type": "score",
+            "score": 2.0,
+            "confidence": 0.99,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "impossible"
+              },
+              "1": {
+                "score": 1,
+                "label": "unlikely"
+              },
+              "2": {
+                "score": 2,
+                "label": "even odds"
+              },
+              "3": {
+                "score": 3,
+                "label": "likely"
+              },
+              "4": {
+                "score": 4,
+                "label": "certain"
+              }
+            },
+            "probabilities": {
+              "0": 0.0,
+              "1": 0.0,
+              "2": 1.0,
+              "3": 0.0,
+              "4": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 404,
+          "output_tokens": 18
+        }
+      },
+      "parsed": {
+        "coin_score": {
+          "type": "score",
+          "score": 2.0,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 1.0,
+            "3": 0.0,
+            "4": 0.0
+          },
+          "confidence": 0.99
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "repeat_6",
+      "repeat": 6,
+      "qtype": "noul",
+      "state": "A biased coin lands heads 50% of the time and tails 50% of the time. The coin is flipped once.",
+      "timestamp": "2026-09-23T10:20:12.017080+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdc7b43773fc83a758c88fc7e2de",
+      "latency_ms": 541.0870149999027,
+      "input_tokens": 301,
+      "output_tokens": 22,
+      "estimated_cost_usd": 1.2642000000000002e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:20:12 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdc7b43773fc83a758c88fc7e2de",
+        "x-envoy-upstream-service-time": "105",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=BxljdKCzbwIs4TsfJITMNQU8WQORl0cbeGTlEkBiToYOLYD%2F2MPtra7oPWYlBqq6fov9Cp7HtYngoObYANzMQdZtx8dos4wJ%2BGWjvXxGy80%2Fs5OiouVmuQ0PrVuBXewPHtbkH1oaet%2BQEzojUA%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8d0bfab4b9025-FRA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "heads_noul": {
+            "type": "noul",
+            "noul": 0.46
+          }
+        },
+        "usage": {
+          "input_tokens": 301,
+          "output_tokens": 22
+        }
+      },
+      "parsed": {
+        "heads_noul": {
+          "type": "noul",
+          "noul": 0.46
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "repeat_6",
+      "repeat": 6,
+      "qtype": "score",
+      "state": "A biased coin lands heads 50% of the time and tails 50% of the time. The coin is flipped once.",
+      "timestamp": "2026-09-23T10:20:12.558438+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdc7b65a70fcb5233236c4eb201f",
+      "latency_ms": 574.3105590004234,
+      "input_tokens": 404,
+      "output_tokens": 18,
+      "estimated_cost_usd": 1.6968e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:20:13 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdc7b65a70fcb5233236c4eb201f",
+        "x-envoy-upstream-service-time": "164",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=BuZGmiqu5C1aNPIfry0o%2F3wtiFmW5uz%2FRsql%2Be2Kl06m%2FR4J6aRETiVuo%2BJrzuEc785CJu9RhwhoMWrCtDZRanwgOIWaHtspaVwOiO31V1Cdkjyefq28LpoxI19Q0kuduQaz5TwpLoPJbI02iQ%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8d0c30cd59025-FRA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "coin_score": {
+            "type": "score",
+            "score": 2.0,
+            "confidence": 0.99,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "impossible"
+              },
+              "1": {
+                "score": 1,
+                "label": "unlikely"
+              },
+              "2": {
+                "score": 2,
+                "label": "even odds"
+              },
+              "3": {
+                "score": 3,
+                "label": "likely"
+              },
+              "4": {
+                "score": 4,
+                "label": "certain"
+              }
+            },
+            "probabilities": {
+              "0": 0.0,
+              "1": 0.0,
+              "2": 1.0,
+              "3": 0.0,
+              "4": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 404,
+          "output_tokens": 18
+        }
+      },
+      "parsed": {
+        "coin_score": {
+          "type": "score",
+          "score": 2.0,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 1.0,
+            "3": 0.0,
+            "4": 0.0
+          },
+          "confidence": 0.99
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "repeat_7",
+      "repeat": 7,
+      "qtype": "noul",
+      "state": "A biased coin lands heads 50% of the time and tails 50% of the time. The coin is flipped once.",
+      "timestamp": "2026-09-23T10:20:13.133074+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdc7b8947f4d933673644742172a",
+      "latency_ms": 468.2211549998101,
+      "input_tokens": 301,
+      "output_tokens": 22,
+      "estimated_cost_usd": 1.2642000000000002e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:20:13 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdc7b8947f4d933673644742172a",
+        "x-envoy-upstream-service-time": "106",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=XdHe7QquDr8vlK8UJHZtCyZIxbjIEzfttxY0W21rQeWuahjx0IDMJUnsrrtjPsblTt4KLyCJeOiiztlzYUKJfFGUzsBOrgcpwb9kY3k26H3BfiF2ZkJnDFz%2FDQ7hBV1ao%2FWdC5%2FPCbPskXAFwA%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8d0c6aea89025-FRA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "heads_noul": {
+            "type": "noul",
+            "noul": 0.46
+          }
+        },
+        "usage": {
+          "input_tokens": 301,
+          "output_tokens": 22
+        }
+      },
+      "parsed": {
+        "heads_noul": {
+          "type": "noul",
+          "noul": 0.46
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "repeat_7",
+      "repeat": 7,
+      "qtype": "score",
+      "state": "A biased coin lands heads 50% of the time and tails 50% of the time. The coin is flipped once.",
+      "timestamp": "2026-09-23T10:20:13.601567+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdc7ba6a797699c8ced93e39e6b3",
+      "latency_ms": 536.7083150003964,
+      "input_tokens": 404,
+      "output_tokens": 18,
+      "estimated_cost_usd": 1.6968e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:20:13 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdc7ba6a797699c8ced93e39e6b3",
+        "x-envoy-upstream-service-time": "84",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=1hoEc4jnyQhruFzU1mNTZsrHj4Qi991aGUjHpZjNcUOuDLgTGUTcHV2f88aNxnjpB9pjhc6%2BVKUye2md5VC3cp2YUOjy%2BtZd9YbNM3CAUIleF95AHc9cT7SDQBeFdENBeVBNRFBZIbMIPlWOFQ%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8d0c998089025-FRA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "coin_score": {
+            "type": "score",
+            "score": 2.0,
+            "confidence": 0.99,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "impossible"
+              },
+              "1": {
+                "score": 1,
+                "label": "unlikely"
+              },
+              "2": {
+                "score": 2,
+                "label": "even odds"
+              },
+              "3": {
+                "score": 3,
+                "label": "likely"
+              },
+              "4": {
+                "score": 4,
+                "label": "certain"
+              }
+            },
+            "probabilities": {
+              "0": 0.0,
+              "1": 0.0,
+              "2": 1.0,
+              "3": 0.0,
+              "4": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 404,
+          "output_tokens": 18
+        }
+      },
+      "parsed": {
+        "coin_score": {
+          "type": "score",
+          "score": 2.0,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 1.0,
+            "3": 0.0,
+            "4": 0.0
+          },
+          "confidence": 0.99
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "repeat_8",
+      "repeat": 8,
+      "qtype": "noul",
+      "state": "A biased coin lands heads 50% of the time and tails 50% of the time. The coin is flipped once.",
+      "timestamp": "2026-09-23T10:20:14.138543+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdc7bc73727096d345e4c277d36a",
+      "latency_ms": 475.49244700030613,
+      "input_tokens": 301,
+      "output_tokens": 22,
+      "estimated_cost_usd": 1.2642000000000002e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:20:14 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdc7bc73727096d345e4c277d36a",
+        "x-envoy-upstream-service-time": "110",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=MzPXs3dQqM3cZ2NN6mRgO7oyEcS12jfvg5WLfKXM1sle6OwN4My9TgOL0iSjpuES63uZMDGEBMsbvwQmRfweF%2FYYQo6pEZQbQ36zG%2BHB%2Fp%2BRk4%2FaJMwYUbeXtLUsBNsOIkkOZ8np2yKBWGnR6A%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8d0cce9829025-FRA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "heads_noul": {
+            "type": "noul",
+            "noul": 0.45
+          }
+        },
+        "usage": {
+          "input_tokens": 301,
+          "output_tokens": 22
+        }
+      },
+      "parsed": {
+        "heads_noul": {
+          "type": "noul",
+          "noul": 0.45
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "repeat_8",
+      "repeat": 8,
+      "qtype": "score",
+      "state": "A biased coin lands heads 50% of the time and tails 50% of the time. The coin is flipped once.",
+      "timestamp": "2026-09-23T10:20:14.614317+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdc7be5c7183a89e35aaf4e12f81",
+      "latency_ms": 574.760501000128,
+      "input_tokens": 404,
+      "output_tokens": 18,
+      "estimated_cost_usd": 1.6968e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:20:15 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdc7be5c7183a89e35aaf4e12f81",
+        "x-envoy-upstream-service-time": "110",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=FcUo9W4KAuB0vZZwzOepjzZMMTqGvvXq%2FyT8ago283bSjQff%2BF2OJUkGXlveUUjVwjEg12S4ngrYmeHvF2DoOSFHPbR55T9gbLbv6Y7RUTAXW5z9dfgpAIrIknYYzmfLcZAfq1UZyQl6%2BKl4vQ%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8d0cfead79025-FRA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "coin_score": {
+            "type": "score",
+            "score": 2.0,
+            "confidence": 0.99,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "impossible"
+              },
+              "1": {
+                "score": 1,
+                "label": "unlikely"
+              },
+              "2": {
+                "score": 2,
+                "label": "even odds"
+              },
+              "3": {
+                "score": 3,
+                "label": "likely"
+              },
+              "4": {
+                "score": 4,
+                "label": "certain"
+              }
+            },
+            "probabilities": {
+              "0": 0.0,
+              "1": 0.0,
+              "2": 1.0,
+              "3": 0.0,
+              "4": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 404,
+          "output_tokens": 18
+        }
+      },
+      "parsed": {
+        "coin_score": {
+          "type": "score",
+          "score": 2.0,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 1.0,
+            "3": 0.0,
+            "4": 0.0
+          },
+          "confidence": 0.99
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "repeat_9",
+      "repeat": 9,
+      "qtype": "noul",
+      "state": "A biased coin lands heads 50% of the time and tails 50% of the time. The coin is flipped once.",
+      "timestamp": "2026-09-23T10:20:15.189492+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdc7c09e76be8188d9f8e0d556e9",
+      "latency_ms": 454.42061099993225,
+      "input_tokens": 301,
+      "output_tokens": 22,
+      "estimated_cost_usd": 1.2642000000000002e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:20:15 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdc7c09e76be8188d9f8e0d556e9",
+        "x-envoy-upstream-service-time": "91",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=3bH20Rl7vj0MwEoNC%2FX1wHdgz7y2vzvca0UmrwFxJykuZKBBgQylmiz6SdsIAl4n1UB4vOxiPt5%2B7cFKjp5Vf6mhZmuhZ%2BZ%2BJpVyrPjU%2B%2FoP9v88ZVEDo%2FY291%2BnYDhpLSDE5blH%2B5ETIjL0hw%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8d0d37cb89025-FRA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "heads_noul": {
+            "type": "noul",
+            "noul": 0.46
+          }
+        },
+        "usage": {
+          "input_tokens": 301,
+          "output_tokens": 22
+        }
+      },
+      "parsed": {
+        "heads_noul": {
+          "type": "noul",
+          "noul": 0.46
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "repeat_9",
+      "repeat": 9,
+      "qtype": "score",
+      "state": "A biased coin lands heads 50% of the time and tails 50% of the time. The coin is flipped once.",
+      "timestamp": "2026-09-23T10:20:15.644296+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdc7c26477eea3af4a2f93613c10",
+      "latency_ms": 779.2721509999865,
+      "input_tokens": 404,
+      "output_tokens": 18,
+      "estimated_cost_usd": 1.6968e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:20:16 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdc7c26477eea3af4a2f93613c10",
+        "x-envoy-upstream-service-time": "176",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=LdwZdEqhkCVl6e662pdt9nETbZuv0ltlCUdk%2BnOEdCyrXKWs7%2FTFlXxASZf49B6qze8n8fnVaaHNk7FLbogCCOq2qhX4N6pXTJPw72jeYao3e0PKPayk6xIAGI2FcZ2yGyTlaM8DCtByTWaBpw%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8d0d65e239025-FRA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "coin_score": {
+            "type": "score",
+            "score": 2.0,
+            "confidence": 0.99,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "impossible"
+              },
+              "1": {
+                "score": 1,
+                "label": "unlikely"
+              },
+              "2": {
+                "score": 2,
+                "label": "even odds"
+              },
+              "3": {
+                "score": 3,
+                "label": "likely"
+              },
+              "4": {
+                "score": 4,
+                "label": "certain"
+              }
+            },
+            "probabilities": {
+              "0": 0.0,
+              "1": 0.0,
+              "2": 1.0,
+              "3": 0.0,
+              "4": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 404,
+          "output_tokens": 18
+        }
+      },
+      "parsed": {
+        "coin_score": {
+          "type": "score",
+          "score": 2.0,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 1.0,
+            "3": 0.0,
+            "4": 0.0
+          },
+          "confidence": 0.99
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "repeat_10",
+      "repeat": 10,
+      "qtype": "noul",
+      "state": "A biased coin lands heads 50% of the time and tails 50% of the time. The coin is flipped once.",
+      "timestamp": "2026-09-23T10:20:16.423882+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdc7c56f7ebc9fb1856f7fd24805",
+      "latency_ms": 469.34592999969027,
+      "input_tokens": 301,
+      "output_tokens": 22,
+      "estimated_cost_usd": 1.2642000000000002e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:20:16 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdc7c56f7ebc9fb1856f7fd24805",
+        "x-envoy-upstream-service-time": "108",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=Q8abfzZNl75HBlrPrMRujSn6nrfUvrdve0e%2B8Z8fvZNS4Q1Jw7O37rYw49Rml0YBlprVLgeqCE3d0ESYR95e1DIN3K74mfn%2Fu5J%2FYvLapAqXo0X%2BhqTxXPyurehKSgEHXjtQPYm7sQDjebVRfg%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8d0db384d9025-FRA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "heads_noul": {
+            "type": "noul",
+            "noul": 0.46
+          }
+        },
+        "usage": {
+          "input_tokens": 301,
+          "output_tokens": 22
+        }
+      },
+      "parsed": {
+        "heads_noul": {
+          "type": "noul",
+          "noul": 0.46
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "repeat_10",
+      "repeat": 10,
+      "qtype": "score",
+      "state": "A biased coin lands heads 50% of the time and tails 50% of the time. The coin is flipped once.",
+      "timestamp": "2026-09-23T10:20:16.893614+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdc7c7457eb187aeeb780b6fc099",
+      "latency_ms": 619.1071869998268,
+      "input_tokens": 404,
+      "output_tokens": 18,
+      "estimated_cost_usd": 1.6968e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:20:17 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdc7c7457eb187aeeb780b6fc099",
+        "x-envoy-upstream-service-time": "130",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=S3AbJA%2Bsx356BRmSVVJ7ftdmCx4MM6G4ebhJn1p2JZcU9K5K45ADrfVP7QHPecpxUwSvoM9oK4Ig9Vy7h1YHvilfbpy1dowusho%2FImkcyDnZpVBLtBn2%2B%2BOtB7PZnwkcFwtCxOWlk96kU3Y7Lg%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8d0de29f59025-FRA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "coin_score": {
+            "type": "score",
+            "score": 2.0,
+            "confidence": 0.99,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "impossible"
+              },
+              "1": {
+                "score": 1,
+                "label": "unlikely"
+              },
+              "2": {
+                "score": 2,
+                "label": "even odds"
+              },
+              "3": {
+                "score": 3,
+                "label": "likely"
+              },
+              "4": {
+                "score": 4,
+                "label": "certain"
+              }
+            },
+            "probabilities": {
+              "0": 0.0,
+              "1": 0.0,
+              "2": 1.0,
+              "3": 0.0,
+              "4": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 404,
+          "output_tokens": 18
+        }
+      },
+      "parsed": {
+        "coin_score": {
+          "type": "score",
+          "score": 2.0,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 1.0,
+            "3": 0.0,
+            "4": 0.0
+          },
+          "confidence": 0.99
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "repeat_11",
+      "repeat": 11,
+      "qtype": "noul",
+      "state": "A biased coin lands heads 50% of the time and tails 50% of the time. The coin is flipped once.",
+      "timestamp": "2026-09-23T10:20:17.513183+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdc7c9b2779b98071c74aab6d335",
+      "latency_ms": 449.41044199958924,
+      "input_tokens": 301,
+      "output_tokens": 22,
+      "estimated_cost_usd": 1.2642000000000002e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:20:17 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdc7c9b2779b98071c74aab6d335",
+        "x-envoy-upstream-service-time": "85",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=n9rLw7kyr%2B8TqM%2BX9zwN9l%2FV5ug47Wf%2B14GS1EtdttwhzaA0J0rt5c0f6nZ6SowJ7iR0gzV8Mltn%2FvAVPafIHeGHkz5ASTv4k%2BoC1m9uLhVv9r70V5Lwcapnr6dTTjaY9ZEDAGJhJAiIkEMdmA%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8d0e20c199025-FRA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "heads_noul": {
+            "type": "noul",
+            "noul": 0.46
+          }
+        },
+        "usage": {
+          "input_tokens": 301,
+          "output_tokens": 22
+        }
+      },
+      "parsed": {
+        "heads_noul": {
+          "type": "noul",
+          "noul": 0.46
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "repeat_11",
+      "repeat": 11,
+      "qtype": "score",
+      "state": "A biased coin lands heads 50% of the time and tails 50% of the time. The coin is flipped once.",
+      "timestamp": "2026-09-23T10:20:17.962895+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdc7cb727109817f0c92a7437e02",
+      "latency_ms": 598.7716270001329,
+      "input_tokens": 404,
+      "output_tokens": 18,
+      "estimated_cost_usd": 1.6968e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:20:18 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdc7cb727109817f0c92a7437e02",
+        "x-envoy-upstream-service-time": "122",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=WD18R24EvV6sYSAHnHYxlQ6gljEazI%2FbbmDtojhjUXlrJdDxQCOF%2FncNGjbHj6Tm0S3OpRL%2Fo00s%2BFiQiJAL1i8NxKCYq%2Fk2AWE%2BF%2BNFwJBmibYc1TGCHqTgToIDWran%2BNvZOYLTyNp6b9VzLA%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8d0e4de2f9025-FRA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "coin_score": {
+            "type": "score",
+            "score": 2.0,
+            "confidence": 0.99,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "impossible"
+              },
+              "1": {
+                "score": 1,
+                "label": "unlikely"
+              },
+              "2": {
+                "score": 2,
+                "label": "even odds"
+              },
+              "3": {
+                "score": 3,
+                "label": "likely"
+              },
+              "4": {
+                "score": 4,
+                "label": "certain"
+              }
+            },
+            "probabilities": {
+              "0": 0.0,
+              "1": 0.0,
+              "2": 1.0,
+              "3": 0.0,
+              "4": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 404,
+          "output_tokens": 18
+        }
+      },
+      "parsed": {
+        "coin_score": {
+          "type": "score",
+          "score": 2.0,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 1.0,
+            "3": 0.0,
+            "4": 0.0
+          },
+          "confidence": 0.99
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "repeat_12",
+      "repeat": 12,
+      "qtype": "noul",
+      "state": "A biased coin lands heads 50% of the time and tails 50% of the time. The coin is flipped once.",
+      "timestamp": "2026-09-23T10:20:18.562007+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdc7cdb17d98b1c0650a5cb6c123",
+      "latency_ms": 411.0092370001439,
+      "input_tokens": 301,
+      "output_tokens": 22,
+      "estimated_cost_usd": 1.2642000000000002e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:20:18 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdc7cdb17d98b1c0650a5cb6c123",
+        "x-envoy-upstream-service-time": "73",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=tO211v52i8t%2BYbUQnRZIRktywu9C7zQ2ux6ZIm6xvm6EMZjaKNmjgaDSdrenyp%2BMF0qG9yhDL9z1VIqZy1xi7%2FwNJCenFFkETc33K6dFnChtS9ZE9FQdv45NnjP9xAz3b4KHAeGcTGixHgkdIA%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8d0e898399025-FRA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "heads_noul": {
+            "type": "noul",
+            "noul": 0.46
+          }
+        },
+        "usage": {
+          "input_tokens": 301,
+          "output_tokens": 22
+        }
+      },
+      "parsed": {
+        "heads_noul": {
+          "type": "noul",
+          "noul": 0.46
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "repeat_12",
+      "repeat": 12,
+      "qtype": "score",
+      "state": "A biased coin lands heads 50% of the time and tails 50% of the time. The coin is flipped once.",
+      "timestamp": "2026-09-23T10:20:18.973279+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdc7cf657dc48255de308202aa3f",
+      "latency_ms": 453.26228099975197,
+      "input_tokens": 404,
+      "output_tokens": 18,
+      "estimated_cost_usd": 1.6968e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:20:19 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdc7cf657dc48255de308202aa3f",
+        "x-envoy-upstream-service-time": "114",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=tdmET4%2FwPlAx%2F4cQ1yooXSvGWRdDuZyYzO3BpxkcKkmXen0xncBIKviQmnSWQ58YapnfaoBiC6EJOnKm79YC52UbiHjGEfoE8qbH%2Bk3x7Cqgd0fEeY6uZlZXi4AJ83vUJ2RvYuPWbVLZzFHXQA%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8d0eb299b9025-FRA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "coin_score": {
+            "type": "score",
+            "score": 2.0,
+            "confidence": 0.99,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "impossible"
+              },
+              "1": {
+                "score": 1,
+                "label": "unlikely"
+              },
+              "2": {
+                "score": 2,
+                "label": "even odds"
+              },
+              "3": {
+                "score": 3,
+                "label": "likely"
+              },
+              "4": {
+                "score": 4,
+                "label": "certain"
+              }
+            },
+            "probabilities": {
+              "0": 0.0,
+              "1": 0.0,
+              "2": 1.0,
+              "3": 0.0,
+              "4": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 404,
+          "output_tokens": 18
+        }
+      },
+      "parsed": {
+        "coin_score": {
+          "type": "score",
+          "score": 2.0,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 1.0,
+            "3": 0.0,
+            "4": 0.0
+          },
+          "confidence": 0.99
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "repeat_13",
+      "repeat": 13,
+      "qtype": "noul",
+      "state": "A biased coin lands heads 50% of the time and tails 50% of the time. The coin is flipped once.",
+      "timestamp": "2026-09-23T10:20:19.426846+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdc7d112738a8225c697ef5a621e",
+      "latency_ms": 400.6025060002685,
+      "input_tokens": 301,
+      "output_tokens": 22,
+      "estimated_cost_usd": 1.2642000000000002e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:20:19 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdc7d112738a8225c697ef5a621e",
+        "x-envoy-upstream-service-time": "73",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=UPeLAnNZCMT43A2OfUSO2zq6044M6%2BdVoHfiaxRhBOs5i7WdcDUiXXhuCtfGRLSjFpJsFHZrhHzes7FkI5PhKVAFiUF7o3a5HvrAr8lYMRQyH4hMAF2Jug%2BNvrli2Q40r3zLNNyRPwfMUETm%2Fg%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8d0edfb0a9025-FRA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "heads_noul": {
+            "type": "noul",
+            "noul": 0.46
+          }
+        },
+        "usage": {
+          "input_tokens": 301,
+          "output_tokens": 22
+        }
+      },
+      "parsed": {
+        "heads_noul": {
+          "type": "noul",
+          "noul": 0.46
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "repeat_13",
+      "repeat": 13,
+      "qtype": "score",
+      "state": "A biased coin lands heads 50% of the time and tails 50% of the time. The coin is flipped once.",
+      "timestamp": "2026-09-23T10:20:19.827732+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdc7d2a377aeacbd8d25234a92af",
+      "latency_ms": 429.1323010002088,
+      "input_tokens": 404,
+      "output_tokens": 18,
+      "estimated_cost_usd": 1.6968e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:20:20 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdc7d2a377aeacbd8d25234a92af",
+        "x-envoy-upstream-service-time": "101",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=luCQL6lxFDuR%2BfOPfl1qrcwO%2FeNWbIhCFWFhpwENIAYqE4l933UMZAQ9k5KQCi2bbxvQrDM1HqJeDYQ6IQ4UdQ%2BPG%2BPIP3Cnk9JLIQb2Apabznm00623jiaKe2GETbjzgnE%2BhNbsbayKD1HAFQ%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8d0f07cb39025-FRA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "coin_score": {
+            "type": "score",
+            "score": 2.0,
+            "confidence": 0.99,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "impossible"
+              },
+              "1": {
+                "score": 1,
+                "label": "unlikely"
+              },
+              "2": {
+                "score": 2,
+                "label": "even odds"
+              },
+              "3": {
+                "score": 3,
+                "label": "likely"
+              },
+              "4": {
+                "score": 4,
+                "label": "certain"
+              }
+            },
+            "probabilities": {
+              "0": 0.0,
+              "1": 0.0,
+              "2": 1.0,
+              "3": 0.0,
+              "4": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 404,
+          "output_tokens": 18
+        }
+      },
+      "parsed": {
+        "coin_score": {
+          "type": "score",
+          "score": 2.0,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 1.0,
+            "3": 0.0,
+            "4": 0.0
+          },
+          "confidence": 0.99
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "repeat_14",
+      "repeat": 14,
+      "qtype": "noul",
+      "state": "A biased coin lands heads 50% of the time and tails 50% of the time. The coin is flipped once.",
+      "timestamp": "2026-09-23T10:20:20.257205+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdc7d450791aa40b5188140dae0c",
+      "latency_ms": 439.8179340000752,
+      "input_tokens": 301,
+      "output_tokens": 22,
+      "estimated_cost_usd": 1.2642000000000002e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:20:20 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdc7d450791aa40b5188140dae0c",
+        "x-envoy-upstream-service-time": "114",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=uXMJk1c8sAwHZAPej3oWi%2BTe3%2BfhrKHN9AjTXYf%2BpjfXSb6RapQHXaDVrC35kkZgv06v5Q5ZToY3M1NePjqfj9hv2YXbQf3vXS%2BVjXin2KflXO8jKG8ZkvmJ%2FUgoJxHnR%2BDFpoZYHU8RBMQdmQ%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8d0f32e9f9025-FRA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "heads_noul": {
+            "type": "noul",
+            "noul": 0.46
+          }
+        },
+        "usage": {
+          "input_tokens": 301,
+          "output_tokens": 22
+        }
+      },
+      "parsed": {
+        "heads_noul": {
+          "type": "noul",
+          "noul": 0.46
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "repeat_14",
+      "repeat": 14,
+      "qtype": "score",
+      "state": "A biased coin lands heads 50% of the time and tails 50% of the time. The coin is flipped once.",
+      "timestamp": "2026-09-23T10:20:20.697300+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdc7d60b7e9f8ad10284978dcda9",
+      "latency_ms": 430.27927800039834,
+      "input_tokens": 404,
+      "output_tokens": 18,
+      "estimated_cost_usd": 1.6968e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:20:21 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdc7d60b7e9f8ad10284978dcda9",
+        "x-envoy-upstream-service-time": "100",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=%2FQisFEiq8qYWTsljeXM1tprfPC3%2FgWtDzu8JXu434Yrn6sQeck3EmNbFm9UncL7h6m5xsRqBuGaHbngEqiJ%2FKS%2Fhip8ZJYGULUsDkkQ72z%2FnWqORZzbWMlLH0qpjxQYylX%2ByC%2BQ3Od50Hv%2BjSw%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8d0f5e8549025-FRA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "coin_score": {
+            "type": "score",
+            "score": 2.0,
+            "confidence": 0.99,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "impossible"
+              },
+              "1": {
+                "score": 1,
+                "label": "unlikely"
+              },
+              "2": {
+                "score": 2,
+                "label": "even odds"
+              },
+              "3": {
+                "score": 3,
+                "label": "likely"
+              },
+              "4": {
+                "score": 4,
+                "label": "certain"
+              }
+            },
+            "probabilities": {
+              "0": 0.0,
+              "1": 0.0,
+              "2": 1.0,
+              "3": 0.0,
+              "4": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 404,
+          "output_tokens": 18
+        }
+      },
+      "parsed": {
+        "coin_score": {
+          "type": "score",
+          "score": 2.0,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 1.0,
+            "3": 0.0,
+            "4": 0.0
+          },
+          "confidence": 0.99
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "repeat_15",
+      "repeat": 15,
+      "qtype": "noul",
+      "state": "A biased coin lands heads 50% of the time and tails 50% of the time. The coin is flipped once.",
+      "timestamp": "2026-09-23T10:20:21.127859+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdc7d7ce7312a7a6869f5fab5a2e",
+      "latency_ms": 418.7092480001411,
+      "input_tokens": 301,
+      "output_tokens": 22,
+      "estimated_cost_usd": 1.2642000000000002e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:20:21 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdc7d7ce7312a7a6869f5fab5a2e",
+        "x-envoy-upstream-service-time": "58",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=VckwrvIUXgIS95oI%2B9k8Qlx6u89P1vp9v40KVTReB9CynbdTuc64Cb3DZ%2FdZnvIv2xDiaeArGAErAp8fM36L%2BGhBEFfhwFGbAQTNN3NtyVdVPbDWyzrdQF6WkI8OrxRtXNbmNNwaYxfXBGeiRQ%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8d0f899b79025-FRA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "heads_noul": {
+            "type": "noul",
+            "noul": 0.46
+          }
+        },
+        "usage": {
+          "input_tokens": 301,
+          "output_tokens": 22
+        }
+      },
+      "parsed": {
+        "heads_noul": {
+          "type": "noul",
+          "noul": 0.46
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "repeat_15",
+      "repeat": 15,
+      "qtype": "score",
+      "state": "A biased coin lands heads 50% of the time and tails 50% of the time. The coin is flipped once.",
+      "timestamp": "2026-09-23T10:20:21.546847+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdc7d97175469850b81a1d2280f7",
+      "latency_ms": 424.81501899965224,
+      "input_tokens": 404,
+      "output_tokens": 18,
+      "estimated_cost_usd": 1.6968e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:20:21 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdc7d97175469850b81a1d2280f7",
+        "x-envoy-upstream-service-time": "62",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=hMkMcouqlCxmp37DNL%2FK8p1vBg%2FWbuLdNj%2FZLyGAop6EOzh1QWpq2kdqc%2FcI5sPOLJqLDQVJZSqmcWFBElh7oYyIA7wYNzItWtAndBId7Lrinb68fltG4q3ad9sfFd56KP%2Fxsgy5UoBFmdkX7g%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8d0fb3b119025-FRA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "coin_score": {
+            "type": "score",
+            "score": 2.0,
+            "confidence": 0.99,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "impossible"
+              },
+              "1": {
+                "score": 1,
+                "label": "unlikely"
+              },
+              "2": {
+                "score": 2,
+                "label": "even odds"
+              },
+              "3": {
+                "score": 3,
+                "label": "likely"
+              },
+              "4": {
+                "score": 4,
+                "label": "certain"
+              }
+            },
+            "probabilities": {
+              "0": 0.0,
+              "1": 0.0,
+              "2": 1.0,
+              "3": 0.0,
+              "4": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 404,
+          "output_tokens": 18
+        }
+      },
+      "parsed": {
+        "coin_score": {
+          "type": "score",
+          "score": 2.0,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 1.0,
+            "3": 0.0,
+            "4": 0.0
+          },
+          "confidence": 0.99
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "repeat_16",
+      "repeat": 16,
+      "qtype": "noul",
+      "state": "A biased coin lands heads 50% of the time and tails 50% of the time. The coin is flipped once.",
+      "timestamp": "2026-09-23T10:20:21.971987+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdc7dbd17fa480f7dfd1d58bf183",
+      "latency_ms": 620.2468370001952,
+      "input_tokens": 301,
+      "output_tokens": 22,
+      "estimated_cost_usd": 1.2642000000000002e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:20:22 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdc7dbd17fa480f7dfd1d58bf183",
+        "x-envoy-upstream-service-time": "63",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=O6AdsWbqKp1z88WVB7VWKg6evfzEaS%2FxZ4j9wpLCuGdfwsnIH08zsb4uBqOxFrXf4Ff%2BKB62Iq7VAOLIo76df9o9T5ke1UP%2BFv9SwXVKLvBsEx5xAff19pUrUI4fWQ8qC8hhEPV6Reg6FVYPvQ%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8d0fdec5b9025-FRA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "heads_noul": {
+            "type": "noul",
+            "noul": 0.47
+          }
+        },
+        "usage": {
+          "input_tokens": 301,
+          "output_tokens": 22
+        }
+      },
+      "parsed": {
+        "heads_noul": {
+          "type": "noul",
+          "noul": 0.47
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "repeat_16",
+      "repeat": 16,
+      "qtype": "score",
+      "state": "A biased coin lands heads 50% of the time and tails 50% of the time. The coin is flipped once.",
+      "timestamp": "2026-09-23T10:20:22.592612+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdc7ddc671199e191077ef369828",
+      "latency_ms": 518.0684580000161,
+      "input_tokens": 404,
+      "output_tokens": 18,
+      "estimated_cost_usd": 1.6968e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:20:23 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdc7ddc671199e191077ef369828",
+        "x-envoy-upstream-service-time": "94",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=67rRMy3yoHsAVdHwoBjbLE7E2K3Ec5z4xPhV54xfeSnuysAbPu0suOsUAOJ5ubnPrzC1dQW7icDTOBqNjYB14I05Og7u3Oi2b7UDQPJSNCyr8dYOP2Rv%2B7Gf%2F7007pKwKBzlIs%2BBSrkdILEyOQ%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8d101ce759025-FRA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "coin_score": {
+            "type": "score",
+            "score": 2.0,
+            "confidence": 0.99,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "impossible"
+              },
+              "1": {
+                "score": 1,
+                "label": "unlikely"
+              },
+              "2": {
+                "score": 2,
+                "label": "even odds"
+              },
+              "3": {
+                "score": 3,
+                "label": "likely"
+              },
+              "4": {
+                "score": 4,
+                "label": "certain"
+              }
+            },
+            "probabilities": {
+              "0": 0.0,
+              "1": 0.0,
+              "2": 1.0,
+              "3": 0.0,
+              "4": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 404,
+          "output_tokens": 18
+        }
+      },
+      "parsed": {
+        "coin_score": {
+          "type": "score",
+          "score": 2.0,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 1.0,
+            "3": 0.0,
+            "4": 0.0
+          },
+          "confidence": 0.99
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "repeat_17",
+      "repeat": 17,
+      "qtype": "noul",
+      "state": "A biased coin lands heads 50% of the time and tails 50% of the time. The coin is flipped once.",
+      "timestamp": "2026-09-23T10:20:23.111023+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdc7df787dbaa66188d7fc055fce",
+      "latency_ms": 552.9920799999672,
+      "input_tokens": 301,
+      "output_tokens": 22,
+      "estimated_cost_usd": 1.2642000000000002e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:20:23 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdc7df787dbaa66188d7fc055fce",
+        "x-envoy-upstream-service-time": "131",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=1HLakLDKY9QkO%2BZI32H6uB3nyUJFvlW6sx0WH3fQp2W%2Fpp59ncqr6gEQlT71X%2BSRoxXqNBpMlgkC%2FUIcDuiuvTO9CKhJygOmRAqGS1I%2B6YDzZV0gs2vlrmv%2Fk4kGp4D%2B8Dxb2ryAPyR%2FO2uNfA%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8d104f80e9025-FRA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "heads_noul": {
+            "type": "noul",
+            "noul": 0.46
+          }
+        },
+        "usage": {
+          "input_tokens": 301,
+          "output_tokens": 22
+        }
+      },
+      "parsed": {
+        "heads_noul": {
+          "type": "noul",
+          "noul": 0.46
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "repeat_17",
+      "repeat": 17,
+      "qtype": "score",
+      "state": "A biased coin lands heads 50% of the time and tails 50% of the time. The coin is flipped once.",
+      "timestamp": "2026-09-23T10:20:23.664388+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdc7e1a8717b8652d0487a7a383e",
+      "latency_ms": 444.7037480003928,
+      "input_tokens": 404,
+      "output_tokens": 18,
+      "estimated_cost_usd": 1.6968e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:20:24 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdc7e1a8717b8652d0487a7a383e",
+        "x-envoy-upstream-service-time": "113",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=K4s3tSAIuMKNNc5uzUV%2BU2ZfYR9QzqJ96bPGwetdEDJ12%2B%2B%2FfYoG%2B2bM%2FhPE4RZTsDmBYZcHeNHdO%2FWfR5fcV%2B9nXk2sWrpEJ%2F%2F019QIrXn%2BO6zlsetQv1nwnrIpk%2FBHtoUCsb6hggTR%2FtNVvw%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8d10879b19025-FRA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "coin_score": {
+            "type": "score",
+            "score": 2.0,
+            "confidence": 0.99,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "impossible"
+              },
+              "1": {
+                "score": 1,
+                "label": "unlikely"
+              },
+              "2": {
+                "score": 2,
+                "label": "even odds"
+              },
+              "3": {
+                "score": 3,
+                "label": "likely"
+              },
+              "4": {
+                "score": 4,
+                "label": "certain"
+              }
+            },
+            "probabilities": {
+              "0": 0.0,
+              "1": 0.0,
+              "2": 1.0,
+              "3": 0.0,
+              "4": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 404,
+          "output_tokens": 18
+        }
+      },
+      "parsed": {
+        "coin_score": {
+          "type": "score",
+          "score": 2.0,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 1.0,
+            "3": 0.0,
+            "4": 0.0
+          },
+          "confidence": 0.99
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "repeat_18",
+      "repeat": 18,
+      "qtype": "noul",
+      "state": "A biased coin lands heads 50% of the time and tails 50% of the time. The coin is flipped once.",
+      "timestamp": "2026-09-23T10:20:24.109412+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdc7e36477488282e58f73ac8304",
+      "latency_ms": 427.8894720000608,
+      "input_tokens": 301,
+      "output_tokens": 22,
+      "estimated_cost_usd": 1.2642000000000002e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:20:24 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdc7e36477488282e58f73ac8304",
+        "x-envoy-upstream-service-time": "92",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=G53jOu09%2FgB8410747twsyhXmIMcNI15%2BMvR%2F%2FTvIBtQg3lrz3aZjeHEfw7JBF69N%2FOLoXjjiVebxpwDBXWRopWetctPgfDa11D34uxkC2816tvtVjVjiKo6MShj0DAxtgfhohzAJ9FdADov0g%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8d10b3ac69025-FRA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "heads_noul": {
+            "type": "noul",
+            "noul": 0.46
+          }
+        },
+        "usage": {
+          "input_tokens": 301,
+          "output_tokens": 22
+        }
+      },
+      "parsed": {
+        "heads_noul": {
+          "type": "noul",
+          "noul": 0.46
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "repeat_18",
+      "repeat": 18,
+      "qtype": "score",
+      "state": "A biased coin lands heads 50% of the time and tails 50% of the time. The coin is flipped once.",
+      "timestamp": "2026-09-23T10:20:24.537643+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdc7e52173fcb6a5be4266a5a626",
+      "latency_ms": 448.2615780002561,
+      "input_tokens": 404,
+      "output_tokens": 18,
+      "estimated_cost_usd": 1.6968e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:20:24 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdc7e52173fcb6a5be4266a5a626",
+        "x-envoy-upstream-service-time": "86",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=XQjXL0%2FX7zYc6FmpR8jprDHC08GzBBSL5ZCe49gAFBPW%2BqxFYxNcJKaxuy86K8e1U%2BYIdmAf1Z9wPnmde5mzf6kPVU7fkclgEsilrKrxMBjQViKBvMyV4ftEHT1VttAnndOsSNJk04rHj3qgNA%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8d10debff9025-FRA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "coin_score": {
+            "type": "score",
+            "score": 2.0,
+            "confidence": 0.99,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "impossible"
+              },
+              "1": {
+                "score": 1,
+                "label": "unlikely"
+              },
+              "2": {
+                "score": 2,
+                "label": "even odds"
+              },
+              "3": {
+                "score": 3,
+                "label": "likely"
+              },
+              "4": {
+                "score": 4,
+                "label": "certain"
+              }
+            },
+            "probabilities": {
+              "0": 0.0,
+              "1": 0.0,
+              "2": 1.0,
+              "3": 0.0,
+              "4": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 404,
+          "output_tokens": 18
+        }
+      },
+      "parsed": {
+        "coin_score": {
+          "type": "score",
+          "score": 2.0,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 1.0,
+            "3": 0.0,
+            "4": 0.0
+          },
+          "confidence": 0.99
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "repeat_19",
+      "repeat": 19,
+      "qtype": "noul",
+      "state": "A biased coin lands heads 50% of the time and tails 50% of the time. The coin is flipped once.",
+      "timestamp": "2026-09-23T10:20:24.986259+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdc7e7247434b06751f3d29bcbcb",
+      "latency_ms": 514.1925050002101,
+      "input_tokens": 301,
+      "output_tokens": 22,
+      "estimated_cost_usd": 1.2642000000000002e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:20:25 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdc7e7247434b06751f3d29bcbcb",
+        "x-envoy-upstream-service-time": "85",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=ljJtRo4hMEdbCP9YTGUnFAueN43zkSaPJkX5DMAub2VtO6UP3NDAjlceJMdG0riJFaBjMjM2tOu6E99yqicO1FLUr0AgM%2FMQ7nlDGcd51XvgMkS0ZC5Etl95bHJaFdRz8OvNltCgISkVnL0I5A%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8d110bd429025-FRA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "heads_noul": {
+            "type": "noul",
+            "noul": 0.46
+          }
+        },
+        "usage": {
+          "input_tokens": 301,
+          "output_tokens": 22
+        }
+      },
+      "parsed": {
+        "heads_noul": {
+          "type": "noul",
+          "noul": 0.46
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "repeat_19",
+      "repeat": 19,
+      "qtype": "score",
+      "state": "A biased coin lands heads 50% of the time and tails 50% of the time. The coin is flipped once.",
+      "timestamp": "2026-09-23T10:20:25.500768+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdc7e8e778e192a0c60f58d2a1e2",
+      "latency_ms": 465.47789199985345,
+      "input_tokens": 404,
+      "output_tokens": 18,
+      "estimated_cost_usd": 1.6968e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:20:25 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdc7e8e778e192a0c60f58d2a1e2",
+        "x-envoy-upstream-service-time": "51",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=b3mb6Va0fcdEu1wYi2T6iMoYzki%2FgtZz6Pnkqw6NSnyXHzKPu8BrbkMTKTTWb3rEJYT1ug46fDMjSqn%2BaahJvKl3l5y1iVSx0Xb31pTbDeQCRc8Zsr5MxsvIRQbSCrDEOM8qO7kQuWcuGdsF4w%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8d113febc9025-FRA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "coin_score": {
+            "type": "score",
+            "score": 2.0,
+            "confidence": 0.99,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "impossible"
+              },
+              "1": {
+                "score": 1,
+                "label": "unlikely"
+              },
+              "2": {
+                "score": 2,
+                "label": "even odds"
+              },
+              "3": {
+                "score": 3,
+                "label": "likely"
+              },
+              "4": {
+                "score": 4,
+                "label": "certain"
+              }
+            },
+            "probabilities": {
+              "0": 0.0,
+              "1": 0.0,
+              "2": 1.0,
+              "3": 0.0,
+              "4": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 404,
+          "output_tokens": 18
+        }
+      },
+      "parsed": {
+        "coin_score": {
+          "type": "score",
+          "score": 2.0,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 1.0,
+            "3": 0.0,
+            "4": 0.0
+          },
+          "confidence": 0.99
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "repeat_20",
+      "repeat": 20,
+      "qtype": "noul",
+      "state": "A biased coin lands heads 50% of the time and tails 50% of the time. The coin is flipped once.",
+      "timestamp": "2026-09-23T10:20:25.966547+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdc7ead775bfa29606404592ed68",
+      "latency_ms": 656.5684110000802,
+      "input_tokens": 301,
+      "output_tokens": 22,
+      "estimated_cost_usd": 1.2642000000000002e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:20:26 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdc7ead775bfa29606404592ed68",
+        "x-envoy-upstream-service-time": "137",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=pLHOX31Yxn2ygMF%2B9sigC%2Fplgf6RhPXugKdXJzm%2FftPB08fLXD1%2B%2FpF6r8QzZKhYCxHS98LKAxfbsmwvezJTIzvjwgGK2KaFpxZ6XKvhKkXtJf7B653pBED9E0f7NYeOhYhuMnFKLntp5iTMjg%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8d116e8339025-FRA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "heads_noul": {
+            "type": "noul",
+            "noul": 0.46
+          }
+        },
+        "usage": {
+          "input_tokens": 301,
+          "output_tokens": 22
+        }
+      },
+      "parsed": {
+        "heads_noul": {
+          "type": "noul",
+          "noul": 0.46
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "repeat_20",
+      "repeat": 20,
+      "qtype": "score",
+      "state": "A biased coin lands heads 50% of the time and tails 50% of the time. The coin is flipped once.",
+      "timestamp": "2026-09-23T10:20:26.623393+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdc7ed4b7a6697ceb8e4784d955d",
+      "latency_ms": 522.3421860000599,
+      "input_tokens": 404,
+      "output_tokens": 18,
+      "estimated_cost_usd": 1.6968e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:20:27 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdc7ed4b7a6697ceb8e4784d955d",
+        "x-envoy-upstream-service-time": "78",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=WX%2BtIhPn5r8mYsCOIkiaBPlPYQnMWZNJ8OJI0e4CPQH3elHEOjFvK9TFKB%2FxqeZA6dRsJI1FuInBgBGinvitlLTuJIvHtftQNMY%2B9fndq%2BtG2JZO4JHXfYAHkS9ZktBuaZ%2FyqAfaLcKOiIi9GQ%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8d11afa199025-FRA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "coin_score": {
+            "type": "score",
+            "score": 2.0,
+            "confidence": 0.99,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "impossible"
+              },
+              "1": {
+                "score": 1,
+                "label": "unlikely"
+              },
+              "2": {
+                "score": 2,
+                "label": "even odds"
+              },
+              "3": {
+                "score": 3,
+                "label": "likely"
+              },
+              "4": {
+                "score": 4,
+                "label": "certain"
+              }
+            },
+            "probabilities": {
+              "0": 0.0,
+              "1": 0.0,
+              "2": 1.0,
+              "3": 0.0,
+              "4": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 404,
+          "output_tokens": 18
+        }
+      },
+      "parsed": {
+        "coin_score": {
+          "type": "score",
+          "score": 2.0,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 1.0,
+            "3": 0.0,
+            "4": 0.0
+          },
+          "confidence": 0.99
+        }
+      },
+      "error": null
+    }
+  ]
+}

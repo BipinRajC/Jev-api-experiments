@@ -174,3 +174,42 @@ Only findings measured in this repository.
 - **Limitations:** n=1 per case. Only tested moderate-to-strong evidence strengths; no truly ambiguous or contradictory states were used (that's Experiment 012/013). Does not test whether confidence correlates with accuracy.
 - **Confidence in the finding:** High that confidence varies; moderate on the range (broader evidence types might produce lower confidence).
 - **Implications:** Confidence is more informative than Phase 1 suggested but may be poorly calibrated at the low end. Experiment 012 (conflicting evidence) and 013 (missing information) should attempt to elicit lower confidence values. Do not interpret confidence as a calibrated probability without calibration experiments (Phase 3).
+
+---
+
+## F014 — Noul has small but real output jitter (±0.01); central tendency is stable
+
+- **Related hypothesis:** H023, H026
+- **Experiment(s):** 008 (`results/008-repeatability/run-001.json`)
+- **Conditions:** 2026-09-23 UTC; `jev-1.13.0`; fair-coin state; n=20 identical Noul requests
+- **Evidence:** 20 calls returned 3 unique values: 0.45 (×1), **0.46 (×18)**, 0.47 (×1). Mean/median 0.46, stdev 0.0032, range 0.02. Token usage constant at 301 input tokens (stdev 0.0).
+- **Interpretation:** Noul is not perfectly deterministic, but the jitter is tiny (±0.01 around the mean). This explains Experiment 006's 0.99-vs-1.0 discrepancy and confirms it is output noise, not a batch effect. Experiment 007's fair-coin reading of 0.45 was a slightly-low single draw; the true central tendency is ~0.46.
+- **Limitations:** Single state. Sequential calls may share server-side caching. 20 repeats is moderate, not conclusive.
+- **Confidence in the finding:** High for the jitter magnitude on this state.
+- **Implications:** A single Noul call reliably estimates the central tendency (within ±0.01). For exact reproducibility claims, note that Noul has ~0.01 jitter. The ~0.04 understatement of 50% (0.46 not 0.5) is a separate calibration characteristic to revisit in Phase 3.
+
+---
+
+## F015 — Score and Score confidence are deterministic on an unambiguous integer state
+
+- **Related hypothesis:** H024, H025
+- **Experiment(s):** 008 (`results/008-repeatability/run-001.json`)
+- **Conditions:** 2026-09-23 UTC; `jev-1.13.0`; fair-coin state; n=20 identical Score requests; rubric 0=impossible..4=certain
+- **Evidence:** All 20 calls returned exactly 2.0 with confidence exactly 0.99. stdev 0.0 for both. Token usage constant at 404 input tokens.
+- **Interpretation:** On an unambiguous integer-valued state, Score output and confidence are fully deterministic. This contrasts with Noul's ±0.01 jitter on the same state.
+- **Limitations:** Tested only at an obvious integer level. Experiment 007's graded fractional scores (2.92, 4.68) were NOT retested here; their repeatability is unknown.
+- **Confidence in the finding:** High for this state; unknown for graded evidence.
+- **Implications:** Score may be more reproducible than Noul. If this holds for graded evidence, Score is the preferred primitive for reproducible quantitative judgments. A follow-up should test whether fractional Score values are equally stable.
+
+---
+
+## F016 — Latency varies ~2x while token usage is deterministic
+
+- **Related hypothesis:** none numbered
+- **Experiment(s):** 008 (`results/008-repeatability/run-001.json`)
+- **Conditions:** 2026-09-23 UTC; `jev-1.13.0`; n=20 per primitive; client wall-clock latency
+- **Evidence:** Noul latency: min 400.6 ms, max 875.7 ms, mean 493.4 ms, median 451.9 ms, stdev 114.4 ms. Score latency: min 422.6 ms, max 779.3 ms, mean 505.1 ms, median 466.1 ms, stdev 91.3 ms. In contrast, input tokens were constant (301/404) across all calls.
+- **Interpretation:** Latency varies roughly 2x around the median, far exceeding the Noul output jitter. Client wall-clock includes network overhead. Token accounting has zero jitter.
+- **Limitations:** Client wall-clock, not `x-envoy-upstream-service-time`; includes network and local overhead.
+- **Confidence in the finding:** High for the observed latency distribution on this date/network.
+- **Implications:** For latency-sensitive use, variability (~2x) is the practical concern, not output determinism. Do not treat a single latency measurement as representative.
