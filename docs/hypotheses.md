@@ -531,3 +531,67 @@ SUPPORTED (conditions: 2026-09-23, `jev-1.13.0`, facts 7 red/3 blue; prose 464 t
 Experiment:
 
 011
+
+---
+
+## H034 — Noul moves toward 0.5 on contradictory state
+
+Hypothesis:
+
+Given internally contradictory state (two mutual exclusives), Jev's Noul value falls in an uncertain band near 0.5 rather than confidently picking a side.
+
+Status:
+
+INCONCLUSIVE (conditions: 2026-09-23, `jev-1.13.0`, 3 contradictory pairs × 3 repeats; coin 0.49 (uncertain) but sky 0.69 and direction 0.40 did NOT collapse to 0.5; Noul can lean toward or away from the stated side depending on the pair; Noul is not a reliable uncertainty signal on contradiction)
+
+Experiment:
+
+012
+
+---
+
+## H035 — Choice selects an explicit "uncertain" option on contradictory state
+
+Hypothesis:
+
+Given contradictory state, Jev's Choice selects an explicit "uncertain/conflicting" option when one is available.
+
+Status:
+
+SUPPORTED (conditions: 2026-09-23, `jev-1.13.0`, 3 contradictory pairs × 3 repeats; "uncertain" selected in 9/9 calls, confidence 0.95–0.99; Jev reliably detects the contradiction when an "uncertain" option exists)
+
+Experiment:
+
+012
+
+---
+
+## H036 — Confidence is low on contradictory state
+
+Hypothesis:
+
+Given contradictory state, Jev's confidence is well below 1.0.
+
+Status:
+
+INCONCLUSIVE / PARTIAL (conditions: 2026-09-23, `jev-1.13.0`, 3 contradictory pairs × 3 repeats; Choice confidence HIGH 0.95–0.99 because Jev is confident it detected the contradiction, but Score confidence LOW 0.59–0.85; the blanket "low confidence on contradiction" prediction is too simple — confidence depends on the primitive and what it is confident about)
+
+Experiment:
+
+012
+
+---
+
+## H037 — Contradiction handling is consistent across repeats
+
+Hypothesis:
+
+Jev's response to the same contradictory state is stable across repeated calls.
+
+Status:
+
+SUPPORTED (conditions: 2026-09-23, `jev-1.13.0`, 3 contradictory pairs × 3 repeats; Choice "uncertain" 3/3 in every case; Noul and Score very stable, e.g. direction Score exactly 3.82 × 3)
+
+Experiment:
+
+012

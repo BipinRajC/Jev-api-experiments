@@ -1,0 +1,1217 @@
+{
+  "experiment_id": "012-conflicting-evidence",
+  "run_id": "run-001",
+  "timestamp": "2026-09-23T11:18:41.657456+00:00",
+  "model_requested": "jev-1.13.0",
+  "api": {
+    "provider": "typesafe_direct",
+    "base_url": "https://api.typesafe.ai",
+    "endpoint": "/v1/systemone",
+    "method": "POST"
+  },
+  "design": {
+    "repeats_per_case": 3,
+    "cases": [
+      {
+        "case_id": "sky",
+        "state": "Statement 1: The sky is blue. Statement 2: The sky is grey. Statement 3: The observation was made during the same time period.",
+        "noul_q": "Is the sky blue?",
+        "choice_options": {
+          "blue": "The sky is blue.",
+          "grey": "The sky is grey.",
+          "uncertain": "The sky color cannot be determined from the statements."
+        }
+      },
+      {
+        "case_id": "coin",
+        "state": "Statement 1: The coin shows heads. Statement 2: The coin shows tails. Statement 3: The observation was made during the same time period.",
+        "noul_q": "Does the coin show heads?",
+        "choice_options": {
+          "heads": "The coin shows heads.",
+          "tails": "The coin shows tails.",
+          "uncertain": "The coin face cannot be determined from the statements."
+        }
+      },
+      {
+        "case_id": "direction",
+        "state": "Statement 1: The car is moving north. Statement 2: The car is moving south. Statement 3: The observation was made during the same time period.",
+        "noul_q": "Is the car moving north?",
+        "choice_options": {
+          "north": "The car is moving north.",
+          "south": "The car is moving south.",
+          "uncertain": "The car's direction cannot be determined from the statements."
+        }
+      }
+    ],
+    "score_questions": {
+      "contradiction_level": {
+        "type": "score",
+        "instructions": "Based on the statements, how contradictory is the situation?",
+        "criteria": [
+          {
+            "score": 0,
+            "label": "completely clear, one side"
+          },
+          {
+            "score": 1,
+            "label": "mostly clear, one side dominant"
+          },
+          {
+            "score": 2,
+            "label": "mixed, balanced"
+          },
+          {
+            "score": 3,
+            "label": "mostly contradictory, little clarity"
+          },
+          {
+            "score": 4,
+            "label": "fully contradictory, no way to decide"
+          }
+        ]
+      }
+    }
+  },
+  "analysis": {
+    "by_case": {
+      "sky": {
+        "nouls": [
+          0.68,
+          0.7,
+          0.69
+        ],
+        "noul_mean": 0.69,
+        "choices": [
+          "uncertain",
+          "uncertain",
+          "uncertain"
+        ],
+        "choice_set": [
+          "uncertain"
+        ],
+        "scores": [
+          3.51,
+          3.61,
+          3.55
+        ],
+        "score_mean": 3.5567,
+        "confs": [
+          0.96,
+          0.95,
+          0.96
+        ],
+        "conf_mean": 0.9567
+      },
+      "coin": {
+        "nouls": [
+          0.49,
+          0.48,
+          0.49
+        ],
+        "noul_mean": 0.4867,
+        "choices": [
+          "uncertain",
+          "uncertain",
+          "uncertain"
+        ],
+        "choice_set": [
+          "uncertain"
+        ],
+        "scores": [
+          3.68,
+          3.63,
+          3.69
+        ],
+        "score_mean": 3.6667,
+        "confs": [
+          0.98,
+          0.97,
+          0.98
+        ],
+        "conf_mean": 0.9767
+      },
+      "direction": {
+        "nouls": [
+          0.39,
+          0.4,
+          0.41
+        ],
+        "noul_mean": 0.4,
+        "choices": [
+          "uncertain",
+          "uncertain",
+          "uncertain"
+        ],
+        "choice_set": [
+          "uncertain"
+        ],
+        "scores": [
+          3.82,
+          3.82,
+          3.82
+        ],
+        "score_mean": 3.82,
+        "confs": [
+          0.99,
+          0.99,
+          0.99
+        ],
+        "conf_mean": 0.99
+      }
+    },
+    "all_nouls": [
+      0.68,
+      0.7,
+      0.69,
+      0.49,
+      0.48,
+      0.49,
+      0.39,
+      0.4,
+      0.41
+    ],
+    "all_noul_mean": 0.5256,
+    "all_choice_confs": [
+      0.96,
+      0.95,
+      0.96,
+      0.98,
+      0.97,
+      0.98,
+      0.99,
+      0.99,
+      0.99
+    ],
+    "all_choice_conf_mean": 0.9744,
+    "all_choice_conf_min": 0.95,
+    "uncertain_choice_count": 9,
+    "total_choice_count": 9,
+    "h034_noul_means_in_uncertain_band": false,
+    "h035_majority_uncertain": true,
+    "h036_confidence_below_0.9": false,
+    "h037_choice_stable_across_repeats": {
+      "sky": true,
+      "coin": true,
+      "direction": true
+    }
+  },
+  "trials": [
+    {
+      "case_id": "sky",
+      "repeat": 1,
+      "state": "Statement 1: The sky is blue. Statement 2: The sky is grey. Statement 3: The observation was made during the same time period.",
+      "timestamp": "2026-09-23T11:18:41.676265+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdfd43167f928f07bfb013de2702",
+      "latency_ms": 761.732402999769,
+      "input_tokens": 519,
+      "output_tokens": 77,
+      "estimated_cost_usd": 2.1798e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 11:18:42 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdfd43167f928f07bfb013de2702",
+        "x-envoy-upstream-service-time": "132",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=db4uGZKUYg8Be66phvfNBU1bvw%2FPuxyQ8NvRq7CMSNrQ7trQ4QpLSVxVsmjw1fXII8D1s%2BkqJqfhS39c2Ho1zp3WnPK5QbUNVNTIqLx5zfy2jvxR6a%2B22eE6htowA23P0suuZ5U83trpqXYHRg%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f926712d5de85e-FRA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "is_x": {
+            "type": "noul",
+            "noul": 0.68
+          },
+          "which_x": {
+            "type": "choice",
+            "choice": "uncertain",
+            "confidence": 0.96,
+            "probabilities": {
+              "blue": 0.02,
+              "grey": 0.01,
+              "uncertain": 0.97
+            }
+          },
+          "contradiction_level": {
+            "type": "score",
+            "score": 3.51,
+            "confidence": 0.59,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "completely clear, one side"
+              },
+              "1": {
+                "score": 1,
+                "label": "mostly clear, one side dominant"
+              },
+              "2": {
+                "score": 2,
+                "label": "mixed, balanced"
+              },
+              "3": {
+                "score": 3,
+                "label": "mostly contradictory, little clarity"
+              },
+              "4": {
+                "score": 4,
+                "label": "fully contradictory, no way to decide"
+              }
+            },
+            "probabilities": {
+              "0": 0.01,
+              "1": 0.02,
+              "2": 0.1,
+              "3": 0.16,
+              "4": 0.71
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 519,
+          "output_tokens": 77
+        }
+      },
+      "parsed": {
+        "is_x": {
+          "type": "noul",
+          "noul": 0.68
+        },
+        "which_x": {
+          "type": "choice",
+          "choice": "uncertain",
+          "probabilities": {
+            "blue": 0.02,
+            "grey": 0.01,
+            "uncertain": 0.97
+          },
+          "confidence": 0.96
+        },
+        "contradiction_level": {
+          "type": "score",
+          "score": 3.51,
+          "probabilities": {
+            "0": 0.01,
+            "1": 0.02,
+            "2": 0.1,
+            "3": 0.16,
+            "4": 0.71
+          },
+          "confidence": 0.59
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "sky",
+      "repeat": 2,
+      "state": "Statement 1: The sky is blue. Statement 2: The sky is grey. Statement 3: The observation was made during the same time period.",
+      "timestamp": "2026-09-23T11:18:42.438349+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdfd44d675fb95ef973624a87b56",
+      "latency_ms": 381.886024000778,
+      "input_tokens": 519,
+      "output_tokens": 77,
+      "estimated_cost_usd": 2.1798e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 11:18:42 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdfd44d675fb95ef973624a87b56",
+        "x-envoy-upstream-service-time": "67",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=pbC6Trqs9rSH1zexnlT1UYY1t0h%2BsU0YdXadKO7krXFQlsMqqy292mB3VT0hg3XBq0UA1HkoccYenSAGQF9mZEEgmp%2B1rRMdQxyopfZn7HR6DmN7nF8SQ%2BhEfBQQZfdNWslzH4lJsSeIUEBYXQ%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f92673fd3ee85e-FRA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "is_x": {
+            "type": "noul",
+            "noul": 0.7
+          },
+          "which_x": {
+            "type": "choice",
+            "choice": "uncertain",
+            "confidence": 0.95,
+            "probabilities": {
+              "uncertain": 0.96,
+              "grey": 0.01,
+              "blue": 0.03
+            }
+          },
+          "contradiction_level": {
+            "type": "score",
+            "score": 3.61,
+            "confidence": 0.68,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "completely clear, one side"
+              },
+              "1": {
+                "score": 1,
+                "label": "mostly clear, one side dominant"
+              },
+              "2": {
+                "score": 2,
+                "label": "mixed, balanced"
+              },
+              "3": {
+                "score": 3,
+                "label": "mostly contradictory, little clarity"
+              },
+              "4": {
+                "score": 4,
+                "label": "fully contradictory, no way to decide"
+              }
+            },
+            "probabilities": {
+              "0": 0.01,
+              "1": 0.02,
+              "2": 0.09,
+              "3": 0.1,
+              "4": 0.78
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 519,
+          "output_tokens": 77
+        }
+      },
+      "parsed": {
+        "is_x": {
+          "type": "noul",
+          "noul": 0.7
+        },
+        "which_x": {
+          "type": "choice",
+          "choice": "uncertain",
+          "probabilities": {
+            "uncertain": 0.96,
+            "grey": 0.01,
+            "blue": 0.03
+          },
+          "confidence": 0.95
+        },
+        "contradiction_level": {
+          "type": "score",
+          "score": 3.61,
+          "probabilities": {
+            "0": 0.01,
+            "1": 0.02,
+            "2": 0.09,
+            "3": 0.1,
+            "4": 0.78
+          },
+          "confidence": 0.68
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "sky",
+      "repeat": 3,
+      "state": "Statement 1: The sky is blue. Statement 2: The sky is grey. Statement 3: The observation was made during the same time period.",
+      "timestamp": "2026-09-23T11:18:42.820605+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdfd465372b5950a3b2658cb0018",
+      "latency_ms": 388.97458700012066,
+      "input_tokens": 519,
+      "output_tokens": 77,
+      "estimated_cost_usd": 2.1798e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 11:18:43 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdfd465372b5950a3b2658cb0018",
+        "x-envoy-upstream-service-time": "74",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=tgqPctiIIInSdUWqsrV7NPpDlt%2FDbL%2Bq9RQYAcFgcxF2ddsGGsXG%2FZ%2ByBOzEeFayfTG%2FEqUTDACEL94GoWOFiY226wue26ZZ%2FHUJ0xm6G9d4RbwbcEv43YoYhD2CMfhJArri9v%2BrnbVKbiG%2FVg%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f926765aade85e-FRA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "is_x": {
+            "type": "noul",
+            "noul": 0.69
+          },
+          "which_x": {
+            "type": "choice",
+            "choice": "uncertain",
+            "confidence": 0.96,
+            "probabilities": {
+              "grey": 0.0,
+              "blue": 0.02,
+              "uncertain": 0.98
+            }
+          },
+          "contradiction_level": {
+            "type": "score",
+            "score": 3.55,
+            "confidence": 0.62,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "completely clear, one side"
+              },
+              "1": {
+                "score": 1,
+                "label": "mostly clear, one side dominant"
+              },
+              "2": {
+                "score": 2,
+                "label": "mixed, balanced"
+              },
+              "3": {
+                "score": 3,
+                "label": "mostly contradictory, little clarity"
+              },
+              "4": {
+                "score": 4,
+                "label": "fully contradictory, no way to decide"
+              }
+            },
+            "probabilities": {
+              "0": 0.02,
+              "1": 0.02,
+              "2": 0.11,
+              "3": 0.11,
+              "4": 0.74
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 519,
+          "output_tokens": 77
+        }
+      },
+      "parsed": {
+        "is_x": {
+          "type": "noul",
+          "noul": 0.69
+        },
+        "which_x": {
+          "type": "choice",
+          "choice": "uncertain",
+          "probabilities": {
+            "grey": 0.0,
+            "blue": 0.02,
+            "uncertain": 0.98
+          },
+          "confidence": 0.96
+        },
+        "contradiction_level": {
+          "type": "score",
+          "score": 3.55,
+          "probabilities": {
+            "0": 0.02,
+            "1": 0.02,
+            "2": 0.11,
+            "3": 0.11,
+            "4": 0.74
+          },
+          "confidence": 0.62
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "coin",
+      "repeat": 1,
+      "state": "Statement 1: The coin shows heads. Statement 2: The coin shows tails. Statement 3: The observation was made during the same time period.",
+      "timestamp": "2026-09-23T11:18:43.210150+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdfd47f4728e8416995234fa0dd0",
+      "latency_ms": 409.6975940001357,
+      "input_tokens": 520,
+      "output_tokens": 77,
+      "estimated_cost_usd": 2.184e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 11:18:43 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdfd47f4728e8416995234fa0dd0",
+        "x-envoy-upstream-service-time": "64",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=%2FVfN%2Flt%2BHlbfzo9n9uNOgVXOWHx3CO6bIWWqva2hv1NmsBTnM988%2B5OuUXtXypgRktOWb9vShDEfgddfGVX6OIchRUg%2BDI5jPyksW5b8wMQK5dSeYxYxrhFhcWObAYFdR0nJQoJjKrbkvYp7cw%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f92678e8c9e85e-FRA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "is_x": {
+            "type": "noul",
+            "noul": 0.49
+          },
+          "which_x": {
+            "type": "choice",
+            "choice": "uncertain",
+            "confidence": 0.98,
+            "probabilities": {
+              "uncertain": 0.99,
+              "tails": 0.0,
+              "heads": 0.01
+            }
+          },
+          "contradiction_level": {
+            "type": "score",
+            "score": 3.68,
+            "confidence": 0.73,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "completely clear, one side"
+              },
+              "1": {
+                "score": 1,
+                "label": "mostly clear, one side dominant"
+              },
+              "2": {
+                "score": 2,
+                "label": "mixed, balanced"
+              },
+              "3": {
+                "score": 3,
+                "label": "mostly contradictory, little clarity"
+              },
+              "4": {
+                "score": 4,
+                "label": "fully contradictory, no way to decide"
+              }
+            },
+            "probabilities": {
+              "0": 0.02,
+              "1": 0.01,
+              "2": 0.05,
+              "3": 0.13,
+              "4": 0.79
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 520,
+          "output_tokens": 77
+        }
+      },
+      "parsed": {
+        "is_x": {
+          "type": "noul",
+          "noul": 0.49
+        },
+        "which_x": {
+          "type": "choice",
+          "choice": "uncertain",
+          "probabilities": {
+            "uncertain": 0.99,
+            "tails": 0.0,
+            "heads": 0.01
+          },
+          "confidence": 0.98
+        },
+        "contradiction_level": {
+          "type": "score",
+          "score": 3.68,
+          "probabilities": {
+            "0": 0.02,
+            "1": 0.01,
+            "2": 0.05,
+            "3": 0.13,
+            "4": 0.79
+          },
+          "confidence": 0.73
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "coin",
+      "repeat": 2,
+      "state": "Statement 1: The coin shows heads. Statement 2: The coin shows tails. Statement 3: The observation was made during the same time period.",
+      "timestamp": "2026-09-23T11:18:43.620071+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdfd49f67c5485644fbea548d107",
+      "latency_ms": 520.387841000229,
+      "input_tokens": 520,
+      "output_tokens": 77,
+      "estimated_cost_usd": 2.184e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 11:18:44 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdfd49f67c5485644fbea548d107",
+        "x-envoy-upstream-service-time": "71",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=2DQFaTDceLAWkxjHHlyA5m%2FDdGkyEDzIxe2J2RLK9a%2FNRr15aXvymswUxzdIn63N%2FhvYdBzbCjAo8LI0f7CAQ0Mqx1zx7Z4Th%2Bcc6sHw8OWSqNwlRlhRwO%2FjTHzgarJI1%2FGCmTUQmnPpCS%2F33g%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f9267b6f86e85e-FRA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "is_x": {
+            "type": "noul",
+            "noul": 0.48
+          },
+          "which_x": {
+            "type": "choice",
+            "choice": "uncertain",
+            "confidence": 0.97,
+            "probabilities": {
+              "tails": 0.0,
+              "uncertain": 0.98,
+              "heads": 0.02
+            }
+          },
+          "contradiction_level": {
+            "type": "score",
+            "score": 3.63,
+            "confidence": 0.69,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "completely clear, one side"
+              },
+              "1": {
+                "score": 1,
+                "label": "mostly clear, one side dominant"
+              },
+              "2": {
+                "score": 2,
+                "label": "mixed, balanced"
+              },
+              "3": {
+                "score": 3,
+                "label": "mostly contradictory, little clarity"
+              },
+              "4": {
+                "score": 4,
+                "label": "fully contradictory, no way to decide"
+              }
+            },
+            "probabilities": {
+              "0": 0.02,
+              "1": 0.01,
+              "2": 0.08,
+              "3": 0.13,
+              "4": 0.76
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 520,
+          "output_tokens": 77
+        }
+      },
+      "parsed": {
+        "is_x": {
+          "type": "noul",
+          "noul": 0.48
+        },
+        "which_x": {
+          "type": "choice",
+          "choice": "uncertain",
+          "probabilities": {
+            "tails": 0.0,
+            "uncertain": 0.98,
+            "heads": 0.02
+          },
+          "confidence": 0.97
+        },
+        "contradiction_level": {
+          "type": "score",
+          "score": 3.63,
+          "probabilities": {
+            "0": 0.02,
+            "1": 0.01,
+            "2": 0.08,
+            "3": 0.13,
+            "4": 0.76
+          },
+          "confidence": 0.69
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "coin",
+      "repeat": 3,
+      "state": "Statement 1: The coin shows heads. Statement 2: The coin shows tails. Statement 3: The observation was made during the same time period.",
+      "timestamp": "2026-09-23T11:18:44.140675+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdfd4b87775ebea169d2e5cd6cc6",
+      "latency_ms": 421.7886140004339,
+      "input_tokens": 520,
+      "output_tokens": 77,
+      "estimated_cost_usd": 2.184e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 11:18:44 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdfd4b87775ebea169d2e5cd6cc6",
+        "x-envoy-upstream-service-time": "88",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=Z5VyL7TlO%2FTnO7%2BlVQ1S3VbTf8XzEEcAvJbgflAuFyWnMIq7AahEEs3QESX1oyA0zmjoDDFx9APDbqV0XKWuCW4jR2v3gv6U0BtgIU32dkPtJGL1hNdBdscjmwI0RWdZgPbFuWyXU3eI%2F2pG%2Fg%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f9267eaf62e85e-FRA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "is_x": {
+            "type": "noul",
+            "noul": 0.49
+          },
+          "which_x": {
+            "type": "choice",
+            "choice": "uncertain",
+            "confidence": 0.98,
+            "probabilities": {
+              "tails": 0.0,
+              "uncertain": 0.99,
+              "heads": 0.01
+            }
+          },
+          "contradiction_level": {
+            "type": "score",
+            "score": 3.69,
+            "confidence": 0.75,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "completely clear, one side"
+              },
+              "1": {
+                "score": 1,
+                "label": "mostly clear, one side dominant"
+              },
+              "2": {
+                "score": 2,
+                "label": "mixed, balanced"
+              },
+              "3": {
+                "score": 3,
+                "label": "mostly contradictory, little clarity"
+              },
+              "4": {
+                "score": 4,
+                "label": "fully contradictory, no way to decide"
+              }
+            },
+            "probabilities": {
+              "0": 0.02,
+              "1": 0.01,
+              "2": 0.05,
+              "3": 0.12,
+              "4": 0.8
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 520,
+          "output_tokens": 77
+        }
+      },
+      "parsed": {
+        "is_x": {
+          "type": "noul",
+          "noul": 0.49
+        },
+        "which_x": {
+          "type": "choice",
+          "choice": "uncertain",
+          "probabilities": {
+            "tails": 0.0,
+            "uncertain": 0.99,
+            "heads": 0.01
+          },
+          "confidence": 0.98
+        },
+        "contradiction_level": {
+          "type": "score",
+          "score": 3.69,
+          "probabilities": {
+            "0": 0.02,
+            "1": 0.01,
+            "2": 0.05,
+            "3": 0.12,
+            "4": 0.8
+          },
+          "confidence": 0.75
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "direction",
+      "repeat": 1,
+      "state": "Statement 1: The car is moving north. Statement 2: The car is moving south. Statement 3: The observation was made during the same time period.",
+      "timestamp": "2026-09-23T11:18:44.562762+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdfd4d2d722094321627d822d319",
+      "latency_ms": 423.4887140000865,
+      "input_tokens": 525,
+      "output_tokens": 77,
+      "estimated_cost_usd": 2.205e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 11:18:44 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdfd4d2d722094321627d822d319",
+        "x-envoy-upstream-service-time": "89",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=iG3TAymeJDI7ni2TEFkFvpf%2FxzSMj7FAuKhyOvHqZZMKNnsb53Y5nUoa4xzaIJorY31Y6dA15gMk7icVltTlqZImH2%2BCJUwJZSQzKsrO1MplhSjbUaB%2FyJdRqMhaQYl3Qg9Zy9TDPlD3jvLhqw%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f926814ea6e85e-FRA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "is_x": {
+            "type": "noul",
+            "noul": 0.39
+          },
+          "which_x": {
+            "type": "choice",
+            "choice": "uncertain",
+            "confidence": 0.99,
+            "probabilities": {
+              "uncertain": 0.99,
+              "north": 0.01,
+              "south": 0.0
+            }
+          },
+          "contradiction_level": {
+            "type": "score",
+            "score": 3.82,
+            "confidence": 0.85,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "completely clear, one side"
+              },
+              "1": {
+                "score": 1,
+                "label": "mostly clear, one side dominant"
+              },
+              "2": {
+                "score": 2,
+                "label": "mixed, balanced"
+              },
+              "3": {
+                "score": 3,
+                "label": "mostly contradictory, little clarity"
+              },
+              "4": {
+                "score": 4,
+                "label": "fully contradictory, no way to decide"
+              }
+            },
+            "probabilities": {
+              "0": 0.01,
+              "1": 0.0,
+              "2": 0.05,
+              "3": 0.04,
+              "4": 0.9
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 525,
+          "output_tokens": 77
+        }
+      },
+      "parsed": {
+        "is_x": {
+          "type": "noul",
+          "noul": 0.39
+        },
+        "which_x": {
+          "type": "choice",
+          "choice": "uncertain",
+          "probabilities": {
+            "uncertain": 0.99,
+            "north": 0.01,
+            "south": 0.0
+          },
+          "confidence": 0.99
+        },
+        "contradiction_level": {
+          "type": "score",
+          "score": 3.82,
+          "probabilities": {
+            "0": 0.01,
+            "1": 0.0,
+            "2": 0.05,
+            "3": 0.04,
+            "4": 0.9
+          },
+          "confidence": 0.85
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "direction",
+      "repeat": 2,
+      "state": "Statement 1: The car is moving north. Statement 2: The car is moving south. Statement 3: The observation was made during the same time period.",
+      "timestamp": "2026-09-23T11:18:44.986603+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdfd4ed97b80884635f9dd2e7723",
+      "latency_ms": 464.73207700000785,
+      "input_tokens": 525,
+      "output_tokens": 77,
+      "estimated_cost_usd": 2.205e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 11:18:45 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdfd4ed97b80884635f9dd2e7723",
+        "x-envoy-upstream-service-time": "132",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=KRAZfVKxW3NKyi%2Fb8tzJbq0d7sZg9h5vfT5DXx%2BNfktyoHAwgSVlljcUJ%2F2Ntr%2BA4W5Qv5wFipCQWUBZea%2BaFPmYt0PEn91E%2FHw%2B8EJJj4SPG0SYIaZewHArpD94GUCMxrtWUKIQSztNemwk2A%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f92683ee49e85e-FRA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "is_x": {
+            "type": "noul",
+            "noul": 0.4
+          },
+          "which_x": {
+            "type": "choice",
+            "choice": "uncertain",
+            "confidence": 0.99,
+            "probabilities": {
+              "uncertain": 0.99,
+              "south": 0.0,
+              "north": 0.01
+            }
+          },
+          "contradiction_level": {
+            "type": "score",
+            "score": 3.82,
+            "confidence": 0.85,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "completely clear, one side"
+              },
+              "1": {
+                "score": 1,
+                "label": "mostly clear, one side dominant"
+              },
+              "2": {
+                "score": 2,
+                "label": "mixed, balanced"
+              },
+              "3": {
+                "score": 3,
+                "label": "mostly contradictory, little clarity"
+              },
+              "4": {
+                "score": 4,
+                "label": "fully contradictory, no way to decide"
+              }
+            },
+            "probabilities": {
+              "0": 0.01,
+              "1": 0.0,
+              "2": 0.04,
+              "3": 0.05,
+              "4": 0.9
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 525,
+          "output_tokens": 77
+        }
+      },
+      "parsed": {
+        "is_x": {
+          "type": "noul",
+          "noul": 0.4
+        },
+        "which_x": {
+          "type": "choice",
+          "choice": "uncertain",
+          "probabilities": {
+            "uncertain": 0.99,
+            "south": 0.0,
+            "north": 0.01
+          },
+          "confidence": 0.99
+        },
+        "contradiction_level": {
+          "type": "score",
+          "score": 3.82,
+          "probabilities": {
+            "0": 0.01,
+            "1": 0.0,
+            "2": 0.04,
+            "3": 0.05,
+            "4": 0.9
+          },
+          "confidence": 0.85
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "direction",
+      "repeat": 3,
+      "state": "Statement 1: The car is moving north. Statement 2: The car is moving south. Statement 3: The observation was made during the same time period.",
+      "timestamp": "2026-09-23T11:18:45.451735+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdfd50a677eabf3893d9a12a3d2c",
+      "latency_ms": 412.6105089999328,
+      "input_tokens": 525,
+      "output_tokens": 77,
+      "estimated_cost_usd": 2.205e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 11:18:45 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdfd50a677eabf3893d9a12a3d2c",
+        "x-envoy-upstream-service-time": "81",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=frfg3s2yjqMSKT3f4chs483iqk8RkozH1Gpu1O1ID1uG%2BQ9VeSzXPdVSVq2%2FTr%2FnXrVtZDyROdOtd1JYfZKy27bZht3gtgkh0b3RXzZ%2FuaHliWBwUqx5v5MeMv2C3C0x4HEAGYRZUJOV57InAA%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f92686ddc1e85e-FRA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "is_x": {
+            "type": "noul",
+            "noul": 0.41
+          },
+          "which_x": {
+            "type": "choice",
+            "choice": "uncertain",
+            "confidence": 0.99,
+            "probabilities": {
+              "south": 0.0,
+              "uncertain": 1.0,
+              "north": 0.0
+            }
+          },
+          "contradiction_level": {
+            "type": "score",
+            "score": 3.82,
+            "confidence": 0.85,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "completely clear, one side"
+              },
+              "1": {
+                "score": 1,
+                "label": "mostly clear, one side dominant"
+              },
+              "2": {
+                "score": 2,
+                "label": "mixed, balanced"
+              },
+              "3": {
+                "score": 3,
+                "label": "mostly contradictory, little clarity"
+              },
+              "4": {
+                "score": 4,
+                "label": "fully contradictory, no way to decide"
+              }
+            },
+            "probabilities": {
+              "0": 0.01,
+              "1": 0.0,
+              "2": 0.05,
+              "3": 0.05,
+              "4": 0.89
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 525,
+          "output_tokens": 77
+        }
+      },
+      "parsed": {
+        "is_x": {
+          "type": "noul",
+          "noul": 0.41
+        },
+        "which_x": {
+          "type": "choice",
+          "choice": "uncertain",
+          "probabilities": {
+            "south": 0.0,
+            "uncertain": 1.0,
+            "north": 0.0
+          },
+          "confidence": 0.99
+        },
+        "contradiction_level": {
+          "type": "score",
+          "score": 3.82,
+          "probabilities": {
+            "0": 0.01,
+            "1": 0.0,
+            "2": 0.05,
+            "3": 0.05,
+            "4": 0.89
+          },
+          "confidence": 0.85
+        }
+      },
+      "error": null
+    }
+  ]
+}

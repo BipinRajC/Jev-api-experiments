@@ -252,3 +252,16 @@ Only findings measured in this repository.
 - **Limitations:** Single fact set. Three formats only. n=3. Latency confounded by network jitter (008). One specific compact syntax.
 - **Confidence in the finding:** Moderate that representation has a small effect; high that prose vs JSON are behaviorally equivalent on this state.
 - **Implications:** Prose and JSON state are interchangeable for decision output; the choice between them is a token/latency tradeoff, not a decision-quality one. Representation format matters far less than question wording. This narrows the design space for FootyQuant v2: JSON state is safe to use.
+
+---
+
+## F020 — Jev reliably detects contradiction via Choice/Score, but Noul does not collapse to 0.5
+
+- **Related hypothesis:** H034, H035, H036, H037
+- **Experiment(s):** 012 (`results/012-conflicting-evidence/run-001.json`)
+- **Conditions:** 2026-09-23 UTC; `jev-1.13.0`; 3 explicitly-contradictory states (sky blue vs grey, coin heads vs tails, car north vs south), each with a "same time period" tie-breaker; Noul+Choice+Score per call; 3 repeats per case = 9 batch calls
+- **Evidence:** Choice selected "uncertain" in **9/9** calls (confidence 0.95–0.99). Score rated contradiction high (3.56, 3.67, 3.82 on a 0-4 scale) with confidence 0.59–0.85. Noul did NOT reliably hit 0.5: sky 0.69, coin 0.49, direction 0.40. All outputs very consistent across repeats (Choice stable 3/3).
+- **Interpretation:** Jev reliably *detects* contradiction when an explicit "uncertain" option exists (Choice) and rates the degree of contradiction well (Score). But Noul is not a symmetric uncertainty signal — it leans toward/away from the stated side depending on the pair (sky leaned to "blue," direction leaned away from "north"). Confidence is heterogeneous: high for detecting the contradiction (Choice 0.95–0.99), low for rating its degree (Score 0.59–0.85).
+- **Limitations:** Explicit, maximal contradiction only. Three pairs. n=3. Tie-breaker framed as simultaneous.
+- **Confidence in the finding:** High that Choice/Score detect explicit contradiction on these cases; high that Noul does not reliably signal uncertainty via 0.5.
+- **Implications:** To handle conflict in an application, prefer Choice with an explicit "uncertain/conflicting" option over Noul. Do not rely on Noul ≈ 0.5 to detect contradiction. Score is useful for rating the *degree* of conflict. This is directly relevant to FootyQuant v2: when match data conflicts, use Choice with an explicit uncertain category rather than expecting Noul to reflect it.
