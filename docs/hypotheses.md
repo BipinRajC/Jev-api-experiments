@@ -275,3 +275,83 @@ SUPPORTED (conditions: batch 426 vs separate sum 954, ratio 2.24; n=1)
 Experiment:
 
 006
+
+---
+
+## H018 — Noul produces non-extreme values on probabilistic evidence
+
+Hypothesis:
+
+When the state describes a probabilistic scenario with a known numerical probability (e.g., biased coin), Noul produces values significantly different from the 0.01/0.99 extremes observed in Phase 1 toy states, and those values track the stated probability.
+
+Status:
+
+SUPPORTED (conditions: 2026-09-23, `jev-1.13.0`, 5 non-tautological coin-flip cases, n=1 each; Noul range 0.08–0.84; mean abs error 0.05; Pearson r=0.999 vs ground truth; fair coin=0.45, not ~0.5)
+
+Experiment:
+
+007
+
+---
+
+## H019 — Choice produces non-one-hot distributions on probabilistic evidence
+
+Hypothesis:
+
+When the state describes a probabilistic urn with known non-deterministic composition, Choice produces a non-one-hot probability distribution across options.
+
+Status:
+
+REJECTED (conditions: 2026-09-23, `jev-1.13.0`, urn 50/30/20, probabilities {red:1.0, blue:0.0, green:0.0}, confidence 0.99; one-hot only)
+
+Experiment:
+
+007
+
+---
+
+## H020 — Score produces non-integer (interpolated) values between rubric levels
+
+Hypothesis:
+
+When the state describes evidence whose strength falls between rubric levels, Score produces a fractional (non-integer) value rather than snapping to the nearest integer.
+
+Status:
+
+SUPPORTED (conditions: 2026-09-23, `jev-1.13.0`, 5 graded evidence cases, n=1 each; all 5 scores non-integer: 1.06, 1.01, 2.92, 4.68, 4.96; Phase 1 integer-only observations were an artifact of trivial toy states)
+
+Experiment:
+
+007
+
+---
+
+## H021 — Noul/Choice/Score within a batch are internally consistent
+
+Hypothesis:
+
+For a given state in a single batch call, the direction indicated by Noul (>0.5 / <0.5) agrees with the Choice selection and Score direction.
+
+Status:
+
+INCONCLUSIVE (conditions: 2026-09-23, `jev-1.13.0`, 7 coin-flip batch calls; 6/7 consistent, 1/7 inconsistent: fair coin noul=0.45, slightly <0.5 but Choice selected "heads"; n=1 precludes distinguishing jitter from genuine inconsistency)
+
+Experiment:
+
+007
+
+---
+
+## H022 — Jev confidence values are not uniformly 1.0 on non-trivial evidence
+
+Hypothesis:
+
+On states with genuinely mixed or non-trivial evidence, Jev's Choice and Score confidence fields are below 1.0.
+
+Status:
+
+SUPPORTED (conditions: 2026-09-23, `jev-1.13.0`, 20 confidence observations across Choice+Score; 16/20 <1.0, 4/20 =1.0 restricted to tautological cases; range 0.79–0.99; narrow range suggests Jev is reluctant to express low confidence)
+
+Experiment:
+
+007

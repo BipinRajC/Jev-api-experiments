@@ -65,11 +65,11 @@ SDK Python client may reshape answers into `.nouls` / `.choices`; the HTTP body 
 - `answers`: map keyed by question id
 - `usage.input_tokens`, `usage.output_tokens`
 
-Noul answer: `{ "type": "noul", "noul": <number 0–1> }` — no separate `confidence` field in official HTTP docs. VERIFIED EXPERIMENTALLY on 001 and 002 (values 0.99, 0.01, 0.05; no `confidence` key). Identical sequential repeats in 002 had range 0.00 (n=3 per case). An unmentioned-sky state returned 0.05, not ~0.5.
+Noul answer: `{ "type": "noul", "noul": <number 0–1> }` — no separate `confidence` field in official HTTP docs. VERIFIED EXPERIMENTALLY on 001 and 002 (values 0.99, 0.01, 0.05; no `confidence` key). Identical sequential repeats in 002 had range 0.00 (n=3 per case). An unmentioned-sky state returned 0.05, not ~0.5. Now VERIFIED EXPERIMENTALLY on 007: explicitly probabilistic states produce intermediate Noul values (0.08–0.84) that track ground-truth probabilities with r=0.999; fair coin (50%) returned 0.45, clearly distinguishable from the 0.05 "unknown" result. Noul distinguishes between "unmentioned/unstated" and "explicitly 50%."
 
 Choice answer: `choice`, `probabilities`, `confidence`. VERIFIED EXPERIMENTALLY on 003: 9/9 answers had all three fields; maps were one-hot with sum 1.0; `confidence` was 1.0; probability key order was not stable.
 
-Score answer: `score`, `legend`, `probabilities`, `confidence`. VERIFIED EXPERIMENTALLY on 004: 9/9 answers had all four fields; scores were integers 2.0 / 1.0 / 0.0; maps one-hot with sum 1.0; `confidence` 1.0; `legend` echoed request criteria. Between-level scores UNVERIFIED.
+Score answer: `score`, `legend`, `probabilities`, `confidence`. VERIFIED EXPERIMENTALLY on 004: 9/9 answers had all four fields; scores were integers 2.0 / 1.0 / 0.0; maps one-hot with sum 1.0; `confidence` 1.0; `legend` echoed request criteria. Between-level scores now VERIFIED EXPERIMENTALLY on 007: 5/5 evidence-strength Score calls returned non-integer values (1.06, 1.01, 2.92, 4.68, 4.96) with non-one-hot probability distributions. Score IS continuous and interpolates between rubric levels; Phase 1 integer-only observations were an artifact of trivially clear states.
 
 Source: VERIFIED FROM OFFICIAL DOCS.
 

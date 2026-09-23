@@ -122,3 +122,55 @@ Only findings measured in this repository.
 - **Limitations:** n=1. Toy state. Latency confounded by order/warmup. No test of many questions (cookbook-scale fan-out).
 - **Confidence in the finding:** High for batch schema and token inequality on this run; low for answer-identity and latency.
 - **Implications:** Prefer batching independent questions for cost. Do not assume identical Noul floats across batched vs separate. Phase 1 complete.
+
+---
+
+## F010 — Noul tracks explicit probabilities with high correlation but shows a slight conservative bias
+
+- **Related hypothesis:** H018
+- **Experiment(s):** 007 (`results/007-mixed-evidence/run-001.json`)
+- **Conditions:** 2026-09-23 UTC; `jev-1.13.0`; 7 coin-flip states with stated probabilities (0%, 10%, 30%, 50%, 70%, 90%, 100%); n=1 each; batch calls with Noul+Choice+Score
+- **Evidence:** Noul values: {0.01, 0.08, 0.23, 0.45, 0.65, 0.84, 0.98}. Pearson r=0.999 vs ground truth. Mean abs error=0.05 (n=5 non-tautological). Fair coin (50%) produced 0.45, clearly distinguishable from Phase 1's ambiguous-unmentioned result (0.05). Conservative bias: values pulled slightly away from 0.5 toward extremes.
+- **Interpretation:** Jev can express graded Noul uncertainty when the state explicitly quantifies probabilities. Phase 1's extreme-polarization finding was an artifact of trivially clear toy states, not an inherent Noul limitation. The ~0.05 conservative bias (slight pull away from 0.5) is consistent and may reflect a calibration characteristic.
+- **Limitations:** n=1 per probability level. Batch calls may confound Noul values vs separate calls (see F009). Does not test whether Jev can infer probabilities — the state explicitly stated them.
+- **Confidence in the finding:** High for Noul's ability to track explicit probabilities; lower for the magnitude of the conservative bias (needs repeats).
+- **Implications:** Noul is usable for quantitative uncertainty when the state provides explicit probability information. The slight conservative bias should be characterized in Experiment 008 (repeatability).
+
+---
+
+## F011 — Choice remains one-hot even on explicitly probabilistic alternatives
+
+- **Related hypothesis:** H019
+- **Experiment(s):** 007 (`results/007-mixed-evidence/run-001.json`)
+- **Conditions:** 2026-09-23 UTC; `jev-1.13.0`; urn with known composition 50% red / 30% blue / 20% green; question "What color will the randomly drawn ball be?"; n=1
+- **Evidence:** Choice selected "red" with probabilities {red: 1.0, blue: 0.0, green: 0.0}, confidence 0.99. Despite the state explicitly providing a non-trivial distribution, Jev treated Choice as "pick the most likely" and returned a one-hot distribution.
+- **Interpretation:** Jev's Choice primitive appears to answer "which option is most likely?" rather than "what is the probability distribution?" This is consistent with all Phase 1 Choice results (all one-hot). The confidence of 0.99 is notable — not 1.0 despite being clearly the correct modal answer, possibly reflecting the genuine uncertainty.
+- **Limitations:** n=1. Single wording of the question. Does not test whether different phrasing ("What is the probability distribution...") would produce partial distributions.
+- **Confidence in the finding:** Moderate — the one-hot pattern is consistent across Phase 1 and Phase 2, but n is still small and only one question wording was tested.
+- **Implications:** Do not use Choice when a probability distribution is required. Noul or Score may be better suited for distributions. Experiment 009 (wording sensitivity) should test whether phrasing affects Choice distribution behavior.
+
+---
+
+## F012 — Score IS continuous: non-integer values observed for genuinely graded evidence
+
+- **Related hypothesis:** H020
+- **Experiment(s):** 007 (`results/007-mixed-evidence/run-001.json`)
+- **Conditions:** 2026-09-23 UTC; `jev-1.13.0`; 5-point evidence-strength rubric (0–5); 5 cases with graded evidence descriptions (vague hint through overwhelming consensus); n=1 each
+- **Evidence:** All 5 scores were non-integer: 1.06 (vague hint), 1.01 (weak study), 2.92 (moderate), 4.68 (strong), 4.96 (overwhelming). Phase 1's integer-only scores (0.0, 1.0, 2.0) were an artifact of trivially-clear toy states where the answer was obvious. Score interpolates between rubric levels.
+- **Interpretation:** Score is a continuous-scale primitive that can return fractional values between rubric levels. It is not limited to snapping to integer levels. The two-decimal-place precision suggests the model produces a computed value, not merely a category selection.
+- **Limitations:** n=1 per case. Subjective mapping between text descriptions and rubric levels. Different wording might shift scores (Experiment 009). The specific numeric values should not be treated as precisely calibrated without further testing.
+- **Confidence in the finding:** High that Score interpolates; lower on the specific numeric precision (needs repeatability testing).
+- **Implications:** Score is the most promising primitive for graded quantitative judgments. Future calibration experiments should use Score for continuous-valued predictions. Experiment 008 should test repeatability of fractional Score values.
+
+---
+
+## F013 — Jev confidence varies with evidence strength but stays in a narrow range
+
+- **Related hypothesis:** H022
+- **Experiment(s):** 007 (`results/007-mixed-evidence/run-001.json`)
+- **Conditions:** 2026-09-23 UTC; `jev-1.13.0`; 20 confidence observations across 13 trial calls (Choice and Score primitives)
+- **Evidence:** 16/20 confidence values < 1.0; 4/20 = 1.0 (all on tautological 100%/0% coin cases). Non-1.0 range: 0.79 (strong evidence, Score) to 0.99 (several cases). Phase 1's uniform 1.0 confidence was an artifact of trivial toy states. Confidence now varies but in a narrow band — even the weakest evidence case (single small study, p=0.08) got confidence 0.88.
+- **Interpretation:** Jev does produce variable confidence, overturning the Phase 1 assumption that confidence is always 1.0. However, the narrow range (0.79–0.99) suggests reluctance to express low confidence. No observation below 0.79, even for explicitly weak evidence.
+- **Limitations:** n=1 per case. Only tested moderate-to-strong evidence strengths; no truly ambiguous or contradictory states were used (that's Experiment 012/013). Does not test whether confidence correlates with accuracy.
+- **Confidence in the finding:** High that confidence varies; moderate on the range (broader evidence types might produce lower confidence).
+- **Implications:** Confidence is more informative than Phase 1 suggested but may be poorly calibrated at the low end. Experiment 012 (conflicting evidence) and 013 (missing information) should attempt to elicit lower confidence values. Do not interpret confidence as a calibrated probability without calibration experiments (Phase 3).

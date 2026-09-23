@@ -1,0 +1,1836 @@
+{
+  "experiment_id": "007-mixed-evidence",
+  "run_id": "run-001",
+  "timestamp": "2026-09-23T10:01:04.610330+00:00",
+  "model_requested": "jev-1.13.0",
+  "api": {
+    "provider": "typesafe_direct",
+    "base_url": "https://api.typesafe.ai",
+    "endpoint": "/v1/systemone",
+    "method": "POST"
+  },
+  "design": {
+    "description": "Batch calls per case with Noul+Choice+Score coin questions, one standalone Choice urn call, and Score-only evidence calls.",
+    "noul_cases": [
+      {
+        "case_id": "noul_coin_fair",
+        "pct": 50,
+        "description": "fair coin",
+        "ground_truth_p_heads": 0.5
+      },
+      {
+        "case_id": "noul_coin_70",
+        "pct": 70,
+        "description": "70% heads",
+        "ground_truth_p_heads": 0.7
+      },
+      {
+        "case_id": "noul_coin_30",
+        "pct": 30,
+        "description": "30% heads",
+        "ground_truth_p_heads": 0.3
+      },
+      {
+        "case_id": "noul_coin_90",
+        "pct": 90,
+        "description": "90% heads",
+        "ground_truth_p_heads": 0.9
+      },
+      {
+        "case_id": "noul_coin_10",
+        "pct": 10,
+        "description": "10% heads",
+        "ground_truth_p_heads": 0.1
+      },
+      {
+        "case_id": "noul_coin_taut_yes",
+        "pct": 100,
+        "description": "tautological yes (100%)",
+        "ground_truth_p_heads": 1.0
+      },
+      {
+        "case_id": "noul_coin_taut_no",
+        "pct": 0,
+        "description": "tautological no (0%)",
+        "ground_truth_p_heads": 0.0
+      }
+    ],
+    "choice_urn": {
+      "state": "An urn contains 50 red balls, 30 blue balls, and 20 green balls. One ball is drawn uniformly at random.",
+      "options": [
+        "red",
+        "blue",
+        "green"
+      ],
+      "composition": {
+        "red": 50,
+        "blue": 30,
+        "green": 20
+      }
+    },
+    "score_cases": [
+      {
+        "case_id": "score_vague_hint",
+        "description": "intended ~1 (very weak)"
+      },
+      {
+        "case_id": "score_weak_study",
+        "description": "intended ~2 (weak)"
+      },
+      {
+        "case_id": "score_moderate",
+        "description": "intended ~3 (moderate)"
+      },
+      {
+        "case_id": "score_strong",
+        "description": "intended ~4 (strong)"
+      },
+      {
+        "case_id": "score_overwhelming",
+        "description": "intended ~5 (overwhelming)"
+      }
+    ],
+    "score_rubric": [
+      {
+        "score": 0,
+        "label": "no evidence"
+      },
+      {
+        "score": 1,
+        "label": "very weak evidence"
+      },
+      {
+        "score": 2,
+        "label": "weak evidence"
+      },
+      {
+        "score": 3,
+        "label": "moderate evidence"
+      },
+      {
+        "score": 4,
+        "label": "strong evidence"
+      },
+      {
+        "score": 5,
+        "label": "overwhelming evidence"
+      }
+    ]
+  },
+  "analysis": {
+    "noul_count": 7,
+    "noul_extreme_count": 1,
+    "noul_non_extreme_count": 6,
+    "noul_non_extreme_values": [
+      {
+        "case_id": "noul_coin_fair",
+        "noul": 0.45,
+        "ground_truth": 0.5
+      },
+      {
+        "case_id": "noul_coin_70",
+        "noul": 0.65,
+        "ground_truth": 0.7
+      },
+      {
+        "case_id": "noul_coin_30",
+        "noul": 0.23,
+        "ground_truth": 0.3
+      },
+      {
+        "case_id": "noul_coin_90",
+        "noul": 0.84,
+        "ground_truth": 0.9
+      },
+      {
+        "case_id": "noul_coin_10",
+        "noul": 0.08,
+        "ground_truth": 0.1
+      },
+      {
+        "case_id": "noul_coin_taut_yes",
+        "noul": 0.98,
+        "ground_truth": 1.0
+      }
+    ],
+    "noul_mean_abs_error": 0.04499999999999999,
+    "noul_max_abs_error": 0.06999999999999998,
+    "noul_min_abs_error": 0.020000000000000004,
+    "urn_choice_label": "red",
+    "urn_probabilities": {
+      "blue": 0.0,
+      "red": 1.0,
+      "green": 0.0
+    },
+    "urn_confidence": 0.99,
+    "urn_is_one_hot": true,
+    "score_count": 5,
+    "score_integer_count": 0,
+    "score_non_integer_count": 5,
+    "score_confidence_values": [
+      0.96,
+      0.88,
+      0.94,
+      0.79,
+      0.97
+    ],
+    "score_confidence_lt_1_count": 5,
+    "total_confidence_values": 20,
+    "confidence_1_count": 4,
+    "confidence_lt_1_count": 16
+  },
+  "trials": [
+    {
+      "case_id": "noul_coin_fair",
+      "state": "A biased coin lands heads 50% of the time and tails 50% of the time. The coin is flipped once.",
+      "timestamp": "2026-09-23T10:01:04.673273+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdb632707b8f964a2e3cf324751f",
+      "latency_ms": 475.13202899972384,
+      "input_tokens": 475,
+      "output_tokens": 65,
+      "estimated_cost_usd": 1.9950000000000004e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:01:05 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdb632707b8f964a2e3cf324751f",
+        "x-envoy-upstream-service-time": "163",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=xEKPhDsyq%2BNzjmbPsdI%2BaAFIpF7YfdSBvrZbxY3keueTX65qyg1wotKVVQHZ2x9nacY%2FdGR2msya6OQyQa0X1mhzPcj4kQ%2FmenppX%2FLFJ5tEwLoO%2BKf3VkNRD6UxCpjJZEU1BPGswO%2Bi4w%2FXZQ%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8b4bc9932350b-MAA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "heads_noul": {
+            "type": "noul",
+            "noul": 0.45
+          },
+          "coin_choice": {
+            "type": "choice",
+            "choice": "heads",
+            "confidence": 0.81,
+            "probabilities": {
+              "tails": 0.09,
+              "heads": 0.91
+            }
+          },
+          "coin_score": {
+            "type": "score",
+            "score": 2.0,
+            "confidence": 0.99,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "impossible"
+              },
+              "1": {
+                "score": 1,
+                "label": "unlikely"
+              },
+              "2": {
+                "score": 2,
+                "label": "even odds"
+              },
+              "3": {
+                "score": 3,
+                "label": "likely"
+              },
+              "4": {
+                "score": 4,
+                "label": "certain"
+              }
+            },
+            "probabilities": {
+              "0": 0.0,
+              "1": 0.0,
+              "2": 1.0,
+              "3": 0.0,
+              "4": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 475,
+          "output_tokens": 65
+        }
+      },
+      "parsed": {
+        "heads_noul": {
+          "type": "noul",
+          "noul": 0.45
+        },
+        "coin_choice": {
+          "type": "choice",
+          "choice": "heads",
+          "probabilities": {
+            "tails": 0.09,
+            "heads": 0.91
+          },
+          "confidence": 0.81
+        },
+        "coin_score": {
+          "type": "score",
+          "score": 2.0,
+          "legend": {
+            "0": {
+              "score": 0,
+              "label": "impossible"
+            },
+            "1": {
+              "score": 1,
+              "label": "unlikely"
+            },
+            "2": {
+              "score": 2,
+              "label": "even odds"
+            },
+            "3": {
+              "score": 3,
+              "label": "likely"
+            },
+            "4": {
+              "score": 4,
+              "label": "certain"
+            }
+          },
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 1.0,
+            "3": 0.0,
+            "4": 0.0
+          },
+          "confidence": 0.99
+        }
+      },
+      "error": null,
+      "case_meta": {
+        "case_id": "noul_coin_fair",
+        "pct": 50,
+        "description": "fair coin",
+        "ground_truth_p_heads": 0.5
+      }
+    },
+    {
+      "case_id": "noul_coin_70",
+      "state": "A biased coin lands heads 70% of the time and tails 30% of the time. The coin is flipped once.",
+      "timestamp": "2026-09-23T10:01:05.150301+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdb6340c7ef5a6ce0e79bb49d57a",
+      "latency_ms": 355.20120899991525,
+      "input_tokens": 475,
+      "output_tokens": 65,
+      "estimated_cost_usd": 1.9950000000000004e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:01:05 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdb6340c7ef5a6ce0e79bb49d57a",
+        "x-envoy-upstream-service-time": "60",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=2glAVEnHSDf6nIeLGKncYQRMhzympK9NqDYP7%2B1%2F0stD2IjG7sfE%2BWrWEtvaE47no8TLZzZ2UXg%2FgeTXmk%2BPpob3w0yIPnZ9U0oHu%2FrdDAQAgHw1nBaJcdJ%2BrGmI%2Fb4jKVzBnHmtKS%2BfweUfQw%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8b4bf3ad7350b-MAA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "heads_noul": {
+            "type": "noul",
+            "noul": 0.65
+          },
+          "coin_choice": {
+            "type": "choice",
+            "choice": "heads",
+            "confidence": 0.99,
+            "probabilities": {
+              "heads": 0.99,
+              "tails": 0.01
+            }
+          },
+          "coin_score": {
+            "type": "score",
+            "score": 3.0,
+            "confidence": 1.0,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "impossible"
+              },
+              "1": {
+                "score": 1,
+                "label": "unlikely"
+              },
+              "2": {
+                "score": 2,
+                "label": "even odds"
+              },
+              "3": {
+                "score": 3,
+                "label": "likely"
+              },
+              "4": {
+                "score": 4,
+                "label": "certain"
+              }
+            },
+            "probabilities": {
+              "0": 0.0,
+              "1": 0.0,
+              "2": 0.0,
+              "3": 1.0,
+              "4": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 475,
+          "output_tokens": 65
+        }
+      },
+      "parsed": {
+        "heads_noul": {
+          "type": "noul",
+          "noul": 0.65
+        },
+        "coin_choice": {
+          "type": "choice",
+          "choice": "heads",
+          "probabilities": {
+            "heads": 0.99,
+            "tails": 0.01
+          },
+          "confidence": 0.99
+        },
+        "coin_score": {
+          "type": "score",
+          "score": 3.0,
+          "legend": {
+            "0": {
+              "score": 0,
+              "label": "impossible"
+            },
+            "1": {
+              "score": 1,
+              "label": "unlikely"
+            },
+            "2": {
+              "score": 2,
+              "label": "even odds"
+            },
+            "3": {
+              "score": 3,
+              "label": "likely"
+            },
+            "4": {
+              "score": 4,
+              "label": "certain"
+            }
+          },
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 0.0,
+            "3": 1.0,
+            "4": 0.0
+          },
+          "confidence": 1.0
+        }
+      },
+      "error": null,
+      "case_meta": {
+        "case_id": "noul_coin_70",
+        "pct": 70,
+        "description": "70% heads",
+        "ground_truth_p_heads": 0.7
+      }
+    },
+    {
+      "case_id": "noul_coin_30",
+      "state": "A biased coin lands heads 30% of the time and tails 70% of the time. The coin is flipped once.",
+      "timestamp": "2026-09-23T10:01:05.505932+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdb6356774debd116c169ebbd00e",
+      "latency_ms": 453.6737449998327,
+      "input_tokens": 475,
+      "output_tokens": 65,
+      "estimated_cost_usd": 1.9950000000000004e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:01:05 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdb6356774debd116c169ebbd00e",
+        "x-envoy-upstream-service-time": "113",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=5XvG45chN42MfFSPcNQCin2%2BhCaltGl9DJ8yRrjZ20XT1pF%2FXEv%2BIxWWmYUwxlliAM%2Bt4Ma6tlbrGg7zRO9jJ%2Bw8vGosyEttDWu1Nyb0awzDD1KNGhnKfgmIYxgWLnMx6ySH%2BP79zxhw5B1uAw%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8b4c17b9e350b-MAA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "heads_noul": {
+            "type": "noul",
+            "noul": 0.23
+          },
+          "coin_choice": {
+            "type": "choice",
+            "choice": "tails",
+            "confidence": 0.87,
+            "probabilities": {
+              "tails": 0.93,
+              "heads": 0.07
+            }
+          },
+          "coin_score": {
+            "type": "score",
+            "score": 1.0,
+            "confidence": 0.99,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "impossible"
+              },
+              "1": {
+                "score": 1,
+                "label": "unlikely"
+              },
+              "2": {
+                "score": 2,
+                "label": "even odds"
+              },
+              "3": {
+                "score": 3,
+                "label": "likely"
+              },
+              "4": {
+                "score": 4,
+                "label": "certain"
+              }
+            },
+            "probabilities": {
+              "0": 0.0,
+              "1": 1.0,
+              "2": 0.0,
+              "3": 0.0,
+              "4": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 475,
+          "output_tokens": 65
+        }
+      },
+      "parsed": {
+        "heads_noul": {
+          "type": "noul",
+          "noul": 0.23
+        },
+        "coin_choice": {
+          "type": "choice",
+          "choice": "tails",
+          "probabilities": {
+            "tails": 0.93,
+            "heads": 0.07
+          },
+          "confidence": 0.87
+        },
+        "coin_score": {
+          "type": "score",
+          "score": 1.0,
+          "legend": {
+            "0": {
+              "score": 0,
+              "label": "impossible"
+            },
+            "1": {
+              "score": 1,
+              "label": "unlikely"
+            },
+            "2": {
+              "score": 2,
+              "label": "even odds"
+            },
+            "3": {
+              "score": 3,
+              "label": "likely"
+            },
+            "4": {
+              "score": 4,
+              "label": "certain"
+            }
+          },
+          "probabilities": {
+            "0": 0.0,
+            "1": 1.0,
+            "2": 0.0,
+            "3": 0.0,
+            "4": 0.0
+          },
+          "confidence": 0.99
+        }
+      },
+      "error": null,
+      "case_meta": {
+        "case_id": "noul_coin_30",
+        "pct": 30,
+        "description": "30% heads",
+        "ground_truth_p_heads": 0.3
+      }
+    },
+    {
+      "case_id": "noul_coin_90",
+      "state": "A biased coin lands heads 90% of the time and tails 10% of the time. The coin is flipped once.",
+      "timestamp": "2026-09-23T10:01:05.959944+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdb6372c7958893ed92b1c86d6eb",
+      "latency_ms": 412.25413399979516,
+      "input_tokens": 475,
+      "output_tokens": 65,
+      "estimated_cost_usd": 1.9950000000000004e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:01:06 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdb6372c7958893ed92b1c86d6eb",
+        "x-envoy-upstream-service-time": "82",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=UOU6z2gM%2BcFo8JsMXyeTUW6PbGMVbQDjeNd3tw%2BVocyIJbWAry0%2F5VCffSpI%2BZsEl2GluArx998UHTPgzdyl6Psx0waq%2FF5oi6PYwOjkYiBSKZQMz4VC9u3JSqS3F%2BHh3Rt%2FQAFKCtghGO04YQ%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8b4c44e66350b-MAA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "heads_noul": {
+            "type": "noul",
+            "noul": 0.84
+          },
+          "coin_choice": {
+            "type": "choice",
+            "choice": "heads",
+            "confidence": 0.98,
+            "probabilities": {
+              "tails": 0.01,
+              "heads": 0.99
+            }
+          },
+          "coin_score": {
+            "type": "score",
+            "score": 3.02,
+            "confidence": 0.98,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "impossible"
+              },
+              "1": {
+                "score": 1,
+                "label": "unlikely"
+              },
+              "2": {
+                "score": 2,
+                "label": "even odds"
+              },
+              "3": {
+                "score": 3,
+                "label": "likely"
+              },
+              "4": {
+                "score": 4,
+                "label": "certain"
+              }
+            },
+            "probabilities": {
+              "0": 0.0,
+              "1": 0.0,
+              "2": 0.0,
+              "3": 0.97,
+              "4": 0.03
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 475,
+          "output_tokens": 65
+        }
+      },
+      "parsed": {
+        "heads_noul": {
+          "type": "noul",
+          "noul": 0.84
+        },
+        "coin_choice": {
+          "type": "choice",
+          "choice": "heads",
+          "probabilities": {
+            "tails": 0.01,
+            "heads": 0.99
+          },
+          "confidence": 0.98
+        },
+        "coin_score": {
+          "type": "score",
+          "score": 3.02,
+          "legend": {
+            "0": {
+              "score": 0,
+              "label": "impossible"
+            },
+            "1": {
+              "score": 1,
+              "label": "unlikely"
+            },
+            "2": {
+              "score": 2,
+              "label": "even odds"
+            },
+            "3": {
+              "score": 3,
+              "label": "likely"
+            },
+            "4": {
+              "score": 4,
+              "label": "certain"
+            }
+          },
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 0.0,
+            "3": 0.97,
+            "4": 0.03
+          },
+          "confidence": 0.98
+        }
+      },
+      "error": null,
+      "case_meta": {
+        "case_id": "noul_coin_90",
+        "pct": 90,
+        "description": "90% heads",
+        "ground_truth_p_heads": 0.9
+      }
+    },
+    {
+      "case_id": "noul_coin_10",
+      "state": "A biased coin lands heads 10% of the time and tails 90% of the time. The coin is flipped once.",
+      "timestamp": "2026-09-23T10:01:06.372613+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdb638c97eaeb5cb76e9b40921cd",
+      "latency_ms": 410.4267699999582,
+      "input_tokens": 475,
+      "output_tokens": 65,
+      "estimated_cost_usd": 1.9950000000000004e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:01:06 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdb638c97eaeb5cb76e9b40921cd",
+        "x-envoy-upstream-service-time": "107",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=61NDZaH9vxLN2Tp%2F7oujFXTJrEG2rEJcVg8IhWJTdP%2FmFiW1LmJyoU3Tf2BiJarZRwrVkvk6MFV%2FYo8eCwWioyFUBHYD1paO9vIpsZYTXb51jFN5KTAalKhfYT0WLkm9UbIkVsG2cDolDtXsew%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8b4c6e8fd350b-MAA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "heads_noul": {
+            "type": "noul",
+            "noul": 0.08
+          },
+          "coin_choice": {
+            "type": "choice",
+            "choice": "tails",
+            "confidence": 0.95,
+            "probabilities": {
+              "heads": 0.03,
+              "tails": 0.97
+            }
+          },
+          "coin_score": {
+            "type": "score",
+            "score": 0.99,
+            "confidence": 0.98,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "impossible"
+              },
+              "1": {
+                "score": 1,
+                "label": "unlikely"
+              },
+              "2": {
+                "score": 2,
+                "label": "even odds"
+              },
+              "3": {
+                "score": 3,
+                "label": "likely"
+              },
+              "4": {
+                "score": 4,
+                "label": "certain"
+              }
+            },
+            "probabilities": {
+              "0": 0.02,
+              "1": 0.98,
+              "2": 0.0,
+              "3": 0.0,
+              "4": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 475,
+          "output_tokens": 65
+        }
+      },
+      "parsed": {
+        "heads_noul": {
+          "type": "noul",
+          "noul": 0.08
+        },
+        "coin_choice": {
+          "type": "choice",
+          "choice": "tails",
+          "probabilities": {
+            "heads": 0.03,
+            "tails": 0.97
+          },
+          "confidence": 0.95
+        },
+        "coin_score": {
+          "type": "score",
+          "score": 0.99,
+          "legend": {
+            "0": {
+              "score": 0,
+              "label": "impossible"
+            },
+            "1": {
+              "score": 1,
+              "label": "unlikely"
+            },
+            "2": {
+              "score": 2,
+              "label": "even odds"
+            },
+            "3": {
+              "score": 3,
+              "label": "likely"
+            },
+            "4": {
+              "score": 4,
+              "label": "certain"
+            }
+          },
+          "probabilities": {
+            "0": 0.02,
+            "1": 0.98,
+            "2": 0.0,
+            "3": 0.0,
+            "4": 0.0
+          },
+          "confidence": 0.98
+        }
+      },
+      "error": null,
+      "case_meta": {
+        "case_id": "noul_coin_10",
+        "pct": 10,
+        "description": "10% heads",
+        "ground_truth_p_heads": 0.1
+      }
+    },
+    {
+      "case_id": "noul_coin_taut_yes",
+      "state": "A biased coin lands heads 100% of the time and tails 0% of the time. The coin is flipped once.",
+      "timestamp": "2026-09-23T10:01:06.783497+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdb63a657eccb128850e25f7c640",
+      "latency_ms": 373.4478400001535,
+      "input_tokens": 475,
+      "output_tokens": 65,
+      "estimated_cost_usd": 1.9950000000000004e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:01:07 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdb63a657eccb128850e25f7c640",
+        "x-envoy-upstream-service-time": "122",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=JmrrzxttCDLvfm33Jy7occKRDRH%2BJo0BglVYE7LZww4bBOuYkOCbM1PQjHdaJbWRc7PrWjIQAt5riQQzxujVksjOWg9rUU1hCxb83mziK35eMO0expGpT%2BKx4Ii9RPiP0h6a9SnozKmrDrq%2F%2FQ%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8b4c97a66350b-MAA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "heads_noul": {
+            "type": "noul",
+            "noul": 0.98
+          },
+          "coin_choice": {
+            "type": "choice",
+            "choice": "heads",
+            "confidence": 1.0,
+            "probabilities": {
+              "tails": 0.0,
+              "heads": 1.0
+            }
+          },
+          "coin_score": {
+            "type": "score",
+            "score": 3.99,
+            "confidence": 0.99,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "impossible"
+              },
+              "1": {
+                "score": 1,
+                "label": "unlikely"
+              },
+              "2": {
+                "score": 2,
+                "label": "even odds"
+              },
+              "3": {
+                "score": 3,
+                "label": "likely"
+              },
+              "4": {
+                "score": 4,
+                "label": "certain"
+              }
+            },
+            "probabilities": {
+              "0": 0.0,
+              "1": 0.0,
+              "2": 0.0,
+              "3": 0.0,
+              "4": 1.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 475,
+          "output_tokens": 65
+        }
+      },
+      "parsed": {
+        "heads_noul": {
+          "type": "noul",
+          "noul": 0.98
+        },
+        "coin_choice": {
+          "type": "choice",
+          "choice": "heads",
+          "probabilities": {
+            "tails": 0.0,
+            "heads": 1.0
+          },
+          "confidence": 1.0
+        },
+        "coin_score": {
+          "type": "score",
+          "score": 3.99,
+          "legend": {
+            "0": {
+              "score": 0,
+              "label": "impossible"
+            },
+            "1": {
+              "score": 1,
+              "label": "unlikely"
+            },
+            "2": {
+              "score": 2,
+              "label": "even odds"
+            },
+            "3": {
+              "score": 3,
+              "label": "likely"
+            },
+            "4": {
+              "score": 4,
+              "label": "certain"
+            }
+          },
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 0.0,
+            "3": 0.0,
+            "4": 1.0
+          },
+          "confidence": 0.99
+        }
+      },
+      "error": null,
+      "case_meta": {
+        "case_id": "noul_coin_taut_yes",
+        "pct": 100,
+        "description": "tautological yes (100%)",
+        "ground_truth_p_heads": 1.0
+      }
+    },
+    {
+      "case_id": "noul_coin_taut_no",
+      "state": "A biased coin lands heads 0% of the time and tails 100% of the time. The coin is flipped once.",
+      "timestamp": "2026-09-23T10:01:07.157433+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdb63bda743b9f8b0209e349c6da",
+      "latency_ms": 448.32299900008366,
+      "input_tokens": 475,
+      "output_tokens": 65,
+      "estimated_cost_usd": 1.9950000000000004e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:01:07 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdb63bda743b9f8b0209e349c6da",
+        "x-envoy-upstream-service-time": "106",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=T0iyAWy0FLDWRBuYQBSRF%2B4shwDPXNG36JUnmpj1iRKCDry27nHT99toWel4ZhoMdc3mq%2B778jbdu0IaCZPklbWS9%2FzNeCtTLUdp%2BdfZX9M%2FZjFH3u9jwmKy8yhHGtdw8YVqdQJ5e5y3ugFnUg%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8b4cbcad3350b-MAA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "heads_noul": {
+            "type": "noul",
+            "noul": 0.01
+          },
+          "coin_choice": {
+            "type": "choice",
+            "choice": "tails",
+            "confidence": 1.0,
+            "probabilities": {
+              "heads": 0.0,
+              "tails": 1.0
+            }
+          },
+          "coin_score": {
+            "type": "score",
+            "score": 0.0,
+            "confidence": 1.0,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "impossible"
+              },
+              "1": {
+                "score": 1,
+                "label": "unlikely"
+              },
+              "2": {
+                "score": 2,
+                "label": "even odds"
+              },
+              "3": {
+                "score": 3,
+                "label": "likely"
+              },
+              "4": {
+                "score": 4,
+                "label": "certain"
+              }
+            },
+            "probabilities": {
+              "0": 1.0,
+              "1": 0.0,
+              "2": 0.0,
+              "3": 0.0,
+              "4": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 475,
+          "output_tokens": 65
+        }
+      },
+      "parsed": {
+        "heads_noul": {
+          "type": "noul",
+          "noul": 0.01
+        },
+        "coin_choice": {
+          "type": "choice",
+          "choice": "tails",
+          "probabilities": {
+            "heads": 0.0,
+            "tails": 1.0
+          },
+          "confidence": 1.0
+        },
+        "coin_score": {
+          "type": "score",
+          "score": 0.0,
+          "legend": {
+            "0": {
+              "score": 0,
+              "label": "impossible"
+            },
+            "1": {
+              "score": 1,
+              "label": "unlikely"
+            },
+            "2": {
+              "score": 2,
+              "label": "even odds"
+            },
+            "3": {
+              "score": 3,
+              "label": "likely"
+            },
+            "4": {
+              "score": 4,
+              "label": "certain"
+            }
+          },
+          "probabilities": {
+            "0": 1.0,
+            "1": 0.0,
+            "2": 0.0,
+            "3": 0.0,
+            "4": 0.0
+          },
+          "confidence": 1.0
+        }
+      },
+      "error": null,
+      "case_meta": {
+        "case_id": "noul_coin_taut_no",
+        "pct": 0,
+        "description": "tautological no (0%)",
+        "ground_truth_p_heads": 0.0
+      }
+    },
+    {
+      "case_id": "choice_urn",
+      "state": "An urn contains 50 red balls, 30 blue balls, and 20 green balls. One ball is drawn uniformly at random.",
+      "timestamp": "2026-09-23T10:01:07.606127+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdb63d9972538718e7a6d272b569",
+      "latency_ms": 411.0239419997015,
+      "input_tokens": 363,
+      "output_tokens": 39,
+      "estimated_cost_usd": 1.5246000000000001e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:01:07 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdb63d9972538718e7a6d272b569",
+        "x-envoy-upstream-service-time": "71",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=OddJGi2N%2BnQM%2FVio2Qiuyw9OZ1d738dZfsb7JMH%2FFZwb1o9uil943pij%2FPYtFqeFjelM37JwPSiU%2B6gUxIj93ZOQPkxBa68cjvitjG73y7LkGaE5S0ufZFuxk7Fz9bT2fuLTKO4%2B%2BpjFao3gTA%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8b4ce9c9c350b-MAA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "urn_color": {
+            "type": "choice",
+            "choice": "red",
+            "confidence": 0.99,
+            "probabilities": {
+              "blue": 0.0,
+              "red": 1.0,
+              "green": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 363,
+          "output_tokens": 39
+        }
+      },
+      "parsed": {
+        "urn_color": {
+          "type": "choice",
+          "choice": "red",
+          "probabilities": {
+            "blue": 0.0,
+            "red": 1.0,
+            "green": 0.0
+          },
+          "confidence": 0.99
+        }
+      },
+      "error": null,
+      "case_meta": {
+        "composition": {
+          "red": 50,
+          "blue": 30,
+          "green": 20
+        },
+        "description": "probabilistic urn, non-trivial Choice"
+      }
+    },
+    {
+      "case_id": "score_vague_hint",
+      "state": "Hypothesis: The supplement reduces symptom duration. Some preliminary data suggests the supplement might reduce symptom duration, but the sample size is tiny and contradictory data also exists.",
+      "timestamp": "2026-09-23T10:01:08.017571+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdb6400e7ab684a26406c9c7d451",
+      "latency_ms": 576.782713999819,
+      "input_tokens": 438,
+      "output_tokens": 20,
+      "estimated_cost_usd": 1.8396e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:01:08 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdb6400e7ab684a26406c9c7d451",
+        "x-envoy-upstream-service-time": "89",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=p6MRqHj3%2FQtoD4I3pxOY4445OK2TtuBexJdpEj1n2OCEKAi4onPtEexp9xhXiQ2w7mzulffD21vvat%2BB1rOEAPiu8PhZIANIW5XzYRHpeSCmP%2F9Y6UGHucuj2FkF0EgW8pJKAmxqPBMZ4U5aaA%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8b4d13e01350b-MAA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "evidence_level": {
+            "type": "score",
+            "score": 1.06,
+            "confidence": 0.96,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "no evidence"
+              },
+              "1": {
+                "score": 1,
+                "label": "very weak evidence"
+              },
+              "2": {
+                "score": 2,
+                "label": "weak evidence"
+              },
+              "3": {
+                "score": 3,
+                "label": "moderate evidence"
+              },
+              "4": {
+                "score": 4,
+                "label": "strong evidence"
+              },
+              "5": {
+                "score": 5,
+                "label": "overwhelming evidence"
+              }
+            },
+            "probabilities": {
+              "0": 0.0,
+              "1": 0.94,
+              "2": 0.06,
+              "3": 0.0,
+              "4": 0.0,
+              "5": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 438,
+          "output_tokens": 20
+        }
+      },
+      "parsed": {
+        "evidence_level": {
+          "type": "score",
+          "score": 1.06,
+          "legend": {
+            "0": {
+              "score": 0,
+              "label": "no evidence"
+            },
+            "1": {
+              "score": 1,
+              "label": "very weak evidence"
+            },
+            "2": {
+              "score": 2,
+              "label": "weak evidence"
+            },
+            "3": {
+              "score": 3,
+              "label": "moderate evidence"
+            },
+            "4": {
+              "score": 4,
+              "label": "strong evidence"
+            },
+            "5": {
+              "score": 5,
+              "label": "overwhelming evidence"
+            }
+          },
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.94,
+            "2": 0.06,
+            "3": 0.0,
+            "4": 0.0,
+            "5": 0.0
+          },
+          "confidence": 0.96
+        }
+      },
+      "error": null,
+      "case_meta": {
+        "case_id": "score_vague_hint",
+        "description": "intended ~1 (very weak)",
+        "intended_range": [
+          0,
+          2
+        ]
+      }
+    },
+    {
+      "case_id": "score_weak_study",
+      "state": "Hypothesis: The intervention improves test scores. A single small study with n=30 and p=0.08 supports the intervention. No replication exists.",
+      "timestamp": "2026-09-23T10:01:08.594784+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdb641797e0aae330a265a667c74",
+      "latency_ms": 409.7353860001931,
+      "input_tokens": 439,
+      "output_tokens": 20,
+      "estimated_cost_usd": 1.8438000000000002e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:01:08 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdb641797e0aae330a265a667c74",
+        "x-envoy-upstream-service-time": "89",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=p43ehdZWObM0pnYhNmS49Y4G6RMY0HU9dMMb%2FW1df0vMZpwPn0ovB%2F%2FpckP45VdojH%2BYY7C1dY1GwEtCwD2n69udahR2PFeydNgyKB5fgGflvlEx7lZuOjhQJcCbnyBr3A0ql1PaCFW%2Bj701eQ%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8b4d4ca7a350b-MAA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "evidence_level": {
+            "type": "score",
+            "score": 1.01,
+            "confidence": 0.88,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "no evidence"
+              },
+              "1": {
+                "score": 1,
+                "label": "very weak evidence"
+              },
+              "2": {
+                "score": 2,
+                "label": "weak evidence"
+              },
+              "3": {
+                "score": 3,
+                "label": "moderate evidence"
+              },
+              "4": {
+                "score": 4,
+                "label": "strong evidence"
+              },
+              "5": {
+                "score": 5,
+                "label": "overwhelming evidence"
+              }
+            },
+            "probabilities": {
+              "0": 0.09,
+              "1": 0.8099999999999999,
+              "2": 0.1,
+              "3": 0.0,
+              "4": 0.0,
+              "5": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 439,
+          "output_tokens": 20
+        }
+      },
+      "parsed": {
+        "evidence_level": {
+          "type": "score",
+          "score": 1.01,
+          "legend": {
+            "0": {
+              "score": 0,
+              "label": "no evidence"
+            },
+            "1": {
+              "score": 1,
+              "label": "very weak evidence"
+            },
+            "2": {
+              "score": 2,
+              "label": "weak evidence"
+            },
+            "3": {
+              "score": 3,
+              "label": "moderate evidence"
+            },
+            "4": {
+              "score": 4,
+              "label": "strong evidence"
+            },
+            "5": {
+              "score": 5,
+              "label": "overwhelming evidence"
+            }
+          },
+          "probabilities": {
+            "0": 0.09,
+            "1": 0.8099999999999999,
+            "2": 0.1,
+            "3": 0.0,
+            "4": 0.0,
+            "5": 0.0
+          },
+          "confidence": 0.88
+        }
+      },
+      "error": null,
+      "case_meta": {
+        "case_id": "score_weak_study",
+        "description": "intended ~2 (weak)",
+        "intended_range": [
+          1,
+          3
+        ]
+      }
+    },
+    {
+      "case_id": "score_moderate",
+      "state": "Hypothesis: The treatment reduces recovery time. Two independent studies with moderate sample sizes find statistically significant results. One replication attempt failed.",
+      "timestamp": "2026-09-23T10:01:09.005029+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdb643137cf0ac7ace3a105a19cb",
+      "latency_ms": 416.4686819999588,
+      "input_tokens": 432,
+      "output_tokens": 20,
+      "estimated_cost_usd": 1.8144e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:01:09 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdb643137cf0ac7ace3a105a19cb",
+        "x-envoy-upstream-service-time": "68",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=WXr91QZEazt1VnlDsCTZruONsbM9SzLjJ8q9%2Bdy3zfjxK3B%2FBYL%2Bf%2FS%2F4Tv4U4YXI%2FKxBjiy%2BP5uLK%2FftXotViEtNOL3RU7DrOQuGf1SE5kUIyfT7tYn0tTQJo%2Ba99MLdDefOTfzBwrTe4jv%2BQ%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8b4d75b48350b-MAA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "evidence_level": {
+            "type": "score",
+            "score": 2.92,
+            "confidence": 0.94,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "no evidence"
+              },
+              "1": {
+                "score": 1,
+                "label": "very weak evidence"
+              },
+              "2": {
+                "score": 2,
+                "label": "weak evidence"
+              },
+              "3": {
+                "score": 3,
+                "label": "moderate evidence"
+              },
+              "4": {
+                "score": 4,
+                "label": "strong evidence"
+              },
+              "5": {
+                "score": 5,
+                "label": "overwhelming evidence"
+              }
+            },
+            "probabilities": {
+              "0": 0.0,
+              "1": 0.0,
+              "2": 0.09,
+              "3": 0.91,
+              "4": 0.0,
+              "5": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 432,
+          "output_tokens": 20
+        }
+      },
+      "parsed": {
+        "evidence_level": {
+          "type": "score",
+          "score": 2.92,
+          "legend": {
+            "0": {
+              "score": 0,
+              "label": "no evidence"
+            },
+            "1": {
+              "score": 1,
+              "label": "very weak evidence"
+            },
+            "2": {
+              "score": 2,
+              "label": "weak evidence"
+            },
+            "3": {
+              "score": 3,
+              "label": "moderate evidence"
+            },
+            "4": {
+              "score": 4,
+              "label": "strong evidence"
+            },
+            "5": {
+              "score": 5,
+              "label": "overwhelming evidence"
+            }
+          },
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 0.09,
+            "3": 0.91,
+            "4": 0.0,
+            "5": 0.0
+          },
+          "confidence": 0.94
+        }
+      },
+      "error": null,
+      "case_meta": {
+        "case_id": "score_moderate",
+        "description": "intended ~3 (moderate)",
+        "intended_range": [
+          2,
+          4
+        ]
+      }
+    },
+    {
+      "case_id": "score_strong",
+      "state": "Hypothesis: The drug lowers blood pressure. Five large randomized controlled trials consistently support the hypothesis. Two meta-analyses confirm the effect.",
+      "timestamp": "2026-09-23T10:01:09.421930+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdb644b2750a9a3c2336d0d53394",
+      "latency_ms": 403.1341820000307,
+      "input_tokens": 434,
+      "output_tokens": 20,
+      "estimated_cost_usd": 1.8228000000000002e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:01:09 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdb644b2750a9a3c2336d0d53394",
+        "x-envoy-upstream-service-time": "73",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=YTPMoBD21byRNxU%2B2XqDfl8hJTXiypaYbAfUaoESbjnnKHktQvxnoNMp9SsfdEOZRgh8plFktpFfUjj24u3A4GF4VNft34AVlBX%2FuaywIRRtgi9rjTWu%2B61qGQ%2B5yKwyqovEwFKb6ldVODSfVQ%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8b4d9fc8f350b-MAA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "evidence_level": {
+            "type": "score",
+            "score": 4.68,
+            "confidence": 0.79,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "no evidence"
+              },
+              "1": {
+                "score": 1,
+                "label": "very weak evidence"
+              },
+              "2": {
+                "score": 2,
+                "label": "weak evidence"
+              },
+              "3": {
+                "score": 3,
+                "label": "moderate evidence"
+              },
+              "4": {
+                "score": 4,
+                "label": "strong evidence"
+              },
+              "5": {
+                "score": 5,
+                "label": "overwhelming evidence"
+              }
+            },
+            "probabilities": {
+              "0": 0.0,
+              "1": 0.0,
+              "2": 0.0,
+              "3": 0.0,
+              "4": 0.31,
+              "5": 0.69
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 434,
+          "output_tokens": 20
+        }
+      },
+      "parsed": {
+        "evidence_level": {
+          "type": "score",
+          "score": 4.68,
+          "legend": {
+            "0": {
+              "score": 0,
+              "label": "no evidence"
+            },
+            "1": {
+              "score": 1,
+              "label": "very weak evidence"
+            },
+            "2": {
+              "score": 2,
+              "label": "weak evidence"
+            },
+            "3": {
+              "score": 3,
+              "label": "moderate evidence"
+            },
+            "4": {
+              "score": 4,
+              "label": "strong evidence"
+            },
+            "5": {
+              "score": 5,
+              "label": "overwhelming evidence"
+            }
+          },
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 0.0,
+            "3": 0.0,
+            "4": 0.31,
+            "5": 0.69
+          },
+          "confidence": 0.79
+        }
+      },
+      "error": null,
+      "case_meta": {
+        "case_id": "score_strong",
+        "description": "intended ~4 (strong)",
+        "intended_range": [
+          3,
+          5
+        ]
+      }
+    },
+    {
+      "case_id": "score_overwhelming",
+      "state": "Hypothesis: Smoking causes lung cancer. Dozens of independent labs across multiple countries have replicated the finding. The effect is well-established scientific consensus.",
+      "timestamp": "2026-09-23T10:01:09.825470+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cdb6464b7386964347c0c497ab09",
+      "latency_ms": 411.66083300004175,
+      "input_tokens": 435,
+      "output_tokens": 20,
+      "estimated_cost_usd": 1.827e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 10:01:10 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cdb6464b7386964347c0c497ab09",
+        "x-envoy-upstream-service-time": "94",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=lpUR16End%2FnYEZVjOfPwMD5vB8S36f1hcGaCUpdxeCTICHUPrcc7rviS41MousES61ec3uYsTztjDpjQea99tFO%2BS1c8Vc%2BB04j90LSitSdtUVeT5JijBdfquOcDlkA%2B1yhmFWaulTBqTPpDcg%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3f8b4dc8d62350b-MAA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "evidence_level": {
+            "type": "score",
+            "score": 4.96,
+            "confidence": 0.97,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "no evidence"
+              },
+              "1": {
+                "score": 1,
+                "label": "very weak evidence"
+              },
+              "2": {
+                "score": 2,
+                "label": "weak evidence"
+              },
+              "3": {
+                "score": 3,
+                "label": "moderate evidence"
+              },
+              "4": {
+                "score": 4,
+                "label": "strong evidence"
+              },
+              "5": {
+                "score": 5,
+                "label": "overwhelming evidence"
+              }
+            },
+            "probabilities": {
+              "0": 0.0,
+              "1": 0.0,
+              "2": 0.0,
+              "3": 0.0,
+              "4": 0.03,
+              "5": 0.97
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 435,
+          "output_tokens": 20
+        }
+      },
+      "parsed": {
+        "evidence_level": {
+          "type": "score",
+          "score": 4.96,
+          "legend": {
+            "0": {
+              "score": 0,
+              "label": "no evidence"
+            },
+            "1": {
+              "score": 1,
+              "label": "very weak evidence"
+            },
+            "2": {
+              "score": 2,
+              "label": "weak evidence"
+            },
+            "3": {
+              "score": 3,
+              "label": "moderate evidence"
+            },
+            "4": {
+              "score": 4,
+              "label": "strong evidence"
+            },
+            "5": {
+              "score": 5,
+              "label": "overwhelming evidence"
+            }
+          },
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 0.0,
+            "3": 0.0,
+            "4": 0.03,
+            "5": 0.97
+          },
+          "confidence": 0.97
+        }
+      },
+      "error": null,
+      "case_meta": {
+        "case_id": "score_overwhelming",
+        "description": "intended ~5 (overwhelming)",
+        "intended_range": [
+          4,
+          5
+        ]
+      }
+    }
+  ]
+}
