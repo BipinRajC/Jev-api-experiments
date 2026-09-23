@@ -643,3 +643,67 @@ REJECTED (conditions: 2026-09-23, `jev-1.13.0`, color question, 3 missing framin
 Experiment:
 
 013
+
+---
+
+## H041 — Score produces non-integer (interpolated) values between rubric levels
+
+Hypothesis:
+
+When evidence falls between rubric levels, Jev's Score produces a fractional value rather than snapping to an integer.
+
+Status:
+
+SUPPORTED (conditions: 2026-09-23, `jev-1.13.0`, 0-5 evidence-strength rubric, 6 graded cases × 3 repeats; 14/18 scores non-integer; values span a continuous range 0.00–4.87; decisively confirms Score interpolation, overturning the Phase 1 implication that Score is discrete)
+
+Experiment:
+
+014
+
+---
+
+## H042 — Score covers the full rubric scale
+
+Hypothesis:
+
+Score produces values across all rubric levels (0 through 5), not a subset.
+
+Status:
+
+SUPPORTED (conditions: 2026-09-23, `jev-1.13.0`, 0-5 evidence-strength rubric, 6 graded cases × 3 repeats; scores span 0.00 to 4.87, monotonic across intended levels)
+
+Experiment:
+
+014
+
+---
+
+## H043 — Score ordering matches intended evidence strength
+
+Hypothesis:
+
+Score means increase monotonically with the intended evidence strength.
+
+Status:
+
+SUPPORTED (conditions: 2026-09-23, `jev-1.13.0`, 0-5 evidence-strength rubric, 6 graded cases × 3 repeats; means strictly increase 0.003 → 0.79 → 1.00 → 1.99 → 4.11 → 4.87 with intended level)
+
+Experiment:
+
+014
+
+---
+
+## H044 — Fractional Score values are stable across repeats
+
+Hypothesis:
+
+Repeated identical Score calls on graded evidence produce materially similar fractional values.
+
+Status:
+
+SUPPORTED (conditions: 2026-09-23, `jev-1.13.0`, 0-5 evidence-strength rubric, 6 graded cases × 3 repeats; max within-case range 0.03 across all cases; fractional scores are reproducible, extending 008's determinism finding to graded cases)
+
+Experiment:
+
+014

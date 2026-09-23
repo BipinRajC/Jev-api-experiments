@@ -1,0 +1,1870 @@
+{
+  "experiment_id": "014-score-interpolation",
+  "run_id": "run-001",
+  "timestamp": "2026-09-23T14:49:19.276098+00:00",
+  "model_requested": "jev-1.13.0",
+  "api": {
+    "provider": "typesafe_direct",
+    "base_url": "https://api.typesafe.ai",
+    "endpoint": "/v1/systemone",
+    "method": "POST"
+  },
+  "design": {
+    "repeats_per_case": 3,
+    "score_question": {
+      "evidence_level": {
+        "type": "score",
+        "instructions": "What level of evidence supports this hypothesis?",
+        "criteria": [
+          {
+            "score": 0,
+            "label": "no evidence"
+          },
+          {
+            "score": 1,
+            "label": "very weak evidence"
+          },
+          {
+            "score": 2,
+            "label": "weak evidence"
+          },
+          {
+            "score": 3,
+            "label": "moderate evidence"
+          },
+          {
+            "score": 4,
+            "label": "strong evidence"
+          },
+          {
+            "score": 5,
+            "label": "overwhelming evidence"
+          }
+        ]
+      }
+    },
+    "cases": [
+      {
+        "case_id": "no_evidence",
+        "state": "Hypothesis: The compound affects memory. There is no evidence either way about the hypothesis.",
+        "intended_level": 0
+      },
+      {
+        "case_id": "very_weak",
+        "state": "Hypothesis: The compound affects memory. A single tiny anecdotal report suggests the hypothesis might be true, but it is completely unconvincing and there is no data.",
+        "intended_level": 1
+      },
+      {
+        "case_id": "weak",
+        "state": "Hypothesis: The compound affects memory. One small exploratory study with a nonsignificant result slightly hints at the hypothesis. No replication.",
+        "intended_level": 2
+      },
+      {
+        "case_id": "moderate",
+        "state": "Hypothesis: The compound affects memory. Two independent studies find moderate effects, but with wide confidence intervals and one failed replication.",
+        "intended_level": 3
+      },
+      {
+        "case_id": "strong",
+        "state": "Hypothesis: The compound affects memory. Five large, well-powered studies consistently confirm the hypothesis. Effect sizes are small but stable.",
+        "intended_level": 4
+      },
+      {
+        "case_id": "overwhelming",
+        "state": "Hypothesis: The compound affects memory. Dozens of independent replications across many labs confirm the hypothesis with large, precise effect sizes. It is scientific consensus.",
+        "intended_level": 5
+      }
+    ]
+  },
+  "analysis": {
+    "by_case": {
+      "no_evidence": {
+        "intended_level": 0,
+        "scores": [
+          0.0,
+          0.0,
+          0.01
+        ],
+        "mean": 0.0033,
+        "range": 0.01,
+        "confidences": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "conf_mean": 1.0
+      },
+      "very_weak": {
+        "intended_level": 1,
+        "scores": [
+          0.8,
+          0.79,
+          0.77
+        ],
+        "mean": 0.7867,
+        "range": 0.03,
+        "confidences": [
+          0.86,
+          0.86,
+          0.85
+        ],
+        "conf_mean": 0.8567
+      },
+      "weak": {
+        "intended_level": 2,
+        "scores": [
+          1.0,
+          1.0,
+          0.99
+        ],
+        "mean": 0.9967,
+        "range": 0.01,
+        "confidences": [
+          0.99,
+          0.99,
+          0.99
+        ],
+        "conf_mean": 0.99
+      },
+      "moderate": {
+        "intended_level": 3,
+        "scores": [
+          1.98,
+          1.99,
+          1.99
+        ],
+        "mean": 1.9867,
+        "range": 0.01,
+        "confidences": [
+          0.93,
+          0.93,
+          0.92
+        ],
+        "conf_mean": 0.9267
+      },
+      "strong": {
+        "intended_level": 4,
+        "scores": [
+          4.1,
+          4.13,
+          4.1
+        ],
+        "mean": 4.11,
+        "range": 0.03,
+        "confidences": [
+          0.89,
+          0.88,
+          0.89
+        ],
+        "conf_mean": 0.8867
+      },
+      "overwhelming": {
+        "intended_level": 5,
+        "scores": [
+          4.88,
+          4.86,
+          4.87
+        ],
+        "mean": 4.87,
+        "range": 0.02,
+        "confidences": [
+          0.92,
+          0.91,
+          0.92
+        ],
+        "conf_mean": 0.9167
+      }
+    },
+    "all_scores": [
+      0.0,
+      0.0,
+      0.01,
+      0.8,
+      0.79,
+      0.77,
+      1.0,
+      1.0,
+      0.99,
+      1.98,
+      1.99,
+      1.99,
+      4.1,
+      4.13,
+      4.1,
+      4.88,
+      4.86,
+      4.87
+    ],
+    "non_integer_count": 14,
+    "total_scores": 18,
+    "any_non_integer": true,
+    "means_by_intended_level": {
+      "no_evidence": 0.0033333333333333335,
+      "very_weak": 0.7866666666666667,
+      "weak": 0.9966666666666667,
+      "moderate": 1.9866666666666666,
+      "strong": 4.109999999999999,
+      "overwhelming": 4.87
+    },
+    "monotonic_with_intended": true,
+    "max_within_case_range": 0.03
+  },
+  "trials": [
+    {
+      "case_id": "no_evidence",
+      "intended_level": 0,
+      "state": "Hypothesis: The compound affects memory. There is no evidence either way about the hypothesis.",
+      "repeat": 1,
+      "timestamp": "2026-09-23T14:49:19.304927+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cebe179b7b3eb2042bb23c3d5af4",
+      "latency_ms": 434.7838399999091,
+      "input_tokens": 418,
+      "output_tokens": 20,
+      "estimated_cost_usd": 1.7556e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 14:49:19 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cebe179b7b3eb2042bb23c3d5af4",
+        "x-envoy-upstream-service-time": "135",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=1B4qCBlmHu%2B5UlDeZGkLHiF0tDo3OD12DGlvKfpOICw078Dtng4XG5ZoZa1gcj%2Fv2sgLp5G318hMSX96ci0eAIBxlma%2FnGxIghA5wzcgzUFxhm3tRbrBdXy%2BCjYiVDWjy2J9zN4FA0oOmGmHHg%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3fa5af83e5b9de0-MAA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "evidence_level": {
+            "type": "score",
+            "score": 0.0,
+            "confidence": 1.0,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "no evidence"
+              },
+              "1": {
+                "score": 1,
+                "label": "very weak evidence"
+              },
+              "2": {
+                "score": 2,
+                "label": "weak evidence"
+              },
+              "3": {
+                "score": 3,
+                "label": "moderate evidence"
+              },
+              "4": {
+                "score": 4,
+                "label": "strong evidence"
+              },
+              "5": {
+                "score": 5,
+                "label": "overwhelming evidence"
+              }
+            },
+            "probabilities": {
+              "0": 1.0,
+              "1": 0.0,
+              "2": 0.0,
+              "3": 0.0,
+              "4": 0.0,
+              "5": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 418,
+          "output_tokens": 20
+        }
+      },
+      "parsed": {
+        "evidence_level": {
+          "type": "score",
+          "score": 0.0,
+          "probabilities": {
+            "0": 1.0,
+            "1": 0.0,
+            "2": 0.0,
+            "3": 0.0,
+            "4": 0.0,
+            "5": 0.0
+          },
+          "confidence": 1.0
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "no_evidence",
+      "intended_level": 0,
+      "state": "Hypothesis: The compound affects memory. There is no evidence either way about the hypothesis.",
+      "repeat": 2,
+      "timestamp": "2026-09-23T14:49:19.740128+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cebe192270118d441cde6cdeb83d",
+      "latency_ms": 349.55158399998254,
+      "input_tokens": 418,
+      "output_tokens": 20,
+      "estimated_cost_usd": 1.7556e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 14:49:20 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cebe192270118d441cde6cdeb83d",
+        "x-envoy-upstream-service-time": "98",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=MJkC9GnwbHJZH4qFbSNFrzE28YKDc4hXQEypOGgci%2Bbq9h6UHFw1f7Ar6acZRa1nYROIGv%2B7Y1A4IBakFPgLMZYEO2uaCFlalLBjWaFUoYnsfHNT4boKbxBmJhYoNF%2Bj2u%2Fv9YIJP2v3cI2AXA%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3fa5afaaf329de0-MAA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "evidence_level": {
+            "type": "score",
+            "score": 0.0,
+            "confidence": 1.0,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "no evidence"
+              },
+              "1": {
+                "score": 1,
+                "label": "very weak evidence"
+              },
+              "2": {
+                "score": 2,
+                "label": "weak evidence"
+              },
+              "3": {
+                "score": 3,
+                "label": "moderate evidence"
+              },
+              "4": {
+                "score": 4,
+                "label": "strong evidence"
+              },
+              "5": {
+                "score": 5,
+                "label": "overwhelming evidence"
+              }
+            },
+            "probabilities": {
+              "0": 1.0,
+              "1": 0.0,
+              "2": 0.0,
+              "3": 0.0,
+              "4": 0.0,
+              "5": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 418,
+          "output_tokens": 20
+        }
+      },
+      "parsed": {
+        "evidence_level": {
+          "type": "score",
+          "score": 0.0,
+          "probabilities": {
+            "0": 1.0,
+            "1": 0.0,
+            "2": 0.0,
+            "3": 0.0,
+            "4": 0.0,
+            "5": 0.0
+          },
+          "confidence": 1.0
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "no_evidence",
+      "intended_level": 0,
+      "state": "Hypothesis: The compound affects memory. There is no evidence either way about the hypothesis.",
+      "repeat": 3,
+      "timestamp": "2026-09-23T14:49:20.090000+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cebe1a7e7dc38f9a12a6f9649be9",
+      "latency_ms": 390.6290260001697,
+      "input_tokens": 418,
+      "output_tokens": 20,
+      "estimated_cost_usd": 1.7556e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 14:49:20 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cebe1a7e7dc38f9a12a6f9649be9",
+        "x-envoy-upstream-service-time": "140",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=sYf6ODCsNF3SjS%2BbNnZgflfDKQrggWIps0xF5n1SmgrM3EMUUwTbQ96O2n4vVQkz207WL4frGwFNeQaQDHpqaeH0%2F0HAL7%2FgPzYbxG%2FddPdafNIyzEIv2JY9mClVe8MASOBwUJSGKeie8bMR%2FQ%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3fa5afcdf789de0-MAA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "evidence_level": {
+            "type": "score",
+            "score": 0.01,
+            "confidence": 1.0,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "no evidence"
+              },
+              "1": {
+                "score": 1,
+                "label": "very weak evidence"
+              },
+              "2": {
+                "score": 2,
+                "label": "weak evidence"
+              },
+              "3": {
+                "score": 3,
+                "label": "moderate evidence"
+              },
+              "4": {
+                "score": 4,
+                "label": "strong evidence"
+              },
+              "5": {
+                "score": 5,
+                "label": "overwhelming evidence"
+              }
+            },
+            "probabilities": {
+              "0": 1.0,
+              "1": 0.0,
+              "2": 0.0,
+              "3": 0.0,
+              "4": 0.0,
+              "5": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 418,
+          "output_tokens": 20
+        }
+      },
+      "parsed": {
+        "evidence_level": {
+          "type": "score",
+          "score": 0.01,
+          "probabilities": {
+            "0": 1.0,
+            "1": 0.0,
+            "2": 0.0,
+            "3": 0.0,
+            "4": 0.0,
+            "5": 0.0
+          },
+          "confidence": 1.0
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "very_weak",
+      "intended_level": 1,
+      "state": "Hypothesis: The compound affects memory. A single tiny anecdotal report suggests the hypothesis might be true, but it is completely unconvincing and there is no data.",
+      "repeat": 1,
+      "timestamp": "2026-09-23T14:49:20.480808+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cebe1c0673818fa5e8bb88c87f0c",
+      "latency_ms": 335.74883600022076,
+      "input_tokens": 436,
+      "output_tokens": 20,
+      "estimated_cost_usd": 1.8312e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 14:49:20 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cebe1c0673818fa5e8bb88c87f0c",
+        "x-envoy-upstream-service-time": "85",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=7FwLFoa1kCfix2GxOeVhmkbBat38Kwwl1QcDEQm9rwfbTZ3xK6Iu2Qwx2nkQgR%2ByAwAmKVcCPTM5tnnB5BRm5LiC7ROttmIhxceMnmRRm4l9mW%2FMvMcDGUosxFhGWPbTdpBVQF6nOyNLNmVDmg%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3fa5aff488c9de0-MAA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "evidence_level": {
+            "type": "score",
+            "score": 0.8,
+            "confidence": 0.86,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "no evidence"
+              },
+              "1": {
+                "score": 1,
+                "label": "very weak evidence"
+              },
+              "2": {
+                "score": 2,
+                "label": "weak evidence"
+              },
+              "3": {
+                "score": 3,
+                "label": "moderate evidence"
+              },
+              "4": {
+                "score": 4,
+                "label": "strong evidence"
+              },
+              "5": {
+                "score": 5,
+                "label": "overwhelming evidence"
+              }
+            },
+            "probabilities": {
+              "0": 0.2,
+              "1": 0.8,
+              "2": 0.0,
+              "3": 0.0,
+              "4": 0.0,
+              "5": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 436,
+          "output_tokens": 20
+        }
+      },
+      "parsed": {
+        "evidence_level": {
+          "type": "score",
+          "score": 0.8,
+          "probabilities": {
+            "0": 0.2,
+            "1": 0.8,
+            "2": 0.0,
+            "3": 0.0,
+            "4": 0.0,
+            "5": 0.0
+          },
+          "confidence": 0.86
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "very_weak",
+      "intended_level": 1,
+      "state": "Hypothesis: The compound affects memory. A single tiny anecdotal report suggests the hypothesis might be true, but it is completely unconvincing and there is no data.",
+      "repeat": 2,
+      "timestamp": "2026-09-23T14:49:20.816746+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cebe1d537c388ba6deaec8fbfda3",
+      "latency_ms": 341.2075029996231,
+      "input_tokens": 436,
+      "output_tokens": 20,
+      "estimated_cost_usd": 1.8312e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 14:49:21 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cebe1d537c388ba6deaec8fbfda3",
+        "x-envoy-upstream-service-time": "84",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=Tid8pMwXPKjj98xRdg1NRrTkc5EkebWzJJHlrstU1yQuxeRtiuthirW1ATgOcwcizWvxWqYkg141no8xZeHa2%2FA2NTWsKGIYKG61bineRWX99Te7T2i88X3Y%2FSKSHcI7bCFD7M9I0%2BqtocqJbA%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3fa5b016faf9de0-MAA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "evidence_level": {
+            "type": "score",
+            "score": 0.79,
+            "confidence": 0.86,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "no evidence"
+              },
+              "1": {
+                "score": 1,
+                "label": "very weak evidence"
+              },
+              "2": {
+                "score": 2,
+                "label": "weak evidence"
+              },
+              "3": {
+                "score": 3,
+                "label": "moderate evidence"
+              },
+              "4": {
+                "score": 4,
+                "label": "strong evidence"
+              },
+              "5": {
+                "score": 5,
+                "label": "overwhelming evidence"
+              }
+            },
+            "probabilities": {
+              "0": 0.21,
+              "1": 0.79,
+              "2": 0.0,
+              "3": 0.0,
+              "4": 0.0,
+              "5": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 436,
+          "output_tokens": 20
+        }
+      },
+      "parsed": {
+        "evidence_level": {
+          "type": "score",
+          "score": 0.79,
+          "probabilities": {
+            "0": 0.21,
+            "1": 0.79,
+            "2": 0.0,
+            "3": 0.0,
+            "4": 0.0,
+            "5": 0.0
+          },
+          "confidence": 0.86
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "very_weak",
+      "intended_level": 1,
+      "state": "Hypothesis: The compound affects memory. A single tiny anecdotal report suggests the hypothesis might be true, but it is completely unconvincing and there is no data.",
+      "repeat": 3,
+      "timestamp": "2026-09-23T14:49:21.158306+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cebe1ea87e6d8069d54a71a2374c",
+      "latency_ms": 312.0531320000737,
+      "input_tokens": 436,
+      "output_tokens": 20,
+      "estimated_cost_usd": 1.8312e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 14:49:21 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cebe1ea87e6d8069d54a71a2374c",
+        "x-envoy-upstream-service-time": "63",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=aqxeeBW5YEcr3yH%2FbK7T1M1QuEyDnzqLpyrMCrZk43z%2BGo6rm548wZ6RTv4GO8U%2Flqs4hh5oKtrlwbLUjl85FWKTxqW3VhcivwOw5Th7BjgCcYgjhvbf6MDDsSoaOlMSgmjo5rBggb8dVgvNog%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3fa5b038e649de0-MAA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "evidence_level": {
+            "type": "score",
+            "score": 0.77,
+            "confidence": 0.85,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "no evidence"
+              },
+              "1": {
+                "score": 1,
+                "label": "very weak evidence"
+              },
+              "2": {
+                "score": 2,
+                "label": "weak evidence"
+              },
+              "3": {
+                "score": 3,
+                "label": "moderate evidence"
+              },
+              "4": {
+                "score": 4,
+                "label": "strong evidence"
+              },
+              "5": {
+                "score": 5,
+                "label": "overwhelming evidence"
+              }
+            },
+            "probabilities": {
+              "0": 0.23,
+              "1": 0.77,
+              "2": 0.0,
+              "3": 0.0,
+              "4": 0.0,
+              "5": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 436,
+          "output_tokens": 20
+        }
+      },
+      "parsed": {
+        "evidence_level": {
+          "type": "score",
+          "score": 0.77,
+          "probabilities": {
+            "0": 0.23,
+            "1": 0.77,
+            "2": 0.0,
+            "3": 0.0,
+            "4": 0.0,
+            "5": 0.0
+          },
+          "confidence": 0.85
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "weak",
+      "intended_level": 2,
+      "state": "Hypothesis: The compound affects memory. One small exploratory study with a nonsignificant result slightly hints at the hypothesis. No replication.",
+      "repeat": 1,
+      "timestamp": "2026-09-23T14:49:21.470736+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cebe1fe375668187934e400ba417",
+      "latency_ms": 377.6499179998609,
+      "input_tokens": 430,
+      "output_tokens": 20,
+      "estimated_cost_usd": 1.8060000000000003e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 14:49:21 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cebe1fe375668187934e400ba417",
+        "x-envoy-upstream-service-time": "121",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=UsQjC997MUnJy%2BVo1AnYLOezepcGPlUjGmZqwhSitdcS%2FMfli5eBl%2FL6nbQY9mmnl16vQcsxUnJ0gMHJEN60xQGELEgMXXzis2ufguzTTLG2QQaWNg9Su%2FV4qdkRbfHFI8Ka5%2FmRQJq%2FsoMQvQ%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3fa5b057c6c9de0-MAA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "evidence_level": {
+            "type": "score",
+            "score": 1.0,
+            "confidence": 0.99,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "no evidence"
+              },
+              "1": {
+                "score": 1,
+                "label": "very weak evidence"
+              },
+              "2": {
+                "score": 2,
+                "label": "weak evidence"
+              },
+              "3": {
+                "score": 3,
+                "label": "moderate evidence"
+              },
+              "4": {
+                "score": 4,
+                "label": "strong evidence"
+              },
+              "5": {
+                "score": 5,
+                "label": "overwhelming evidence"
+              }
+            },
+            "probabilities": {
+              "0": 0.01,
+              "1": 0.98,
+              "2": 0.01,
+              "3": 0.0,
+              "4": 0.0,
+              "5": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 430,
+          "output_tokens": 20
+        }
+      },
+      "parsed": {
+        "evidence_level": {
+          "type": "score",
+          "score": 1.0,
+          "probabilities": {
+            "0": 0.01,
+            "1": 0.98,
+            "2": 0.01,
+            "3": 0.0,
+            "4": 0.0,
+            "5": 0.0
+          },
+          "confidence": 0.99
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "weak",
+      "intended_level": 2,
+      "state": "Hypothesis: The compound affects memory. One small exploratory study with a nonsignificant result slightly hints at the hypothesis. No replication.",
+      "repeat": 2,
+      "timestamp": "2026-09-23T14:49:21.848592+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cebe216d717cba85670bd35b8005",
+      "latency_ms": 385.6423470001573,
+      "input_tokens": 430,
+      "output_tokens": 20,
+      "estimated_cost_usd": 1.8060000000000003e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 14:49:22 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cebe216d717cba85670bd35b8005",
+        "x-envoy-upstream-service-time": "122",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=kkWdKnOg8huvLhhvL8RCmrH74753jlwkdX54%2FUCrT5%2F%2FtlJe3bjGMuW%2BwO52gD49NffBDWWsZZu%2Fnx0YDQ1wofCardydVx7EJP%2F7dDoWMC6QjnWdEOMkPRzSbWMvjAg7Rrr4YbOEBTPBj9ec0g%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3fa5b07fbff9de0-MAA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "evidence_level": {
+            "type": "score",
+            "score": 1.0,
+            "confidence": 0.99,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "no evidence"
+              },
+              "1": {
+                "score": 1,
+                "label": "very weak evidence"
+              },
+              "2": {
+                "score": 2,
+                "label": "weak evidence"
+              },
+              "3": {
+                "score": 3,
+                "label": "moderate evidence"
+              },
+              "4": {
+                "score": 4,
+                "label": "strong evidence"
+              },
+              "5": {
+                "score": 5,
+                "label": "overwhelming evidence"
+              }
+            },
+            "probabilities": {
+              "0": 0.01,
+              "1": 0.98,
+              "2": 0.01,
+              "3": 0.0,
+              "4": 0.0,
+              "5": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 430,
+          "output_tokens": 20
+        }
+      },
+      "parsed": {
+        "evidence_level": {
+          "type": "score",
+          "score": 1.0,
+          "probabilities": {
+            "0": 0.01,
+            "1": 0.98,
+            "2": 0.01,
+            "3": 0.0,
+            "4": 0.0,
+            "5": 0.0
+          },
+          "confidence": 0.99
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "weak",
+      "intended_level": 2,
+      "state": "Hypothesis: The compound affects memory. One small exploratory study with a nonsignificant result slightly hints at the hypothesis. No replication.",
+      "repeat": 3,
+      "timestamp": "2026-09-23T14:49:22.234450+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cebe22e17061976b6365f754efc7",
+      "latency_ms": 402.4070649998066,
+      "input_tokens": 430,
+      "output_tokens": 20,
+      "estimated_cost_usd": 1.8060000000000003e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 14:49:22 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cebe22e17061976b6365f754efc7",
+        "x-envoy-upstream-service-time": "152",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=6PBH95254cn33vUT%2FZ1S6NGi1HstXuxMRlZFVjxwfmLsJxNYqK4JvffTljCdOZFV1Dtn%2BGeuA4lEGbcp2hW3N%2F91iWlr%2FhwhCpq0TK7%2F06qyASOi%2FSwNJLa%2BjIXwWbIytpNf59zmeEPYwN9Y6g%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3fa5b0a4b869de0-MAA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "evidence_level": {
+            "type": "score",
+            "score": 0.99,
+            "confidence": 0.99,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "no evidence"
+              },
+              "1": {
+                "score": 1,
+                "label": "very weak evidence"
+              },
+              "2": {
+                "score": 2,
+                "label": "weak evidence"
+              },
+              "3": {
+                "score": 3,
+                "label": "moderate evidence"
+              },
+              "4": {
+                "score": 4,
+                "label": "strong evidence"
+              },
+              "5": {
+                "score": 5,
+                "label": "overwhelming evidence"
+              }
+            },
+            "probabilities": {
+              "0": 0.01,
+              "1": 0.98,
+              "2": 0.01,
+              "3": 0.0,
+              "4": 0.0,
+              "5": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 430,
+          "output_tokens": 20
+        }
+      },
+      "parsed": {
+        "evidence_level": {
+          "type": "score",
+          "score": 0.99,
+          "probabilities": {
+            "0": 0.01,
+            "1": 0.98,
+            "2": 0.01,
+            "3": 0.0,
+            "4": 0.0,
+            "5": 0.0
+          },
+          "confidence": 0.99
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "moderate",
+      "intended_level": 3,
+      "state": "Hypothesis: The compound affects memory. Two independent studies find moderate effects, but with wide confidence intervals and one failed replication.",
+      "repeat": 1,
+      "timestamp": "2026-09-23T14:49:22.637006+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cebe24707acebc03cb3d0b4aaca2",
+      "latency_ms": 385.90217699993445,
+      "input_tokens": 425,
+      "output_tokens": 20,
+      "estimated_cost_usd": 1.785e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 14:49:23 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cebe24707acebc03cb3d0b4aaca2",
+        "x-envoy-upstream-service-time": "136",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=%2BjtNMX503pu1l9IUjliCEcHBeR93eLB6UYNsgdLSiMYmqU3ZSCC9AZsOir9JOhPbqa9hmSlU5vBP5Vaiwyn%2BIbCMiLsOY2TLhrUY2apchZgbEWdBEz%2BYviLYekMpimkb5R8K4G3c%2FS5xwHPGNA%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3fa5b0ccbb99de0-MAA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "evidence_level": {
+            "type": "score",
+            "score": 1.98,
+            "confidence": 0.93,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "no evidence"
+              },
+              "1": {
+                "score": 1,
+                "label": "very weak evidence"
+              },
+              "2": {
+                "score": 2,
+                "label": "weak evidence"
+              },
+              "3": {
+                "score": 3,
+                "label": "moderate evidence"
+              },
+              "4": {
+                "score": 4,
+                "label": "strong evidence"
+              },
+              "5": {
+                "score": 5,
+                "label": "overwhelming evidence"
+              }
+            },
+            "probabilities": {
+              "0": 0.0,
+              "1": 0.07,
+              "2": 0.88,
+              "3": 0.05,
+              "4": 0.0,
+              "5": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 425,
+          "output_tokens": 20
+        }
+      },
+      "parsed": {
+        "evidence_level": {
+          "type": "score",
+          "score": 1.98,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.07,
+            "2": 0.88,
+            "3": 0.05,
+            "4": 0.0,
+            "5": 0.0
+          },
+          "confidence": 0.93
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "moderate",
+      "intended_level": 3,
+      "state": "Hypothesis: The compound affects memory. Two independent studies find moderate effects, but with wide confidence intervals and one failed replication.",
+      "repeat": 2,
+      "timestamp": "2026-09-23T14:49:23.023205+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cebe25f67f9981902f06b12e1f09",
+      "latency_ms": 372.2944579999421,
+      "input_tokens": 425,
+      "output_tokens": 20,
+      "estimated_cost_usd": 1.785e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 14:49:23 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cebe25f67f9981902f06b12e1f09",
+        "x-envoy-upstream-service-time": "114",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=YGtv64gVif2%2BgyAJlSIy8i2Qu4ycvXLo150%2FpFRNgG%2BXctF%2FxaGi9iYvNVIhCqFfB443DvYuyIc6QAn9k%2F1LilUaYKb7rWwio53YYqA99tgjwY6vbHrJ301myXuVA1TBULXWYxx7YE1mvVPBuw%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3fa5b0f3b579de0-MAA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "evidence_level": {
+            "type": "score",
+            "score": 1.99,
+            "confidence": 0.93,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "no evidence"
+              },
+              "1": {
+                "score": 1,
+                "label": "very weak evidence"
+              },
+              "2": {
+                "score": 2,
+                "label": "weak evidence"
+              },
+              "3": {
+                "score": 3,
+                "label": "moderate evidence"
+              },
+              "4": {
+                "score": 4,
+                "label": "strong evidence"
+              },
+              "5": {
+                "score": 5,
+                "label": "overwhelming evidence"
+              }
+            },
+            "probabilities": {
+              "0": 0.0,
+              "1": 0.05,
+              "2": 0.9,
+              "3": 0.05,
+              "4": 0.0,
+              "5": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 425,
+          "output_tokens": 20
+        }
+      },
+      "parsed": {
+        "evidence_level": {
+          "type": "score",
+          "score": 1.99,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.05,
+            "2": 0.9,
+            "3": 0.05,
+            "4": 0.0,
+            "5": 0.0
+          },
+          "confidence": 0.93
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "moderate",
+      "intended_level": 3,
+      "state": "Hypothesis: The compound affects memory. Two independent studies find moderate effects, but with wide confidence intervals and one failed replication.",
+      "repeat": 3,
+      "timestamp": "2026-09-23T14:49:23.395844+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cebe276774a8bfb36e381a6fcd0a",
+      "latency_ms": 351.3143969998964,
+      "input_tokens": 425,
+      "output_tokens": 20,
+      "estimated_cost_usd": 1.785e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 14:49:23 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cebe276774a8bfb36e381a6fcd0a",
+        "x-envoy-upstream-service-time": "99",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=w2Ibd1im2duaeMqArQAvgq%2FeVzo4fYs1tl3Zx%2BNJ9YJyksXEEUD2%2FtLunmuGAlRcCCsmimQh9JkaVVF7JfDSgrcIL9GSETIkfcYvLlHQXRdVXAEECX%2BKlxQlBzgrSqm9d5FGPKSk5vN%2BNlavoA%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3fa5b118b939de0-MAA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "evidence_level": {
+            "type": "score",
+            "score": 1.99,
+            "confidence": 0.92,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "no evidence"
+              },
+              "1": {
+                "score": 1,
+                "label": "very weak evidence"
+              },
+              "2": {
+                "score": 2,
+                "label": "weak evidence"
+              },
+              "3": {
+                "score": 3,
+                "label": "moderate evidence"
+              },
+              "4": {
+                "score": 4,
+                "label": "strong evidence"
+              },
+              "5": {
+                "score": 5,
+                "label": "overwhelming evidence"
+              }
+            },
+            "probabilities": {
+              "0": 0.0,
+              "1": 0.06,
+              "2": 0.89,
+              "3": 0.05,
+              "4": 0.0,
+              "5": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 425,
+          "output_tokens": 20
+        }
+      },
+      "parsed": {
+        "evidence_level": {
+          "type": "score",
+          "score": 1.99,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.06,
+            "2": 0.89,
+            "3": 0.05,
+            "4": 0.0,
+            "5": 0.0
+          },
+          "confidence": 0.92
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "strong",
+      "intended_level": 4,
+      "state": "Hypothesis: The compound affects memory. Five large, well-powered studies consistently confirm the hypothesis. Effect sizes are small but stable.",
+      "repeat": 1,
+      "timestamp": "2026-09-23T14:49:23.747502+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cebe28ce7db097e6ba4e90cef591",
+      "latency_ms": 599.2977599998994,
+      "input_tokens": 426,
+      "output_tokens": 20,
+      "estimated_cost_usd": 1.7892e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 14:49:24 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cebe28ce7db097e6ba4e90cef591",
+        "x-envoy-upstream-service-time": "94",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=ZvyhmS5yaRS1TIt70MB4bxGRezcdKOX6u%2BqlQsGYME77h2p4ETQPmMgqnkN4J2PxB7SnVfmaGR3Shms6b89%2Bx5oFtOt4Dic819FoNPDD%2BaO8wA%2BvjXZtyjFGyywQ1hkMF6wm%2FKOauLavwZmT2w%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3fa5b13caf49de0-MAA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "evidence_level": {
+            "type": "score",
+            "score": 4.1,
+            "confidence": 0.89,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "no evidence"
+              },
+              "1": {
+                "score": 1,
+                "label": "very weak evidence"
+              },
+              "2": {
+                "score": 2,
+                "label": "weak evidence"
+              },
+              "3": {
+                "score": 3,
+                "label": "moderate evidence"
+              },
+              "4": {
+                "score": 4,
+                "label": "strong evidence"
+              },
+              "5": {
+                "score": 5,
+                "label": "overwhelming evidence"
+              }
+            },
+            "probabilities": {
+              "0": 0.0,
+              "1": 0.0,
+              "2": 0.0,
+              "3": 0.02,
+              "4": 0.85,
+              "5": 0.13
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 426,
+          "output_tokens": 20
+        }
+      },
+      "parsed": {
+        "evidence_level": {
+          "type": "score",
+          "score": 4.1,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 0.0,
+            "3": 0.02,
+            "4": 0.85,
+            "5": 0.13
+          },
+          "confidence": 0.89
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "strong",
+      "intended_level": 4,
+      "state": "Hypothesis: The compound affects memory. Five large, well-powered studies consistently confirm the hypothesis. Effect sizes are small but stable.",
+      "repeat": 2,
+      "timestamp": "2026-09-23T14:49:24.347179+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cebe2b2a7015a3584e1f596fde66",
+      "latency_ms": 399.01051800006826,
+      "input_tokens": 426,
+      "output_tokens": 20,
+      "estimated_cost_usd": 1.7892e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 14:49:24 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cebe2b2a7015a3584e1f596fde66",
+        "x-envoy-upstream-service-time": "117",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=%2BR8JfjRO3aSjZqyBK1gxjx1fAYCegrJQ5WO%2F58a%2Bg6qle%2B8hA0jd645sCvpPtcTA2RjzewZ%2Bxs%2Bo4VJJocpEfET9X4yOkKqqNDX8IhCwgXULFqCQ%2BYcvLPWeVx0leJ%2Bbi6Lr9QaN%2F2AgO2HYCw%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3fa5b178fe99de0-MAA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "evidence_level": {
+            "type": "score",
+            "score": 4.13,
+            "confidence": 0.88,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "no evidence"
+              },
+              "1": {
+                "score": 1,
+                "label": "very weak evidence"
+              },
+              "2": {
+                "score": 2,
+                "label": "weak evidence"
+              },
+              "3": {
+                "score": 3,
+                "label": "moderate evidence"
+              },
+              "4": {
+                "score": 4,
+                "label": "strong evidence"
+              },
+              "5": {
+                "score": 5,
+                "label": "overwhelming evidence"
+              }
+            },
+            "probabilities": {
+              "0": 0.0,
+              "1": 0.0,
+              "2": 0.0,
+              "3": 0.02,
+              "4": 0.82,
+              "5": 0.16
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 426,
+          "output_tokens": 20
+        }
+      },
+      "parsed": {
+        "evidence_level": {
+          "type": "score",
+          "score": 4.13,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 0.0,
+            "3": 0.02,
+            "4": 0.82,
+            "5": 0.16
+          },
+          "confidence": 0.88
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "strong",
+      "intended_level": 4,
+      "state": "Hypothesis: The compound affects memory. Five large, well-powered studies consistently confirm the hypothesis. Effect sizes are small but stable.",
+      "repeat": 3,
+      "timestamp": "2026-09-23T14:49:24.746523+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cebe2cb67505973b7835758912cd",
+      "latency_ms": 321.61613800008126,
+      "input_tokens": 426,
+      "output_tokens": 20,
+      "estimated_cost_usd": 1.7892e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 14:49:25 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cebe2cb67505973b7835758912cd",
+        "x-envoy-upstream-service-time": "61",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=i%2FrGZxC%2F3sU1JK1Re4Y1QdSjhVKcNLOVm5uYusqbMD0OPFP9DCgRuEoj0ZJH1IIMfiLrOwclTecbQ%2Bv6gWjKXDb78TxJPrHgzkd2gU2P8upZwnmVj3XIWKslySPiO5ORRrTGcFZiDWVGvw6I0Q%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3fa5b1a08e49de0-MAA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "evidence_level": {
+            "type": "score",
+            "score": 4.1,
+            "confidence": 0.89,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "no evidence"
+              },
+              "1": {
+                "score": 1,
+                "label": "very weak evidence"
+              },
+              "2": {
+                "score": 2,
+                "label": "weak evidence"
+              },
+              "3": {
+                "score": 3,
+                "label": "moderate evidence"
+              },
+              "4": {
+                "score": 4,
+                "label": "strong evidence"
+              },
+              "5": {
+                "score": 5,
+                "label": "overwhelming evidence"
+              }
+            },
+            "probabilities": {
+              "0": 0.0,
+              "1": 0.0,
+              "2": 0.0,
+              "3": 0.03,
+              "4": 0.84,
+              "5": 0.13
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 426,
+          "output_tokens": 20
+        }
+      },
+      "parsed": {
+        "evidence_level": {
+          "type": "score",
+          "score": 4.1,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 0.0,
+            "3": 0.03,
+            "4": 0.84,
+            "5": 0.13
+          },
+          "confidence": 0.89
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "overwhelming",
+      "intended_level": 5,
+      "state": "Hypothesis: The compound affects memory. Dozens of independent replications across many labs confirm the hypothesis with large, precise effect sizes. It is scientific consensus.",
+      "repeat": 1,
+      "timestamp": "2026-09-23T14:49:25.068476+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cebe2df17783b61a60442b1ef12d",
+      "latency_ms": 321.2827610000204,
+      "input_tokens": 433,
+      "output_tokens": 20,
+      "estimated_cost_usd": 1.8186e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 14:49:25 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cebe2df17783b61a60442b1ef12d",
+        "x-envoy-upstream-service-time": "70",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=tGmjmBA4uH8NsCym5%2FngtMkPXt%2BoMAAb391baRNxWQ3V%2Bx7q%2FjDsAXLUEXY5%2B8leRr7UNLdpLYKKSgU7OZ8wPyZYtqKeXuMwnmTaZwYeGDInJAcT982h9PQkU%2FONWe10wZ4pZCFLHrbqGYdAQQ%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3fa5b1bf86b9de0-MAA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "evidence_level": {
+            "type": "score",
+            "score": 4.88,
+            "confidence": 0.92,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "no evidence"
+              },
+              "1": {
+                "score": 1,
+                "label": "very weak evidence"
+              },
+              "2": {
+                "score": 2,
+                "label": "weak evidence"
+              },
+              "3": {
+                "score": 3,
+                "label": "moderate evidence"
+              },
+              "4": {
+                "score": 4,
+                "label": "strong evidence"
+              },
+              "5": {
+                "score": 5,
+                "label": "overwhelming evidence"
+              }
+            },
+            "probabilities": {
+              "0": 0.01,
+              "1": 0.0,
+              "2": 0.0,
+              "3": 0.0,
+              "4": 0.02,
+              "5": 0.97
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 433,
+          "output_tokens": 20
+        }
+      },
+      "parsed": {
+        "evidence_level": {
+          "type": "score",
+          "score": 4.88,
+          "probabilities": {
+            "0": 0.01,
+            "1": 0.0,
+            "2": 0.0,
+            "3": 0.0,
+            "4": 0.02,
+            "5": 0.97
+          },
+          "confidence": 0.92
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "overwhelming",
+      "intended_level": 5,
+      "state": "Hypothesis: The compound affects memory. Dozens of independent replications across many labs confirm the hypothesis with large, precise effect sizes. It is scientific consensus.",
+      "repeat": 2,
+      "timestamp": "2026-09-23T14:49:25.390108+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cebe2f4871e4893d7170a708f005",
+      "latency_ms": 345.4786800002694,
+      "input_tokens": 433,
+      "output_tokens": 20,
+      "estimated_cost_usd": 1.8186e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 14:49:25 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cebe2f4871e4893d7170a708f005",
+        "x-envoy-upstream-service-time": "73",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=5LrHzQq9nfOwTudlu3YRSydLwrzVs4tmFt8%2BQ6lvi13uWB9Y%2FbYsNsQHhgWe9%2FLrjU8aGO4J67LhPHykO6di4fbIbg3KKrQvmfRXHC56zWEvT7xrxOrNgYPQaC6mCnqbjkReGDmBB%2BG%2BDbIdkA%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3fa5b1e08359de0-MAA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "evidence_level": {
+            "type": "score",
+            "score": 4.86,
+            "confidence": 0.91,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "no evidence"
+              },
+              "1": {
+                "score": 1,
+                "label": "very weak evidence"
+              },
+              "2": {
+                "score": 2,
+                "label": "weak evidence"
+              },
+              "3": {
+                "score": 3,
+                "label": "moderate evidence"
+              },
+              "4": {
+                "score": 4,
+                "label": "strong evidence"
+              },
+              "5": {
+                "score": 5,
+                "label": "overwhelming evidence"
+              }
+            },
+            "probabilities": {
+              "0": 0.02,
+              "1": 0.01,
+              "2": 0.0,
+              "3": 0.0,
+              "4": 0.02,
+              "5": 0.95
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 433,
+          "output_tokens": 20
+        }
+      },
+      "parsed": {
+        "evidence_level": {
+          "type": "score",
+          "score": 4.86,
+          "probabilities": {
+            "0": 0.02,
+            "1": 0.01,
+            "2": 0.0,
+            "3": 0.0,
+            "4": 0.02,
+            "5": 0.95
+          },
+          "confidence": 0.91
+        }
+      },
+      "error": null
+    },
+    {
+      "case_id": "overwhelming",
+      "intended_level": 5,
+      "state": "Hypothesis: The compound affects memory. Dozens of independent replications across many labs confirm the hypothesis with large, precise effect sizes. It is scientific consensus.",
+      "repeat": 3,
+      "timestamp": "2026-09-23T14:49:25.736036+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0cebe30987c88b4c2a8568dc44de5",
+      "latency_ms": 446.1249480000333,
+      "input_tokens": 433,
+      "output_tokens": 20,
+      "estimated_cost_usd": 1.8186e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Wed, 23 Sep 2026 14:49:26 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "server": "cloudflare",
+        "x-typesafe-request-id": "req_01a0cebe30987c88b4c2a8568dc44de5",
+        "x-envoy-upstream-service-time": "185",
+        "cf-cache-status": "DYNAMIC",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=dKEw1VXCMGmX1sHgXtWAu5tV0UoIrqvFnRq19glGU9w2GWpGSOFTOwx2Km1r%2BKWXRvLGyWiV6q3aCyjm2kOstBF2jbGbiC5cLHK0Zv%2BRNp7UGd6u2k8e7N7OgcJ08CwuQwde1uooz99DzhA2gg%3D%3D\"}]}",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "content-encoding": "gzip",
+        "cf-ray": "a3fa5b202f859de0-MAA"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "evidence_level": {
+            "type": "score",
+            "score": 4.87,
+            "confidence": 0.92,
+            "legend": {
+              "0": {
+                "score": 0,
+                "label": "no evidence"
+              },
+              "1": {
+                "score": 1,
+                "label": "very weak evidence"
+              },
+              "2": {
+                "score": 2,
+                "label": "weak evidence"
+              },
+              "3": {
+                "score": 3,
+                "label": "moderate evidence"
+              },
+              "4": {
+                "score": 4,
+                "label": "strong evidence"
+              },
+              "5": {
+                "score": 5,
+                "label": "overwhelming evidence"
+              }
+            },
+            "probabilities": {
+              "0": 0.02,
+              "1": 0.01,
+              "2": 0.0,
+              "3": 0.0,
+              "4": 0.02,
+              "5": 0.95
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 433,
+          "output_tokens": 20
+        }
+      },
+      "parsed": {
+        "evidence_level": {
+          "type": "score",
+          "score": 4.87,
+          "probabilities": {
+            "0": 0.02,
+            "1": 0.01,
+            "2": 0.0,
+            "3": 0.0,
+            "4": 0.02,
+            "5": 0.95
+          },
+          "confidence": 0.92
+        }
+      },
+      "error": null
+    }
+  ]
+}

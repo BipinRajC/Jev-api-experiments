@@ -278,3 +278,16 @@ Only findings measured in this repository.
 - **Limitations:** Single question. Three framings + one control. n=3. State-specific Noul values may vary with wording (009).
 - **Confidence in the finding:** High that Noul is not near 0 on neutral missing-info; moderate that the exact 0.20-0.29 band generalizes.
 - **Implications:** For "unknown" signals, prefer a Score rubric with an explicit "unknown/even chance" level (returns ~2.0) over Noul, whose low-but-nonzero values are ambiguous. Do not assume missing info → Noul ≈ 0. For FootyQuant v2, an explicit Score/Choice "unknown" category is more reliable than interpreting low Noul as absence of information.
+
+---
+
+## F022 — Score is a continuous, reproducible, monotonic quantitative primitive
+
+- **Related hypothesis:** H041, H042, H043, H044
+- **Experiment(s):** 014 (`results/014-score-interpolation/run-001.json`)
+- **Conditions:** 2026-09-23 UTC; `jev-1.13.0`; 0-5 evidence-strength rubric; 6 graded evidence descriptions × 3 repeats = 18 Score calls
+- **Evidence:** 14/18 scores non-integer. Means by intended level: no_evidence 0.003, very_weak 0.79, weak 1.00, moderate 1.99, strong 4.11, overwhelming 4.87. Monotonic increase. Max within-case range 0.03. Confidence 0.86-1.0.
+- **Interpretation:** Score definitively interpolates (non-integer values), overturning Phase 1's implication that it is discrete. Fractional scores are highly reproducible (max range 0.03), extending 008's determinism finding to graded cases. Means increase monotonically with evidence strength, with endpoints well-aligned to the rubric. The "weak"/"moderate" cases landed lower than intended, but the state descriptions there were arguably misaligned with their rubric labels (a design caveat, not necessarily a model error).
+- **Limitations:** Single rubric. The weak/moderate state wording may have understated their intended levels. n=3. Wording can shift scores (009).
+- **Confidence in the finding:** High that Score interpolates, is monotonic, and is stable; moderate on exact calibration to rubric levels.
+- **Implications:** Score is the strongest primitive for quantitative, reproducible judgments. It is the natural candidate for Phase 3 calibration (does its continuous output correspond to observed frequency?). For FootyQuant v2, a well-designed Score rubric can yield stable quantitative estimates, provided the state wording is controlled (009) and the rubric levels are described precisely.
