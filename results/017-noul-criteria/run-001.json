@@ -1,0 +1,471 @@
+{
+  "experiment_id": "017-noul-criteria",
+  "run_id": "run-001",
+  "timestamp": "2026-09-24T20:37:50.478768+00:00",
+  "model_requested": "jev-1.13.0",
+  "api": {
+    "provider": "typesafe_direct",
+    "base_url": "https://api.typesafe.ai",
+    "endpoint": "/v1/systemone",
+    "method": "POST"
+  },
+  "design": {
+    "repeats_per_formulation": 3,
+    "state": "A bag contains 55 red balls and 45 blue balls. One ball is selected randomly.",
+    "question_id": "is_red",
+    "formulations": [
+      {
+        "id": "instruction_only",
+        "description": "instruction only, no criteria",
+        "question": {
+          "type": "noul",
+          "instructions": "Is the ball red?"
+        }
+      },
+      {
+        "id": "criteria_plain",
+        "description": "plain true/false criteria",
+        "question": {
+          "type": "noul",
+          "instructions": "Is the ball red?",
+          "criteria": {
+            "true": "The ball is red.",
+            "false": "The ball is not red."
+          }
+        }
+      },
+      {
+        "id": "criteria_reworded",
+        "description": "reworded criteria",
+        "question": {
+          "type": "noul",
+          "instructions": "Decide whether the ball is red.",
+          "criteria": {
+            "true": "Return a high probability if the ball is red.",
+            "false": "Return a low probability if the ball is not red."
+          }
+        }
+      }
+    ]
+  },
+  "analysis": {
+    "means": {
+      "instruction_only": 0.5533,
+      "criteria_plain": 0.5733,
+      "criteria_reworded": 0.6267
+    },
+    "details": {
+      "instruction_only": {
+        "values": [
+          0.55,
+          0.55,
+          0.56
+        ],
+        "mean": 0.5533,
+        "range": 0.01
+      },
+      "criteria_plain": {
+        "values": [
+          0.58,
+          0.57,
+          0.57
+        ],
+        "mean": 0.5733,
+        "range": 0.01
+      },
+      "criteria_reworded": {
+        "values": [
+          0.63,
+          0.62,
+          0.63
+        ],
+        "mean": 0.6267,
+        "range": 0.01
+      }
+    },
+    "range_across_formulations": 0.0734,
+    "jitter_baseline": 0.02,
+    "exceeds_jitter_baseline": true,
+    "criteria_changes_output": true
+  },
+  "trials": [
+    {
+      "formulation": "instruction_only",
+      "formulation_description": "instruction only, no criteria",
+      "state": "A bag contains 55 red balls and 45 blue balls. One ball is selected randomly.",
+      "repeat": 1,
+      "timestamp": "2026-09-24T20:37:50.495480+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0d523898b7421bcfd6c4d1b03a105",
+      "latency_ms": 974.2755940005736,
+      "input_tokens": 292,
+      "output_tokens": 21,
+      "estimated_cost_usd": 1.2264000000000002e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Thu, 24 Sep 2026 20:37:50 GMT",
+        "server": "istio-envoy",
+        "content-length": "119",
+        "content-type": "application/json",
+        "x-typesafe-request-id": "req_01a0d523898b7421bcfd6c4d1b03a105",
+        "x-envoy-upstream-service-time": "233"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "is_red": {
+            "type": "noul",
+            "noul": 0.55
+          }
+        },
+        "usage": {
+          "input_tokens": 292,
+          "output_tokens": 21
+        }
+      },
+      "parsed": {
+        "is_red": {
+          "type": "noul",
+          "noul": 0.55
+        }
+      },
+      "error": null
+    },
+    {
+      "formulation": "instruction_only",
+      "formulation_description": "instruction only, no criteria",
+      "state": "A bag contains 55 red balls and 45 blue balls. One ball is selected randomly.",
+      "repeat": 2,
+      "timestamp": "2026-09-24T20:37:51.469952+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0d5238b677edabc326bd6c3f89442",
+      "latency_ms": 283.65093799948227,
+      "input_tokens": 292,
+      "output_tokens": 21,
+      "estimated_cost_usd": 1.2264000000000002e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Thu, 24 Sep 2026 20:37:51 GMT",
+        "server": "istio-envoy",
+        "content-length": "119",
+        "content-type": "application/json",
+        "x-typesafe-request-id": "req_01a0d5238b677edabc326bd6c3f89442",
+        "x-envoy-upstream-service-time": "44"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "is_red": {
+            "type": "noul",
+            "noul": 0.55
+          }
+        },
+        "usage": {
+          "input_tokens": 292,
+          "output_tokens": 21
+        }
+      },
+      "parsed": {
+        "is_red": {
+          "type": "noul",
+          "noul": 0.55
+        }
+      },
+      "error": null
+    },
+    {
+      "formulation": "instruction_only",
+      "formulation_description": "instruction only, no criteria",
+      "state": "A bag contains 55 red balls and 45 blue balls. One ball is selected randomly.",
+      "repeat": 3,
+      "timestamp": "2026-09-24T20:37:51.753748+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0d5238c847c6bb0362c553e364fb4",
+      "latency_ms": 294.05857699930493,
+      "input_tokens": 292,
+      "output_tokens": 21,
+      "estimated_cost_usd": 1.2264000000000002e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Thu, 24 Sep 2026 20:37:51 GMT",
+        "server": "istio-envoy",
+        "content-length": "119",
+        "content-type": "application/json",
+        "x-typesafe-request-id": "req_01a0d5238c847c6bb0362c553e364fb4",
+        "x-envoy-upstream-service-time": "45"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "is_red": {
+            "type": "noul",
+            "noul": 0.56
+          }
+        },
+        "usage": {
+          "input_tokens": 292,
+          "output_tokens": 21
+        }
+      },
+      "parsed": {
+        "is_red": {
+          "type": "noul",
+          "noul": 0.56
+        }
+      },
+      "error": null
+    },
+    {
+      "formulation": "criteria_plain",
+      "formulation_description": "plain true/false criteria",
+      "state": "A bag contains 55 red balls and 45 blue balls. One ball is selected randomly.",
+      "repeat": 1,
+      "timestamp": "2026-09-24T20:37:52.047921+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0d5238daa718687b6770c9662e394",
+      "latency_ms": 283.3136210010707,
+      "input_tokens": 319,
+      "output_tokens": 21,
+      "estimated_cost_usd": 1.3398000000000001e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Thu, 24 Sep 2026 20:37:51 GMT",
+        "server": "istio-envoy",
+        "content-length": "119",
+        "content-type": "application/json",
+        "x-typesafe-request-id": "req_01a0d5238daa718687b6770c9662e394",
+        "x-envoy-upstream-service-time": "44"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "is_red": {
+            "type": "noul",
+            "noul": 0.58
+          }
+        },
+        "usage": {
+          "input_tokens": 319,
+          "output_tokens": 21
+        }
+      },
+      "parsed": {
+        "is_red": {
+          "type": "noul",
+          "noul": 0.58
+        }
+      },
+      "error": null
+    },
+    {
+      "formulation": "criteria_plain",
+      "formulation_description": "plain true/false criteria",
+      "state": "A bag contains 55 red balls and 45 blue balls. One ball is selected randomly.",
+      "repeat": 2,
+      "timestamp": "2026-09-24T20:37:52.333824+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0d5238ec87c1aa3d7f5eed37587b7",
+      "latency_ms": 287.64190200126905,
+      "input_tokens": 319,
+      "output_tokens": 21,
+      "estimated_cost_usd": 1.3398000000000001e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Thu, 24 Sep 2026 20:37:51 GMT",
+        "server": "istio-envoy",
+        "content-length": "119",
+        "content-type": "application/json",
+        "x-typesafe-request-id": "req_01a0d5238ec87c1aa3d7f5eed37587b7",
+        "x-envoy-upstream-service-time": "46"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "is_red": {
+            "type": "noul",
+            "noul": 0.57
+          }
+        },
+        "usage": {
+          "input_tokens": 319,
+          "output_tokens": 21
+        }
+      },
+      "parsed": {
+        "is_red": {
+          "type": "noul",
+          "noul": 0.57
+        }
+      },
+      "error": null
+    },
+    {
+      "formulation": "criteria_plain",
+      "formulation_description": "plain true/false criteria",
+      "state": "A bag contains 55 red balls and 45 blue balls. One ball is selected randomly.",
+      "repeat": 3,
+      "timestamp": "2026-09-24T20:37:52.621664+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0d5238fe67a108ec2423e78890913",
+      "latency_ms": 322.7333849990828,
+      "input_tokens": 319,
+      "output_tokens": 21,
+      "estimated_cost_usd": 1.3398000000000001e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Thu, 24 Sep 2026 20:37:51 GMT",
+        "server": "istio-envoy",
+        "content-length": "119",
+        "content-type": "application/json",
+        "x-typesafe-request-id": "req_01a0d5238fe67a108ec2423e78890913",
+        "x-envoy-upstream-service-time": "82"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "is_red": {
+            "type": "noul",
+            "noul": 0.57
+          }
+        },
+        "usage": {
+          "input_tokens": 319,
+          "output_tokens": 21
+        }
+      },
+      "parsed": {
+        "is_red": {
+          "type": "noul",
+          "noul": 0.57
+        }
+      },
+      "error": null
+    },
+    {
+      "formulation": "criteria_reworded",
+      "formulation_description": "reworded criteria",
+      "state": "A bag contains 55 red balls and 45 blue balls. One ball is selected randomly.",
+      "repeat": 1,
+      "timestamp": "2026-09-24T20:37:52.944725+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0d523912c7706975cbbc7a0bf3f6b",
+      "latency_ms": 284.96343799997703,
+      "input_tokens": 332,
+      "output_tokens": 21,
+      "estimated_cost_usd": 1.3944e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Thu, 24 Sep 2026 20:37:53 GMT",
+        "server": "istio-envoy",
+        "content-length": "119",
+        "content-type": "application/json",
+        "x-typesafe-request-id": "req_01a0d523912c7706975cbbc7a0bf3f6b",
+        "x-envoy-upstream-service-time": "44"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "is_red": {
+            "type": "noul",
+            "noul": 0.63
+          }
+        },
+        "usage": {
+          "input_tokens": 332,
+          "output_tokens": 21
+        }
+      },
+      "parsed": {
+        "is_red": {
+          "type": "noul",
+          "noul": 0.63
+        }
+      },
+      "error": null
+    },
+    {
+      "formulation": "criteria_reworded",
+      "formulation_description": "reworded criteria",
+      "state": "A bag contains 55 red balls and 45 blue balls. One ball is selected randomly.",
+      "repeat": 2,
+      "timestamp": "2026-09-24T20:37:53.229958+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0d52392477ce1be4a3ad7a4033e07",
+      "latency_ms": 300.60406799930206,
+      "input_tokens": 332,
+      "output_tokens": 21,
+      "estimated_cost_usd": 1.3944e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Thu, 24 Sep 2026 20:37:52 GMT",
+        "server": "istio-envoy",
+        "content-length": "119",
+        "content-type": "application/json",
+        "x-typesafe-request-id": "req_01a0d52392477ce1be4a3ad7a4033e07",
+        "x-envoy-upstream-service-time": "61"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "is_red": {
+            "type": "noul",
+            "noul": 0.62
+          }
+        },
+        "usage": {
+          "input_tokens": 332,
+          "output_tokens": 21
+        }
+      },
+      "parsed": {
+        "is_red": {
+          "type": "noul",
+          "noul": 0.62
+        }
+      },
+      "error": null
+    },
+    {
+      "formulation": "criteria_reworded",
+      "formulation_description": "reworded criteria",
+      "state": "A bag contains 55 red balls and 45 blue balls. One ball is selected randomly.",
+      "repeat": 3,
+      "timestamp": "2026-09-24T20:37:53.530725+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0d5239373731f8e88c24f5bad47fe",
+      "latency_ms": 351.5155909990426,
+      "input_tokens": 332,
+      "output_tokens": 21,
+      "estimated_cost_usd": 1.3944e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Thu, 24 Sep 2026 20:37:52 GMT",
+        "server": "istio-envoy",
+        "content-length": "119",
+        "content-type": "application/json",
+        "x-typesafe-request-id": "req_01a0d5239373731f8e88c24f5bad47fe",
+        "x-envoy-upstream-service-time": "43"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "is_red": {
+            "type": "noul",
+            "noul": 0.63
+          }
+        },
+        "usage": {
+          "input_tokens": 332,
+          "output_tokens": 21
+        }
+      },
+      "parsed": {
+        "is_red": {
+          "type": "noul",
+          "noul": 0.63
+        }
+      },
+      "error": null
+    }
+  ]
+}

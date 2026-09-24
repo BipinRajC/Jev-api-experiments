@@ -803,3 +803,35 @@ SUPPORTED (conditions: 2026-09-23, `jev-1.13.0`, urn state; every batch returned
 Experiment:
 
 016
+
+---
+
+## H051 — Noul `criteria.{true,false}` materially changes the output
+
+Hypothesis:
+
+Adding explicit true/false criteria to a Noul question changes the Noul value beyond the ±0.02 jitter baseline.
+
+Status:
+
+SUPPORTED (conditions: 2026-09-23, `jev-1.13.0`, 55/45 bag state, 3 formulations × 3 repeats; range across formulation means 0.073 > 0.03 threshold; plain criteria +0.02, reworded criteria +0.07; consistent with wording sensitivity from 009)
+
+Experiment:
+
+017
+
+---
+
+## H052 — Noul `criteria.{true,false}` does not change the output
+
+Hypothesis:
+
+Adding explicit true/false criteria leaves the Noul value within the ±0.02 jitter baseline.
+
+Status:
+
+REJECTED (conditions: 2026-09-23, `jev-1.13.0`, 55/45 bag state, 3 formulations × 3 repeats; range 0.073 exceeds the baseline; reworded criteria raised Noul by ~0.07)
+
+Experiment:
+
+017

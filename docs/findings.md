@@ -317,3 +317,16 @@ Only findings measured in this repository.
 - **Limitations:** n=1 per batch. Homogeneous Noul only. Latency confounded by network jitter (008) and warmup. 20 is the largest tested.
 - **Confidence in the finding:** High that large batches work and scale sublinearly in tokens; moderate on the flat-latency claim (needs more repeats to separate from jitter).
 - **Implications:** Strongly favorable for FootyQuant v2: batching many questions per match state is both token-efficient and latency-neutral (parallel). The ~31 tokens/question marginal cost at 20 questions means a full match query could ask dozens of questions cheaply.
+
+---
+
+## F025 — Noul criteria affect output, but mostly via the extra wording, not the criteria per se
+
+- **Related hypothesis:** H051, H052
+- **Experiment(s):** 017 (`results/017-noul-criteria/run-001.json`)
+- **Conditions:** 2026-09-23 UTC; `jev-1.13.0`; 55/45 bag state; 3 Noul formulations (instruction-only, plain true/false criteria, reworded criteria) × 3 repeats
+- **Evidence:** Noul means: instruction-only 0.553, plain criteria 0.573, reworded criteria 0.627. Range 0.073. Plain criteria moved output by only +0.02 (at jitter boundary); reworded criteria (with "high/low probability" meta-language) moved it by +0.07.
+- **Interpretation:** Criteria do change Noul, but the magnitude depends on the wording. Plain true/false criteria (restating the proposition) have a marginal effect, while reworded criteria that add probability meta-language have a larger effect — consistent with the wording sensitivity established in 009. The effect looks like it comes mostly from the extra wording, not from the criteria mechanism itself.
+- **Limitations:** Single state. Three formulations. n=3. The reworded criteria confound "criteria" with "extra instruction wording."
+- **Confidence in the finding:** High that criteria (as additional wording) shift Noul; moderate that the shift is attributable to wording rather than the criteria field.
+- **Implications:** Using `criteria` adds tokens and shifts output, so it should be added deliberately and consistently. Because the shift tracks wording, keep criteria wording neutral (restating the proposition) to avoid inflating Noul. This complements 009's guidance to standardize all question wording, including criteria.
