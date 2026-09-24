@@ -707,3 +707,35 @@ SUPPORTED (conditions: 2026-09-23, `jev-1.13.0`, 0-5 evidence-strength rubric, 6
 Experiment:
 
 014
+
+---
+
+## H045 — `jev-latest` resolves to a versioned model ID
+
+Hypothesis:
+
+Sending `model: "jev-latest"` returns a response whose `model` field is a concrete versioned ID, not the alias.
+
+Status:
+
+SUPPORTED (conditions: 2026-09-23, `jev-1.13.0`; request `jev-latest` → response `model` = `jev-1.13.0`; HTTP 200; n=1)
+
+Experiment:
+
+015
+
+---
+
+## H046 — `jev-latest` produces the same output as the pinned `jev-1.13.0`
+
+Hypothesis:
+
+On an identical question, `jev-latest` and the pinned `jev-1.13.0` produce the same Noul output (within jitter).
+
+Status:
+
+SUPPORTED (conditions: 2026-09-23, 70/30 bag state, Noul "Will the selected ball be red?"; alias 0.66 vs pinned 0.67, diff 0.01 within the 0.02 jitter baseline; n=1 indicative)
+
+Experiment:
+
+015

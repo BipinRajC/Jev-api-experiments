@@ -36,7 +36,7 @@ Conflicts: official TypeSafe docs take precedence over blogs, OpenRouter, and co
 - Alias `jev-latest` currently points to `jev-1.13.0` — VERIFIED FROM OFFICIAL DOCS
 - Alias `jev-preview` currently also points to `jev-1.13.0` — VERIFIED FROM OFFICIAL DOCS
 - Experiments in this repo pin `jev-1.13.0` by default (not the moving alias) — INFERRED from reproducibility requirement
-- Response `model` field reports the versioned ID that answered — VERIFIED FROM OFFICIAL DOCS; VERIFIED EXPERIMENTALLY for request `jev-1.13.0` → response `jev-1.13.0` (001). Alias `jev-latest` resolution: UNVERIFIED experimentally.
+- Response `model` field reports the versioned ID that answered — VERIFIED FROM OFFICIAL DOCS; VERIFIED EXPERIMENTALLY for request `jev-1.13.0` → response `jev-1.13.0` (001). Alias `jev-latest` resolution: VERIFIED EXPERIMENTALLY (015): request `jev-latest` → response `jev-1.13.0`, output 0.66 vs pinned 0.67 (within jitter), as of 2026-09-23. Alias targets move when new versions ship.
 - `GET /v1/models` currently lists aliases; versioned IDs are still accepted — VERIFIED FROM OFFICIAL DOCS
 
 ## Request format

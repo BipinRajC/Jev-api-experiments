@@ -291,3 +291,16 @@ Only findings measured in this repository.
 - **Limitations:** Single rubric. The weak/moderate state wording may have understated their intended levels. n=3. Wording can shift scores (009).
 - **Confidence in the finding:** High that Score interpolates, is monotonic, and is stable; moderate on exact calibration to rubric levels.
 - **Implications:** Score is the strongest primitive for quantitative, reproducible judgments. It is the natural candidate for Phase 3 calibration (does its continuous output correspond to observed frequency?). For FootyQuant v2, a well-designed Score rubric can yield stable quantitative estimates, provided the state wording is controlled (009) and the rubric levels are described precisely.
+
+---
+
+## F023 — `jev-latest` alias resolves to `jev-1.13.0` and matches its output
+
+- **Related hypothesis:** H045, H046
+- **Experiment(s):** 015 (`results/015-alias-resolution/run-001.json`)
+- **Conditions:** 2026-09-23 UTC; 70/30 bag state; Noul "Will the selected ball be red?"; one `jev-latest` call + one `jev-1.13.0` control
+- **Evidence:** Request `jev-latest` → response `model` = `jev-1.13.0` (HTTP 200). Alias Noul 0.66 vs pinned 0.67 (diff 0.01, within jitter).
+- **Interpretation:** `jev-latest` currently resolves to `jev-1.13.0` and produces matching output, verifying the documented alias mapping for this snapshot. Aliases move when new versions ship.
+- **Limitations:** n=1 each. Snapshot as of 2026-09-23. Does not test `jev-preview`. The 0.01 Noul diff is within jitter but cannot rule out a subtle version difference without repeatability.
+- **Confidence in the finding:** High that the alias resolves to `jev-1.13.0` on this date; moderate on full output equivalence.
+- **Implications:** Pinned versioned IDs remain the correct choice for reproducible experiments. This resolves the api-notes.md "UNVERIFIED experimentally" note for `jev-latest` alias resolution.
