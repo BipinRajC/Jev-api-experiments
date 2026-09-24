@@ -330,3 +330,16 @@ Only findings measured in this repository.
 - **Limitations:** Single state. Three formulations. n=3. The reworded criteria confound "criteria" with "extra instruction wording."
 - **Confidence in the finding:** High that criteria (as additional wording) shift Noul; moderate that the shift is attributable to wording rather than the criteria field.
 - **Implications:** Using `criteria` adds tokens and shifts output, so it should be added deliberately and consistently. Because the shift tracks wording, keep criteria wording neutral (restating the proposition) to avoid inflating Noul. This complements 009's guidance to standardize all question wording, including criteria.
+
+---
+
+## F026 — Normal rapid operation does not rate-limit (429 untriggered, by design)
+
+- **Related hypothesis:** H053, H054
+- **Experiment(s):** 018 (`results/018-rate-limit/run-001.json`)
+- **Conditions:** 2026-09-23 UTC; `jev-1.13.0`; 10 back-to-back Noul requests on a 70/30 bag state; ~200 rpm estimated (well below documented 1,200 rpm)
+- **Evidence:** 10/10 HTTP 200, no 429, no retry-after headers. Mean latency 344 ms.
+- **Interpretation:** Normal operation, even rapid back-to-back calls, does not trigger rate limiting — consistent with documented limits. The 429 response structure remains unobserved because the experiment deliberately stayed within limits (the handoff prohibits intentionally hammering the API).
+- **Limitations:** Does not test the rate-limit ceiling. Single burst. Token-based limits untested.
+- **Confidence in the finding:** High that normal rapid operation works; the exact 429 trigger/ceiling is untested.
+- **Implications:** For FootyQuant v2, typical usage (batched requests, moderate frequency) will not hit rate limits. No special rate-limit handling is needed for normal operation, but a 429 retry path is still prudent defensive design.

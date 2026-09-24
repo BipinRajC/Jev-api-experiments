@@ -835,3 +835,35 @@ REJECTED (conditions: 2026-09-23, `jev-1.13.0`, 55/45 bag state, 3 formulations 
 Experiment:
 
 017
+
+---
+
+## H053 — A moderate burst of requests completes without HTTP 429
+
+Hypothesis:
+
+A short burst of rapid requests (well within documented limits) completes without rate-limiting.
+
+Status:
+
+SUPPORTED (conditions: 2026-09-23, `jev-1.13.0`, 10 back-to-back Noul requests on a 70/30 bag state; 10/10 HTTP 200, no 429, no retry-after headers; ~200 rpm estimated, far below the documented 1,200 rpm; does NOT test the rate-limit ceiling)
+
+Experiment:
+
+018
+
+---
+
+## H054 — A 429 response includes a meaningful body and retry-after info
+
+Hypothesis:
+
+If a rate-limit (429) occurs, the response includes a useful error body and/or retry-after header.
+
+Status:
+
+UNTESTED / NOT ASSESSED (conditions: no 429 was observed because the experiment deliberately stayed within documented limits; the response structure on 429 remains unverified — noted as VERIFIED FROM OFFICIAL DOCS in api-notes but UNVERIFIED experimentally)
+
+Experiment:
+
+018
