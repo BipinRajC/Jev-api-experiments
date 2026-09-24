@@ -304,3 +304,16 @@ Only findings measured in this repository.
 - **Limitations:** n=1 each. Snapshot as of 2026-09-23. Does not test `jev-preview`. The 0.01 Noul diff is within jitter but cannot rule out a subtle version difference without repeatability.
 - **Confidence in the finding:** High that the alias resolves to `jev-1.13.0` on this date; moderate on full output equivalence.
 - **Implications:** Pinned versioned IDs remain the correct choice for reproducible experiments. This resolves the api-notes.md "UNVERIFIED experimentally" note for `jev-latest` alias resolution.
+
+---
+
+## F024 — Large question batches are efficient: sublinear tokens, flat latency, no dropped answers
+
+- **Related hypothesis:** H047, H048, H049, H050
+- **Experiment(s):** 016 (`results/016-fan-out/run-001.json`)
+- **Conditions:** 2026-09-23 UTC; `jev-1.13.0`; urn state; batches of 3/5/10/20 homogeneous Noul questions; n=1 per batch
+- **Evidence:** All HTTP 200 with exact answer counts (3/3, 5/5, 10/10, 20/20). Input tokens: 327 (3q), 365 (5q), 435 (10q), 620 (20q) → tokens/question fell 109 → 31. Latency: 833 (warmup), then flat ~317ms for 5/10/20 questions.
+- **Interpretation:** Batching handles many questions cleanly with sublinear token cost (shared state amortized) and flat latency after warmup (consistent with parallel question evaluation). This strongly extends 006's 3-question token-savings finding to 20 questions. No dropped answers.
+- **Limitations:** n=1 per batch. Homogeneous Noul only. Latency confounded by network jitter (008) and warmup. 20 is the largest tested.
+- **Confidence in the finding:** High that large batches work and scale sublinearly in tokens; moderate on the flat-latency claim (needs more repeats to separate from jitter).
+- **Implications:** Strongly favorable for FootyQuant v2: batching many questions per match state is both token-efficient and latency-neutral (parallel). The ~31 tokens/question marginal cost at 20 questions means a full match query could ask dozens of questions cheaply.

@@ -87,7 +87,7 @@ Named map; keys are not sent to the underlying model. VERIFIED FROM OFFICIAL DOC
 
 ## Batching
 
-Multiple questions in one request, evaluated in parallel against one `state`. VERIFIED FROM OFFICIAL DOCS. VERIFIED EXPERIMENTALLY (006): one request returned Noul+Choice+Score together. Input tokens 426 vs 954 for three separate calls (n=1, 3 questions, same state). Output 77 vs 84. Noul 0.99 vs 1.0 across batch vs separate; Choice/Score matched. Large fan-out (cookbook 13-question claims): UNVERIFIED here.
+Multiple questions in one request, evaluated in parallel against one `state`. VERIFIED FROM OFFICIAL DOCS. VERIFIED EXPERIMENTALLY (006): one request returned Noul+Choice+Score together. Input tokens 426 vs 954 for three separate calls (n=1, 3 questions, same state). Output 77 vs 84. Noul 0.99 vs 1.0 across batch vs separate; Choice/Score matched. Large fan-out VERIFIED EXPERIMENTALLY (016): batches of 3/5/10/20 Noul questions all returned HTTP 200 with exact answer counts; input tokens 327/365/435/620 (tokens/question fell 109→31, sublinear, state amortized); latency flat ~317ms from 5 to 20 questions after warmup, consistent with parallel evaluation; no dropped answers up to 20 questions.
 
 ## Errors
 

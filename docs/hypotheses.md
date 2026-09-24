@@ -739,3 +739,67 @@ SUPPORTED (conditions: 2026-09-23, 70/30 bag state, Noul "Will the selected ball
 Experiment:
 
 015
+
+---
+
+## H047 — A single request can contain many questions and return all answers
+
+Hypothesis:
+
+A single System One request with up to 20 questions returns all answers with HTTP 200.
+
+Status:
+
+SUPPORTED (conditions: 2026-09-23, `jev-1.13.0`, urn state, batches of 3/5/10/20 Noul questions; all HTTP 200 with exact answer counts 3/3, 5/5, 10/10, 20/20)
+
+Experiment:
+
+016
+
+---
+
+## H048 — Input tokens scale sublinearly with question count
+
+Hypothesis:
+
+Batching many questions amortizes the shared state, so input tokens grow more slowly than question count.
+
+Status:
+
+SUPPORTED (conditions: 2026-09-23, `jev-1.13.0`, urn state; tokens/question fell 109 (3q) → 73 (5q) → 43.5 (10q) → 31 (20q); going 10→20 questions added only ~185 input tokens)
+
+Experiment:
+
+016
+
+---
+
+## H049 — Latency increases with question count
+
+Hypothesis:
+
+A batch with more questions takes longer than one with fewer.
+
+Status:
+
+REJECTED (conditions: 2026-09-23, `jev-1.13.0`, urn state; after a slow first call (833ms warmup), latency was flat ~317ms for 5, 10, AND 20 questions; consistent with the documented parallel evaluation of questions; latency confounded by network jitter per 008)
+
+Experiment:
+
+016
+
+---
+
+## H050 — All questions in a large batch are answered consistently
+
+Hypothesis:
+
+No questions are dropped or left unanswered in a large batch.
+
+Status:
+
+SUPPORTED (conditions: 2026-09-23, `jev-1.13.0`, urn state; every batch returned exactly the number of answers requested, up to 20/20)
+
+Experiment:
+
+016

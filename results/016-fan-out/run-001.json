@@ -1,0 +1,426 @@
+{
+  "experiment_id": "016-fan-out",
+  "run_id": "run-001",
+  "timestamp": "2026-09-24T20:27:22.619660+00:00",
+  "model_requested": "jev-1.13.0",
+  "api": {
+    "provider": "typesafe_direct",
+    "base_url": "https://api.typesafe.ai",
+    "endpoint": "/v1/systemone",
+    "method": "POST"
+  },
+  "design": {
+    "state": "An urn contains 60 red, 25 blue, and 15 green balls. One ball is drawn randomly.",
+    "batch_sizes": [
+      3,
+      5,
+      10,
+      20
+    ],
+    "propositions": [
+      "Will the drawn ball be red?",
+      "Will the drawn ball be blue?",
+      "Will the drawn ball be green?",
+      "Will the drawn ball be a warm color (red)?",
+      "Will the drawn ball be a cool color (blue or green)?",
+      "Is red the most likely outcome?",
+      "Is blue more likely than green?",
+      "Is green the least likely outcome?",
+      "Will the ball not be blue?",
+      "Will the ball not be green?",
+      "Is there more than a 50% chance the ball is red?",
+      "Is the chance of blue over 20%?",
+      "Is the chance of green under 20%?",
+      "Will the ball be either red or blue?",
+      "Will the ball be either red or green?",
+      "Is the drawn ball more likely to be red than non-red?",
+      "Is the probability of green less than 25%?",
+      "Is the probability of blue less than 30%?",
+      "Is the probability of red above 50%?",
+      "Will the ball be one of the two more common colors?"
+    ]
+  },
+  "analysis": {
+    "details": [
+      {
+        "n_questions": 3,
+        "http_status": 200,
+        "input_tokens": 327,
+        "output_tokens": 58,
+        "latency_ms": 832.9350800004249,
+        "n_answers_returned": 3
+      },
+      {
+        "n_questions": 5,
+        "http_status": 200,
+        "input_tokens": 365,
+        "output_tokens": 94,
+        "latency_ms": 319.37022199963394,
+        "n_answers_returned": 5
+      },
+      {
+        "n_questions": 10,
+        "http_status": 200,
+        "input_tokens": 435,
+        "output_tokens": 184,
+        "latency_ms": 317.39108999954624,
+        "n_answers_returned": 10
+      },
+      {
+        "n_questions": 20,
+        "http_status": 200,
+        "input_tokens": 620,
+        "output_tokens": 364,
+        "latency_ms": 317.2795649998079,
+        "n_answers_returned": 20
+      }
+    ],
+    "all_success": true,
+    "all_answers_complete": true,
+    "latency_increases_with_count": false,
+    "token_scaling": [
+      {
+        "n_questions": 3,
+        "tokens_per_question": 109.0
+      },
+      {
+        "n_questions": 5,
+        "tokens_per_question": 73.0
+      },
+      {
+        "n_questions": 10,
+        "tokens_per_question": 43.5
+      },
+      {
+        "n_questions": 20,
+        "tokens_per_question": 31.0
+      }
+    ],
+    "input_tokens_3": 327,
+    "input_tokens_20": 620
+  },
+  "trials": [
+    {
+      "n_questions": 3,
+      "state": "An urn contains 60 red, 25 blue, and 15 green balls. One ball is drawn randomly.",
+      "timestamp": "2026-09-24T20:27:22.637443+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0d519f4fb7394b3a544d466606f9d",
+      "latency_ms": 832.9350800004249,
+      "input_tokens": 327,
+      "output_tokens": 58,
+      "estimated_cost_usd": 1.3734e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Thu, 24 Sep 2026 20:27:23 GMT",
+        "server": "istio-envoy",
+        "content-length": "183",
+        "content-type": "application/json",
+        "x-typesafe-request-id": "req_01a0d519f4fb7394b3a544d466606f9d",
+        "x-envoy-upstream-service-time": "94"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "q00": {
+            "type": "noul",
+            "noul": 0.56
+          },
+          "q01": {
+            "type": "noul",
+            "noul": 0.13
+          },
+          "q02": {
+            "type": "noul",
+            "noul": 0.1
+          }
+        },
+        "usage": {
+          "input_tokens": 327,
+          "output_tokens": 58
+        }
+      },
+      "n_answers_returned": 3,
+      "answers_parsed": {
+        "q00": 0.56,
+        "q01": 0.13,
+        "q02": 0.1
+      },
+      "error": null
+    },
+    {
+      "n_questions": 5,
+      "state": "An urn contains 60 red, 25 blue, and 15 green balls. One ball is drawn randomly.",
+      "timestamp": "2026-09-24T20:27:23.470641+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0d519f64d72a18354cba6ad3e3e32",
+      "latency_ms": 319.37022199963394,
+      "input_tokens": 365,
+      "output_tokens": 94,
+      "estimated_cost_usd": 1.533e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Thu, 24 Sep 2026 20:27:23 GMT",
+        "server": "istio-envoy",
+        "content-length": "251",
+        "content-type": "application/json",
+        "x-typesafe-request-id": "req_01a0d519f64d72a18354cba6ad3e3e32",
+        "x-envoy-upstream-service-time": "67"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "q00": {
+            "type": "noul",
+            "noul": 0.56
+          },
+          "q01": {
+            "type": "noul",
+            "noul": 0.13
+          },
+          "q02": {
+            "type": "noul",
+            "noul": 0.1
+          },
+          "q03": {
+            "type": "noul",
+            "noul": 0.56
+          },
+          "q04": {
+            "type": "noul",
+            "noul": 0.31
+          }
+        },
+        "usage": {
+          "input_tokens": 365,
+          "output_tokens": 94
+        }
+      },
+      "n_answers_returned": 5,
+      "answers_parsed": {
+        "q00": 0.56,
+        "q01": 0.13,
+        "q02": 0.1,
+        "q03": 0.56,
+        "q04": 0.31
+      },
+      "error": null
+    },
+    {
+      "n_questions": 10,
+      "state": "An urn contains 60 red, 25 blue, and 15 green balls. One ball is drawn randomly.",
+      "timestamp": "2026-09-24T20:27:23.790371+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0d519f7877f67944bfc815e3610a7",
+      "latency_ms": 317.39108999954624,
+      "input_tokens": 435,
+      "output_tokens": 184,
+      "estimated_cost_usd": 1.827e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Thu, 24 Sep 2026 20:27:23 GMT",
+        "server": "istio-envoy",
+        "content-length": "421",
+        "content-type": "application/json",
+        "x-typesafe-request-id": "req_01a0d519f7877f67944bfc815e3610a7",
+        "x-envoy-upstream-service-time": "67"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "q00": {
+            "type": "noul",
+            "noul": 0.56
+          },
+          "q01": {
+            "type": "noul",
+            "noul": 0.12
+          },
+          "q02": {
+            "type": "noul",
+            "noul": 0.1
+          },
+          "q03": {
+            "type": "noul",
+            "noul": 0.55
+          },
+          "q04": {
+            "type": "noul",
+            "noul": 0.3
+          },
+          "q05": {
+            "type": "noul",
+            "noul": 0.99
+          },
+          "q06": {
+            "type": "noul",
+            "noul": 0.98
+          },
+          "q07": {
+            "type": "noul",
+            "noul": 0.97
+          },
+          "q08": {
+            "type": "noul",
+            "noul": 0.81
+          },
+          "q09": {
+            "type": "noul",
+            "noul": 0.85
+          }
+        },
+        "usage": {
+          "input_tokens": 435,
+          "output_tokens": 184
+        }
+      },
+      "n_answers_returned": 10,
+      "answers_parsed": {
+        "q00": 0.56,
+        "q01": 0.12,
+        "q02": 0.1,
+        "q03": 0.55,
+        "q04": 0.3,
+        "q05": 0.99,
+        "q06": 0.98,
+        "q07": 0.97,
+        "q08": 0.81,
+        "q09": 0.85
+      },
+      "error": null
+    },
+    {
+      "n_questions": 20,
+      "state": "An urn contains 60 red, 25 blue, and 15 green balls. One ball is drawn randomly.",
+      "timestamp": "2026-09-24T20:27:24.107964+00:00",
+      "http_status": 200,
+      "request_id": "req_01a0d519f8e67f1ba4d89c9a25bcbfb1",
+      "latency_ms": 317.2795649998079,
+      "input_tokens": 620,
+      "output_tokens": 364,
+      "estimated_cost_usd": 2.604e-05,
+      "model_returned": "jev-1.13.0",
+      "response_headers": {
+        "date": "Thu, 24 Sep 2026 20:27:23 GMT",
+        "server": "istio-envoy",
+        "content-length": "760",
+        "content-type": "application/json",
+        "x-typesafe-request-id": "req_01a0d519f8e67f1ba4d89c9a25bcbfb1",
+        "x-envoy-upstream-service-time": "45"
+      },
+      "raw_response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "q00": {
+            "type": "noul",
+            "noul": 0.57
+          },
+          "q01": {
+            "type": "noul",
+            "noul": 0.13
+          },
+          "q02": {
+            "type": "noul",
+            "noul": 0.1
+          },
+          "q03": {
+            "type": "noul",
+            "noul": 0.56
+          },
+          "q04": {
+            "type": "noul",
+            "noul": 0.3
+          },
+          "q05": {
+            "type": "noul",
+            "noul": 0.99
+          },
+          "q06": {
+            "type": "noul",
+            "noul": 0.97
+          },
+          "q07": {
+            "type": "noul",
+            "noul": 0.97
+          },
+          "q08": {
+            "type": "noul",
+            "noul": 0.81
+          },
+          "q09": {
+            "type": "noul",
+            "noul": 0.85
+          },
+          "q10": {
+            "type": "noul",
+            "noul": 0.96
+          },
+          "q11": {
+            "type": "noul",
+            "noul": 0.85
+          },
+          "q12": {
+            "type": "noul",
+            "noul": 0.96
+          },
+          "q13": {
+            "type": "noul",
+            "noul": 0.82
+          },
+          "q14": {
+            "type": "noul",
+            "noul": 0.71
+          },
+          "q15": {
+            "type": "noul",
+            "noul": 0.94
+          },
+          "q16": {
+            "type": "noul",
+            "noul": 0.98
+          },
+          "q17": {
+            "type": "noul",
+            "noul": 0.96
+          },
+          "q18": {
+            "type": "noul",
+            "noul": 0.97
+          },
+          "q19": {
+            "type": "noul",
+            "noul": 0.9
+          }
+        },
+        "usage": {
+          "input_tokens": 620,
+          "output_tokens": 364
+        }
+      },
+      "n_answers_returned": 20,
+      "answers_parsed": {
+        "q00": 0.57,
+        "q01": 0.13,
+        "q02": 0.1,
+        "q03": 0.56,
+        "q04": 0.3,
+        "q05": 0.99,
+        "q06": 0.97,
+        "q07": 0.97,
+        "q08": 0.81,
+        "q09": 0.85,
+        "q10": 0.96,
+        "q11": 0.85,
+        "q12": 0.96,
+        "q13": 0.82,
+        "q14": 0.71,
+        "q15": 0.94,
+        "q16": 0.98,
+        "q17": 0.96,
+        "q18": 0.97,
+        "q19": 0.9
+      },
+      "error": null
+    }
+  ]
+}
