@@ -343,3 +343,22 @@ Only findings measured in this repository.
 - **Limitations:** Does not test the rate-limit ceiling. Single burst. Token-based limits untested.
 - **Confidence in the finding:** High that normal rapid operation works; the exact 429 trigger/ceiling is untested.
 - **Implications:** For FootyQuant v2, typical usage (batched requests, moderate frequency) will not hit rate limits. No special rate-limit handling is needed for normal operation, but a 429 retry path is still prudent defensive design.
+
+---
+
+## F027 — Noul is reasonably well-calibrated with a systematic conservative bias of ~0.04
+
+- **Related hypothesis:** H055, H056, H057, H058
+- **Experiment(s):** 019 (`results/019-calibration/run-001.json`)
+- **Conditions:** 2026-09-23 UTC; `jev-1.13.0`; 5 probability levels (0.50/0.60/0.70/0.80/0.90) × 20 instances each = 100 Noul + 100 Score calls; fixed question wording "Will the selected ball be red?"; bag-of-balls state
+- **Evidence:**
+  - Noul Brier: 0.195 (beats both the 0.25 constant-0.5 baseline and the 0.210 constant-base-rate baseline)
+  - Noul correlation with ground truth: r=0.983 (level means)
+  - Systematic bias: Noul understates probabilities by mean 0.037
+  - Level mean abs error: 0.040
+  - Noul stdev within level: ~0.005 (very tight)
+  - Score Brier: 0.258 (worse than constant-0.5 baseline; 5-level rubric too coarse)
+- **Interpretation:** Noul is useable for calibrated probability estimates. It beats both naive baselines (constant 0.5 and constant base rate). The conservative bias (~0.04) is systematic and consistent with earlier findings (008's 0.46 vs 0.50). Within-level variance is tiny (stdev ~0.005), so one call reliably estimates the central tendency. Score calibration is poor with the current 5-level rubric because it cannot resolve fine-grained differences (80% vs 90% both land at ~3.0/0.75).
+- **Limitations:** Bag-of-balls domain only; n=20 per level; outcome sampling noise affects bin-level calibration error; single fixed Noul wording; Score rubric too coarse for probability calibration.
+- **Confidence in the finding:** High that Noul Brier beats baseline on this domain; high that the conservative bias is systematic; moderate that the exact bias magnitude (-0.037) generalizes to other wordings/domains.
+- **Implications:** For FootyQuant v2, Noul can be used for calibrated probability estimates. The systematic -0.04 bias can be corrected (add ~0.04 to Noul for better calibration). Score needs a finer-grained rubric for probability tasks. One Noul call per question is sufficient (within-level variance is negligible).

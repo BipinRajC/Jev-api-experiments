@@ -867,3 +867,67 @@ UNTESTED / NOT ASSESSED (conditions: no 429 was observed because the experiment 
 Experiment:
 
 018
+
+---
+
+## H055 — Noul is positively correlated with ground-truth probabilities
+
+Hypothesis:
+
+Noul values and ground-truth probabilities are positively correlated with a high correlation coefficient.
+
+Status:
+
+SUPPORTED (conditions: 2026-09-23, `jev-1.13.0`, 5 probability levels × 20 each = 100 instances; Noul vs ground truth across level means r=0.983, per-instance r not computed due to tight within-level clustering)
+
+Experiment:
+
+019
+
+---
+
+## H056 — Noul Brier score is better than a constant-0.5 baseline
+
+Hypothesis:
+
+Noul's Brier score (mean squared error between predicted probability and actual outcome) is lower than the constant-0.5 baseline of 0.25.
+
+Status:
+
+SUPPORTED (conditions: 2026-09-23, `jev-1.13.0`, 100 predictions across 5 probability levels; Noul Brier 0.195 < 0.25 baseline; also beats constant base-rate baseline of 0.210)
+
+Experiment:
+
+019
+
+---
+
+## H057 — Noul is not perfectly calibrated (systematic bias exists)
+
+Hypothesis:
+
+Noul has a systematic calibration bias — the mean predicted Noul does not exactly equal the outcome frequency.
+
+Status:
+
+SUPPORTED (conditions: 2026-09-23, `jev-1.13.0`, 100 predictions across 5 levels; systematic conservative bias of ~0.037; Noul understates probabilities at extremes: p=0.50→0.418, p=0.90→0.857; best at p=0.60→0.607; level mean abs error 0.040)
+
+Experiment:
+
+019
+
+---
+
+## H058 — Score on a probability rubric is better calibrated than Noul
+
+Hypothesis:
+
+Score with a mapped probability rubric (0/0.25/0.5/0.75/1.0) produces better-calibrated probability estimates than Noul.
+
+Status:
+
+REJECTED (conditions: 2026-09-23, `jev-1.13.0`, 100 Score calls across 5 probability levels; Score Brier 0.258 > Noul Brier 0.195; Score worse than constant-0.5 baseline; the 5-level rubric is too coarse — Score cannot distinguish 80% from 90%)
+
+Experiment:
+
+019
