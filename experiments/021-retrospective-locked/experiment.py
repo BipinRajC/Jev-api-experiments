@@ -221,6 +221,13 @@ def build_state(row: pd.Series) -> dict[str, Any]:
 
 
 def arm_questions(arm: str) -> dict[str, dict[str, Any]]:
+    if "choice" in arm:
+        # must precede the _1x2 check: choice_1x2 is a single three-way question
+        return (
+            Q20.choice_1x2_question()
+            if arm == "choice_1x2"
+            else Q20.choice_binary_questions()
+        )
     if arm.endswith("_1x2"):
         if "noul" in arm:
             return {
@@ -237,10 +244,6 @@ def arm_questions(arm: str) -> dict[str, dict[str, Any]]:
         return {
             e: q for e, q in Q20.score_questions().items() if e in Q20.BINARY_EVENTS
         }
-    if arm == "choice_binary":
-        return Q20.choice_binary_questions()
-    if arm == "choice_1x2":
-        return Q20.choice_1x2_question()
     raise ValueError(f"unknown arm {arm}")
 
 
@@ -386,7 +389,8 @@ def main() -> int:
         print("Freeze-only mode: no API calls made.")
         return 0
 
-    # Resume support: load completed trial keys from the append-only stream.
+    # Resume support: only validated records count as done; failed and
+    # rejected attempts are retried (their original records stay in the stream).
     done: set[str] = set()
     stream_lines: list[dict[str, Any]] = []
     if STREAM_PATH.exists():
@@ -397,8 +401,15 @@ def main() -> int:
                     continue
                 rec = json.loads(line)
                 stream_lines.append(rec)
-                done.add(rec["run_local_id"])
-        print(f"Resuming: {len(done)} calls already recorded in {STREAM_PATH.name}.")
+                if (
+                    rec.get("error") is None
+                    and rec.get("parsed", {}).get("validation") == "ok"
+                ):
+                    done.add(rec["run_local_id"])
+        print(
+            f"Resuming: {len(done)} valid calls done, "
+            f"{len(stream_lines) - len(done)} earlier attempts will be retried/superseded."
+        )
 
     rng = np.random.RandomState(SEED + 2)
     fixtures_by_id = {f["match_id"]: f for f in protocol["fixtures"]}
