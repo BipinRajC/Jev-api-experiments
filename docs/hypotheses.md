@@ -931,3 +931,67 @@ REJECTED (conditions: 2026-09-23, `jev-1.13.0`, 100 Score calls across 5 probabi
 Experiment:
 
 019
+
+---
+
+## H059 — Football pipeline produces valid primitive outputs end to end
+
+Hypothesis:
+
+On real as-of football states, Noul, Score, and Choice all return parseable, in-range probability outputs for 1X2, over/under 2.5, BTTS, and corners-over-9.5 questions, with an invalid rate below 5% per arm.
+
+Status:
+
+SUPPORTED (conditions: 2026-10-18/19 UTC, `jev-1.13.0`, 48 stratified completed 2025/26 fixtures, 432 calls across 8 arms; 0 HTTP failures, 0 parse rejections, all scored probabilities finite in [0,1], every 1X2 distribution summed to 1 after recorded normalization)
+
+Experiment:
+
+020
+
+---
+
+## H060 — Choice's native 1X2 distribution is not overconfident
+
+Hypothesis:
+
+Choice's native three-way football distribution performs within 0.05 three-class Brier of Noul and Score on the same fixtures.
+
+Status:
+
+REJECTED (conditions: 2026-10-18/19 UTC, `jev-1.13.0`, n=48 paired completed 2025/26 fixtures; Choice 1X2 Brier 0.788 vs Noul 0.591 and Score 0.579; paired Noul−Choice mean diff −0.197, bootstrap 95% CI [−0.331, −0.065]; 16/48 Choice distributions put ≥0.99 on one class, vs 0/48 for Noul and Score — consistent with the one-hot Choice behavior of H019)
+
+Experiment:
+
+020
+
+---
+
+## H061 — Repeat-call spread on football states stays near the synthetic jitter baseline
+
+Hypothesis:
+
+Repeating the same football request produces event-probability differences of the same order as the ±0.02 synthetic jitter baseline (mean absolute repeat difference ≤ 0.04 per event).
+
+Status:
+
+SUPPORTED (conditions: 2026-10-18/19 UTC, `jev-1.13.0`, 8 fixtures × 6 core arms repeated once (24 paired event sets); mean absolute repeat difference 0.006–0.017 per event, max single-event 0.07 and max 1X2 L1 distance 0.073; no ordering or normalization errors)
+
+Experiment:
+
+020
+
+---
+
+## H062 — Names/date-only states are not suspiciously informed (contamination probe)
+
+Hypothesis:
+
+A names-and-dates-only state (no performance fields) produces clearly worse forecasts than the full as-of state, indicating the model is not answering from memorized match knowledge.
+
+Status:
+
+INCONCLUSIVE (conditions: 2026-10-18/19 UTC, `jev-1.13.0`, n=48 paired completed 2025/26 fixtures, Noul 1X2; names/date-only Brier 0.609 vs full state 0.591 — direction consistent with no contamination (the control is worse, not better), but n=48 cannot separate a 0.018 gap from noise; the anonymized control (0.592) matched the full state. No contamination signal, and no contamination ruling)
+
+Experiment:
+
+020

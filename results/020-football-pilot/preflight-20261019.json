@@ -1,0 +1,58 @@
+{
+  "preflight_for": "experiment-020",
+  "recorded_at_utc": "2026-10-18T19:49:20.367513+00:00",
+  "git_sha": "e236c053d787be7b7c963f2776f0a58c20a4e302",
+  "python_version": "3.14.7 (main, Sep 18 2026, 06:46:30) [GCC 16.2.1 20260810]",
+  "dependency_versions": {
+    "httpx": "0.28.1",
+    "pydantic": "2.13.5",
+    "pandas": "3.0.6",
+    "numpy": "2.5.4"
+  },
+  "input_table_sha256": {
+    "model_inputs.parquet": "ca6a4ba22415e77667bb55d466a84f36ecc7de5e8471c63610857471c475e9ff",
+    "market_labels.parquet": "c5319587640b74c16b04e0593350883e05ceab6fb7d7aca239cef7a0b7e7b61b",
+    "matches.parquet": "6bc9f1ba421081d7cd6e82fd83d8b0b9cc3bc8da7827e86c6071516ae4437602",
+    "upcoming_inputs.parquet": "d225374597d35578698dbb6795d6be20ac816ccd2c65ffc00596fca2ac0231c0",
+    "forward_quotes.parquet": "3e3a602a0b874c58150d33b2eed47dbbb3e693d5ddb421f3c571dd57638e5aa2"
+  },
+  "status_stdout": "football-data CSVs: 65\nunderstat league files: 65\nunderstat match files: 0\nfotmob league files: 254\nfotmob match files: 23578\nfotmob details pending for finished target fixtures: 7\nsnapshots: 132\nraw cache size: 4521.8 MB at /home/bipin/jev-api-experiments/data/raw\n",
+  "audit_report": {
+    "rows": {
+      "matches": 63875,
+      "model_inputs": 23585,
+      "upcoming": 1521,
+      "upcoming_inputs": 1521,
+      "market_labels": 63875,
+      "forward_quotes": 730
+    },
+    "stale_missing_details": 0,
+    "pending_details": 7,
+    "score_conflicts": 4,
+    "kickoff_disagreements": 16,
+    "corner_conflicts": 412,
+    "unmatched_quote_rows": 120,
+    "late_cutoffs": 0,
+    "duplicate_ids": {
+      "matches": 0,
+      "model_inputs": 0,
+      "upcoming": 0,
+      "upcoming_inputs": 0,
+      "market_labels": 0
+    },
+    "leaked_input_columns": [],
+    "invalid_quote_capture_times": 0,
+    "errors": []
+  },
+  "audit_passed": true,
+  "api_key_present": true,
+  "api_models_endpoint_check": {
+    "endpoint": "GET /v1/models",
+    "http_status": 200,
+    "aliases_listed": [
+      "jev-latest",
+      "jev-preview"
+    ],
+    "note": "No balance endpoint is documented; account credit state is not verifiable in-repo. Pinned jev-1.13.0 answered a single toy Noul call with HTTP 200 at 2026-10-18T19:4xZ before the freeze."
+  }
+}

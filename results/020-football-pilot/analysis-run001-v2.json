@@ -1,0 +1,471 @@
+{
+  "experiment_id": "020-football-pilot",
+  "applies_to_run": "run-001.json",
+  "corrected_analysis_reason": "run-001.json embedded summary computed repeat_pairs=0 because the analyze() r1 index was built after the r2 diff loop. analysis fixed; trials unchanged; this file supersedes the embedded summary.",
+  "generated_at_utc": "2026-10-18T19:54:38.928549+00:00",
+  "analysis": {
+    "totals": {
+      "attempted_calls": 432,
+      "successful_calls": 432,
+      "failed_calls": 0,
+      "rejected_parses": 0,
+      "distinct_fixtures": 48,
+      "repeat_pairs": 48,
+      "total_input_tokens": 986690,
+      "total_estimated_cost_usd": 0.041441
+    },
+    "arms": {
+      "ctrl_anon_noul_1x2": {
+        "n_calls": 48,
+        "events": {
+          "home_win": {
+            "n": 48,
+            "mean_prob": 0.4444,
+            "brier_binary": {
+              "n": 0,
+              "mean": null
+            },
+            "log_loss_fixed_floor": {
+              "n": 0,
+              "mean": null
+            }
+          },
+          "draw": {
+            "n": 48,
+            "mean_prob": 0.2671,
+            "brier_binary": {
+              "n": 0,
+              "mean": null
+            },
+            "log_loss_fixed_floor": {
+              "n": 0,
+              "mean": null
+            }
+          },
+          "away_win": {
+            "n": 48,
+            "mean_prob": 0.3365,
+            "brier_binary": {
+              "n": 0,
+              "mean": null
+            },
+            "log_loss_fixed_floor": {
+              "n": 0,
+              "mean": null
+            }
+          }
+        },
+        "one_x_two": {
+          "n": 48,
+          "brier_3class": {
+            "n": 48,
+            "mean": 0.59187,
+            "stdev": 0.34041
+          },
+          "log_loss_fixed_floor": {
+            "n": 48,
+            "mean": 0.99405,
+            "stdev": 0.49108
+          }
+        }
+      },
+      "ctrl_namesdate_noul_1x2": {
+        "n_calls": 48,
+        "events": {
+          "home_win": {
+            "n": 48,
+            "mean_prob": 0.4523,
+            "brier_binary": {
+              "n": 0,
+              "mean": null
+            },
+            "log_loss_fixed_floor": {
+              "n": 0,
+              "mean": null
+            }
+          },
+          "draw": {
+            "n": 48,
+            "mean_prob": 0.3696,
+            "brier_binary": {
+              "n": 0,
+              "mean": null
+            },
+            "log_loss_fixed_floor": {
+              "n": 0,
+              "mean": null
+            }
+          },
+          "away_win": {
+            "n": 48,
+            "mean_prob": 0.4283,
+            "brier_binary": {
+              "n": 0,
+              "mean": null
+            },
+            "log_loss_fixed_floor": {
+              "n": 0,
+              "mean": null
+            }
+          }
+        },
+        "one_x_two": {
+          "n": 48,
+          "brier_3class": {
+            "n": 48,
+            "mean": 0.60857,
+            "stdev": 0.12099
+          },
+          "log_loss_fixed_floor": {
+            "n": 48,
+            "mean": 1.01312,
+            "stdev": 0.16597
+          }
+        }
+      },
+      "score_1x2": {
+        "n_calls": 56,
+        "events": {
+          "home_win": {
+            "n": 56,
+            "mean_prob": 0.4836,
+            "brier_binary": {
+              "n": 0,
+              "mean": null
+            },
+            "log_loss_fixed_floor": {
+              "n": 0,
+              "mean": null
+            }
+          },
+          "draw": {
+            "n": 56,
+            "mean_prob": 0.2655,
+            "brier_binary": {
+              "n": 0,
+              "mean": null
+            },
+            "log_loss_fixed_floor": {
+              "n": 0,
+              "mean": null
+            }
+          },
+          "away_win": {
+            "n": 56,
+            "mean_prob": 0.3695,
+            "brier_binary": {
+              "n": 0,
+              "mean": null
+            },
+            "log_loss_fixed_floor": {
+              "n": 0,
+              "mean": null
+            }
+          }
+        },
+        "one_x_two": {
+          "n": 56,
+          "brier_3class": {
+            "n": 56,
+            "mean": 0.60001,
+            "stdev": 0.33894
+          },
+          "log_loss_fixed_floor": {
+            "n": 56,
+            "mean": 0.9999,
+            "stdev": 0.46724
+          }
+        }
+      },
+      "noul_1x2": {
+        "n_calls": 56,
+        "events": {
+          "home_win": {
+            "n": 56,
+            "mean_prob": 0.43,
+            "brier_binary": {
+              "n": 0,
+              "mean": null
+            },
+            "log_loss_fixed_floor": {
+              "n": 0,
+              "mean": null
+            }
+          },
+          "draw": {
+            "n": 56,
+            "mean_prob": 0.2404,
+            "brier_binary": {
+              "n": 0,
+              "mean": null
+            },
+            "log_loss_fixed_floor": {
+              "n": 0,
+              "mean": null
+            }
+          },
+          "away_win": {
+            "n": 56,
+            "mean_prob": 0.3312,
+            "brier_binary": {
+              "n": 0,
+              "mean": null
+            },
+            "log_loss_fixed_floor": {
+              "n": 0,
+              "mean": null
+            }
+          }
+        },
+        "one_x_two": {
+          "n": 56,
+          "brier_3class": {
+            "n": 56,
+            "mean": 0.6105,
+            "stdev": 0.37422
+          },
+          "log_loss_fixed_floor": {
+            "n": 56,
+            "mean": 1.01525,
+            "stdev": 0.53028
+          }
+        }
+      },
+      "score_binary": {
+        "n_calls": 56,
+        "events": {
+          "over_2_5": {
+            "n": 56,
+            "mean_prob": 0.5898,
+            "brier_binary": {
+              "n": 56,
+              "mean": 0.28142,
+              "stdev": 0.10486
+            },
+            "log_loss_fixed_floor": {
+              "n": 56,
+              "mean": 0.75793,
+              "stdev": 0.21636
+            }
+          },
+          "btts_yes": {
+            "n": 56,
+            "mean_prob": 0.5493,
+            "brier_binary": {
+              "n": 56,
+              "mean": 0.26567,
+              "stdev": 0.08913
+            },
+            "log_loss_fixed_floor": {
+              "n": 56,
+              "mean": 0.72527,
+              "stdev": 0.18172
+            }
+          },
+          "corners_over_9_5": {
+            "n": 56,
+            "mean_prob": 0.6117,
+            "brier_binary": {
+              "n": 56,
+              "mean": 0.24007,
+              "stdev": 0.12073
+            },
+            "log_loss_fixed_floor": {
+              "n": 56,
+              "mean": 0.67356,
+              "stdev": 0.24834
+            }
+          }
+        },
+        "one_x_two": {
+          "n": 0,
+          "brier_3class": {
+            "n": 0,
+            "mean": null
+          },
+          "log_loss_fixed_floor": {
+            "n": 0,
+            "mean": null
+          }
+        }
+      },
+      "choice_binary": {
+        "n_calls": 56,
+        "events": {
+          "over_2_5": {
+            "n": 56,
+            "mean_prob": 0.4943,
+            "brier_binary": {
+              "n": 56,
+              "mean": 0.26413,
+              "stdev": 0.11057
+            },
+            "log_loss_fixed_floor": {
+              "n": 56,
+              "mean": 0.72294,
+              "stdev": 0.23237
+            }
+          },
+          "btts_yes": {
+            "n": 56,
+            "mean_prob": 0.5798,
+            "brier_binary": {
+              "n": 56,
+              "mean": 0.2888,
+              "stdev": 0.15125
+            },
+            "log_loss_fixed_floor": {
+              "n": 56,
+              "mean": 0.77607,
+              "stdev": 0.3209
+            }
+          },
+          "corners_over_9_5": {
+            "n": 56,
+            "mean_prob": 0.4825,
+            "brier_binary": {
+              "n": 56,
+              "mean": 0.27277,
+              "stdev": 0.15188
+            },
+            "log_loss_fixed_floor": {
+              "n": 56,
+              "mean": 0.74466,
+              "stdev": 0.33309
+            }
+          }
+        },
+        "one_x_two": {
+          "n": 0,
+          "brier_3class": {
+            "n": 0,
+            "mean": null
+          },
+          "log_loss_fixed_floor": {
+            "n": 0,
+            "mean": null
+          }
+        }
+      },
+      "noul_binary": {
+        "n_calls": 56,
+        "events": {
+          "over_2_5": {
+            "n": 56,
+            "mean_prob": 0.3963,
+            "brier_binary": {
+              "n": 56,
+              "mean": 0.24107,
+              "stdev": 0.11772
+            },
+            "log_loss_fixed_floor": {
+              "n": 56,
+              "mean": 0.67568,
+              "stdev": 0.24363
+            }
+          },
+          "btts_yes": {
+            "n": 56,
+            "mean_prob": 0.4582,
+            "brier_binary": {
+              "n": 56,
+              "mean": 0.24443,
+              "stdev": 0.07026
+            },
+            "log_loss_fixed_floor": {
+              "n": 56,
+              "mean": 0.68095,
+              "stdev": 0.14398
+            }
+          },
+          "corners_over_9_5": {
+            "n": 56,
+            "mean_prob": 0.4204,
+            "brier_binary": {
+              "n": 56,
+              "mean": 0.26932,
+              "stdev": 0.10463
+            },
+            "log_loss_fixed_floor": {
+              "n": 56,
+              "mean": 0.73312,
+              "stdev": 0.21712
+            }
+          }
+        },
+        "one_x_two": {
+          "n": 0,
+          "brier_3class": {
+            "n": 0,
+            "mean": null
+          },
+          "log_loss_fixed_floor": {
+            "n": 0,
+            "mean": null
+          }
+        }
+      },
+      "choice_1x2": {
+        "n_calls": 56,
+        "events": {},
+        "one_x_two": {
+          "n": 56,
+          "brier_3class": {
+            "n": 56,
+            "mean": 0.83073,
+            "stdev": 0.83507
+          },
+          "log_loss_fixed_floor": {
+            "n": 56,
+            "mean": 1.85009,
+            "stdev": 1.9798
+          }
+        }
+      }
+    },
+    "repeat_spread": {
+      "over_2_5": {
+        "n_pairs": 24,
+        "mean_abs_diff": 0.01385,
+        "max_abs_diff": 0.05
+      },
+      "btts_yes": {
+        "n_pairs": 24,
+        "mean_abs_diff": 0.01563,
+        "max_abs_diff": 0.05
+      },
+      "corners_over_9_5": {
+        "n_pairs": 24,
+        "mean_abs_diff": 0.01656,
+        "max_abs_diff": 0.07
+      },
+      "one_x_two_l1": {
+        "n_pairs": 24,
+        "mean_abs_diff": 0.01626,
+        "max_abs_diff": 0.07314
+      },
+      "home_win": {
+        "n_pairs": 16,
+        "mean_abs_diff": 0.00695,
+        "max_abs_diff": 0.02
+      },
+      "draw": {
+        "n_pairs": 16,
+        "mean_abs_diff": 0.00555,
+        "max_abs_diff": 0.03
+      },
+      "away_win": {
+        "n_pairs": 16,
+        "mean_abs_diff": 0.00828,
+        "max_abs_diff": 0.03
+      }
+    },
+    "exclusions": [
+      {
+        "stage": "eligibility",
+        "reason": "failed one of label_valid_90 / corner label / conflict / disagreement / pending",
+        "n_excluded": 21
+      }
+    ]
+  }
+}

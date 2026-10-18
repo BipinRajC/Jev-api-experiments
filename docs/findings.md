@@ -362,3 +362,23 @@ Only findings measured in this repository.
 - **Limitations:** Bag-of-balls domain only; n=20 per level; outcome sampling noise affects bin-level calibration error; single fixed Noul wording; Score rubric too coarse for probability calibration.
 - **Confidence in the finding:** High that Noul Brier beats baseline on this domain; high that the conservative bias is systematic; moderate that the exact bias magnitude (-0.037) generalizes to other wordings/domains.
 - **Implications:** For FootyQuant v2, Noul can be used for calibrated probability estimates. The systematic -0.04 bias can be corrected (add ~0.04 to Noul for better calibration). Score needs a finer-grained rubric for probability tasks. One Noul call per question is sufficient (within-level variance is negligible).
+
+---
+
+## F028 — The football pipeline works end to end; Choice's native 1X2 distribution is badly overconfident
+
+- **Related hypothesis:** H059, H060, H061, H062
+- **Experiment(s):** 020 (`results/020-football-pilot/run-001.json`, `analysis-run001-v2.json`, `protocol-v1.json`)
+- **Conditions:** 2026-10-18/19 UTC; `jev-1.13.0`; 48 stratified completed 2025/26 fixtures (8 per competition: EPL, La Liga, Bundesliga, Serie A, Ligue 1, UCL) selected by seeded abs(Elo-diff) terciles from 1,920 eligible (21 excluded for corner/conflict/disagreement/pending); retrospective cohort (all calls post-match, recorded); question set QSET-020-v1 frozen before the first scored call; 432 calls, 0 retries.
+- **Evidence:**
+  - Reliability: 432/432 HTTP 200; 0 parse rejections; model returned `jev-1.13.0` on every call; 986,690 input tokens, mean 2,284/call, estimated cost $0.0414; latency mean 289 ms, median 281 ms, max 629 ms.
+  - 1X2 three-class Brier (r1, n=48): Score **0.5788** < Noul 0.5913 ≈ anonymized control 0.5919 < names/date-only control 0.6086 < 2025/26 season base-rate 0.6460 < Choice **0.7883**. Paired Noul−Choice diff −0.197 (95% bootstrap CI [−0.331, −0.065]); Noul−Score +0.0125 (CI [−0.006, +0.033]).
+  - Choice overconfidence: 16/48 Choice 1X2 distributions placed ≥0.99 on one class (0/48 Noul, 0/48 Score) — the one-hot Choice behavior of H019 persists on real football states.
+  - Binary Brier (r1, n=48; 2025/26 base rate in parentheses): over 2.5 — Noul 0.2478 (0.2482), Choice 0.2598, Score 0.2726; BTTS — Noul 0.2421 (0.2483), Score 0.2642, Choice 0.2830; corners over 9.5 — Score 0.2449 (0.2498), Noul 0.2625, Choice 0.2686. Paired Noul−Choice BTTS diff −0.041 (CI [−0.080, −0.001]); all other binary contrasts' CIs include 0.
+  - Repeat spread (8 fixtures × 6 core arms): mean absolute repeat difference 0.006–0.017 per event; max 0.07 single event, 0.073 1X2 L1.
+  - Controls: names/date-only Noul 1X2 Brier 0.6086 vs full state 0.5913 vs anonymized 0.5919 — no contamination signal, n=48 cannot rule small contamination in or out (H062 INCONCLUSIVE).
+  - Per-competition Noul 1X2 Brier ranged 0.487 (Serie A) to 0.664 (La Liga), n=8 each — noise.
+- **Interpretation:** The full pipeline (state construction → batched multi-primitive requests → parsing → validation → scoring) works on real football data at zero rejections. Noul and Score are roughly comparable and both beat the season base rate on 1X2 at this tiny n; Choice's native three-way output is unusable as a calibrated 1X2 distribution because it collapses to near-one-hot. Score's rubric mean (score/8) may better resolve the middle of the 1X2 distribution than the five-level rubric of 019.
+- **Limitations:** n=48 (exploratory; no winner claim). Retrospective cohort — Jev may know these results; contamination could not be ruled out. No calibration map fitted (no earlier out-of-sample football predictions exist; raw scores only). Binary-event Brier scales are not comparable with the 1X2 Brier scale. Corners line 9.5 selected from 2014/15–2024/25 development data (over rate 0.514). A `pandas` merge on `competition` initially produced duplicate-column suffixes and was fixed before scoring; run-001.json's embedded summary undercounted `repeat_pairs` due to an analysis-loop ordering bug, corrected in `analysis-run001-v2.json` (trials untouched); a regression test covers it.
+- **Confidence in the finding:** High on pipeline reliability and Choice overconfidence (large paired gap); low on all primitive rankings (n=48, retrospective).
+- **Implications:** For 021+, keep Noul and Score as primary arms; run Choice 1X2 only as a separately labelled arm and consider its `confidence`/`choice` fields rather than its near-one-hot distribution. Freeze the same question set for the locked retrospective run. Set up prospective capture (024) promptly.
