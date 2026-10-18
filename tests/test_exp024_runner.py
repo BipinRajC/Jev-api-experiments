@@ -264,6 +264,8 @@ class TestSettlement:
             [{"match_id": "m1", "fd_stat_HTHG": 2.0, "fd_stat_HTAG": 0.0}]
         )
         odds.to_parquet(derived / "odds.parquet")
+        pd.DataFrame([{"match_id": "m1", "home_id": 1, "away_id": 2}]).to_parquet(derived / "matches.parquet")
+        pd.DataFrame([{"match_id": "m1", "team_id": 1, "minute": 10.0, "minute_added": 0.0, "period": "FirstHalf", "event_type": "Goal", "is_own_goal": False}]).to_parquet(derived / "shots.parquet")
         monkeypatch.setattr(S, "PREDICTIONS_PATH", results / "predictions.jsonl")
         monkeypatch.setattr(S, "SETTLEMENTS_PATH", results / "settlements.jsonl")
         monkeypatch.setattr(S, "DERIVED_DIR", derived)
@@ -328,6 +330,8 @@ class TestSettlement:
         odds.to_parquet(derived / "odds.parquet")
         monkeypatch.setattr(S, "PREDICTIONS_PATH", results / "predictions.jsonl")
         monkeypatch.setattr(S, "SETTLEMENTS_PATH", results / "settlements.jsonl")
+        pd.DataFrame([{"match_id": "m1", "home_id": 1, "away_id": 2}]).to_parquet(derived / "matches.parquet")
+        pd.DataFrame(columns=["match_id", "team_id", "minute", "minute_added", "period", "event_type", "is_own_goal"]).to_parquet(derived / "shots.parquet")
         monkeypatch.setattr(S, "DERIVED_DIR", derived)
 
         assert S.main([]) == 0
