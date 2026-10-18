@@ -1,0 +1,10 @@
+[Unit]
+Description=Run prospective Jev predictions near the pre-match cutoff
+
+[Service]
+Type=oneshot
+WorkingDirectory=/home/bipin/jev-api-experiments
+Nice=10
+StandardOutput=append:/home/bipin/jev-api-experiments/logs/predict.log
+StandardError=append:/home/bipin/jev-api-experiments/logs/predict.log
+ExecStart=/usr/bin/systemd-inhibit --what=sleep --why="FootyQuant prospective predictions" --mode=block /usr/bin/flock -n /tmp/footyquant-predict.lock /home/bipin/jev-api-experiments/.venv/bin/python experiments/024-prospective-series/predict_due.py
