@@ -1,0 +1,46 @@
+{
+  "protocol_version": "025-protocol-v1",
+  "frozen_at_utc": "2026-10-18T21:52:44.705908+00:00",
+  "git_sha": "31ab5a894515fe0556eb5ac29cfb6235d8dc028c",
+  "stack_spec": "STACK-025-v1",
+  "split": {
+    "train_season": 2025,
+    "eval_season": 2026
+  },
+  "arms": {
+    "1x2": [
+      "ml_alone",
+      "ml_plus_noul",
+      "ml_plus_score",
+      "ml_plus_choice",
+      "jev_noul_alone",
+      "jev_score_alone",
+      "jev_choice_alone"
+    ],
+    "binary": [
+      "ml_alone",
+      "ml_plus_noul",
+      "ml_plus_score",
+      "ml_plus_choice",
+      "jev_noul_alone",
+      "jev_score_alone",
+      "jev_choice_alone"
+    ]
+  },
+  "layer_model": "sklearn LogisticRegression(max_iter=2000, random_state=42); ML trees never refitted",
+  "metrics": "3-class / binary Brier on the eval season; paired date-clustered bootstrap CIs",
+  "bootstrap": {
+    "n": 10000,
+    "seed": 42
+  },
+  "exploratory_note": "Retrospective stacking only; a product conclusion needs the 024 prospective cohort.",
+  "input_artifacts": {
+    "stream_021": "results/021-retrospective-locked/stream-001.jsonl",
+    "ml_predictions": "results/021-retrospective-locked/ml-predictions-v1.parquet"
+  },
+  "diagnostics": {
+    "n_jev": 2286,
+    "n_ml": 2288,
+    "n_joined": 2286
+  }
+}
