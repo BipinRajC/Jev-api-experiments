@@ -25,8 +25,8 @@ Do not treat marketing claims, blog posts, or demos as facts until they are test
 
 - Early access to TypeSafe Jev
 - Direct TypeSafe API access
-- Experiments run: `001`–`019` (API behavior and synthetic calibration)
-- Phase 4 football raw-data collection and as-of feature engineering are present; real-match Jev experiments have not yet run
+- Experiments run: `001`–`019` (API behavior and synthetic calibration); `020`–`023` (football pilot, count bands, ablations, locked retrospective); `024` **ACTIVE** (prospective 2026/27 series); `025` pending; `026` WAITING FOR RESEARCH
+- Football headline (retrospective, exploratory): Score 1X2 ties a simple Elo baseline; Noul's binary outputs need calibration; Choice is unusable raw. See `experiments/021-retrospective-locked/README.md`
 
 ## Long-term objective
 
