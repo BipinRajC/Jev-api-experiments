@@ -1,0 +1,10 @@
+{
+  "chosen_max_iter": 100,
+  "n_features": 112,
+  "n_train": 20863,
+  "n_eval": 2288,
+  "ml_1x2_brier": 0.5953,
+  "ml_over_2_5_brier": 0.24172,
+  "ml_btts_yes_brier": 0.24631,
+  "ml_corner_over_brier": 0.25011
+}
