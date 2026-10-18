@@ -10,7 +10,17 @@ import pytest
 REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT / "experiments" / "023-state-ablations"))
 
+import importlib.util  # noqa: E402
+
 import state_variants as SV  # noqa: E402
+
+_spec = importlib.util.spec_from_file_location(
+    "exp023_module",
+    REPO_ROOT / "experiments" / "023-state-ablations" / "experiment.py",
+)
+exp023 = importlib.util.module_from_spec(_spec)
+sys.modules["exp023_module"] = exp023
+_spec.loader.exec_module(exp023)
 
 
 def _full_state() -> dict:
@@ -106,7 +116,7 @@ class TestStateVariants:
 
 class TestAnalyze:
     def test_repeat_and_contrasts(self):
-        from experiment import analyze
+        from exp023_module import analyze
 
         def trial(match, arm, ridx, pH):
             return {
