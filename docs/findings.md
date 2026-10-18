@@ -433,3 +433,19 @@ Only findings measured in this repository.
 - **Limitations:** retrospective (contamination unresolvable here); no admissible pre-cutoff prices → outcome-only; calibration split single and small (n=366); binary scales not comparable across markets; multiple contrasts are exploratory.
 - **Confidence in the finding:** High on the Score>Noul>Choice 1X2 ordering and the Noul miscalibration; moderate on the Elo tie; low on any binary-market ranking.
 - **Implications:** FootyQuant defaults: Score for 1X2 (raw), calibrated Noul for binary markets, Choice only post-calibration; report Jev-vs-baseline honestly as "no demonstrated retrospective edge over Elo" and let the prospective 024 series decide. The calibration map must be re-fitted chronologically (never on evaluated fixtures).
+
+---
+
+## F032 — Frozen Jev outputs add small but significant ML improvements on BTTS and corners
+
+- **Related hypothesis:** H073
+- **Experiment(s):** 025 (`results/025-jev-plus-ml/run-001.json`, `stack-predictions-v1.parquet`)
+- **Conditions:** 2026-10-19 UTC; STACK-025-v1 frozen protocol; logistic stack layer fitted on 2025/26 (n=1,920) and evaluated on untouched 2026/27 (n=366); 7 arms × 4 markets; inputs are the frozen 021 Jev predictions and the frozen ML baseline predictions; no API cost.
+- **Evidence:**
+  - Jev alone < ML alone on every market (1X2: 0.576–0.590 vs 0.568).
+  - ML+Jev vs ML alone: BTTS −0.0011 (all three primitives, CIs exclude 0); corners over 9.5 −0.0016/−0.0017/−0.0025 (all significant, Choice bands best); 1X2 −0.0033 (not significant); over 2.5 −0.0016 (not significant).
+  - Independently reproduced with bootstrap seed 999.
+- **Interpretation:** Jev's outputs contain information the ML model has not already extracted — the markets where Jev bands/binary outputs carry complementary distribution information (022) are exactly where the stack gains. The 1X2 tie (021) is consistent: with team identity in the state, Jev duplicates Elo-like knowledge ML already has.
+- **Limitations:** retrospective; single 366-fixture split; tiny effect sizes near the noise floor; 12 uncorrected contrasts; the product conclusion requires the 024 prospective cohort.
+- **Confidence in the finding:** Moderate on the direction (consistent across primitives); low on magnitudes.
+- **Implications:** For FootyQuant, the candidate integration is ML-plus-Jev stacking (not Jev standalone), prioritizing corners/BTTS-style markets where the complementary signal appeared. Re-evaluate on prospective 024 records before any product commitment.

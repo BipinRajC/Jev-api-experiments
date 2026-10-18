@@ -1123,3 +1123,19 @@ REJECTED for Noul / SUPPORTED for Score (conditions: 2026-10-19 UTC, CALIB-021-v
 Experiment:
 
 021
+
+---
+
+## H073 — Frozen Jev outputs add skill to the ML baseline
+
+Hypothesis:
+
+Adding frozen Jev probabilities to the tabular ML baseline's features improves eval-season Brier on at least one core market under a chronological split.
+
+Status:
+
+SUPPORTED (conditions: 2026-10-19 UTC, STACK-025-v1, stack layer fitted on 2025/26 (n=1,920) and evaluated on untouched 2026/27 (n=366); BTTS: ML+Jev beats ML alone by 0.0011 with all three primitives, date-clustered CIs exclude 0; corners over 9.5: 0.0016-0.0025, all significant; 1X2 and over 2.5 positive but not significant. Jev alone remains worse than ML on every market. Effect sizes ~0.001-0.003; exploratory until the prospective 024 cohort replicates)
+
+Experiment:
+
+025
