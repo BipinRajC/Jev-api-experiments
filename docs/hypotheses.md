@@ -1139,3 +1139,19 @@ SUPPORTED (conditions: 2026-10-19 UTC, STACK-025-v1, stack layer fitted on 2025/
 Experiment:
 
 025
+
+---
+
+## H074 — 026 extension markets: Jev's prospective forecasts beat their mathematical baselines
+
+Hypothesis:
+
+On the prospective cohort, at least one of the registered 026 markets (team goals over 1.5 home/away, handicap home −1.5, first-half over 1.5) shows a Jev arm (raw or 2026/27-fitted calibration) with better Brier than its registered mathematical baseline (Dixon–Coles matrix marginal for team goals/handicap, constant base rate for first-half).
+
+Status:
+
+UNTESTED (registered 2026-10-19 with the research source docs/footyquant-math-research-2026-10-18.pdf sha256 b4419ccb...; evaluation only from settled prospective 024 records after the protocol revision 2 activation — no retrospective backtest per the outcome-only rule)
+
+Experiment:
+
+026 (via 024 revision 2)

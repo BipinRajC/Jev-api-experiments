@@ -5,6 +5,13 @@ The first prospective interim report is due after 250 eligible completed matches
 (descriptive only); the final report after the 2026/27 season ends. No Results are
 claimed yet.
 
+> **Protocol revision 2 (2026-10-19, 026-scoped):** three extension arms
+> (`noul_ext`, `score_ext`, `choice_ext`) were added for the four registered
+> 026 markets (team goals over 1.5 home/away, handicap home −1.5, first-half
+> goals over 1.5; question set `QSET-026-v1`). Core arms and all earlier
+> records are untouched; each record carries its own `question_set_version`.
+> See `experiments/026-market-extension/README.md`.
+
 ## Objective
 
 Predict every eligible 2026/27 fixture **before its recorded 60-minute information

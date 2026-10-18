@@ -51,6 +51,14 @@ _spec = importlib.util.spec_from_file_location(
 exp020 = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(exp020)
 
+# Experiment 026 extension markets (protocol revision 2 of the prospective runner).
+_spec26 = importlib.util.spec_from_file_location(
+    "exp026_questions",
+    REPO_ROOT / "experiments" / "026-market-extension" / "questions.py",
+)
+Q26 = importlib.util.module_from_spec(_spec26)
+_spec26.loader.exec_module(Q26)
+
 from src.data.cli import DERIVED_DIR  # noqa: E402
 from src.jev_client import (  # noqa: E402
     DEFAULT_BASE_URL,
@@ -71,7 +79,25 @@ ARMS = (
     "score_binary",
     "choice_1x2",
     "choice_binary",
+    # 026 extension markets (QSET-026-v1): team goals, handicap, first-half goals
+    "noul_ext",
+    "score_ext",
+    "choice_ext",
 )
+
+
+def arm_questions_for(arm: str) -> tuple[dict[str, dict[str, Any]], str]:
+    """Return (questions, question_set_version) for an arm."""
+    if arm in ("noul_ext", "score_ext", "choice_ext"):
+        builder = {
+            "noul_ext": Q26.noul_ext_questions,
+            "score_ext": Q26.score_ext_questions,
+            "choice_ext": Q26.choice_ext_questions,
+        }[arm]
+        return builder(), Q26.QUESTION_SET_VERSION
+    return exp020.arm_questions(arm), Q20.QUESTION_SET_VERSION
+
+
 # Due window: state assembled and calls started between 80 and 62 minutes before
 # kickoff; all calls must finish by the 60-minute cutoff.
 WINDOW_START_MIN = 80.0
@@ -243,7 +269,7 @@ def run_fixture(client: JevClient, model: str, fixture: dict[str, Any]) -> None:
     cutoff = datetime.fromisoformat(fixture["cutoff_utc"])
     for arm in fixture.get("missing_arms", ARMS):
         request_time = utc_now_iso()
-        questions = exp020.arm_questions(arm)
+        questions, qset_version = arm_questions_for(arm)
         started = datetime.now(timezone.utc)
         try:
             result = client.system_one(state=state, questions=questions)
@@ -290,7 +316,7 @@ def run_fixture(client: JevClient, model: str, fixture: dict[str, Any]) -> None:
             "arm": arm,
             "state": state,
             "state_sha256": fixture["state_sha256"],
-            "question_set_version": Q20.QUESTION_SET_VERSION,
+            "question_set_version": qset_version,
             "model_requested": model,
             "model_returned": result.model,
             "kickoff_utc": fixture["kickoff_utc"],
@@ -353,7 +379,9 @@ def main(argv: list[str] | None = None) -> int:
                         ],
                         "state_sha256": fixture["state_sha256"],
                         "state_fixture_block": fixture["state"]["fixture"],
-                        "question_set_version": questions and Q20.QUESTION_SET_VERSION,
+                        "question_set_versions": {
+                            arm: arm_questions_for(arm)[1] for arm in ARMS
+                        },
                     },
                     ensure_ascii=False,
                 )

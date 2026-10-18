@@ -82,6 +82,13 @@ def main(argv: list[str] | None = None) -> int:
     labels_path = DERIVED_DIR / "market_labels.parquet"
     labels = pd.read_parquet(labels_path)
     label_rows = labels.set_index("match_id")
+    # First-half goals come from football-data's half-time score (odds table);
+    # they exist for domestic leagues only (~93% of fixtures; null for UCL).
+    odds = pd.read_parquet(
+        DERIVED_DIR / "odds.parquet",
+        columns=["match_id", "fd_stat_HTHG", "fd_stat_HTAG"],
+    )
+    odds_rows = odds.set_index("match_id")
     done = settled_keys()
 
     predictions: dict[str, list[dict[str, Any]]] = {}
@@ -101,24 +108,36 @@ def main(argv: list[str] | None = None) -> int:
         row = label_rows.loc[match_id]
         if isinstance(row, pd.DataFrame):
             row = row.iloc[0]  # duplicate ids are audited to zero; defensive
+        goals_home = (
+            None if pd.isna(row["goals_home_90"]) else float(row["goals_home_90"])
+        )
+        goals_away = (
+            None if pd.isna(row["goals_away_90"]) else float(row["goals_away_90"])
+        )
+        valid = (
+            bool(row["label_valid_90"]) if pd.notna(row["label_valid_90"]) else False
+        )
+        ht_home = ht_away = None
+        if match_id in odds_rows.index:
+            odds_row = odds_rows.loc[match_id]
+            if isinstance(odds_row, pd.DataFrame):
+                odds_row = odds_row.iloc[0]
+            if pd.notna(odds_row["fd_stat_HTHG"]):
+                ht_home = float(odds_row["fd_stat_HTHG"])
+            if pd.notna(odds_row["fd_stat_HTAG"]):
+                ht_away = float(odds_row["fd_stat_HTAG"])
         settlement = {
             "experiment_id": EXPERIMENT_ID,
             "match_id": match_id,
             "settled_at_utc": utc_now_iso(),
-            "labels_source": "data/derived/market_labels.parquet",
+            "labels_source": "data/derived/market_labels.parquet + data/derived/odds.parquet (fd_stat_HT*)",
             "labels_sha256": labels_hash,
             "kickoff_utc": str(row.get("kickoff_utc", ""))
             if "kickoff_utc" in row
             else None,
-            "label_valid_90": bool(row["label_valid_90"])
-            if pd.notna(row["label_valid_90"])
-            else False,
-            "goals_home_90": None
-            if pd.isna(row["goals_home_90"])
-            else float(row["goals_home_90"]),
-            "goals_away_90": None
-            if pd.isna(row["goals_away_90"])
-            else float(row["goals_away_90"]),
+            "label_valid_90": valid,
+            "goals_home_90": goals_home,
+            "goals_away_90": goals_away,
             "result_90": None if pd.isna(row["result_90"]) else str(row["result_90"]),
             "over_2_5": None if pd.isna(row["over_2_5"]) else bool(row["over_2_5"]),
             "btts_yes": None if pd.isna(row["btts_yes"]) else bool(row["btts_yes"]),
@@ -128,6 +147,21 @@ def main(argv: list[str] | None = None) -> int:
             "corner_conflict": bool(row["corner_conflict"])
             if pd.notna(row["corner_conflict"])
             else False,
+            # 026 extension-market labels (derived; null when the gate fails)
+            "home_team_over_1_5": (goals_home >= 2)
+            if valid and goals_home is not None
+            else None,
+            "away_team_over_1_5": (goals_away >= 2)
+            if valid and goals_away is not None
+            else None,
+            "handicap_home_minus_1_5": (goals_home - goals_away) >= 2
+            if valid and goals_home is not None and goals_away is not None
+            else None,
+            "first_half_home_goals": ht_home,
+            "first_half_away_goals": ht_away,
+            "first_half_over_1_5": (ht_home + ht_away) >= 2
+            if ht_home is not None and ht_away is not None
+            else None,
         }
         for rec in recs:
             key = rec["run_local_id"]

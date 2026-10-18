@@ -174,6 +174,59 @@ class TestQuoteMatching:
         assert out[0]["decimal_odds"] == 1.5
 
 
+class TestExtensionArms:
+    def test_026_questions_registered(self):
+        import importlib.util
+
+        _spec = importlib.util.spec_from_file_location(
+            "exp026_questions_test",
+            REPO_ROOT / "experiments" / "026-market-extension" / "questions.py",
+        )
+        Q26 = importlib.util.module_from_spec(_spec)
+        _spec.loader.exec_module(Q26)
+
+        assert Q26.QUESTION_SET_VERSION == "QSET-026-v1"
+        assert set(Q26.EXTENSION_EVENTS) == {
+            "home_team_over_1_5",
+            "away_team_over_1_5",
+            "handicap_home_minus_1_5",
+            "first_half_over_1_5",
+        }
+        nq = Q26.noul_ext_questions()
+        assert len(nq) == 4 and all(q["type"] == "noul" for q in nq.values())
+        sq = Q26.score_ext_questions()
+        assert all(len(q["criteria"]) == 9 for q in sq.values())
+        cq = Q26.choice_ext_questions()
+        assert all(set(q["criteria"]) == {"yes", "no"} for q in cq.values())
+
+    def test_runner_has_extension_arms_and_versions(self):
+        import predict_due as PD
+
+        assert {"noul_ext", "score_ext", "choice_ext"} <= set(PD.ARMS)
+        for arm in ("noul_ext", "score_ext", "choice_ext"):
+            questions, qset = PD.arm_questions_for(arm)
+            assert qset == "QSET-026-v1"
+            assert len(questions) == 4
+        # core arms keep the frozen 020 question set
+        _, core_qset = PD.arm_questions_for("noul_1x2")
+        assert core_qset == "QSET-020-v1"
+
+    def test_parse_call_handles_extension_arms(self):
+        from experiment import parse_call
+
+        body = {
+            "answers": {
+                "home_team_over_1_5": {"type": "noul", "noul": 0.44},
+                "away_team_over_1_5": {"type": "noul", "noul": 0.34},
+                "handicap_home_minus_1_5": {"type": "noul", "noul": 0.23},
+                "first_half_over_1_5": {"type": "noul", "noul": 0.35},
+            }
+        }
+        parsed = parse_call("noul_ext", body)
+        assert parsed["validation"] == "ok"
+        assert parsed["events"]["home_team_over_1_5"]["prob"] == pytest.approx(0.44)
+
+
 class TestSettlement:
     def test_settlement_appends_and_is_idempotent(self, monkeypatch, tmp_path):
         import settle as S
@@ -196,7 +249,7 @@ class TestSettlement:
                     "match_id": "m1",
                     "label_valid_90": True,
                     "result_90": "H",
-                    "goals_home_90": 2.0,
+                    "goals_home_90": 3.0,
                     "goals_away_90": 1.0,
                     "over_2_5": True,
                     "btts_yes": True,
@@ -207,6 +260,10 @@ class TestSettlement:
         )
         derived = tmp_path
         labels.to_parquet(derived / "market_labels.parquet")
+        odds = pd.DataFrame(
+            [{"match_id": "m1", "fd_stat_HTHG": 2.0, "fd_stat_HTAG": 0.0}]
+        )
+        odds.to_parquet(derived / "odds.parquet")
         monkeypatch.setattr(S, "PREDICTIONS_PATH", results / "predictions.jsonl")
         monkeypatch.setattr(S, "SETTLEMENTS_PATH", results / "settlements.jsonl")
         monkeypatch.setattr(S, "DERIVED_DIR", derived)
@@ -218,7 +275,13 @@ class TestSettlement:
             if l.strip()
         ]
         assert len(recs) == 1
-        assert recs[0]["result_90"] == "H" and recs[0]["goals_home_90"] == 2.0
+        assert recs[0]["result_90"] == "H" and recs[0]["goals_home_90"] == 3.0
+        # 026 extension-market labels
+        assert recs[0]["home_team_over_1_5"] is True
+        assert recs[0]["away_team_over_1_5"] is False
+        assert recs[0]["handicap_home_minus_1_5"] is True
+        assert recs[0]["first_half_home_goals"] == 2.0
+        assert recs[0]["first_half_over_1_5"] is True
         # rerun: idempotent
         assert S.main([]) == 0
         recs2 = [
@@ -259,6 +322,10 @@ class TestSettlement:
         )
         derived = tmp_path
         labels.to_parquet(derived / "market_labels.parquet")
+        odds = pd.DataFrame(
+            [{"match_id": "m1", "fd_stat_HTHG": 1.0, "fd_stat_HTAG": 0.0}]
+        )
+        odds.to_parquet(derived / "odds.parquet")
         monkeypatch.setattr(S, "PREDICTIONS_PATH", results / "predictions.jsonl")
         monkeypatch.setattr(S, "SETTLEMENTS_PATH", results / "settlements.jsonl")
         monkeypatch.setattr(S, "DERIVED_DIR", derived)
