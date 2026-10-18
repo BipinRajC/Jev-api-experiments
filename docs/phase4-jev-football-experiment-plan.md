@@ -2,6 +2,8 @@
 
 Plan date: 2026-10-18. Execution begins after the 2014–2019 FotMob backfill and the data gates below. This document defines the evaluation protocol; it does not report football performance.
 
+Data-layer checkpoint, later on 2026-10-18: the backfill, source-join repair, conservative cutoff, separate market labels/model inputs, upcoming-fixture query, quote parsing, and integrity audit are implemented. Seven newly finished fixtures await the four-hour match-detail window; none is overdue. Confirmed pre-cutoff historical lineups and executable bookmaker quote timestamps remain unavailable, so those fields stay out of the default state or carry explicit provenance. The experimental question set and scoring protocol still need to be frozen before the first Jev football call. See [the data-layer usage guide](data-layer-usage.md).
+
 ## 1. Research question and scope
 
 Measure which Jev primitive—**Noul, Score, or Choice**—gives the most useful forecasts across football markets, and whether those forecasts add information beyond mathematical models, tabular ML, and available pre-match prices. Preserve the same match-level evidence so a later FootyQuant ML model can be compared with Jev and, if justified, use frozen Jev outputs as additional inputs. No primitive is declared the winner from the earlier synthetic experiments.

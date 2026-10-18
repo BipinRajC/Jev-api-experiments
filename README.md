@@ -25,8 +25,8 @@ Do not treat marketing claims, blog posts, or demos as facts until they are test
 
 - Early access to TypeSafe Jev
 - Direct TypeSafe API access
-- $5 promotional monthly credit, currently expiring 19 October (year of credit grant)
-- Experiments run: `001`–`006` (Phase 1 API understanding complete)
+- Experiments run: `001`–`019` (API behavior and synthetic calibration)
+- Phase 4 football raw-data collection and as-of feature engineering are present; real-match Jev experiments have not yet run
 
 ## Long-term objective
 
@@ -67,6 +67,29 @@ Raw output is written to `results/001-api-sanity/run-NNN.json`.
 ```bash
 python -m pytest
 ```
+
+## Football data layer
+
+The data CLI collects five domestic leagues, UCL, and rating-only feeder competitions. Raw responses live in ignored `data/raw/`; rebuilt Parquet files live in ignored `data/derived/`. Finished target fixtures have match details, while feeder competitions contribute results to cross-league Elo.
+
+```bash
+.venv/bin/python -m src.data.cli status
+.venv/bin/python -m src.data.cli build-tables
+.venv/bin/python -m src.data.cli build-features
+.venv/bin/python -m src.data.cli audit
+```
+
+Read `data/derived/model_inputs.parquet` for label-free historical ML inputs, `market_labels.parquet` for outcomes, and `upcoming_inputs.parquet` for future fixtures. `matches.parquet` and `upcoming.parquet` supply names and data-quality fields. The `state` command prints an allowlisted JSON record for Jev:
+
+```bash
+.venv/bin/python -m src.data.cli state --match-id MATCH_ID
+.venv/bin/python -m src.data.cli state --match-id MATCH_ID --upcoming
+.venv/bin/python -m src.data.cli state --match-id MATCH_ID --upcoming --anonymized
+```
+
+The upcoming command refuses a match once its 60-minute cutoff has passed. `capture-due` archives ESPN pages when an upcoming fixture is near that cutoff and updates `forward_quotes.parquet`; the quote table records source and capture times and leaves uncertain event matches unlinked. Its displayed prices are not verified executable bookmaker quotes. See [daily and pregame timer setup](ops/systemd/README.md).
+
+For the table schema, label rules, quality flags, and Python ingestion example, see the [data layer usage guide](docs/data-layer-usage.md).
 
 ## Layout
 

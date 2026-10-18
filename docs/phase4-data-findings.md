@@ -574,6 +574,8 @@ Payloads are 130–300 KB for 2016+ matches. **`content.h2h` leaks the future** 
 
 ## 11. Derived tables and as-of features (added 2026-10-18)
 
+> This section records the **first** derived build, before the completed backfill and subsequent source-join/feature corrections. For the current schema and ingestion commands, see [Football data layer: files, cutoffs, and direct use](data-layer-usage.md) and §12 below.
+
 Code: `src/data/tables.py` (raw → parquet tables), `src/features/asof.py` (as-of feature engine), `src/features/build.py`. Commands: `python -m src.data.cli build-tables` then `build-features`; the daily job runs both after fetching. Outputs go to `data/derived/` (git-ignored, rebuildable). 71 tests pass.
 
 ### 11.1 Tables (`data/derived/*.parquet`) [LIVE, built from the raw cache]
@@ -616,3 +618,12 @@ Features per team (`home_*`, `away_*`) and match: cross-league Elo (K=20, ×1.5 
 ### 11.5 Known limits
 
 League-only context (no domestic cups), so rest days and congestion are understated for teams in cups; FotMob market values and ages are current-at-fetch and are deliberately not features; `elo_diff` uses a fixed home advantage, including at neutral venues; the Elo league prior is learned only through European results, so the relative strength of isolated leagues is approximate.
+
+## 12. Data-layer correction and readiness audit (2026-10-18, after the full backfill)
+
+- The 2014–2019 FotMob detail backfill finished with zero reported download failures. Every finished target fixture in that backfill had a saved detail file. The later daily refresh added new 2026/27 fixtures; the latest build has **63,875** finished results, **23,585** target historical feature rows, and **1,521** future-fixture input rows. Seven newly finished target fixtures are waiting for the four-hour detail-settle rule; `audit` reports **zero overdue** missing details.
+- The source join now uses competition, season, both teams, and a unique plausible fixture date. Spezia–Verona's 2023-03-05 league game gets the football-data and Understat rows; its 2023-06-11 playoff keeps its own 1–3 label. The genuine score-conflict count is **four**, not five. Understat team history is joined through Understat's own match list, raising joined team rows to **43,844 of 43,846** in the latest cache; one Understat match (ID `31948`) lacks a FotMob fixture link. Four joined Understat matches retain a source date more than one day from the FotMob date, recorded as `us_date_gap_days`.
+- Football-data `HxG/AxG` are now post-match `fd_stat_*` fields, not `odds_*`. The 16 football-data/FotMob kickoff differences over 15 minutes are flagged; the earlier recorded time determines the historical 60-minute cutoff. Actual starting XIs from completed matches are no longer treated as known before kickoff unless a timestamped, confirmed pre-cutoff lineup is supplied.
+- `market_labels.parquet` now separates reliable 90-minute 1X2/O-U 2.5/BTTS results from model inputs. In the latest target cache, **23,581** goal labels and **23,151** conservative 90-minute corner labels are available; 412 corner source conflicts have null corner labels. Extra-time corners use first and second halves where FotMob provides them; otherwise the regulation corner label stays null.
+- `model_inputs.parquet` and `upcoming_inputs.parquet` have the same 130-column, label-free schema. The `state` command prints allowlisted JSON and rejects an upcoming request after its cutoff. `forward_quotes.parquet` has **730** parsed ESPN quote rows, **610** linked by conservative fixture matching, and **25** captured within 15 minutes before a cutoff. The ESPN pre-event price field is named `close`, but its own quote timestamp/executability has not been verified. Quotes keep this provenance and are not default Jev state fields.
+- The collector rejects malformed HTTP 200 bodies before caching, returns a nonzero code for partial fetches, and the daily update runs a final `audit`. On this build the audit found **no duplicate IDs, late cutoffs, leaked label columns, or quote captures after kickoff**. The pregame capture CLI and five-minute systemd timer are documented in [the operations runbook](../ops/systemd/README.md).
