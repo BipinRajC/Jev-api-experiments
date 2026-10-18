@@ -1,0 +1,134 @@
+{
+  "experiment_id": "023-state-ablations",
+  "run_id": "run-001",
+  "timestamp_utc": "2026-10-18T20:41:16.651672+00:00",
+  "protocol_version": "023-protocol-v1",
+  "model_requested": "jev-1.13.0",
+  "git_sha": "4add182578e2d473858abe1ff0f342c34f7d61c7",
+  "question_set_version": "QSET-020-v1",
+  "summary": {
+    "totals": {
+      "attempted_calls": 432,
+      "successful_calls": 432,
+      "failed_calls": 0,
+      "rejected_parses": 0,
+      "total_input_tokens": 679799,
+      "total_estimated_cost_usd": 0.028552,
+      "models_returned": [
+        "jev-1.13.0",
+        "jev-1.14.0"
+      ]
+    },
+    "arms": {
+      "anon_full_113": {
+        "n": 48,
+        "brier_3class": 0.59011,
+        "mean_input_tokens": 2206.1,
+        "mean_latency_ms": 314.0,
+        "paired_vs_full_113": {
+          "n": 48,
+          "mean_diff": -0.00369,
+          "ci95": [
+            -0.02037,
+            0.01078
+          ],
+          "excludes_zero": false
+        }
+      },
+      "full_113": {
+        "n": 96,
+        "brier_3class": 0.59118,
+        "mean_input_tokens": 2290.0,
+        "mean_latency_ms": 319.1
+      },
+      "full_114": {
+        "n": 48,
+        "brier_3class": 0.60338,
+        "mean_input_tokens": 2290.0,
+        "mean_latency_ms": 299.9,
+        "paired_vs_full_113": {
+          "n": 48,
+          "mean_diff": 0.00958,
+          "ci95": [
+            -0.00473,
+            0.02471
+          ],
+          "excludes_zero": false
+        }
+      },
+      "id_elo_113": {
+        "n": 48,
+        "brier_3class": 0.55942,
+        "mean_input_tokens": 644.1,
+        "mean_latency_ms": 313.1,
+        "paired_vs_full_113": {
+          "n": 48,
+          "mean_diff": -0.03438,
+          "ci95": [
+            -0.07702,
+            0.00485
+          ],
+          "excludes_zero": false
+        }
+      },
+      "id_elo_form_113": {
+        "n": 96,
+        "brier_3class": 0.58806,
+        "mean_input_tokens": 1686.0,
+        "mean_latency_ms": 317.2,
+        "paired_vs_full_113": {
+          "n": 48,
+          "mean_diff": -0.00505,
+          "ci95": [
+            -0.01441,
+            0.00418
+          ],
+          "excludes_zero": false
+        }
+      },
+      "id_only_113": {
+        "n": 48,
+        "brier_3class": 0.59961,
+        "mean_input_tokens": 535.1,
+        "mean_latency_ms": 309.1,
+        "paired_vs_full_113": {
+          "n": 48,
+          "mean_diff": 0.00581,
+          "ci95": [
+            -0.07379,
+            0.08174
+          ],
+          "excludes_zero": false
+        }
+      },
+      "id_only_114": {
+        "n": 48,
+        "brier_3class": 0.56685,
+        "mean_input_tokens": 535.1,
+        "mean_latency_ms": 289.2,
+        "paired_vs_full_113": {
+          "n": 48,
+          "mean_diff": -0.02695,
+          "ci95": [
+            -0.09843,
+            0.04121
+          ],
+          "excludes_zero": false
+        }
+      }
+    },
+    "repeat_spread": {
+      "id_elo_form_113": {
+        "n": 48,
+        "mean_l1": 0.02458,
+        "max_l1": 0.06095
+      },
+      "full_113": {
+        "n": 48,
+        "mean_l1": 0.02327,
+        "max_l1": 0.06959
+      }
+    }
+  },
+  "trials_reference": "stream-001.jsonl (append-only per-call records)"
+}

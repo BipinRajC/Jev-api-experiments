@@ -1,0 +1,1228 @@
+{
+  "protocol_version": "023-protocol-v1",
+  "frozen_at_utc": "2026-10-18T20:38:55.573204+00:00",
+  "git_sha": "4add182578e2d473858abe1ff0f342c34f7d61c7",
+  "cohort": "retrospective_2025_26",
+  "paired_with": "results/020-football-pilot/protocol-v1.json (same 48 fixtures)",
+  "state_ablation_version": "STATE-ABL-023-v1",
+  "question_set_version": "QSET-020-v1",
+  "noul_1x2_questions": {
+    "home_win": {
+      "type": "noul",
+      "instructions": "Is the following proposition true? The home team wins after 90 minutes plus stoppage time, excluding extra time and penalties."
+    },
+    "draw": {
+      "type": "noul",
+      "instructions": "Is the following proposition true? The match is a draw after 90 minutes plus stoppage time, excluding extra time and penalties."
+    },
+    "away_win": {
+      "type": "noul",
+      "instructions": "Is the following proposition true? The away team wins after 90 minutes plus stoppage time, excluding extra time and penalties."
+    }
+  },
+  "prob_derivation_version": "PROB-DERIVE-020-v1",
+  "arms": [
+    {
+      "arm": "id_only_113",
+      "model": "jev-1.13.0",
+      "state_variant": "identity_only"
+    },
+    {
+      "arm": "id_elo_113",
+      "model": "jev-1.13.0",
+      "state_variant": "identity_elo"
+    },
+    {
+      "arm": "id_elo_form_113",
+      "model": "jev-1.13.0",
+      "state_variant": "identity_elo_form"
+    },
+    {
+      "arm": "full_113",
+      "model": "jev-1.13.0",
+      "state_variant": "full"
+    },
+    {
+      "arm": "anon_full_113",
+      "model": "jev-1.13.0",
+      "state_variant": "anonymized"
+    },
+    {
+      "arm": "id_only_114",
+      "model": "jev-1.14.0",
+      "state_variant": "identity_only"
+    },
+    {
+      "arm": "full_114",
+      "model": "jev-1.14.0",
+      "state_variant": "full"
+    }
+  ],
+  "repeat_arms": [
+    "id_elo_form_113",
+    "full_113"
+  ],
+  "wording_ablations": "not retested here; covered by experiments 009 and 017",
+  "retries": {
+    "max_retries": 2,
+    "delays_s": [
+      2.0,
+      5.0
+    ]
+  },
+  "n_fixtures": 48,
+  "fixtures": [
+    {
+      "match_id": "4813374",
+      "competition": "EPL",
+      "cohort": "retrospective_2025_26",
+      "kickoff_utc": "2025-08-15T19:00:00+00:00",
+      "cutoff_utc": "2025-08-15T18:00:00+00:00",
+      "labels": {
+        "result_90": "H",
+        "goals_home_90": 4.0,
+        "goals_away_90": 2.0,
+        "over_2_5": true,
+        "btts_yes": true,
+        "corner_total_90": 13.0,
+        "corner_source": "fotmob+footballdata",
+        "corner_over_9_5": true
+      },
+      "state_hashes": {
+        "identity_only": "cb60916c67203c8b64ce0e5591c0f6fe7d65e7b24ba57abb4700935e1f38dc21",
+        "identity_elo": "ab56a4dec0875e868a79a30c448e8c500455e41eba00b12bfa3e13cf42c74ea5",
+        "identity_elo_form": "e616e0a7f7aefe530114236538c8e0b27c1adfbedc8a0025dbf63eaec087b336",
+        "full": "0c0dc68aa8e22bb06e3d014c32fe4c1c34085f87f6ef7ebfb5b4fecd3d676921",
+        "anonymized": "3f1da445276b9c4115480d8c4a3037b913f6ec0449eddf85ac8413074d70fd6e"
+      }
+    },
+    {
+      "match_id": "4837117",
+      "competition": "LALIGA",
+      "cohort": "retrospective_2025_26",
+      "kickoff_utc": "2025-08-16T19:30:00+00:00",
+      "cutoff_utc": "2025-08-16T18:30:00+00:00",
+      "labels": {
+        "result_90": "D",
+        "goals_home_90": 1.0,
+        "goals_away_90": 1.0,
+        "over_2_5": false,
+        "btts_yes": true,
+        "corner_total_90": 15.0,
+        "corner_source": "fotmob+footballdata",
+        "corner_over_9_5": true
+      },
+      "state_hashes": {
+        "identity_only": "1a7ad047de65a6b6b61010774c0b8ea82bc53ca5c4d528a4d26786d6ec883b92",
+        "identity_elo": "d7223459973e5c3e87983802e6eac0f67cf283882a6d1dac8edb9cc4bfa1d1e6",
+        "identity_elo_form": "fe008f8a8a2c65e3d618a7c841ba74053e0dc3695bded79599a390db7e813830",
+        "full": "4cd368dfddcbc2e88f612b274e9b8bedf627e9b08f0d6f3f80120d7a10a11f0e",
+        "anonymized": "1132a123f29865873b600a026e4b54829a7b12a9d6fd80b5b2af9ed64088e524"
+      }
+    },
+    {
+      "match_id": "4813382",
+      "competition": "EPL",
+      "cohort": "retrospective_2025_26",
+      "kickoff_utc": "2025-08-17T15:30:00+00:00",
+      "cutoff_utc": "2025-08-17T14:30:00+00:00",
+      "labels": {
+        "result_90": "A",
+        "goals_home_90": 0.0,
+        "goals_away_90": 1.0,
+        "over_2_5": false,
+        "btts_yes": false,
+        "corner_total_90": 7.0,
+        "corner_source": "fotmob+footballdata",
+        "corner_over_9_5": false
+      },
+      "state_hashes": {
+        "identity_only": "235ae3d9ed68103960cfa707fc6c7d957485671289c69719dd5a3fdab700b0fd",
+        "identity_elo": "5358f9681d9a1278d88e98ace7bf3bf3a9a54ced2225c8f9af389eb01f04b8f3",
+        "identity_elo_form": "3fa6145a370392e368fec48923820963f14f4a0a10579a80939d5c215e1376ae",
+        "full": "fbbeb3c7d402393bcaacaf83740757cb3ed76f192d6d4a3503428b00497e83f9",
+        "anonymized": "6d9ba7d60413ca77678b3fe6e3a98521879a75bf26317a7e0370669284d0c9d2"
+      }
+    },
+    {
+      "match_id": "4829222",
+      "competition": "BUNDESLIGA",
+      "cohort": "retrospective_2025_26",
+      "kickoff_utc": "2025-08-23T13:30:00+00:00",
+      "cutoff_utc": "2025-08-23T12:30:00+00:00",
+      "labels": {
+        "result_90": "H",
+        "goals_home_90": 4.0,
+        "goals_away_90": 1.0,
+        "over_2_5": true,
+        "btts_yes": true,
+        "corner_total_90": 8.0,
+        "corner_source": "fotmob+footballdata",
+        "corner_over_9_5": false
+      },
+      "state_hashes": {
+        "identity_only": "d4f53cd21671d993609e49e91b6c0bcea9e1a875f72b2e72b919e9f3dae94b1d",
+        "identity_elo": "1c23ebdff6b4e16b39885bbb9ce4cda351aaaf00e3d9cfc3c1d9bd1cbfe38f42",
+        "identity_elo_form": "285e57b934e823c1dc02565dacc3527fda1d2f7c0a4f106823714bf40b5289d5",
+        "full": "5ae4c42d4556d3b3b7fa1822f100259f0979ee7ef7ce635947f076136a6f001c",
+        "anonymized": "06ca353f3fa6ab3593a0a7ed7b71da264d0d53dfcee9d9b55ecd5a6270d9b002"
+      }
+    },
+    {
+      "match_id": "4813398",
+      "competition": "EPL",
+      "cohort": "retrospective_2025_26",
+      "kickoff_utc": "2025-08-30T16:30:00+00:00",
+      "cutoff_utc": "2025-08-30T15:30:00+00:00",
+      "labels": {
+        "result_90": "D",
+        "goals_home_90": 0.0,
+        "goals_away_90": 0.0,
+        "over_2_5": false,
+        "btts_yes": false,
+        "corner_total_90": 10.0,
+        "corner_source": "fotmob+footballdata",
+        "corner_over_9_5": true
+      },
+      "state_hashes": {
+        "identity_only": "1688303e4ad8aa0f3d5735c88ef22c3a1c431648db7a9c17a9905151449df3d8",
+        "identity_elo": "7e0e17c3f01e6e78de9b6025a1cd7d4ef07cf7679ad918d2bcc5dda703a56f52",
+        "identity_elo_form": "7ef3f00f35e942f7b9a8bb9e68c6b66f4fcd404a011b14339474a8bd36a0f967",
+        "full": "d3008a8fc7cb7ead6afa9d8a5d924a494d662a26bb0ba217d49abcae4e67915c",
+        "anonymized": "c06cf47aeb61dff787d73db0819e912450f3fe96ba693b77d062bb15201f11f3"
+      }
+    },
+    {
+      "match_id": "4830482",
+      "competition": "LIGUE1",
+      "cohort": "retrospective_2025_26",
+      "kickoff_utc": "2025-08-30T17:00:00+00:00",
+      "cutoff_utc": "2025-08-30T16:00:00+00:00",
+      "labels": {
+        "result_90": "H",
+        "goals_home_90": 1.0,
+        "goals_away_90": 0.0,
+        "over_2_5": false,
+        "btts_yes": false,
+        "corner_total_90": 12.0,
+        "corner_source": "fotmob+footballdata",
+        "corner_over_9_5": true
+      },
+      "state_hashes": {
+        "identity_only": "e7f168143d17ac41ed72b2579b21772f22215d8941979c61e4822cb786816b3d",
+        "identity_elo": "6988a0ea039001a9efbbeb59adedbf97f4fe25700e1b6e752f0a6fc8e56cf83b",
+        "identity_elo_form": "7d6685955fae5385758b9301906f8509c08f5eb40f56dad14d00d15131256cd0",
+        "full": "000195dd0cc7ebfabbc73491565912053b4481f391dd9aed613ebd4521f6e1e4",
+        "anonymized": "5a167289216e78248a0de931e9095f7a9e3a6057e365f6a9fe8e4a42c02784cd"
+      }
+    },
+    {
+      "match_id": "4837134",
+      "competition": "LALIGA",
+      "cohort": "retrospective_2025_26",
+      "kickoff_utc": "2025-08-30T17:00:00+00:00",
+      "cutoff_utc": "2025-08-30T16:00:00+00:00",
+      "labels": {
+        "result_90": "H",
+        "goals_home_90": 1.0,
+        "goals_away_90": 0.0,
+        "over_2_5": false,
+        "btts_yes": false,
+        "corner_total_90": 11.0,
+        "corner_source": "fotmob+footballdata",
+        "corner_over_9_5": true
+      },
+      "state_hashes": {
+        "identity_only": "d550254de406d48fbe16e4c2f59da6c7f7251a0cb6c74010c3ab096808e7bb8b",
+        "identity_elo": "8e2cafe6e63dc4b71fee1d1b1d070f3b3ba34d12d8d140f2821a113635157173",
+        "identity_elo_form": "364f9fdac609e3c23be78501f51da0951e52644d307b6248aaac36f8f09b69e5",
+        "full": "770940209294cbdecfbd0e27d406d95d0561287b1018fa3331d8e5174c8110ff",
+        "anonymized": "b73ea4e28144470c4354a2603771d20107484687df6c09c8aa9a731d38c77ac2"
+      }
+    },
+    {
+      "match_id": "4837143",
+      "competition": "LALIGA",
+      "cohort": "retrospective_2025_26",
+      "kickoff_utc": "2025-09-13T12:00:00+00:00",
+      "cutoff_utc": "2025-09-13T11:00:00+00:00",
+      "labels": {
+        "result_90": "H",
+        "goals_home_90": 2.0,
+        "goals_away_90": 0.0,
+        "over_2_5": false,
+        "btts_yes": false,
+        "corner_total_90": 7.0,
+        "corner_source": "fotmob+footballdata",
+        "corner_over_9_5": false
+      },
+      "state_hashes": {
+        "identity_only": "5f41b234ee41ba00841374712e3126eaa780699bc404e23fcaa9abf0f9c28d32",
+        "identity_elo": "8a4d0e10f8aa778fbe5b65dcc3f224854cb6d646b6637518c6cc250e3b22d9de",
+        "identity_elo_form": "d4568ba99ed762a7849bc8738916915dc01f4a6458ef6a6b571caad17365addc",
+        "full": "e945d692d5dd7fc845fd999aaec0af59677d73068310415368d761d36d458f9d",
+        "anonymized": "e1e472c7f8d4a06a5e8824c67064f2968a021b4c347502642e8dacf74cbc18f1"
+      }
+    },
+    {
+      "match_id": "4829334",
+      "competition": "BUNDESLIGA",
+      "cohort": "retrospective_2025_26",
+      "kickoff_utc": "2025-09-13T13:30:00+00:00",
+      "cutoff_utc": "2025-09-13T12:30:00+00:00",
+      "labels": {
+        "result_90": "A",
+        "goals_home_90": 0.0,
+        "goals_away_90": 1.0,
+        "over_2_5": false,
+        "btts_yes": false,
+        "corner_total_90": 8.0,
+        "corner_source": "fotmob+footballdata",
+        "corner_over_9_5": false
+      },
+      "state_hashes": {
+        "identity_only": "b32aeb7aae3d0a59eabe7ad93093559ce9dbee15f3637a4a99068d681637c5c4",
+        "identity_elo": "4dc84b7136400e59f4551b0f8d07efd4f3b9cde6bd78dc9f352d50e685753d0a",
+        "identity_elo_form": "0c54831a8c1ddba25bd109d62ef9a946a0deee5e253781a7aba806fea9573dc5",
+        "full": "455053745cb3b149884fe8052cdd21ba78487700b94938cb43a58a0615ff68a9",
+        "anonymized": "e8c9fd33601046e63b76d93ddadaaafc7d05ef70e6058f33280adfaf9dc67a3d"
+      }
+    },
+    {
+      "match_id": "4803062",
+      "competition": "SERIEA",
+      "cohort": "retrospective_2025_26",
+      "kickoff_utc": "2025-09-14T18:45:00+00:00",
+      "cutoff_utc": "2025-09-14T17:45:00+00:00",
+      "labels": {
+        "result_90": "H",
+        "goals_home_90": 1.0,
+        "goals_away_90": 0.0,
+        "over_2_5": false,
+        "btts_yes": false,
+        "corner_total_90": 11.0,
+        "corner_source": "fotmob+footballdata",
+        "corner_over_9_5": true
+      },
+      "state_hashes": {
+        "identity_only": "cbe2ee2d87f4961681d2117abcaa93a22a8cad22b7a3ea741830721ea0bf81e1",
+        "identity_elo": "9a1df1c1b8fa83f7c021498ac8947d66fb3aed7ed8dbdd655fd30cb4cb65da95",
+        "identity_elo_form": "143c818d892ecf1103bdf6631d0a0ed0e7f8b7be48eeadcf7e22121778a8cc3f",
+        "full": "f7b18bd81b8c934275c47ecca0554f888a243c9c9ec2a82952fd044cc6df6954",
+        "anonymized": "8aed2315875093ed5d284ada276910d90f212512413c5777c131be44fc47cb69"
+      }
+    },
+    {
+      "match_id": "4947250",
+      "competition": "UCL",
+      "cohort": "retrospective_2025_26",
+      "kickoff_utc": "2025-10-01T16:45:00+00:00",
+      "cutoff_utc": "2025-10-01T15:45:00+00:00",
+      "labels": {
+        "result_90": "A",
+        "goals_home_90": 0.0,
+        "goals_away_90": 4.0,
+        "over_2_5": true,
+        "btts_yes": false,
+        "corner_total_90": 12.0,
+        "corner_source": "fotmob",
+        "corner_over_9_5": true
+      },
+      "state_hashes": {
+        "identity_only": "cdbc37419dc912f0c15a9bbc762a5afa8e85e297757cc84aa724a09adecf85fb",
+        "identity_elo": "1906d538635aabef2551a42890538b22bb2b0138d876d047c48ed35dc1ae4a80",
+        "identity_elo_form": "3479deb25f76fae3ac57af9a6d495baff470946747c9b80577048bc6120ac5ab",
+        "full": "0d7c5567befc3048acf3ef01c96aaa55971e9f5ff3020f15820cccea1b505d67",
+        "anonymized": "845fe87c8d323064a60505a79e928e5244b32e68667dadb34e398cfafd114ab5"
+      }
+    },
+    {
+      "match_id": "4947173",
+      "competition": "UCL",
+      "cohort": "retrospective_2025_26",
+      "kickoff_utc": "2025-10-21T19:00:00+00:00",
+      "cutoff_utc": "2025-10-21T18:00:00+00:00",
+      "labels": {
+        "result_90": "H",
+        "goals_home_90": 4.0,
+        "goals_away_90": 0.0,
+        "over_2_5": true,
+        "btts_yes": false,
+        "corner_total_90": 7.0,
+        "corner_source": "fotmob",
+        "corner_over_9_5": false
+      },
+      "state_hashes": {
+        "identity_only": "b1450cef16a76f84215404870f3d443011b13f8f68c62a6c9db249b896abefaa",
+        "identity_elo": "a119d62693ddac49507698fcc89040424a458b64819d700cbe0d56d78d303592",
+        "identity_elo_form": "b4a5e7c225449e4fcd0ce87f9e44057b5a51343d9eff4aaa363022c4baa1113b",
+        "full": "46c3c4fa570ce68ef7b26085ddb273084e9166e120050c63b7a3dbb3729ea982",
+        "anonymized": "899a4b83cef7caee1ba3390e27bac9fab07a447b4e20c3f1595aa3d4ca0825ba"
+      }
+    },
+    {
+      "match_id": "4947224",
+      "competition": "UCL",
+      "cohort": "retrospective_2025_26",
+      "kickoff_utc": "2025-10-22T16:45:00+00:00",
+      "cutoff_utc": "2025-10-22T15:45:00+00:00",
+      "labels": {
+        "result_90": "H",
+        "goals_home_90": 3.0,
+        "goals_away_90": 1.0,
+        "over_2_5": true,
+        "btts_yes": true,
+        "corner_total_90": 11.0,
+        "corner_source": "fotmob",
+        "corner_over_9_5": true
+      },
+      "state_hashes": {
+        "identity_only": "ecc21ab1abb8a3f8bdb98c4ce42019cd475a6b344dbca2044a3a8d2529bb71e7",
+        "identity_elo": "7335b948e082410a5e935ae449d80c6c4fda330a5abd3e3723672d3f217ff152",
+        "identity_elo_form": "c852e429efb269f785ce4456964be174d12e79630d5d6332ab3666b821ba3b66",
+        "full": "fce593a82c311dc4ee279ad9a387106fd57a84392fabb5762e06d220b27af04a",
+        "anonymized": "e2c8322b99c60553512bd81acabb154e4fc73debd2d25a43037fd3874462ffde"
+      }
+    },
+    {
+      "match_id": "4829383",
+      "competition": "BUNDESLIGA",
+      "cohort": "retrospective_2025_26",
+      "kickoff_utc": "2025-10-25T13:30:00+00:00",
+      "cutoff_utc": "2025-10-25T12:30:00+00:00",
+      "labels": {
+        "result_90": "A",
+        "goals_home_90": 0.0,
+        "goals_away_90": 1.0,
+        "over_2_5": false,
+        "btts_yes": false,
+        "corner_total_90": 12.0,
+        "corner_source": "fotmob+footballdata",
+        "corner_over_9_5": true
+      },
+      "state_hashes": {
+        "identity_only": "4c6b3d371f018c564c9adcc5d7b775b62f35e225d2843b820745388d27964592",
+        "identity_elo": "d2e8afde78aa1a222f3a463f189ead671e89829790fbe887c1479b1f09bd2f99",
+        "identity_elo_form": "24dbec8428dac915f796db997548a8e65ec5f4b55f36f85abb88fd990ed912ef",
+        "full": "5a8a074068e66032192a757c9115dc4372ab561343f52f7d8526936c9bf13151",
+        "anonymized": "3d5d7780e0063c3453da526234ef031f97cbc5432028a13891a1e3d720b95a74"
+      }
+    },
+    {
+      "match_id": "4830536",
+      "competition": "LIGUE1",
+      "cohort": "retrospective_2025_26",
+      "kickoff_utc": "2025-10-25T17:00:00+00:00",
+      "cutoff_utc": "2025-10-25T16:00:00+00:00",
+      "labels": {
+        "result_90": "H",
+        "goals_home_90": 1.0,
+        "goals_away_90": 0.0,
+        "over_2_5": false,
+        "btts_yes": false,
+        "corner_total_90": 7.0,
+        "corner_source": "fotmob+footballdata",
+        "corner_over_9_5": false
+      },
+      "state_hashes": {
+        "identity_only": "16b2eeb456e009ee39a5fdb0e4bc07825025f0a18dbd8fb122beac47fa55ec55",
+        "identity_elo": "d3a7c6e51a1bdfe201adb54d8239f864a8d95ce0e5ee23a8edd8583a0e47ade0",
+        "identity_elo_form": "165991de83fdb4dfc458d671a02c824a7ea3a092d23b45d23933d78b245a6186",
+        "full": "e1ea2455dac2b4615c4c38fa8dbc893020c873cef89410fbe13f24e68e6aa6cd",
+        "anonymized": "9e83e3b2abaedad233cdcde32c31974c09dc3e7408681e6abe7ad1b49de8e753"
+      }
+    },
+    {
+      "match_id": "4830540",
+      "competition": "LIGUE1",
+      "cohort": "retrospective_2025_26",
+      "kickoff_utc": "2025-10-29T18:00:00+00:00",
+      "cutoff_utc": "2025-10-29T17:00:00+00:00",
+      "labels": {
+        "result_90": "D",
+        "goals_home_90": 1.0,
+        "goals_away_90": 1.0,
+        "over_2_5": false,
+        "btts_yes": true,
+        "corner_total_90": 8.0,
+        "corner_source": "fotmob+footballdata",
+        "corner_over_9_5": false
+      },
+      "state_hashes": {
+        "identity_only": "c096f343ec8a3923e3013f8ef21b18ffa326a59662455b72c55c7e6e8aaba257",
+        "identity_elo": "8d83c170eb8452d4d153e129389e2b8c6a95c8630aec5be60f6c411b11dd2102",
+        "identity_elo_form": "7eabddc8c77384409c1fc3bef982a11576a3db68f6fbca950ca71057d6f37ff7",
+        "full": "ca4c2e9da5f2208b15573111ed222d0b83ae93d15c971248cf86134414fa72cb",
+        "anonymized": "474c568fad91b9f9d3d73afe0d27bf32e228ddd0e3f131badcd7f2cea3e20b55"
+      }
+    },
+    {
+      "match_id": "4830543",
+      "competition": "LIGUE1",
+      "cohort": "retrospective_2025_26",
+      "kickoff_utc": "2025-10-29T20:05:00+00:00",
+      "cutoff_utc": "2025-10-29T19:05:00+00:00",
+      "labels": {
+        "result_90": "A",
+        "goals_home_90": 3.0,
+        "goals_away_90": 5.0,
+        "over_2_5": true,
+        "btts_yes": true,
+        "corner_total_90": 4.0,
+        "corner_source": "fotmob+footballdata",
+        "corner_over_9_5": false
+      },
+      "state_hashes": {
+        "identity_only": "8755d82256051004920c2505a65f3724fc98755265897d7b246e433cddc51ee9",
+        "identity_elo": "50b843edd6a38e13f5e39f266f28f4e99405d084f0d641644ed92c45b8b77069",
+        "identity_elo_form": "e468d74a03b7917893cddd20d35bb988cdbc79c1393bc44ebbf555fe754b8bf9",
+        "full": "276afc4186d725686fd2be85778942d2b547abeef5ebaa46ef65426c13c15417",
+        "anonymized": "ad87fab53a271119d1612c0734663b719888851e875ae88f39de726f488c790f"
+      }
+    },
+    {
+      "match_id": "4829400",
+      "competition": "BUNDESLIGA",
+      "cohort": "retrospective_2025_26",
+      "kickoff_utc": "2025-11-08T14:30:00+00:00",
+      "cutoff_utc": "2025-11-08T13:30:00+00:00",
+      "labels": {
+        "result_90": "D",
+        "goals_home_90": 1.0,
+        "goals_away_90": 1.0,
+        "over_2_5": false,
+        "btts_yes": true,
+        "corner_total_90": 8.0,
+        "corner_source": "fotmob+footballdata",
+        "corner_over_9_5": false
+      },
+      "state_hashes": {
+        "identity_only": "98c038c452ae1c5b9e2dcbeae7cf8646417333070eab7c23e82c1fc8503f3c4f",
+        "identity_elo": "633633d61cc669f2eed55265cb02fb3cceba0ab316e89fd67bb2364e3775c0fd",
+        "identity_elo_form": "5831459e3a4928758cb0cd216336429b1aed604c47bd05750136b5931ff02b9a",
+        "full": "3db28371f6126b50367c71b21bcfb011f43ced49d71afb120bb6b90cf4182fef",
+        "anonymized": "010593e4ee865dc98c5212bf0461b1caab54dc9344835bfd4da895384490903d"
+      }
+    },
+    {
+      "match_id": "4830557",
+      "competition": "LIGUE1",
+      "cohort": "retrospective_2025_26",
+      "kickoff_utc": "2025-11-09T16:15:00+00:00",
+      "cutoff_utc": "2025-11-09T15:15:00+00:00",
+      "labels": {
+        "result_90": "H",
+        "goals_home_90": 2.0,
+        "goals_away_90": 0.0,
+        "over_2_5": false,
+        "btts_yes": false,
+        "corner_total_90": 6.0,
+        "corner_source": "fotmob+footballdata",
+        "corner_over_9_5": false
+      },
+      "state_hashes": {
+        "identity_only": "d66feec08a5198a55ac0d2eb297d6411434d6ee82367e368f63b54deeafc81db",
+        "identity_elo": "1dd55c9b5cda53642f7427d6011247ce84f414a83ff531dc77a31318fa351627",
+        "identity_elo_form": "8e3647237be204ea704b8a316211b7df174f0264f6828a9c389e2331f1b77dd6",
+        "full": "eda87941211602485f9b289f2564771e2eca02e75d3eb7874f3121fed9a12d96",
+        "anonymized": "75157c8c19d6fe9ca17ab3899e7124404c92f8f73a3a42f36c5cf4f18f528f1b"
+      }
+    },
+    {
+      "match_id": "4830566",
+      "competition": "LIGUE1",
+      "cohort": "retrospective_2025_26",
+      "kickoff_utc": "2025-11-23T14:00:00+00:00",
+      "cutoff_utc": "2025-11-23T13:00:00+00:00",
+      "labels": {
+        "result_90": "D",
+        "goals_home_90": 0.0,
+        "goals_away_90": 0.0,
+        "over_2_5": false,
+        "btts_yes": false,
+        "corner_total_90": 18.0,
+        "corner_source": "fotmob+footballdata",
+        "corner_over_9_5": true
+      },
+      "state_hashes": {
+        "identity_only": "65a49a244a4a5508bec9c7f21c5f2c5cb523dac2a0cb63f9ab66ca1fdb1e4c9b",
+        "identity_elo": "a3289232093729e2716909c1e9dcc23a64c0af134759170c383ef2d6e601b3e2",
+        "identity_elo_form": "243bec7da87e21eb308b4ae90bdcf5eb7dc85dae46534fcbcde704a9949f3ec8",
+        "full": "d14335d7d13656f671136cc9bb3a8b042dcc903ef1dfbee5a5d612ff996b2b5d",
+        "anonymized": "f15ef1c2c2c478555acda5aea188304491f69dc9fbcd9f26a0daa4afd04ea758"
+      }
+    },
+    {
+      "match_id": "4803152",
+      "competition": "SERIEA",
+      "cohort": "retrospective_2025_26",
+      "kickoff_utc": "2025-11-23T19:45:00+00:00",
+      "cutoff_utc": "2025-11-23T18:45:00+00:00",
+      "labels": {
+        "result_90": "A",
+        "goals_home_90": 0.0,
+        "goals_away_90": 1.0,
+        "over_2_5": false,
+        "btts_yes": false,
+        "corner_total_90": 10.0,
+        "corner_source": "fotmob+footballdata",
+        "corner_over_9_5": true
+      },
+      "state_hashes": {
+        "identity_only": "161dae9263f356097ad09e6deba9e772159fa3296aaa13aa13d5a2e4168dc0f7",
+        "identity_elo": "ca35c86374ff9b1167f6f0b9cc488314eca8f6865eddcdd4350aaff2fda764e6",
+        "identity_elo_form": "298ce261438f7698b5ec2f69681e457bbb73101430ca3e1d5872047cea541bc3",
+        "full": "c03a9686a93ea49ab72e7033e9ba2cbbda5998dd864711cc499d85d0c035ea93",
+        "anonymized": "f73d3ca6f0430729fa446e7785ab035d4746c29947dd8126f3e1ce1ec108cb4b"
+      }
+    },
+    {
+      "match_id": "4803163",
+      "competition": "SERIEA",
+      "cohort": "retrospective_2025_26",
+      "kickoff_utc": "2025-11-30T11:30:00+00:00",
+      "cutoff_utc": "2025-11-30T10:30:00+00:00",
+      "labels": {
+        "result_90": "H",
+        "goals_home_90": 2.0,
+        "goals_away_90": 1.0,
+        "over_2_5": true,
+        "btts_yes": true,
+        "corner_total_90": 12.0,
+        "corner_source": "fotmob+footballdata",
+        "corner_over_9_5": true
+      },
+      "state_hashes": {
+        "identity_only": "e3f1ea2024fe4a2ef4134247245bc804604d05b239563549c48f8102bce2e27c",
+        "identity_elo": "8e96351d3bfbe94fde5d5ac439e0c4941c4f4b699691b4c8b8176fb091339e41",
+        "identity_elo_form": "7800e71d48c48a04e5be5e6aadde6a3c1a022a4c0a2d0720822788795c00e93e",
+        "full": "94d66907d1108bd8cc2c604cfc84cbea0c735aef300659a84b542de63f5c1b0c",
+        "anonymized": "38e0921ea34f46846840cb15b91d3174943b17abea58e52112f3e2129e37e04e"
+      }
+    },
+    {
+      "match_id": "4803179",
+      "competition": "SERIEA",
+      "cohort": "retrospective_2025_26",
+      "kickoff_utc": "2025-12-14T19:45:00+00:00",
+      "cutoff_utc": "2025-12-14T18:45:00+00:00",
+      "labels": {
+        "result_90": "A",
+        "goals_home_90": 0.0,
+        "goals_away_90": 1.0,
+        "over_2_5": false,
+        "btts_yes": false,
+        "corner_total_90": 7.0,
+        "corner_source": "fotmob+footballdata",
+        "corner_over_9_5": false
+      },
+      "state_hashes": {
+        "identity_only": "e3fb155d242ef8c71f4cd559a13be6616af8c01124ed888f7a21a9274435a5d1",
+        "identity_elo": "4ce5b56866936b3c891de1d16227ab9ab8deec0cc917de450443346f92adfa45",
+        "identity_elo_form": "ed219a0a97e5878776bfe2c429ff7a5ea8e2018f980d3f57318327439495cd6c",
+        "full": "42ab5ffca0562d62a55002fbd750452bddd91b36acf1ceb6b94e1640c6718ef3",
+        "anonymized": "edf5320a75f9c79fc86d5ca4169dd4c1545d9fdc17bea6aa0d456e5f49f54aef"
+      }
+    },
+    {
+      "match_id": "4803199",
+      "competition": "SERIEA",
+      "cohort": "retrospective_2025_26",
+      "kickoff_utc": "2025-12-28T14:00:00+00:00",
+      "cutoff_utc": "2025-12-28T13:00:00+00:00",
+      "labels": {
+        "result_90": "A",
+        "goals_home_90": 0.0,
+        "goals_away_90": 2.0,
+        "over_2_5": false,
+        "btts_yes": false,
+        "corner_total_90": 11.0,
+        "corner_source": "fotmob+footballdata",
+        "corner_over_9_5": true
+      },
+      "state_hashes": {
+        "identity_only": "26749aee59d34888697d4bf28402091fabde4c116f80c67f74dc17a81135aca3",
+        "identity_elo": "42ffd394f2cda84ea86d90126ba65d131f3ac13999bc4156b385b3e62e8ece84",
+        "identity_elo_form": "6b2f6020afbd41ebb6cdbb8041a3ac7cf2b90140c0f5f1046a6c035cd0ae4dad",
+        "full": "c49732c6061241f1642575e97dcb7a06c3cfd207704101c5b30c9800d429477d",
+        "anonymized": "13eda9ed89c6e0530b340ee1b9530785b742578d44afca073cb8dc3bcc1bc472"
+      }
+    },
+    {
+      "match_id": "4830604",
+      "competition": "LIGUE1",
+      "cohort": "retrospective_2025_26",
+      "kickoff_utc": "2026-01-03T20:05:00+00:00",
+      "cutoff_utc": "2026-01-03T19:05:00+00:00",
+      "labels": {
+        "result_90": "A",
+        "goals_home_90": 0.0,
+        "goals_away_90": 2.0,
+        "over_2_5": false,
+        "btts_yes": false,
+        "corner_total_90": 11.0,
+        "corner_source": "fotmob+footballdata",
+        "corner_over_9_5": true
+      },
+      "state_hashes": {
+        "identity_only": "e89e57544f963982df64cc91058a60eea355bcff6939eae44388771fadb09d73",
+        "identity_elo": "373c57fca34bb27673398a2477c113956a0a6ee7958d533eab7ba39cb5c2f1b4",
+        "identity_elo_form": "9792a6adbf7325b717a1dd6238b40d78de90850cf414b096c9fef5e980271dd3",
+        "full": "182f96042f0a5665b3b6cad33c29811d8dafdadffb204584b7d2eac21d81f4e1",
+        "anonymized": "4ee27dbdd62642e5158aa36eeb900957923eb27b9dfd7ae5c0a4bfe90302059a"
+      }
+    },
+    {
+      "match_id": "4813570",
+      "competition": "EPL",
+      "cohort": "retrospective_2025_26",
+      "kickoff_utc": "2026-01-04T12:30:00+00:00",
+      "cutoff_utc": "2026-01-04T11:30:00+00:00",
+      "labels": {
+        "result_90": "D",
+        "goals_home_90": 1.0,
+        "goals_away_90": 1.0,
+        "over_2_5": false,
+        "btts_yes": true,
+        "corner_total_90": 10.0,
+        "corner_source": "fotmob+footballdata",
+        "corner_over_9_5": true
+      },
+      "state_hashes": {
+        "identity_only": "23294a3967148b5587988611eef791c8fc8c0cf4a412896096afaebdfd4d933b",
+        "identity_elo": "50461ae47e8414ffdb823daded8fa4af4df7a9a0719fd80410ddd0dfdab1df5f",
+        "identity_elo_form": "14c915ac9cac8a436be031f7b7a3275b0580094bf7176e1ad2aa0cf984dce19b",
+        "full": "beae0d9bca6f1f3406212ef6c9da62a9693e1d87b77a880682fa79a9c32c0d16",
+        "anonymized": "8421d71ef56bab6c1af4c0ff998b528dd20da4dc153ee4f24709b4e0bb030fa1"
+      }
+    },
+    {
+      "match_id": "4813587",
+      "competition": "EPL",
+      "cohort": "retrospective_2025_26",
+      "kickoff_utc": "2026-01-17T15:00:00+00:00",
+      "cutoff_utc": "2026-01-17T14:00:00+00:00",
+      "labels": {
+        "result_90": "H",
+        "goals_home_90": 2.0,
+        "goals_away_90": 0.0,
+        "over_2_5": false,
+        "btts_yes": false,
+        "corner_total_90": 12.0,
+        "corner_source": "fotmob+footballdata",
+        "corner_over_9_5": true
+      },
+      "state_hashes": {
+        "identity_only": "1ed7f45e407ea1b9ab2eab9decbc821849a8cbcf77c18ce36a62cac9a792f9f8",
+        "identity_elo": "21d3d6b04d822d647a82ede7968899c69f1e8703c3b2ae79a372001877333a81",
+        "identity_elo_form": "ebbd7e75848aabdb58f05a6d0c0c3aa1947c6f37c82ab7f7f6da3ab284aa57d6",
+        "full": "f1d8c552b6d93b66582abf86c665f9eb8373191d8e800ead24f836a610618798",
+        "anonymized": "b2d23635ca2fcf3b7516a57287b4cd86bee23706d4296f743a1c4f6b2e6acbbe"
+      }
+    },
+    {
+      "match_id": "4947170",
+      "competition": "UCL",
+      "cohort": "retrospective_2025_26",
+      "kickoff_utc": "2026-01-20T20:00:00+00:00",
+      "cutoff_utc": "2026-01-20T19:00:00+00:00",
+      "labels": {
+        "result_90": "H",
+        "goals_home_90": 2.0,
+        "goals_away_90": 0.0,
+        "over_2_5": false,
+        "btts_yes": false,
+        "corner_total_90": 10.0,
+        "corner_source": "fotmob",
+        "corner_over_9_5": true
+      },
+      "state_hashes": {
+        "identity_only": "5d4ab63e6a9dfaeb58dd9168bf80858da4ccddb84b7492c690158ac9b81ad2f2",
+        "identity_elo": "5862cb4aed263b520e22bd000ef8c1215f818cd49356722ea335205f3f3e130d",
+        "identity_elo_form": "ddcc27c27686c258ea41bf11d4cf607266ad22cf6a8db88a727e31eadc079698",
+        "full": "ad0fa59c582b148c9af608853c2d4d721d5e779741cee575bb154e9b07d53e40",
+        "anonymized": "30436c965d77dc7a46b8c8035217c04f14238228ad069bee060a02a74cfde39a"
+      }
+    },
+    {
+      "match_id": "4947208",
+      "competition": "UCL",
+      "cohort": "retrospective_2025_26",
+      "kickoff_utc": "2026-01-20T20:00:00+00:00",
+      "cutoff_utc": "2026-01-20T19:00:00+00:00",
+      "labels": {
+        "result_90": "A",
+        "goals_home_90": 1.0,
+        "goals_away_90": 2.0,
+        "over_2_5": true,
+        "btts_yes": true,
+        "corner_total_90": 12.0,
+        "corner_source": "fotmob",
+        "corner_over_9_5": true
+      },
+      "state_hashes": {
+        "identity_only": "0aa93263807f5538c6971500ebaf5e5b7250610fa71a6d4f42196a1e9b92bfd6",
+        "identity_elo": "799c44526422b48506ec51b59d2e7b7008eccf5191b80330d76394ce4bcee400",
+        "identity_elo_form": "4336e564b0c8bdb4512623aba767b0256957ace30a6eec42afd4cb3d246e23ff",
+        "full": "39317becbab4c4e20872282b7592e353b058e5a1f1d297aa76640dd42dc51101",
+        "anonymized": "311cbe78d24e7122f4d4296bcced3a577b51c07dfbc2c1bc62efa2d5260e01fd"
+      }
+    },
+    {
+      "match_id": "4837315",
+      "competition": "LALIGA",
+      "cohort": "retrospective_2025_26",
+      "kickoff_utc": "2026-01-23T20:00:00+00:00",
+      "cutoff_utc": "2026-01-23T19:00:00+00:00",
+      "labels": {
+        "result_90": "H",
+        "goals_home_90": 3.0,
+        "goals_away_90": 2.0,
+        "over_2_5": true,
+        "btts_yes": true,
+        "corner_total_90": 10.0,
+        "corner_source": "fotmob+footballdata",
+        "corner_over_9_5": true
+      },
+      "state_hashes": {
+        "identity_only": "28ada41a5821bf632ca955334fcbc387713eacb968b57c0d029634e6d386bb8d",
+        "identity_elo": "ba01f1e6d0bc0563480e5fc5c8c0a857e5220f569b0faae04260831e37131a27",
+        "identity_elo_form": "332bf754ac536993145d10c53af95ac5b8e8aa1f86b5de2843a8de9c48bc8a14",
+        "full": "4bbdd3ba47844d016de94e3fc81ad5616c74c02b0d56042e2234ed35f90bd950",
+        "anonymized": "b610816dd6faac111ae869d01feb25ace8d9e0cba9aa358d69b821ed18c3dfb2"
+      }
+    },
+    {
+      "match_id": "4813597",
+      "competition": "EPL",
+      "cohort": "retrospective_2025_26",
+      "kickoff_utc": "2026-01-25T14:00:00+00:00",
+      "cutoff_utc": "2026-01-25T13:00:00+00:00",
+      "labels": {
+        "result_90": "A",
+        "goals_home_90": 0.0,
+        "goals_away_90": 2.0,
+        "over_2_5": false,
+        "btts_yes": false,
+        "corner_total_90": 11.0,
+        "corner_source": "fotmob+footballdata",
+        "corner_over_9_5": true
+      },
+      "state_hashes": {
+        "identity_only": "39cecdd6553b7dae62d64b430cfae9d70ddeec3e1b1d40b22c3b2b2508073ced",
+        "identity_elo": "5c6105aa03daf9d7c6b5a532b76d83adfa1beff64218b61c861ffd8b37764001",
+        "identity_elo_form": "447cef6b889678bffaf13931cca1b184d32145937ca0c0a47d2f947e81c1bc16",
+        "full": "20cf11c1517a8d0226dc8e0773cb55b5f6fb936b304767a12f471fd795fce46e",
+        "anonymized": "b5a3b985fc376663bc106753500893c86012f4fe86ff6b05bd5ec615bcf20143"
+      }
+    },
+    {
+      "match_id": "4947167",
+      "competition": "UCL",
+      "cohort": "retrospective_2025_26",
+      "kickoff_utc": "2026-01-28T20:00:00+00:00",
+      "cutoff_utc": "2026-01-28T19:00:00+00:00",
+      "labels": {
+        "result_90": "H",
+        "goals_home_90": 3.0,
+        "goals_away_90": 0.0,
+        "over_2_5": true,
+        "btts_yes": false,
+        "corner_total_90": 5.0,
+        "corner_source": "fotmob",
+        "corner_over_9_5": false
+      },
+      "state_hashes": {
+        "identity_only": "47a2019b6b4ccbb18327625debceaccf7af3dd110bee948256a8758a51e423f0",
+        "identity_elo": "57b953d49f0beab29107d59cc65fb079e5f32f2abe994d9c2ce1c071f72ac1b2",
+        "identity_elo_form": "376b5d0784bd01fe0acc17b50020c041a62f367f9e2faee74cbd8461a57fbc16",
+        "full": "cee9b2e40440398ca7f334429403f6c5f06a8f12f25fbd651b8b7ee55c88c01d",
+        "anonymized": "d49af505fa1bcd5cd5b1404f47481749755822f8d9c83139ed2311dfc94cb6ab"
+      }
+    },
+    {
+      "match_id": "4947184",
+      "competition": "UCL",
+      "cohort": "retrospective_2025_26",
+      "kickoff_utc": "2026-01-28T20:00:00+00:00",
+      "cutoff_utc": "2026-01-28T19:00:00+00:00",
+      "labels": {
+        "result_90": "H",
+        "goals_home_90": 1.0,
+        "goals_away_90": 0.0,
+        "over_2_5": false,
+        "btts_yes": false,
+        "corner_total_90": 6.0,
+        "corner_source": "fotmob",
+        "corner_over_9_5": false
+      },
+      "state_hashes": {
+        "identity_only": "21668b117d2e6ff52f673826bf0534b5bd8d3359037f3b23e31dbde3f6ccff76",
+        "identity_elo": "9b3fd21c29d168a2ecaba8f87b50b2df5e6fc73920ddf95ee66904b1e2c501c4",
+        "identity_elo_form": "b0148b637830153bf0a00eba5123e3837bc7ad37dd6aaa1fd1b5fb6368e51dcc",
+        "full": "4a3373e58f8beae9354d193310e5d35bb1a00936f52671041817037fb8ffd2d5",
+        "anonymized": "9c60493ecc315fc32549131e9ccf9ee619d1bf5f27d4967ff024c932f7fe5c74"
+      }
+    },
+    {
+      "match_id": "4837329",
+      "competition": "LALIGA",
+      "cohort": "retrospective_2025_26",
+      "kickoff_utc": "2026-02-01T13:00:00+00:00",
+      "cutoff_utc": "2026-02-01T12:00:00+00:00",
+      "labels": {
+        "result_90": "H",
+        "goals_home_90": 2.0,
+        "goals_away_90": 1.0,
+        "over_2_5": true,
+        "btts_yes": true,
+        "corner_total_90": 13.0,
+        "corner_source": "fotmob+footballdata",
+        "corner_over_9_5": true
+      },
+      "state_hashes": {
+        "identity_only": "e9d9a0d8b5e84d14941f04cfbf4cf9769b57e300d59bd72ed98c4f535809da20",
+        "identity_elo": "6473887d07a8a79d5b270524fa8f09eea05e851aca92c3e5306cbc2b7506bb6d",
+        "identity_elo_form": "de554221395a1ae363ecb2fc589f70938ccd509f6e822a9c3bf9caf3c2fa0dde",
+        "full": "6fec06b6e68fce58b2631054e029f4b9c9c8705edd34b6381b95fab655956598",
+        "anonymized": "55e8ab47084394a972c1628fc05a3583c1960a5450a0d6de2bb4e2a55ac8602d"
+      }
+    },
+    {
+      "match_id": "4829493",
+      "competition": "BUNDESLIGA",
+      "cohort": "retrospective_2025_26",
+      "kickoff_utc": "2026-02-01T14:30:00+00:00",
+      "cutoff_utc": "2026-02-01T13:30:00+00:00",
+      "labels": {
+        "result_90": "H",
+        "goals_home_90": 1.0,
+        "goals_away_90": 0.0,
+        "over_2_5": false,
+        "btts_yes": false,
+        "corner_total_90": 8.0,
+        "corner_source": "fotmob+footballdata",
+        "corner_over_9_5": false
+      },
+      "state_hashes": {
+        "identity_only": "2df86bd7fce5a644966e9070680ce8b3859517049cd7768041f07abf2d4a7c76",
+        "identity_elo": "51d3c842cc1e215148056b9884511cc84f0b1ec9a01ae524ebd21ec75a627988",
+        "identity_elo_form": "c324c4fefcccdae245bd1c073f11195fd11e44c60ed2845d06a7a0660f167c1a",
+        "full": "2af708d109ec1096fe15c84a73aa9dfa622d9fa201fe242991601793500db0e1",
+        "anonymized": "8bfa947efbcb08d5392791d1296545fbc6b5581fc236a10740e195bf5ef3d7df"
+      }
+    },
+    {
+      "match_id": "4830644",
+      "competition": "LIGUE1",
+      "cohort": "retrospective_2025_26",
+      "kickoff_utc": "2026-02-07T20:05:00+00:00",
+      "cutoff_utc": "2026-02-07T19:05:00+00:00",
+      "labels": {
+        "result_90": "A",
+        "goals_home_90": 0.0,
+        "goals_away_90": 1.0,
+        "over_2_5": false,
+        "btts_yes": false,
+        "corner_total_90": 9.0,
+        "corner_source": "fotmob+footballdata",
+        "corner_over_9_5": false
+      },
+      "state_hashes": {
+        "identity_only": "ee2ef923998dfc1aa6df41057fd43a5e8014e6f197018007a2e3a8b324f1edd1",
+        "identity_elo": "4c5c8fa76b5e11828d7e2d46b77a569f2e9cd7195dc8c0a8b98447487be5e938",
+        "identity_elo_form": "b56414b1258d2357abcf35ea63f3c0d123401d372940348e26119655e9f68d5d",
+        "full": "9b6a89bbae318a859ad9121801df9ae23e107b3fefe56d4febe2d1b57ba57e5d",
+        "anonymized": "552a44abecddfabe88574ab2d0c0ec5200513b5977330a708067340d8c17708b"
+      }
+    },
+    {
+      "match_id": "4813642",
+      "competition": "EPL",
+      "cohort": "retrospective_2025_26",
+      "kickoff_utc": "2026-02-22T14:00:00+00:00",
+      "cutoff_utc": "2026-02-22T13:00:00+00:00",
+      "labels": {
+        "result_90": "A",
+        "goals_home_90": 1.0,
+        "goals_away_90": 3.0,
+        "over_2_5": true,
+        "btts_yes": true,
+        "corner_total_90": 10.0,
+        "corner_source": "fotmob+footballdata",
+        "corner_over_9_5": true
+      },
+      "state_hashes": {
+        "identity_only": "5af76362893c817bb13faf313f4bd9defa3a1bebc704620e525b2935e9224d2f",
+        "identity_elo": "007d103689ae219f367354f02ee69d36bf5e508e786c1df1ae6b7faabf9e7d47",
+        "identity_elo_form": "dcb6b5c3ee85112214e71d2556cfd45994c10473be195b0d575b79046f5cb3fb",
+        "full": "01abbab5f7081442fc412f1dbcc4443cbfeb0f43444a12919a9ef8ec3ca25733",
+        "anonymized": "9b944a69d3065a63e1b65bc6c8b475baa2171ce9e0a65a1b28b11e5465620971"
+      }
+    },
+    {
+      "match_id": "4837389",
+      "competition": "LALIGA",
+      "cohort": "retrospective_2025_26",
+      "kickoff_utc": "2026-03-15T20:00:00+00:00",
+      "cutoff_utc": "2026-03-15T19:00:00+00:00",
+      "labels": {
+        "result_90": "H",
+        "goals_home_90": 3.0,
+        "goals_away_90": 1.0,
+        "over_2_5": true,
+        "btts_yes": true,
+        "corner_total_90": 8.0,
+        "corner_source": "fotmob+footballdata",
+        "corner_over_9_5": false
+      },
+      "state_hashes": {
+        "identity_only": "49291cb244a82feb4c29e11bed1d44d9d0d8038eb5a00f6352f618f66cbae833",
+        "identity_elo": "cf4350e8fe900bd72e20d5977798b70b4627f58d73281ff61ac4a2c1709b10b7",
+        "identity_elo_form": "c58df3ebcf92f4e99e4e196d954cc7468eb7b9a06ca9a822bcea9954249de654",
+        "full": "3136a929e3fddabbf68d569641fb67a0b350809d180c7a86874cfddadddb5db4",
+        "anonymized": "d54175242e71c74892978a30b43ccf87e773138d9ee5161094d24ac65cd72bec"
+      }
+    },
+    {
+      "match_id": "4837388",
+      "competition": "LALIGA",
+      "cohort": "retrospective_2025_26",
+      "kickoff_utc": "2026-03-16T20:00:00+00:00",
+      "cutoff_utc": "2026-03-16T19:00:00+00:00",
+      "labels": {
+        "result_90": "D",
+        "goals_home_90": 1.0,
+        "goals_away_90": 1.0,
+        "over_2_5": false,
+        "btts_yes": true,
+        "corner_total_90": 11.0,
+        "corner_source": "fotmob+footballdata",
+        "corner_over_9_5": true
+      },
+      "state_hashes": {
+        "identity_only": "491c15b3adefa40e59db8511e093416692888f8bc613fac66756726ec740dc8f",
+        "identity_elo": "21ee65473af9241facdfaac9cb0052ed9793a07432bf191c6901b1b2cfc59bc8",
+        "identity_elo_form": "f7c51ed2cbe1a9b4b8a941de33f284e078ed580a1e8f964fdfc3052b20febedf",
+        "full": "7c648d9b3f482d5f7d27c69d2490d684dd15eab540227bd0c5f092ed959a2625",
+        "anonymized": "e8eb24a8b2418fc2e94678ecf2ed7b7b0676f4696d8c4787152c6bf3c13024c9"
+      }
+    },
+    {
+      "match_id": "4803356",
+      "competition": "SERIEA",
+      "cohort": "retrospective_2025_26",
+      "kickoff_utc": "2026-04-10T18:45:00+00:00",
+      "cutoff_utc": "2026-04-10T17:45:00+00:00",
+      "labels": {
+        "result_90": "H",
+        "goals_home_90": 3.0,
+        "goals_away_90": 0.0,
+        "over_2_5": true,
+        "btts_yes": false,
+        "corner_total_90": 4.0,
+        "corner_source": "fotmob+footballdata",
+        "corner_over_9_5": false
+      },
+      "state_hashes": {
+        "identity_only": "0224595314dee6e7e0737658e567b4e946e2b11795e415394ca1fba60439d415",
+        "identity_elo": "641d33a4a9d6c03e67e25cf796fb67a81e0d95dec251901fc3c2fec0a967abaa",
+        "identity_elo_form": "0e0e35e25ec50e36bd4c2510ca3a59af7c4113d43aae982f7c48932f0cfec796",
+        "full": "153b6abc352397349b9ce2c0d198553622342f3e7abece832ba38eb546e2209f",
+        "anonymized": "c23dfc506877ea8a1259a5a7d5652702a3de8b1737c5e0c1cd47138ea3c500b2"
+      }
+    },
+    {
+      "match_id": "4837413",
+      "competition": "LALIGA",
+      "cohort": "retrospective_2025_26",
+      "kickoff_utc": "2026-04-11T14:15:00+00:00",
+      "cutoff_utc": "2026-04-11T13:15:00+00:00",
+      "labels": {
+        "result_90": "H",
+        "goals_home_90": 1.0,
+        "goals_away_90": 0.0,
+        "over_2_5": false,
+        "btts_yes": false,
+        "corner_total_90": 14.0,
+        "corner_source": "fotmob+footballdata",
+        "corner_over_9_5": true
+      },
+      "state_hashes": {
+        "identity_only": "f47132f59b9ebf303270cefcd885b298c8d9a05a186a470f99065021b88ae697",
+        "identity_elo": "0ccd2417c3454fa8b2dc2b0bde1bd62064a912b9730bd1715f7d65cdfb95638f",
+        "identity_elo_form": "7da9185d9d10aaa3121de4a74ef72a73955be6b2739d2b49d83754c0ebe43c20",
+        "full": "218af36f4e35c6cb3a1958d2eb20ac80d6deccd0db258e9a34eaf708e8ff756e",
+        "anonymized": "3db7cf8267f550e88561b9987fd8b2e8078893a0caea346b7debecf870da6143"
+      }
+    },
+    {
+      "match_id": "4803348",
+      "competition": "SERIEA",
+      "cohort": "retrospective_2025_26",
+      "kickoff_utc": "2026-04-11T18:45:00+00:00",
+      "cutoff_utc": "2026-04-11T17:45:00+00:00",
+      "labels": {
+        "result_90": "A",
+        "goals_home_90": 0.0,
+        "goals_away_90": 1.0,
+        "over_2_5": false,
+        "btts_yes": false,
+        "corner_total_90": 15.0,
+        "corner_source": "fotmob+footballdata",
+        "corner_over_9_5": true
+      },
+      "state_hashes": {
+        "identity_only": "2d4b8af0f71f737b28d2ffc991bbe8c2ddb8e1342cc331f0bbc4d5d608794478",
+        "identity_elo": "2c001cf6c8e33a9f8cedabe509e684eba79e221d2cda08abfad167a1a241e897",
+        "identity_elo_form": "d85849410689301d335bdcab7e0ba8e06b8fe674d7dfe9d31b94e6c7849e3204",
+        "full": "334cd92e2d3c5a1cb9663b42b327b190c0ffb1ec713ed91ff32e862097dbb046",
+        "anonymized": "bb3788cf20fb2962153409d674455e2b73118cb6119b333cb310cfe50102970c"
+      }
+    },
+    {
+      "match_id": "5205790",
+      "competition": "UCL",
+      "cohort": "retrospective_2025_26",
+      "kickoff_utc": "2026-04-14T19:00:00+00:00",
+      "cutoff_utc": "2026-04-14T18:00:00+00:00",
+      "labels": {
+        "result_90": "A",
+        "goals_home_90": 0.0,
+        "goals_away_90": 2.0,
+        "over_2_5": false,
+        "btts_yes": false,
+        "corner_total_90": 10.0,
+        "corner_source": "fotmob",
+        "corner_over_9_5": true
+      },
+      "state_hashes": {
+        "identity_only": "3443be88bef7c837ea6817691f23998e16ffea8773f411308e5d3248a759e60b",
+        "identity_elo": "1457f2314403d22a0c16c8fc907ab6ec7ab67f9928f80d19cabffa29aa0584fe",
+        "identity_elo_form": "e9c5df2ebc7cb17e793fcea10878005ed1217ca36c70fe4c11499622e6978577",
+        "full": "f10bace327e0b01b89709729ea442f3e77c07697b0c072fdc2db76df7ffb6e53",
+        "anonymized": "799205a24952a3aa6eb8d2302b1fe159ef5417591dffa9d2424694d47a2cd967"
+      }
+    },
+    {
+      "match_id": "4829586",
+      "competition": "BUNDESLIGA",
+      "cohort": "retrospective_2025_26",
+      "kickoff_utc": "2026-04-26T15:30:00+00:00",
+      "cutoff_utc": "2026-04-26T14:30:00+00:00",
+      "labels": {
+        "result_90": "H",
+        "goals_home_90": 4.0,
+        "goals_away_90": 0.0,
+        "over_2_5": true,
+        "btts_yes": false,
+        "corner_total_90": 5.0,
+        "corner_source": "fotmob+footballdata",
+        "corner_over_9_5": false
+      },
+      "state_hashes": {
+        "identity_only": "575cb90fd402248d3de76ef0e3b9ac04af58dca32bb7547cf596d81eea10fddc",
+        "identity_elo": "c3584f95c2c546079bdb816c03f5d51b87479b4f4ad3fa81839a760ea7ebfffc",
+        "identity_elo_form": "c564500f66056f50df4af57edb35f169f5401368f832a0c379ff516eedf45544",
+        "full": "c2074f8d6960ee5c42a625110fc8be5be0da2935608d817148f0b1cdccc6cd1d",
+        "anonymized": "6c8f81673dfe161fd8c780162fbc9de6702aaeb59cf3512e0a0bd6305038437c"
+      }
+    },
+    {
+      "match_id": "4829602",
+      "competition": "BUNDESLIGA",
+      "cohort": "retrospective_2025_26",
+      "kickoff_utc": "2026-05-02T13:30:00+00:00",
+      "cutoff_utc": "2026-05-02T12:30:00+00:00",
+      "labels": {
+        "result_90": "A",
+        "goals_home_90": 1.0,
+        "goals_away_90": 3.0,
+        "over_2_5": true,
+        "btts_yes": true,
+        "corner_total_90": 10.0,
+        "corner_source": "fotmob+footballdata",
+        "corner_over_9_5": true
+      },
+      "state_hashes": {
+        "identity_only": "f3cc1e40a61ffe3675df008865a4a1c9be1a311882c0192dcc47cd04ad096110",
+        "identity_elo": "57a6025cbdc87e8cf3780c77b682ae848da4aadc524cf1475c46dd8c2f0da173",
+        "identity_elo_form": "4b745831976a90fbf73eb9327dae8a37c0b1f4be93227c3457b582cd77ee2824",
+        "full": "725a055aa5a3e0097a29baf9f67f4e0aa01b39ac5e1583c1d56e42aa92b7b76b",
+        "anonymized": "7a7399ea3bce0984c960255040e3db38138f473b202dc28457b724e650f5eb30"
+      }
+    },
+    {
+      "match_id": "4813716",
+      "competition": "EPL",
+      "cohort": "retrospective_2025_26",
+      "kickoff_utc": "2026-05-02T16:30:00+00:00",
+      "cutoff_utc": "2026-05-02T15:30:00+00:00",
+      "labels": {
+        "result_90": "H",
+        "goals_home_90": 3.0,
+        "goals_away_90": 0.0,
+        "over_2_5": true,
+        "btts_yes": false,
+        "corner_total_90": 7.0,
+        "corner_source": "fotmob+footballdata",
+        "corner_over_9_5": false
+      },
+      "state_hashes": {
+        "identity_only": "b1f7309639eb1807ec2b6c8e8a4b57baaa7eda780a8e82483398942d1b31c8ce",
+        "identity_elo": "9113dfd3f137eba4fc7824bfe7033d8b3c0aa4c178094c9ffb4392054c53e16d",
+        "identity_elo_form": "c38f67bbe536d3c3ea34938dc9b04604a27997c5a16af747fc0976d60d3b720d",
+        "full": "9ed4f93fddbb3101e0537ea09d76af2840fc250e7bfa3b68780501c48677c228",
+        "anonymized": "c6bb70b08bd7ee8186c6a47c3841546c3c3470819f9f9055adeb6e4b4bb3bb45"
+      }
+    },
+    {
+      "match_id": "4803381",
+      "competition": "SERIEA",
+      "cohort": "retrospective_2025_26",
+      "kickoff_utc": "2026-05-04T16:30:00+00:00",
+      "cutoff_utc": "2026-05-04T15:30:00+00:00",
+      "labels": {
+        "result_90": "A",
+        "goals_home_90": 1.0,
+        "goals_away_90": 2.0,
+        "over_2_5": true,
+        "btts_yes": true,
+        "corner_total_90": 6.0,
+        "corner_source": "fotmob+footballdata",
+        "corner_over_9_5": false
+      },
+      "state_hashes": {
+        "identity_only": "846577b086517f77003b03dd841638e6fdefa2ba255729cae30fa88000bb1c82",
+        "identity_elo": "0d4acf56eda253cad1df03664ca99f99ef1be99dea6926ad9a0a60ed34cb0ece",
+        "identity_elo_form": "f6d454f43b192e1495cf291ae157ff609c820ab795f2d47f4d822e45fa14de1b",
+        "full": "b0fe77534b3f7d10b453d1f13a6bc276dfc744e44de199c56e797f852d7512de",
+        "anonymized": "d4353f5f918a5d95d26058fadae9893f9152f834fd503c9d6431d6c7c395b9f2"
+      }
+    },
+    {
+      "match_id": "4829604",
+      "competition": "BUNDESLIGA",
+      "cohort": "retrospective_2025_26",
+      "kickoff_utc": "2026-05-08T18:30:00+00:00",
+      "cutoff_utc": "2026-05-08T17:30:00+00:00",
+      "labels": {
+        "result_90": "H",
+        "goals_home_90": 3.0,
+        "goals_away_90": 2.0,
+        "over_2_5": true,
+        "btts_yes": true,
+        "corner_total_90": 8.0,
+        "corner_source": "fotmob+footballdata",
+        "corner_over_9_5": false
+      },
+      "state_hashes": {
+        "identity_only": "5b6688035433e50e9d56b209748547f83294d4c069deddd1e2b2f61fbd60c582",
+        "identity_elo": "dbee9600e88d24ad8e318bc37898dee624340d59e158b43d326377bc49834e30",
+        "identity_elo_form": "ac531ae98ae31a64d002e76b8215f6f25df57c1a16750e352dd0a16c32611d77",
+        "full": "7a1a2d3e6fa39b89860f849893028f2d92002a3c1d29e43a5b8894141d8a96f5",
+        "anonymized": "dd72dd4df2d185de7f7eb6770d9f0770c8ac3fe79eccd0dfbc6cda712135b9bd"
+      }
+    }
+  ]
+}
