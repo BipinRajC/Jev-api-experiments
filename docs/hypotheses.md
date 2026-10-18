@@ -1027,3 +1027,51 @@ SUPPORTED (conditions: 2026-10-19 UTC, `jev-1.13.0`, n=48 paired fixtures; Choic
 Experiment:
 
 022
+
+---
+
+## H067 — As-of performance fields improve 1X2 forecasts over identity-only states
+
+Hypothesis:
+
+Adding as-of performance fields (Elo, table, form, rest, rolling shots/xG) to the identity-only state improves Noul 1X2 three-class Brier by at least 0.02 on paired fixtures.
+
+Status:
+
+INCONCLUSIVE (conditions: 2026-10-19 UTC, `jev-1.13.0`, n=48 paired completed 2025/26 fixtures; identity-only 0.5996 vs full 0.5912 — paired diff +0.006, CI [−0.074, +0.082]; the Elo-only state was nominally best at 0.5594; no contrast excluded zero)
+
+Experiment:
+
+023
+
+---
+
+## H068 — jev-1.14.0 matches jev-1.13.0 on paired football states
+
+Hypothesis:
+
+jev-1.14.0 produces 1X2 distributions matching jev-1.13.0 within the repeat-jitter baseline on identical paired states.
+
+Status:
+
+SUPPORTED (conditions: 2026-10-19 UTC, n=48 paired fixtures, full state; paired 1.13−1.14 Brier diff +0.0096, CI [−0.0047, +0.0247] — within the 0.023–0.025 repeat L1 baseline; identity-only paired diff −0.027, CI includes 0)
+
+Experiment:
+
+023
+
+---
+
+## H069 — Repeat spread holds across state variants
+
+Hypothesis:
+
+Repeat-call L1 spread of the 1X2 distribution stays at or below 0.05 mean on every state variant.
+
+Status:
+
+SUPPORTED (conditions: 2026-10-19 UTC, `jev-1.13.0`, 48 repeat pairs per arm; mean L1 0.0246 (identity+elo+form), 0.0233 (full); max 0.0696)
+
+Experiment:
+
+023

@@ -398,3 +398,20 @@ Only findings measured in this repository.
 - **Limitations:** n=48; retrospective; single band granularity; no calibration map (none admissible). Two earlier 240-call batches were lost to post-loop crashes before run files existed (~$0.05 wasted); the final runner streams append-only to disk with resume and a pre-call label self-check.
 - **Confidence in the finding:** Moderate on the corners Noul-vs-ScoreBands rejection; low on the ranking between Choice and Score bands.
 - **Implications:** For 021+ thresholds, prefer direct Noul questions. If count distributions are needed, Choice band arms are candidates, but calibration work (on development-cohort predictions only) is required before any threshold use.
+
+---
+
+## F030 — Ablating the state changes almost nothing: Jev's football signal rides on team identity, and 1.14 matches 1.13
+
+- **Related hypothesis:** H067, H068, H069
+- **Experiment(s):** 023 (`results/023-state-ablations/run-001.json`, `stream-001.jsonl`)
+- **Conditions:** 2026-10-19 UTC; the 020 pilot's 48 fixtures; Noul 1X2; progressive state variants (STATE-ABL-023-v1) plus anonymized control; jev-1.13.0 and jev-1.14.0 paired; 432 calls, 0 failures, 0 rejections; 679,799 input tokens, $0.0286.
+- **Evidence:**
+  - 1X2 Brier: Elo-only **0.5594** (nominally best), identity-only-1.14 0.5669, identity+elo+form 0.5881, anonymized 0.5901, full-1.13 0.5912, identity-only-1.13 0.5996, full-1.14 0.6034.
+  - Every paired contrast vs full_113 includes zero; identity-only vs full diff +0.006 (CI [−0.074, +0.082]).
+  - 1.13 vs 1.14 on full states: +0.0096 (CI [−0.005, +0.025]) — within repeat jitter.
+  - Repeat L1 spread: 0.0233–0.0246 mean, max 0.070.
+- **Interpretation:** At this sample size the rolling performance statistics add no measurable 1X2 signal beyond team identity; the identity-only state is indistinguishable from the full state, and an Elo-only state is nominally better than everything else. Jev's football knowledge appears to ride on team names (pretraining), which also means retrospective contamination cannot be separated from "genuine knowledge" in this cohort. The two model versions are interchangeable within jitter.
+- **Limitations:** n=48, wide CIs, underpowered for effects < ~0.05; retrospective; single wording; lineup and price arms omitted (no proven data).
+- **Confidence in the finding:** Moderate on "no large state effect"; low on any ranking between reduced states.
+- **Implications:** For 021/024, the full state remains the default (it cannot hurt and encodes provenance), but state size can be cut to Elo-only if token budgets ever matter (~644 vs ~2,290 tokens at similar accuracy, pending larger-sample confirmation). 1.14.0 is a safe paired pilot version.
