@@ -1,7 +1,12 @@
 from __future__ import annotations
 
+import csv
+import io
+import json
 from dataclasses import dataclass
 from datetime import date, datetime, timedelta, timezone
+
+import pandas as pd
 
 # Forward-only sources: they only show "now", so the only way to get as-of history is to archive
 # a timestamped copy every time we look. Raw bodies are stored untouched; parsing happens later.
@@ -51,3 +56,44 @@ def snapshot_jobs(now: datetime, days: int = 5) -> list[SnapshotJob]:
                 SnapshotJob("espn", espn_url(slug, day), f"snapshots/espn/{name}/{day:%Y%m%d}@{ts}.json")
             )
     return jobs
+
+
+def due_espn_jobs(upcoming: pd.DataFrame, now: datetime, *, window_minutes: int = 15) -> list[SnapshotJob]:
+    """One scoreboard fetch per competition/day with a fixture nearing its 60-minute cutoff."""
+    if upcoming.empty:
+        return []
+    deadline = now + timedelta(minutes=window_minutes)
+    pairs = {
+        (r.competition, r.kickoff_utc.date())
+        for r in upcoming.itertuples(index=False)
+        if r.competition in ESPN_SLUGS and now <= r.cutoff_utc <= deadline
+    }
+    ts = stamp(now)
+    return [
+        SnapshotJob("espn", espn_url(ESPN_SLUGS[comp], day), f"snapshots/espn/{comp}/{day:%Y%m%d}@{ts}.json")
+        for comp, day in sorted(pairs)
+    ]
+
+
+def validate_snapshot(job: SnapshotJob, raw: bytes) -> None:
+    """Reject obviously wrong 200 responses before they enter the immutable archive."""
+    if job.source == "espn":
+        try:
+            data = json.loads(raw)
+        except ValueError as exc:
+            raise ValueError("unexpected ESPN scoreboard payload") from exc
+        if not isinstance(data, dict) or not isinstance(data.get("events"), list):
+            raise ValueError("unexpected ESPN scoreboard payload")
+    elif job.source == "fpl":
+        try:
+            data = json.loads(raw)
+        except ValueError as exc:
+            raise ValueError("unexpected FPL bootstrap payload") from exc
+        if not isinstance(data, dict) or not isinstance(data.get("elements"), list):
+            raise ValueError("unexpected FPL bootstrap payload")
+    elif job.source == "footballdata":
+        columns = csv.DictReader(io.StringIO(raw.decode("utf-8-sig"))).fieldnames or []
+        if not {"Div", "Date", "HomeTeam", "AwayTeam"}.issubset(columns):
+            raise ValueError("unexpected football-data fixtures CSV")
+    elif job.source == "clubelo" and b"<html" not in raw[:200].lower():
+        raise ValueError("unexpected ClubElo ranking page")

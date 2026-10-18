@@ -2,6 +2,9 @@ from __future__ import annotations
 
 from datetime import datetime, timedelta, timezone
 
+import pandas as pd
+import pytest
+
 from src.data import snapshots
 
 
@@ -22,3 +25,26 @@ def test_espn_urls_use_single_dates_starting_today_utc() -> None:
     assert "uefa.champions/scoreboard?dates=20261018" in urls[0]
     assert "uefa.champions/scoreboard?dates=20261019" in urls[1]
     assert all("-" not in u.split("dates=")[1] for u in urls)
+
+
+def test_due_jobs_capture_each_competition_date_once_before_the_cutoff() -> None:
+    now = datetime(2026, 10, 20, 17, 40, tzinfo=timezone.utc)
+    upcoming = pd.DataFrame([
+        {"competition": "UCL", "kickoff_utc": now + timedelta(minutes=65), "cutoff_utc": now + timedelta(minutes=5)},
+        {"competition": "UCL", "kickoff_utc": now + timedelta(minutes=70), "cutoff_utc": now + timedelta(minutes=10)},
+        {"competition": "EPL", "kickoff_utc": now + timedelta(hours=3), "cutoff_utc": now + timedelta(hours=2)},
+        {"competition": "LALIGA", "kickoff_utc": now + timedelta(minutes=55), "cutoff_utc": now - timedelta(minutes=5)},
+    ])
+
+    jobs = snapshots.due_espn_jobs(upcoming, now, window_minutes=15)
+
+    assert len(jobs) == 1
+    assert jobs[0].source == "espn"
+    assert "uefa.champions/scoreboard?dates=20261020" in jobs[0].url
+    assert "UCL/20261020@20261020T174000Z.json" in jobs[0].cache_key
+
+
+def test_espn_snapshot_rejects_a_200_html_error_page() -> None:
+    job = snapshots.SnapshotJob("espn", "https://site.api.espn.com/example", "snapshots/espn/EPL/example.json")
+    with pytest.raises(ValueError, match="ESPN scoreboard"):
+        snapshots.validate_snapshot(job, b"<html>temporary error</html>")

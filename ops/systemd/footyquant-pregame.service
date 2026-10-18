@@ -1,0 +1,10 @@
+[Unit]
+Description=Capture football market snapshots near the pre-match cutoff
+
+[Service]
+Type=oneshot
+WorkingDirectory=/home/bipin/jev-api-experiments
+Nice=10
+StandardOutput=append:/home/bipin/jev-api-experiments/logs/pregame.log
+StandardError=append:/home/bipin/jev-api-experiments/logs/pregame.log
+ExecStart=/usr/bin/systemd-inhibit --what=sleep --why="FootyQuant pregame snapshot" --mode=block /usr/bin/flock -n /tmp/footyquant-pregame.lock /home/bipin/jev-api-experiments/.venv/bin/python -m src.data.cli capture-due

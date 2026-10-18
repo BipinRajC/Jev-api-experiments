@@ -1,0 +1,9 @@
+[Unit]
+Description=Check for football fixtures approaching the prediction cutoff every five minutes
+
+[Timer]
+OnCalendar=*-*-* *:0/5:00
+Persistent=false
+
+[Install]
+WantedBy=timers.target

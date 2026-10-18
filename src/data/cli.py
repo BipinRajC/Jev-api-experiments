@@ -1,12 +1,13 @@
 from __future__ import annotations
 
 import argparse
+import json
 import sys
 from collections.abc import Iterable
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
-from src.data import footballdata, fotmob, snapshots, understat
+from src.data import footballdata, fotmob, quotes, snapshots, understat
 from src.data.http import BlockedError, CachedFetcher, FetchError
 from src.utils import REPO_ROOT
 
@@ -66,7 +67,7 @@ def cmd_footballdata(args: argparse.Namespace) -> int:
         except FetchError as exc:
             progress.tick(f"{division}/{year}", from_cache=False, error=str(exc))
     print(progress.summary())
-    return 0
+    return int(progress.failed > 0)
 
 
 def cmd_understat_leagues(args: argparse.Namespace) -> int:
@@ -88,7 +89,7 @@ def cmd_understat_leagues(args: argparse.Namespace) -> int:
         except FetchError as exc:
             progress.tick(f"{league}/{year}", from_cache=False, error=str(exc))
     print(progress.summary())
-    return 0
+    return int(progress.failed > 0)
 
 
 def _understat_match_jobs(leagues: Iterable[str], first: int, last: int) -> list[tuple[str, int, str]]:
@@ -119,7 +120,7 @@ def cmd_understat_matches(args: argparse.Namespace) -> int:
         except FetchError as exc:
             progress.tick(f"{league}/{year}/{match_id}", from_cache=False, error=str(exc))
     print(progress.summary())
-    return 0
+    return int(progress.failed > 0)
 
 
 def _fotmob_seasons(fetcher: CachedFetcher, competition: str, first_year: int, last_year: int) -> list[str]:
@@ -152,7 +153,7 @@ def cmd_fotmob_leagues(args: argparse.Namespace) -> int:
         print(f"BLOCKED: {exc}", file=sys.stderr)
         return 2
     print(progress.summary())
-    return 0
+    return int(progress.failed > 0)
 
 
 def _fotmob_match_jobs(
@@ -205,7 +206,7 @@ def cmd_fotmob_matches(args: argparse.Namespace) -> int:
         except FetchError as exc:
             progress.tick(f"{competition}/{season}/{match_id}", from_cache=False, error=str(exc))
     print(progress.summary())
-    return 0
+    return int(progress.failed > 0)
 
 
 def cmd_snapshot(args: argparse.Namespace) -> int:
@@ -215,7 +216,7 @@ def cmd_snapshot(args: argparse.Namespace) -> int:
     progress = Progress("snapshot", len(jobs))
     for job in jobs:
         try:
-            fetcher.get(job.url, cache_key=job.cache_key)
+            fetcher.get(job.url, cache_key=job.cache_key, validate=lambda body: snapshots.validate_snapshot(job, body))
             progress.tick(f"{job.source} {job.cache_key}", from_cache=False)
         except BlockedError as exc:
             print(f"BLOCKED: {exc}", file=sys.stderr)
@@ -223,7 +224,35 @@ def cmd_snapshot(args: argparse.Namespace) -> int:
         except FetchError as exc:
             progress.tick(job.cache_key, from_cache=False, error=str(exc))
     print(progress.summary())
-    return 0
+    return int(progress.failed > 0)
+
+
+def cmd_capture_due(args: argparse.Namespace, *, now: datetime | None = None) -> int:
+    """Archive near-cutoff ESPN pages and refresh the parsed quote table without a full rebuild."""
+    import pandas as pd
+
+    now = now or datetime.now(timezone.utc)
+    upcoming = pd.read_parquet(DERIVED_DIR / "upcoming.parquet")
+    jobs = snapshots.due_espn_jobs(upcoming, now, window_minutes=args.window_minutes)
+    fetcher = _fetcher(args.interval)
+    progress = Progress("capture-due", len(jobs))
+    for job in jobs:
+        try:
+            result = fetcher.get(job.url, cache_key=job.cache_key, validate=lambda body: snapshots.validate_snapshot(job, body))
+            progress.tick(job.cache_key, from_cache=result.from_cache)
+        except BlockedError as exc:
+            print(f"BLOCKED: {exc}", file=sys.stderr)
+            return 2
+        except FetchError as exc:
+            progress.tick(job.cache_key, from_cache=False, error=str(exc))
+    if jobs:
+        columns = ["match_id", "competition", "kickoff_utc", "cutoff_utc", "home_name", "away_name"]
+        history_path = DERIVED_DIR / "matches.parquet"
+        history = pd.read_parquet(history_path, columns=columns) if history_path.exists() else upcoming.iloc[0:0][columns]
+        fixtures = pd.concat([history, upcoming[columns]], ignore_index=True)
+        quotes.build_quotes_from_cache(RAW_DIR, fixtures).to_parquet(DERIVED_DIR / "forward_quotes.parquet", index=False)
+    print(progress.summary())
+    return int(progress.failed > 0)
 
 
 def cmd_daily(args: argparse.Namespace) -> int:
@@ -247,6 +276,7 @@ def cmd_daily(args: argparse.Namespace) -> int:
         ("snapshot", cmd_snapshot, dict(days=args.days)),
         ("build-tables", cmd_build_tables, dict(from_year=2014)),
         ("build-features", cmd_build_features, dict()),
+        ("audit", cmd_audit, dict()),
     ]
     print(f"=== daily update {datetime.now(timezone.utc):%Y-%m-%d %H:%M:%SZ} season {year}-{(year + 1) % 100:02d} ===", flush=True)
     worst = 0
@@ -285,6 +315,35 @@ def cmd_build_features(_: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_state(args: argparse.Namespace, *, now: datetime | None = None) -> int:
+    """Print an allowlisted Jev state for one historical or upcoming match."""
+    import pandas as pd
+
+    from src.features import state
+
+    input_name = "upcoming_inputs" if args.upcoming else "model_inputs"
+    meta_name = "upcoming" if args.upcoming else "matches"
+    selected = pd.read_parquet(DERIVED_DIR / f"{input_name}.parquet", filters=[("match_id", "==", args.match_id)])
+    meta = pd.read_parquet(DERIVED_DIR / f"{meta_name}.parquet", filters=[("match_id", "==", args.match_id)])
+    if len(selected) != 1 or len(meta) != 1:
+        print(f"match {args.match_id!r} is not present in {input_name}", file=sys.stderr)
+        return 1
+    if args.upcoming and pd.Timestamp(now or datetime.now(timezone.utc)) >= selected.iloc[0]["cutoff_utc"]:
+        print(f"match {args.match_id!r} has passed its 60-minute information cutoff", file=sys.stderr)
+        return 1
+    record = state.state_from_row(selected.iloc[0].to_dict(), meta.iloc[0].to_dict(), anonymized=args.anonymized)
+    print(json.dumps(record, indent=2, allow_nan=False))
+    return 0
+
+
+def cmd_audit(_: argparse.Namespace) -> int:
+    from src.data import audit
+
+    report = audit.audit_derived(DERIVED_DIR)
+    print(json.dumps(report, indent=2))
+    return int(bool(report["errors"]))
+
+
 def cmd_status(_: argparse.Namespace) -> int:
     def count(pattern: str) -> int:
         return sum(1 for p in RAW_DIR.glob(pattern) if not p.name.endswith(".meta.json") and "@" not in p.name)
@@ -294,7 +353,12 @@ def cmd_status(_: argparse.Namespace) -> int:
     print("understat match files:", count("understat/match/*/*/*.json"))
     print("fotmob league files:", count("fotmob/league/*/*.json"))
     print("fotmob match files:", count("fotmob/match/*/*/*.json"))
-    print("snapshots:", count("snapshots/*/*/*"))
+    expected_details = _fotmob_match_jobs(fotmob.COMPETITIONS, 2014, CURRENT_START_YEAR)
+    pending_details = sum(1 for job in expected_details if not (RAW_DIR / fotmob.match_key(*job)).exists())
+    print("fotmob details pending for finished target fixtures:", pending_details)
+    print("snapshots:", sum(
+        1 for p in RAW_DIR.glob("snapshots/*/*/*") if p.is_file() and not p.name.endswith(".meta.json")
+    ))
     size = sum(p.stat().st_size for p in RAW_DIR.rglob("*") if p.is_file()) if RAW_DIR.exists() else 0
     print(f"raw cache size: {size / 1e6:.1f} MB at {RAW_DIR}")
     return 0
@@ -351,6 +415,11 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--interval", type=float, default=1.0)
     p.set_defaults(func=cmd_snapshot)
 
+    p = sub.add_parser("capture-due", help="snapshot ESPN prices near upcoming match cutoffs")
+    p.add_argument("--interval", type=float, default=1.0)
+    p.add_argument("--window-minutes", type=int, default=15)
+    p.set_defaults(func=cmd_capture_due)
+
     p = sub.add_parser("daily", help="incremental update of everything (what the timer runs)")
     p.add_argument("--interval", type=float, default=1.0)
     p.add_argument("--days", type=int, default=5, help="days of ESPN odds to snapshot")
@@ -363,6 +432,15 @@ def build_parser() -> argparse.ArgumentParser:
 
     p = sub.add_parser("build-features", help="as-of features + labels from the derived tables")
     p.set_defaults(func=cmd_build_features)
+
+    p = sub.add_parser("state", help="print an allowlisted JSON state for a match")
+    p.add_argument("--match-id", required=True)
+    p.add_argument("--upcoming", action="store_true", help="read upcoming inputs instead of historical inputs")
+    p.add_argument("--anonymized", action="store_true", help="hide team names and calendar date")
+    p.set_defaults(func=cmd_state)
+
+    p = sub.add_parser("audit", help="check derived tables for unsafe joins, missing details, and label leakage")
+    p.set_defaults(func=cmd_audit)
 
     p = sub.add_parser("status")
     p.set_defaults(func=cmd_status)
