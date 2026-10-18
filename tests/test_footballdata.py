@@ -2,7 +2,11 @@ from __future__ import annotations
 
 from datetime import datetime, timezone
 
+import httpx
+import pytest
+
 from src.data import footballdata, fotmob, understat
+from src.data.http import CachedFetcher, FetchError
 
 HEADER = "Div,Date,Time,HomeTeam,AwayTeam,FTHG,FTAG,FTR,HS,AS,Referee,PSH,PSD,PSA,PSCH,AHh\n"
 
@@ -36,6 +40,21 @@ def test_parse_splits_stats_odds_and_keeps_core_fields() -> None:
     assert m.stats == {"HS": 14.0, "AS": 10.0}
     assert m.odds == {"PSH": 1.63, "PSD": 4.38, "PSA": 5.30, "PSCH": 1.65, "AHh": -1.0}
     assert m.season == "2024-25" and m.source_line == 2
+
+
+def test_post_match_xg_columns_are_stats_not_bookmaker_odds() -> None:
+    raw = (
+        "Date,HomeTeam,AwayTeam,FTHG,FTAG,HxG,AxG,AvgCH\n"
+        "18/10/2026,Arsenal,Chelsea,2,1,2.14,0.91,1.82\n"
+    ).encode()
+    (m,) = footballdata.parse_csv(raw, "E0", 2026)
+    assert m.stats["HxG"] == 2.14 and m.stats["AxG"] == 0.91
+    assert m.odds == {"AvgCH": 1.82}
+
+
+def test_football_data_parser_rejects_a_200_html_page() -> None:
+    with pytest.raises(ValueError, match="football-data CSV columns"):
+        footballdata.parse_csv(b"<html>temporary error</html>", "E0", 2026)
 
 
 def test_parse_skips_blank_and_unplayed_rows_and_tolerates_missing_values() -> None:
@@ -101,6 +120,28 @@ def test_understat_urls_and_match_ids() -> None:
     ).encode()
     assert understat.league_url("La_liga", 2025) == "https://understat.com/getLeagueData/La_liga/2025"
     assert understat.match_ids(raw) == ["1"]
+
+
+def test_understat_does_not_cache_a_malformed_league_response(tmp_path) -> None:
+    client = httpx.Client(transport=httpx.MockTransport(lambda request: httpx.Response(200, json={})))
+    fetcher = CachedFetcher(tmp_path, client=client, min_interval_s=0)
+
+    with pytest.raises(FetchError):
+        understat.fetch_league(fetcher, "EPL", 2026)
+
+    assert not (tmp_path / understat.league_key("EPL", 2026)).exists()
+
+
+def test_fotmob_does_not_cache_a_wrong_match_id(tmp_path) -> None:
+    body = {"general": {"matchId": "wrong", "homeTeam": {"id": 1}, "awayTeam": {"id": 2}},
+            "header": {"status": {}}, "content": {}}
+    client = httpx.Client(transport=httpx.MockTransport(lambda request: httpx.Response(200, json=body)))
+    fetcher = CachedFetcher(tmp_path, client=client, min_interval_s=0)
+
+    with pytest.raises(FetchError):
+        fotmob.fetch_match(fetcher, "EPL", "2026/2027", "expected")
+
+    assert not (tmp_path / fotmob.match_key("EPL", "2026/2027", "expected")).exists()
 
 
 def test_current_start_year_rolls_over_in_july() -> None:

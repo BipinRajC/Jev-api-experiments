@@ -83,14 +83,33 @@ def fetch_league(
     fetcher: CachedFetcher, competition: str, season: str, *, refresh: bool = False
 ) -> FetchResult:
     return fetcher.get(
-        league_url(competition, season), cache_key=league_key(competition, season), refresh=refresh
+        league_url(competition, season), cache_key=league_key(competition, season), refresh=refresh,
+        validate=_validate_league,
     )
 
 
 def fetch_match(
     fetcher: CachedFetcher, competition: str, season: str, match_id: str | int
 ) -> FetchResult:
-    return fetcher.get(match_url(match_id), cache_key=match_key(competition, season, match_id))
+    return fetcher.get(
+        match_url(match_id), cache_key=match_key(competition, season, match_id),
+        validate=lambda raw: _validate_match(raw, str(match_id)),
+    )
+
+
+def _validate_league(raw: bytes) -> None:
+    payload = json.loads(raw)
+    if not isinstance((payload.get("fixtures") or {}).get("allMatches"), list):
+        raise ValueError("unexpected FotMob league payload")
+
+
+def _validate_match(raw: bytes, expected_id: str) -> None:
+    payload = json.loads(raw)
+    general = payload.get("general") or {}
+    if str(general.get("matchId")) != expected_id:
+        raise ValueError(f"FotMob match ID does not match request: expected {expected_id}")
+    if not general.get("homeTeam") or not general.get("awayTeam") or not payload.get("header"):
+        raise ValueError("unexpected FotMob match detail payload")
 
 
 def available_seasons(raw: bytes) -> list[str]:

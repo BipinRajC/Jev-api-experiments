@@ -115,3 +115,12 @@ def test_custom_headers_are_sent(tmp_path: Path) -> None:
     fetcher, _ = make_fetcher(tmp_path, handler)
     fetcher.get("https://x.test/a", cache_key="a", headers={"X-Requested-With": "XMLHttpRequest"})
     assert seen["x-requested-with"] == "XMLHttpRequest"
+
+
+def test_invalid_200_response_is_not_cached(tmp_path: Path) -> None:
+    fetcher, _ = make_fetcher(tmp_path, lambda r: httpx.Response(200, content=b"<html>not JSON</html>"))
+
+    with pytest.raises(FetchError):
+        fetcher.get("https://x.test/data", cache_key="bad.json", validate=lambda body: json.loads(body))
+
+    assert not (tmp_path / "bad.json").exists()

@@ -10,7 +10,7 @@ from typing import Any
 
 import pandas as pd
 
-from src.data import footballdata, fotmob, teams, understat
+from src.data import footballdata, fotmob, markets, quotes, teams, understat
 
 # Stat key in FotMob's matchDetails -> output column. Values like "408 (85%)" produce <col> and <col>_pct.
 STAT_COLUMNS: dict[str, str] = {
@@ -88,6 +88,18 @@ def _goals_by_side(events: dict[str, Any]) -> tuple[list[int], list[int]]:
     return times("homeTeamGoals"), times("awayTeamGoals")
 
 
+def _period_counts(periods: dict[str, Any], period: str, key: str) -> tuple[float, float] | None:
+    for group in (periods.get(period) or {}).get("stats", []):
+        for item in group.get("stats", []):
+            values = item.get("stats")
+            if item.get("key") == key and values and len(values) == 2:
+                home, _ = parse_stat_value(values[0])
+                away, _ = parse_stat_value(values[1])
+                if home is not None and away is not None:
+                    return home, away
+    return None
+
+
 def parse_match_details(raw: bytes, competition: str, season: str) -> dict[str, Any]:
     """Pure parser: one matchDetails payload -> rows for matches/team_stats/shots/players/unavailable."""
     d = json.loads(raw)
@@ -138,6 +150,17 @@ def parse_match_details(raw: bytes, competition: str, season: str) -> dict[str, 
                     row[column] = count
                 if pct is not None:
                     row[f"{column}_pct"] = pct
+
+    if decided_by in ("afterextratime_short", "penalties_short"):
+        first = _period_counts(periods, "FirstHalf", "corners")
+        second = _period_counts(periods, "SecondHalf", "corners")
+        if first and second:
+            for i, row in enumerate(stats):
+                row["corners_90"] = first[i] + second[i]
+    elif decided_by in (None, "fulltime_short"):
+        for row in stats:
+            if "corners" in row:
+                row["corners_90"] = row["corners"]
 
     lineup = content.get("lineup") or {}
     players: list[dict[str, Any]] = []
@@ -258,6 +281,38 @@ def build_matches(raw_dir: Path) -> pd.DataFrame:
     return df.sort_values(["kickoff_utc", "match_id"]).reset_index(drop=True)
 
 
+def build_upcoming(raw_dir: Path, *, as_of: datetime | None = None) -> pd.DataFrame:
+    """Current future fixtures in the six target competitions, without any result fields."""
+    now = as_of or datetime.now(timezone.utc)
+    rows = []
+    for competition, season, path in iter_fixture_files(raw_dir):
+        if competition not in fotmob.COMPETITIONS:
+            continue
+        for fx in fotmob.parse_fixtures(path.read_bytes(), competition, season):
+            if fx.finished or fx.cancelled or fx.kickoff_utc <= now:
+                continue
+            rows.append({
+                "match_id": fx.match_id,
+                "competition": competition,
+                "season": season,
+                "season_start": _season_start(season),
+                "round": fx.round,
+                "kickoff_utc": fx.kickoff_utc,
+                "cutoff_utc": fx.kickoff_utc - timedelta(minutes=60),
+                "home_id": fx.home_id,
+                "home_name": fx.home_name,
+                "away_id": fx.away_id,
+                "away_name": fx.away_name,
+            })
+    columns = ["match_id", "competition", "season", "season_start", "round", "kickoff_utc", "cutoff_utc",
+               "home_id", "home_name", "away_id", "away_name"]
+    df = pd.DataFrame(rows, columns=columns)
+    if not df.empty:
+        df = df.sort_values(["kickoff_utc", "match_id"]).drop_duplicates("match_id", keep="first")
+        df = df.reset_index(drop=True)
+    return df
+
+
 def build_details_tables(raw_dir: Path, matches: pd.DataFrame) -> dict[str, pd.DataFrame]:
     """Parse every saved matchDetails file for the matches known in `matches`."""
     keep = matches[["match_id", "competition", "season"]].astype(str).itertuples(index=False)
@@ -320,14 +375,29 @@ def apply_score_conflicts(matches: pd.DataFrame, odds: pd.DataFrame, us_match: p
 FOOTBALL_DATA_LEAGUES = {spec.football_data: spec for spec in teams.LEAGUE_SPECS}
 
 
+def _fixtures_by_pair(matches: pd.DataFrame) -> dict[tuple[str, int, str, str], list[tuple[str, datetime]]]:
+    index: dict[tuple[str, int, str, str], list[tuple[str, datetime]]] = {}
+    for r in matches.itertuples(index=False):
+        key = (r.competition, r.season_start, r.home_id, r.away_id)
+        index.setdefault(key, []).append((r.match_id, r.kickoff_utc))
+    return index
+
+
+def _match_on_day(candidates: list[tuple[str, datetime]], source_day: date, *, uk_local: bool = False) -> str | None:
+    """Only join a unique fixture within one day of the source's recorded date."""
+    plausible = []
+    for match_id, kickoff in candidates:
+        match_day = kickoff.astimezone(footballdata.KICKOFF_TZ).date() if uk_local else kickoff.date()
+        if abs((match_day - source_day).days) <= 1:
+            plausible.append(match_id)
+    return plausible[0] if len(plausible) == 1 else None
+
+
 def build_odds(raw_dir: Path, matches: pd.DataFrame, years: range) -> tuple[pd.DataFrame, dict[str, int]]:
-    """football-data odds/stats joined to FotMob match ids on (competition, season, home id, away id)."""
+    """football-data odds/stats joined to FotMob ids using teams, season, and fixture date."""
     lookup = matches[matches["decided_by"].fillna("fulltime_short") != "aborted_short"]
     final_score = {r.match_id: (r.final_home_goals, r.final_away_goals) for r in matches.itertuples(index=False)}
-    key_to_match = {
-        (r.competition, r.season_start, r.home_id, r.away_id): r.match_id
-        for r in lookup.itertuples(index=False)
-    }
+    key_to_matches = _fixtures_by_pair(lookup)
     counts = {"rows": 0, "joined": 0, "no_team_link": 0, "no_match": 0}
     rows = []
     for spec in teams.LEAGUE_SPECS:
@@ -343,7 +413,11 @@ def build_odds(raw_dir: Path, matches: pd.DataFrame, years: range) -> tuple[pd.D
                 if home_id is None or away_id is None:
                     counts["no_team_link"] += 1
                     continue
-                match_id = key_to_match.get((spec.fotmob, year, home_id, away_id))
+                match_id = _match_on_day(
+                    key_to_matches.get((spec.fotmob, year, home_id, away_id), []),
+                    m.date,
+                    uk_local=True,
+                )
                 if match_id is None:
                     counts["no_match"] += 1
                     continue
@@ -365,17 +439,26 @@ def build_odds(raw_dir: Path, matches: pd.DataFrame, years: range) -> tuple[pd.D
     return pd.DataFrame(rows), counts
 
 
+def attach_source_timing(matches: pd.DataFrame, odds: pd.DataFrame) -> pd.DataFrame:
+    """Keep FotMob's fixture kickoff and use the earlier recorded kickoff for a safe cutoff."""
+    fd_times = odds[["match_id", "fd_kickoff_utc"]] if not odds.empty else pd.DataFrame(columns=["match_id", "fd_kickoff_utc"])
+    out = matches.merge(fd_times, on="match_id", how="left", validate="one_to_one")
+    out["kickoff_utc"] = pd.to_datetime(out["kickoff_utc"], utc=True)
+    out["fd_kickoff_utc"] = pd.to_datetime(out["fd_kickoff_utc"], utc=True)
+    out["fd_kickoff_delta_min"] = (out["kickoff_utc"] - out["fd_kickoff_utc"]).dt.total_seconds() / 60
+    out["kickoff_disagreement"] = out["fd_kickoff_delta_min"].abs().gt(15).fillna(False)
+    fd_earlier = out["fd_kickoff_utc"].notna() & out["fd_kickoff_utc"].lt(out["kickoff_utc"])
+    out["cutoff_source"] = "fotmob"
+    out.loc[fd_earlier, "cutoff_source"] = "footballdata"
+    out["cutoff_utc"] = out["kickoff_utc"].where(~fd_earlier, out["fd_kickoff_utc"]) - pd.Timedelta(minutes=60)
+    return out
+
+
 def build_understat(raw_dir: Path, matches: pd.DataFrame, years: range) -> tuple[pd.DataFrame, pd.DataFrame, dict[str, int]]:
     """Understat match xG and per-team match metrics (npxG, PPDA, deep, xPts) joined to FotMob ids."""
-    by_key = {
-        (r.competition, r.season_start, r.home_id, r.away_id): r.match_id
-        for r in matches[matches["decided_by"].fillna("fulltime_short") != "aborted_short"].itertuples(index=False)
-    }
+    by_key = _fixtures_by_pair(matches[matches["decided_by"].fillna("fulltime_short") != "aborted_short"])
     final_score = {r.match_id: (r.final_home_goals, r.final_away_goals) for r in matches.itertuples(index=False)}
-    by_team_day: dict[tuple[str, date], list[str]] = {}
-    for r in matches.itertuples(index=False):
-        for team_id in (r.home_id, r.away_id):
-            by_team_day.setdefault((team_id, r.kickoff_utc.date()), []).append(r.match_id)
+    fixture_day = {r.match_id: r.kickoff_utc.date() for r in matches.itertuples(index=False)}
     match_rows, team_rows = [], []
     counts = {"matches": 0, "matches_joined": 0, "team_rows": 0, "team_rows_joined": 0}
     for spec in teams.LEAGUE_SPECS:
@@ -386,35 +469,48 @@ def build_understat(raw_dir: Path, matches: pd.DataFrame, years: range) -> tuple
             if not path.exists():
                 continue
             data = understat.parse_league(path.read_bytes())
+            history_to_match: dict[tuple[str, str, str, int, int], list[str | None]] = {}
             for m in data["dates"]:
                 if not m.get("isResult"):
                     continue
                 counts["matches"] += 1
                 home_id, away_id = title_to_id.get(m["h"]["title"]), title_to_id.get(m["a"]["title"])
-                match_id = by_key.get((spec.fotmob, year, home_id, away_id))
+                home_goals, away_goals = int(m["goals"]["h"]), int(m["goals"]["a"])
+                source_day = date.fromisoformat(m["datetime"][:10])
+                candidates = by_key.get((spec.fotmob, year, home_id, away_id), [])
+                match_id = _match_on_day(candidates, source_day)
+                # Understat sometimes retains an original/postponed date. A unique team pair with
+                # the same score is still linkable; a repeated pair never falls back to a guess.
+                if match_id is None and len(candidates) == 1 and final_score[candidates[0][0]] == (home_goals, away_goals):
+                    match_id = candidates[0][0]
                 if match_id:
                     counts["matches_joined"] += 1
+                day = m["datetime"][:10]
+                for title, side, gf, ga in (
+                    (m["h"]["title"], "h", home_goals, away_goals),
+                    (m["a"]["title"], "a", away_goals, home_goals),
+                ):
+                    history_to_match.setdefault((title, day, side, gf, ga), []).append(match_id)
                 match_rows.append(
                     {
                         "match_id": match_id,
                         "understat_match_id": str(m["id"]),
+                        "us_source_datetime_text": m["datetime"],
+                        "us_date_gap_days": abs((fixture_day[match_id] - source_day).days) if match_id else None,
                         "us_xg_home": float(m["xG"]["h"]),
                         "us_xg_away": float(m["xG"]["a"]),
-                        "us_goals_home": int(m["goals"]["h"]),
-                        "us_goals_away": int(m["goals"]["a"]),
+                        "us_goals_home": home_goals,
+                        "us_goals_away": away_goals,
                         "us_score_agrees": match_id is not None
-                        and final_score[match_id] == (int(m["goals"]["h"]), int(m["goals"]["a"])),
+                        and final_score[match_id] == (home_goals, away_goals),
                     }
                 )
             for team in data["teams"].values():
                 team_id = title_to_id.get(team["title"])
                 for h in team["history"]:
                     counts["team_rows"] += 1
-                    day = date.fromisoformat(h["date"][:10])
-                    candidates: list[str] = []
-                    for offset in (0, -1, 1):
-                        candidates += by_team_day.get((team_id, day + timedelta(days=offset)), [])
-                    candidates = [c for c in dict.fromkeys(candidates)]
+                    source_key = (team["title"], h["date"][:10], h["h_a"], int(h["scored"]), int(h["missed"]))
+                    candidates = history_to_match.get(source_key, [])
                     match_id = candidates[0] if len(candidates) == 1 else None
                     if match_id:
                         counts["team_rows_joined"] += 1
@@ -450,13 +546,28 @@ def build_all(raw_dir: Path, out_dir: Path, *, first_year: int = 2014, last_year
     years = range(first_year, last_year + 1)
     out_dir.mkdir(parents=True, exist_ok=True)
     matches = build_matches(raw_dir)
+    upcoming = build_upcoming(raw_dir)
     tables = build_details_tables(raw_dir, matches)
+    details_ids = set(tables["details"]["match_id"])
+    matches["detail_expected"] = matches["competition"].isin(fotmob.COMPETITIONS)
+    matches["has_match_details"] = matches["match_id"].isin(details_ids)
+    matches["details_pending"] = matches["detail_expected"] & ~matches["has_match_details"]
     matches = attach_goals_90(matches, tables["details"])
     odds, odds_counts = build_odds(raw_dir, matches, years)
     us_match, us_team, us_counts = build_understat(raw_dir, matches, years)
+    matches = attach_source_timing(matches, odds)
     matches = apply_score_conflicts(matches, odds, us_match)
+    market_labels = markets.build_market_labels(matches, tables["team_stats"], odds)
+    quote_fixtures = pd.concat([
+        matches[["match_id", "competition", "kickoff_utc", "cutoff_utc", "home_name", "away_name"]],
+        upcoming[["match_id", "competition", "kickoff_utc", "cutoff_utc", "home_name", "away_name"]],
+    ], ignore_index=True)
+    forward_quotes = quotes.build_quotes_from_cache(raw_dir, quote_fixtures)
     outputs = {
         "matches": matches,
+        "upcoming": upcoming,
+        "market_labels": market_labels,
+        "forward_quotes": forward_quotes,
         "team_stats": tables["team_stats"],
         "players": tables["players"],
         "shots": tables["shots"],
@@ -473,4 +584,5 @@ def build_all(raw_dir: Path, out_dir: Path, *, first_year: int = 2014, last_year
         "odds_join": odds_counts,
         "understat_join": us_counts,
         "details_files_parsed": len(tables["details"]),
+        "target_details_pending": int(matches["details_pending"].sum()),
     }

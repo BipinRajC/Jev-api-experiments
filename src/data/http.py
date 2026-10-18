@@ -85,12 +85,16 @@ class CachedFetcher:
         cache_key: str,
         headers: dict[str, str] | None = None,
         refresh: bool = False,
+        validate: Callable[[bytes], None] | None = None,
     ) -> FetchResult:
         path = self.path_for(cache_key)
         if path.exists() and not refresh:
-            return FetchResult(path.read_bytes(), from_cache=True, path=path)
+            body = path.read_bytes()
+            self._validate(url, body, validate)
+            return FetchResult(body, from_cache=True, path=path)
 
         body = self._fetch(url, headers)
+        self._validate(url, body, validate)
         changed = True
         if path.exists():
             old = path.read_bytes()
@@ -101,6 +105,15 @@ class CachedFetcher:
         if changed:
             self._store(url, path, body)
         return FetchResult(body, from_cache=False, path=path, changed=changed)
+
+    @staticmethod
+    def _validate(url: str, body: bytes, validate: Callable[[bytes], None] | None) -> None:
+        if validate is None:
+            return
+        try:
+            validate(body)
+        except Exception as exc:
+            raise FetchError(f"invalid response body from {url}: {exc}", url=url, status_code=200) from exc
 
     def _fetch(self, url: str, headers: dict[str, str] | None) -> bytes:
         last_error: Exception | None = None

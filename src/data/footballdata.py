@@ -24,6 +24,7 @@ DIVISIONS: dict[str, str] = {
 # Post-match stat columns (home/away pairs). Everything else numeric is treated as odds.
 STAT_COLUMNS = (
     "HTHG", "HTAG", "HS", "AS", "HST", "AST", "HF", "AF", "HC", "AC", "HY", "AY", "HR", "AR",
+    "HxG", "AxG",
 )
 NON_ODDS_COLUMNS = {
     "Div", "Date", "Time", "HomeTeam", "AwayTeam", "FTHG", "FTAG", "FTR", "HTR", "Referee",
@@ -68,7 +69,8 @@ def fetch_season(
     fetcher: CachedFetcher, division: str, start_year: int, *, refresh: bool = False
 ) -> FetchResult:
     return fetcher.get(
-        csv_url(division, start_year), cache_key=cache_key(division, start_year), refresh=refresh
+        csv_url(division, start_year), cache_key=cache_key(division, start_year), refresh=refresh,
+        validate=lambda raw: parse_csv(raw, division, start_year),
     )
 
 
@@ -99,6 +101,9 @@ def _to_float(text: str | None) -> float | None:
 
 def parse_csv(raw: bytes, division: str, start_year: int) -> list[FDMatch]:
     reader = csv.DictReader(io.StringIO(_decode(raw)))
+    required = {"Date", "HomeTeam", "AwayTeam", "FTHG", "FTAG"}
+    if not required.issubset(reader.fieldnames or []):
+        raise ValueError("unexpected football-data CSV columns")
     matches: list[FDMatch] = []
     for index, row in enumerate(reader, start=2):
         home = (row.get("HomeTeam") or "").strip()

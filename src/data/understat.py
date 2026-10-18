@@ -43,6 +43,7 @@ def fetch_league(
         cache_key=league_key(league, start_year),
         headers=HEADERS,
         refresh=refresh,
+        validate=parse_league,
     )
 
 
@@ -50,7 +51,8 @@ def fetch_match(
     fetcher: CachedFetcher, league: str, start_year: int, match_id: str | int
 ) -> FetchResult:
     return fetcher.get(
-        match_url(match_id), cache_key=match_key(league, start_year, match_id), headers=HEADERS
+        match_url(match_id), cache_key=match_key(league, start_year, match_id), headers=HEADERS,
+        validate=json.loads,
     )
 
 
