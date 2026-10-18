@@ -415,3 +415,21 @@ Only findings measured in this repository.
 - **Limitations:** n=48, wide CIs, underpowered for effects < ~0.05; retrospective; single wording; lineup and price arms omitted (no proven data).
 - **Confidence in the finding:** Moderate on "no large state effect"; low on any ranking between reduced states.
 - **Implications:** For 021/024, the full state remains the default (it cannot hurt and encodes provenance), but state size can be cut to Elo-only if token budgets ever matter (~644 vs ~2,290 tokens at similar accuracy, pending larger-sample confirmation). 1.14.0 is a safe paired pilot version.
+
+---
+
+## F031 — On the locked retrospective cohort, Score 1X2 ties Elo and ML; no Jev arm beats a simple Elo rating
+
+- **Related hypothesis:** H070, H071, H072
+- **Experiment(s):** 021 (`results/021-retrospective-locked/run-003.json`, `analysis-v1.json`, `calibration-v1.json`)
+- **Conditions:** 2026-10-19 UTC; `jev-1.13.0`; all 2,286 eligible retrospective fixtures (1,920 of 2025/26 + 366 already-played 2026/27); six core arms on the frozen 020 question set; 13,716 valid calls (+2,286 superseded attempts from the choice_1x2 routing bug, documented); 34.77M input tokens, $1.4602; frozen mathematical baselines (`BASELINE-021-v1`) and a leak-guarded tabular ML baseline.
+- **Evidence:**
+  - 1X2 Brier: Score **0.5919** < Elo 0.5900 (tie), DC 0.5912 (tie), ML 0.5953 (tie), Noul 0.5982 (significantly worse than Elo and Score), Choice 0.7938 (far worse than everything).
+  - Over 2.5: Score raw **0.24204** — best single number in the study, statistical tie with ML 0.24172; Noul 0.26415 is significantly WORSE than the constant base rate (mean P 0.404 vs frequency 0.554 — a −0.149 conservative bias, four times the synthetic −0.037 of 019).
+  - BTTS/corners: ML and prior baselines lead; several Jev arms significantly worse than the base rate raw.
+  - Out-of-fold calibration (fit 2025/26 → eval 2026/27, n=366): Noul binary over-2.5 0.2691 → 0.2344 (−0.035); Choice 1X2 0.7363 → 0.5862 (−0.150, to Elo-level); Score moves ≤ 0.003 (natively calibrated).
+  - UCL (n=225, separate): Score 0.5434 ≈ Elo 0.5433.
+- **Interpretation:** With teams named, Jev's retrospective 1X2 skill is fully explained by team-strength knowledge an Elo rating already captures — consistent with 023's identity-only ablation. Score's structured 1X2 output is the best-calibrated Jev form. Noul's raw binary outputs are badly miscalibrated on football but carry rank information that a simple one-season calibration recovers (its calibrated over-2.5 Brier is the best 26/27 number). Choice remains probability-unusable without calibration. No edge claim: this cohort cannot rule out Jev having known the results.
+- **Limitations:** retrospective (contamination unresolvable here); no admissible pre-cutoff prices → outcome-only; calibration split single and small (n=366); binary scales not comparable across markets; multiple contrasts are exploratory.
+- **Confidence in the finding:** High on the Score>Noul>Choice 1X2 ordering and the Noul miscalibration; moderate on the Elo tie; low on any binary-market ranking.
+- **Implications:** FootyQuant defaults: Score for 1X2 (raw), calibrated Noul for binary markets, Choice only post-calibration; report Jev-vs-baseline honestly as "no demonstrated retrospective edge over Elo" and let the prospective 024 series decide. The calibration map must be re-fitted chronologically (never on evaluated fixtures).

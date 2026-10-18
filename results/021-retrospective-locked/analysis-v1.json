@@ -1,0 +1,1156 @@
+{
+  "coverage": {
+    "models_returned": [
+      "jev-1.13.0"
+    ],
+    "coverage": {
+      "noul_1x2:ok": 2286,
+      "choice_binary:ok": 2286,
+      "noul_binary:ok": 2286,
+      "score_binary:ok": 2286,
+      "choice_1x2:ok": 2286,
+      "score_1x2:ok": 2286
+    }
+  },
+  "superseded": {
+    "n_stream_lines": 16002,
+    "n_unique_run_local_ids": 13716,
+    "n_superseded_attempts": 2286
+  },
+  "one_x_two": {
+    "noul_1x2": {
+      "n": 2286,
+      "brier_3class": 0.5982,
+      "by_competition": {
+        "BUNDESLIGA": {
+          "n": 356,
+          "brier": 0.58853
+        },
+        "EPL": {
+          "n": 436,
+          "brier": 0.63823
+        },
+        "LALIGA": {
+          "n": 463,
+          "brier": 0.59485
+        },
+        "LIGUE1": {
+          "n": 362,
+          "brier": 0.60618
+        },
+        "SERIEA": {
+          "n": 444,
+          "brier": 0.5874
+        },
+        "UCL": {
+          "n": 225,
+          "brier": 0.55135
+        }
+      },
+      "by_season": {
+        "2025": {
+          "n": 1920,
+          "brier": 0.60217
+        },
+        "2026": {
+          "n": 366,
+          "brier": 0.57741
+        }
+      },
+      "brier_skill_vs_prior": 0.04708
+    },
+    "choice_1x2": {
+      "n": 2286,
+      "brier_3class": 0.79382,
+      "by_competition": {
+        "BUNDESLIGA": {
+          "n": 356,
+          "brier": 0.7583
+        },
+        "EPL": {
+          "n": 436,
+          "brier": 0.88764
+        },
+        "LALIGA": {
+          "n": 463,
+          "brier": 0.76601
+        },
+        "LIGUE1": {
+          "n": 362,
+          "brier": 0.83339
+        },
+        "SERIEA": {
+          "n": 444,
+          "brier": 0.77496
+        },
+        "UCL": {
+          "n": 225,
+          "brier": 0.69901
+        }
+      },
+      "by_season": {
+        "2025": {
+          "n": 1920,
+          "brier": 0.80478
+        },
+        "2026": {
+          "n": 366,
+          "brier": 0.73633
+        }
+      },
+      "brier_skill_vs_prior": -0.14853
+    },
+    "score_1x2": {
+      "n": 2286,
+      "brier_3class": 0.59191,
+      "by_competition": {
+        "BUNDESLIGA": {
+          "n": 356,
+          "brier": 0.57882
+        },
+        "EPL": {
+          "n": 436,
+          "brier": 0.63187
+        },
+        "LALIGA": {
+          "n": 463,
+          "brier": 0.58774
+        },
+        "LIGUE1": {
+          "n": 362,
+          "brier": 0.59908
+        },
+        "SERIEA": {
+          "n": 444,
+          "brier": 0.58625
+        },
+        "UCL": {
+          "n": 225,
+          "brier": 0.5434
+        }
+      },
+      "by_season": {
+        "2025": {
+          "n": 1920,
+          "brier": 0.59541
+        },
+        "2026": {
+          "n": 366,
+          "brier": 0.57354
+        }
+      },
+      "brier_skill_vs_prior": 0.05338
+    },
+    "baseline_prior": {
+      "n": 2288,
+      "brier_3class": 0.6453,
+      "by_competition": {
+        "BUNDESLIGA": {
+          "n": 356,
+          "brier": 0.64425
+        },
+        "EPL": {
+          "n": 436,
+          "brier": 0.65689
+        },
+        "LALIGA": {
+          "n": 463,
+          "brier": 0.63745
+        },
+        "LIGUE1": {
+          "n": 363,
+          "brier": 0.64363
+        },
+        "SERIEA": {
+          "n": 445,
+          "brier": 0.65798
+        },
+        "UCL": {
+          "n": 225,
+          "brier": 0.6183
+        }
+      },
+      "by_season": {
+        "2025": {
+          "n": 1922,
+          "brier": 0.64621
+        },
+        "2026": {
+          "n": 366,
+          "brier": 0.64054
+        }
+      },
+      "brier_skill_vs_prior": 0.0
+    },
+    "baseline_elo": {
+      "n": 2288,
+      "brier_3class": 0.58997,
+      "by_competition": {
+        "BUNDESLIGA": {
+          "n": 356,
+          "brier": 0.57509
+        },
+        "EPL": {
+          "n": 436,
+          "brier": 0.63103
+        },
+        "LALIGA": {
+          "n": 463,
+          "brier": 0.5829
+        },
+        "LIGUE1": {
+          "n": 363,
+          "brier": 0.59285
+        },
+        "SERIEA": {
+          "n": 445,
+          "brier": 0.59021
+        },
+        "UCL": {
+          "n": 225,
+          "brier": 0.54333
+        }
+      },
+      "by_season": {
+        "2025": {
+          "n": 1922,
+          "brier": 0.59326
+        },
+        "2026": {
+          "n": 366,
+          "brier": 0.57268
+        }
+      },
+      "brier_skill_vs_prior": 0.05533
+    },
+    "baseline_dc": {
+      "n": 2099,
+      "brier_3class": 0.59116,
+      "by_competition": {
+        "BUNDESLIGA": {
+          "n": 350,
+          "brier": 0.57524
+        },
+        "EPL": {
+          "n": 430,
+          "brier": 0.63389
+        },
+        "LALIGA": {
+          "n": 416,
+          "brier": 0.57873
+        },
+        "LIGUE1": {
+          "n": 316,
+          "brier": 0.58176
+        },
+        "SERIEA": {
+          "n": 407,
+          "brier": 0.60238
+        },
+        "UCL": {
+          "n": 180,
+          "brier": 0.53996
+        }
+      },
+      "by_season": {
+        "2025": {
+          "n": 1777,
+          "brier": 0.59435
+        },
+        "2026": {
+          "n": 322,
+          "brier": 0.57357
+        }
+      },
+      "brier_skill_vs_prior": 0.05399
+    },
+    "baseline_ml": {
+      "n": 2288,
+      "brier_3class": 0.5953,
+      "by_competition": {
+        "BUNDESLIGA": {
+          "n": 356,
+          "brier": 0.57181
+        },
+        "EPL": {
+          "n": 436,
+          "brier": 0.64659
+        },
+        "LALIGA": {
+          "n": 463,
+          "brier": 0.58115
+        },
+        "LIGUE1": {
+          "n": 363,
+          "brier": 0.59177
+        },
+        "SERIEA": {
+          "n": 445,
+          "brier": 0.58915
+        },
+        "UCL": {
+          "n": 225,
+          "brier": 0.58009
+        }
+      },
+      "by_season": {
+        "2025": {
+          "n": 1922,
+          "brier": 0.59989
+        },
+        "2026": {
+          "n": 366,
+          "brier": 0.57122
+        }
+      },
+      "brier_skill_vs_prior": 0.05
+    }
+  },
+  "binary": {
+    "noul_binary/over_2_5": {
+      "n": 2286,
+      "brier_3class": 0.26415,
+      "by_competition": {
+        "BUNDESLIGA": {
+          "n": 356,
+          "brier": 0.26095
+        },
+        "EPL": {
+          "n": 436,
+          "brier": 0.27216
+        },
+        "LALIGA": {
+          "n": 463,
+          "brier": 0.2604
+        },
+        "LIGUE1": {
+          "n": 362,
+          "brier": 0.26542
+        },
+        "SERIEA": {
+          "n": 444,
+          "brier": 0.26243
+        },
+        "UCL": {
+          "n": 225,
+          "brier": 0.26274
+        }
+      },
+      "by_season": {
+        "2025": {
+          "n": 1920,
+          "brier": 0.2632
+        },
+        "2026": {
+          "n": 366,
+          "brier": 0.26911
+        }
+      },
+      "brier_skill_vs_prior": -0.01637,
+      "brier_skill_vs_dc": -0.01652,
+      "brier_skill_vs_ml": -0.02249
+    },
+    "noul_binary/btts_yes": {
+      "n": 2286,
+      "brier_3class": 0.25957,
+      "by_competition": {
+        "BUNDESLIGA": {
+          "n": 356,
+          "brier": 0.26577
+        },
+        "EPL": {
+          "n": 436,
+          "brier": 0.26216
+        },
+        "LALIGA": {
+          "n": 463,
+          "brier": 0.25736
+        },
+        "LIGUE1": {
+          "n": 362,
+          "brier": 0.25889
+        },
+        "SERIEA": {
+          "n": 444,
+          "brier": 0.25602
+        },
+        "UCL": {
+          "n": 225,
+          "brier": 0.25734
+        }
+      },
+      "by_season": {
+        "2025": {
+          "n": 1920,
+          "brier": 0.26001
+        },
+        "2026": {
+          "n": 366,
+          "brier": 0.25724
+        }
+      },
+      "brier_skill_vs_prior": -0.01162,
+      "brier_skill_vs_dc": -0.00758,
+      "brier_skill_vs_ml": -0.01342
+    },
+    "noul_binary/corners_over_9_5": {
+      "n": 2286,
+      "brier_3class": 0.25497,
+      "by_competition": {
+        "BUNDESLIGA": {
+          "n": 356,
+          "brier": 0.26217
+        },
+        "EPL": {
+          "n": 436,
+          "brier": 0.25849
+        },
+        "LALIGA": {
+          "n": 463,
+          "brier": 0.25438
+        },
+        "LIGUE1": {
+          "n": 362,
+          "brier": 0.25812
+        },
+        "SERIEA": {
+          "n": 444,
+          "brier": 0.2472
+        },
+        "UCL": {
+          "n": 225,
+          "brier": 0.24823
+        }
+      },
+      "by_season": {
+        "2025": {
+          "n": 1920,
+          "brier": 0.25586
+        },
+        "2026": {
+          "n": 366,
+          "brier": 0.25033
+        }
+      },
+      "brier_skill_vs_prior": -0.00483,
+      "brier_skill_vs_ml": -0.00487
+    },
+    "score_binary/over_2_5": {
+      "n": 2286,
+      "brier_3class": 0.24204,
+      "by_competition": {
+        "BUNDESLIGA": {
+          "n": 356,
+          "brier": 0.21989
+        },
+        "EPL": {
+          "n": 436,
+          "brier": 0.2475
+        },
+        "LALIGA": {
+          "n": 463,
+          "brier": 0.24885
+        },
+        "LIGUE1": {
+          "n": 362,
+          "brier": 0.2435
+        },
+        "SERIEA": {
+          "n": 444,
+          "brier": 0.25909
+        },
+        "UCL": {
+          "n": 225,
+          "brier": 0.21652
+        }
+      },
+      "by_season": {
+        "2025": {
+          "n": 1920,
+          "brier": 0.24434
+        },
+        "2026": {
+          "n": 366,
+          "brier": 0.22999
+        }
+      },
+      "brier_skill_vs_prior": 0.00573,
+      "brier_skill_vs_dc": 0.00507,
+      "brier_skill_vs_ml": -0.00038
+    },
+    "score_binary/btts_yes": {
+      "n": 2286,
+      "brier_3class": 0.24949,
+      "by_competition": {
+        "BUNDESLIGA": {
+          "n": 356,
+          "brier": 0.24791
+        },
+        "EPL": {
+          "n": 436,
+          "brier": 0.24903
+        },
+        "LALIGA": {
+          "n": 463,
+          "brier": 0.24332
+        },
+        "LIGUE1": {
+          "n": 362,
+          "brier": 0.25118
+        },
+        "SERIEA": {
+          "n": 444,
+          "brier": 0.25635
+        },
+        "UCL": {
+          "n": 225,
+          "brier": 0.24934
+        }
+      },
+      "by_season": {
+        "2025": {
+          "n": 1920,
+          "brier": 0.25091
+        },
+        "2026": {
+          "n": 366,
+          "brier": 0.24205
+        }
+      },
+      "brier_skill_vs_prior": -0.00155,
+      "brier_skill_vs_dc": 0.00282,
+      "brier_skill_vs_ml": -0.00335
+    },
+    "score_binary/corners_over_9_5": {
+      "n": 2286,
+      "brier_3class": 0.26558,
+      "by_competition": {
+        "BUNDESLIGA": {
+          "n": 356,
+          "brier": 0.25716
+        },
+        "EPL": {
+          "n": 436,
+          "brier": 0.2565
+        },
+        "LALIGA": {
+          "n": 463,
+          "brier": 0.26092
+        },
+        "LIGUE1": {
+          "n": 362,
+          "brier": 0.26549
+        },
+        "SERIEA": {
+          "n": 444,
+          "brier": 0.27996
+        },
+        "UCL": {
+          "n": 225,
+          "brier": 0.27789
+        }
+      },
+      "by_season": {
+        "2025": {
+          "n": 1920,
+          "brier": 0.26663
+        },
+        "2026": {
+          "n": 366,
+          "brier": 0.2601
+        }
+      },
+      "brier_skill_vs_prior": -0.01545,
+      "brier_skill_vs_ml": -0.01548
+    },
+    "choice_binary/over_2_5": {
+      "n": 2286,
+      "brier_3class": 0.24795,
+      "by_competition": {
+        "BUNDESLIGA": {
+          "n": 356,
+          "brier": 0.22553
+        },
+        "EPL": {
+          "n": 436,
+          "brier": 0.25883
+        },
+        "LALIGA": {
+          "n": 463,
+          "brier": 0.25072
+        },
+        "LIGUE1": {
+          "n": 362,
+          "brier": 0.24954
+        },
+        "SERIEA": {
+          "n": 444,
+          "brier": 0.26197
+        },
+        "UCL": {
+          "n": 225,
+          "brier": 0.22646
+        }
+      },
+      "by_season": {
+        "2025": {
+          "n": 1920,
+          "brier": 0.24862
+        },
+        "2026": {
+          "n": 366,
+          "brier": 0.24447
+        }
+      },
+      "brier_skill_vs_prior": -0.00018,
+      "brier_skill_vs_dc": -0.00034,
+      "brier_skill_vs_ml": -0.00629
+    },
+    "choice_binary/btts_yes": {
+      "n": 2286,
+      "brier_3class": 0.26219,
+      "by_competition": {
+        "BUNDESLIGA": {
+          "n": 356,
+          "brier": 0.26497
+        },
+        "EPL": {
+          "n": 436,
+          "brier": 0.26514
+        },
+        "LALIGA": {
+          "n": 463,
+          "brier": 0.24878
+        },
+        "LIGUE1": {
+          "n": 362,
+          "brier": 0.26256
+        },
+        "SERIEA": {
+          "n": 444,
+          "brier": 0.26919
+        },
+        "UCL": {
+          "n": 225,
+          "brier": 0.26521
+        }
+      },
+      "by_season": {
+        "2025": {
+          "n": 1920,
+          "brier": 0.26538
+        },
+        "2026": {
+          "n": 366,
+          "brier": 0.24541
+        }
+      },
+      "brier_skill_vs_prior": -0.01424,
+      "brier_skill_vs_dc": -0.00925,
+      "brier_skill_vs_ml": -0.01604
+    },
+    "choice_binary/corners_over_9_5": {
+      "n": 2286,
+      "brier_3class": 0.26923,
+      "by_competition": {
+        "BUNDESLIGA": {
+          "n": 356,
+          "brier": 0.26842
+        },
+        "EPL": {
+          "n": 436,
+          "brier": 0.26774
+        },
+        "LALIGA": {
+          "n": 463,
+          "brier": 0.25954
+        },
+        "LIGUE1": {
+          "n": 362,
+          "brier": 0.27362
+        },
+        "SERIEA": {
+          "n": 444,
+          "brier": 0.2716
+        },
+        "UCL": {
+          "n": 225,
+          "brier": 0.2816
+        }
+      },
+      "by_season": {
+        "2025": {
+          "n": 1920,
+          "brier": 0.27264
+        },
+        "2026": {
+          "n": 366,
+          "brier": 0.25133
+        }
+      },
+      "brier_skill_vs_prior": -0.01909,
+      "brier_skill_vs_ml": -0.01913
+    },
+    "baseline_prior/over_2_5": {
+      "n": 2288,
+      "brier_3class": 0.24778,
+      "by_competition": {
+        "BUNDESLIGA": {
+          "n": 356,
+          "brier": 0.24231
+        },
+        "EPL": {
+          "n": 436,
+          "brier": 0.24783
+        },
+        "LALIGA": {
+          "n": 463,
+          "brier": 0.25036
+        },
+        "LIGUE1": {
+          "n": 363,
+          "brier": 0.24824
+        },
+        "SERIEA": {
+          "n": 445,
+          "brier": 0.25222
+        },
+        "UCL": {
+          "n": 225,
+          "brier": 0.24148
+        }
+      },
+      "by_season": {
+        "2025": {
+          "n": 1922,
+          "brier": 0.24837
+        },
+        "2026": {
+          "n": 366,
+          "brier": 0.24468
+        }
+      },
+      "brier_skill_vs_prior": 0.39752
+    },
+    "baseline_prior/btts_yes": {
+      "n": 2288,
+      "brier_3class": 0.24795,
+      "by_competition": {
+        "BUNDESLIGA": {
+          "n": 356,
+          "brier": 0.24403
+        },
+        "EPL": {
+          "n": 436,
+          "brier": 0.2472
+        },
+        "LALIGA": {
+          "n": 463,
+          "brier": 0.24697
+        },
+        "LIGUE1": {
+          "n": 363,
+          "brier": 0.24916
+        },
+        "SERIEA": {
+          "n": 445,
+          "brier": 0.25256
+        },
+        "UCL": {
+          "n": 225,
+          "brier": 0.24652
+        }
+      },
+      "by_season": {
+        "2025": {
+          "n": 1922,
+          "brier": 0.24835
+        },
+        "2026": {
+          "n": 366,
+          "brier": 0.24585
+        }
+      },
+      "brier_skill_vs_prior": 0.39736
+    },
+    "baseline_prior/corners_over_9_5": {
+      "n": 2288,
+      "brier_3class": 0.25014,
+      "by_competition": {
+        "BUNDESLIGA": {
+          "n": 356,
+          "brier": 0.24969
+        },
+        "EPL": {
+          "n": 436,
+          "brier": 0.24967
+        },
+        "LALIGA": {
+          "n": 463,
+          "brier": 0.2501
+        },
+        "LIGUE1": {
+          "n": 363,
+          "brier": 0.25017
+        },
+        "SERIEA": {
+          "n": 445,
+          "brier": 0.25081
+        },
+        "UCL": {
+          "n": 225,
+          "brier": 0.25044
+        }
+      },
+      "by_season": {
+        "2025": {
+          "n": 1922,
+          "brier": 0.25013
+        },
+        "2026": {
+          "n": 366,
+          "brier": 0.25015
+        }
+      },
+      "brier_skill_vs_prior": 0.39516
+    },
+    "baseline_dc/over_2_5": {
+      "n": 2099,
+      "brier_3class": 0.24797,
+      "by_competition": {
+        "BUNDESLIGA": {
+          "n": 350,
+          "brier": 0.24467
+        },
+        "EPL": {
+          "n": 430,
+          "brier": 0.24515
+        },
+        "LALIGA": {
+          "n": 416,
+          "brier": 0.25093
+        },
+        "LIGUE1": {
+          "n": 316,
+          "brier": 0.24847
+        },
+        "SERIEA": {
+          "n": 407,
+          "brier": 0.25538
+        },
+        "UCL": {
+          "n": 180,
+          "brier": 0.23666
+        }
+      },
+      "by_season": {
+        "2025": {
+          "n": 1777,
+          "brier": 0.24904
+        },
+        "2026": {
+          "n": 322,
+          "brier": 0.24205
+        }
+      },
+      "brier_skill_vs_prior": 0.39719
+    },
+    "baseline_dc/btts_yes": {
+      "n": 2099,
+      "brier_3class": 0.2525,
+      "by_competition": {
+        "BUNDESLIGA": {
+          "n": 350,
+          "brier": 0.25336
+        },
+        "EPL": {
+          "n": 430,
+          "brier": 0.24825
+        },
+        "LALIGA": {
+          "n": 416,
+          "brier": 0.26133
+        },
+        "LIGUE1": {
+          "n": 316,
+          "brier": 0.24795
+        },
+        "SERIEA": {
+          "n": 407,
+          "brier": 0.25002
+        },
+        "UCL": {
+          "n": 180,
+          "brier": 0.25416
+        }
+      },
+      "by_season": {
+        "2025": {
+          "n": 1777,
+          "brier": 0.25315
+        },
+        "2026": {
+          "n": 322,
+          "brier": 0.24892
+        }
+      },
+      "brier_skill_vs_prior": 0.39266
+    },
+    "baseline_ml/over_2_5": {
+      "n": 2288,
+      "brier_3class": 0.24172,
+      "by_competition": {
+        "BUNDESLIGA": {
+          "n": 356,
+          "brier": 0.22836
+        },
+        "EPL": {
+          "n": 436,
+          "brier": 0.25248
+        },
+        "LALIGA": {
+          "n": 463,
+          "brier": 0.24509
+        },
+        "LIGUE1": {
+          "n": 363,
+          "brier": 0.2385
+        },
+        "SERIEA": {
+          "n": 445,
+          "brier": 0.25214
+        },
+        "UCL": {
+          "n": 225,
+          "brier": 0.21964
+        }
+      },
+      "by_season": {
+        "2025": {
+          "n": 1922,
+          "brier": 0.24414
+        },
+        "2026": {
+          "n": 366,
+          "brier": 0.22896
+        }
+      },
+      "brier_skill_vs_prior": 0.40359
+    },
+    "baseline_ml/btts_yes": {
+      "n": 2288,
+      "brier_3class": 0.24631,
+      "by_competition": {
+        "BUNDESLIGA": {
+          "n": 356,
+          "brier": 0.2396
+        },
+        "EPL": {
+          "n": 436,
+          "brier": 0.24585
+        },
+        "LALIGA": {
+          "n": 463,
+          "brier": 0.24275
+        },
+        "LIGUE1": {
+          "n": 363,
+          "brier": 0.24984
+        },
+        "SERIEA": {
+          "n": 445,
+          "brier": 0.25322
+        },
+        "UCL": {
+          "n": 225,
+          "brier": 0.24578
+        }
+      },
+      "by_season": {
+        "2025": {
+          "n": 1922,
+          "brier": 0.24692
+        },
+        "2026": {
+          "n": 366,
+          "brier": 0.24309
+        }
+      },
+      "brier_skill_vs_prior": 0.39899
+    },
+    "baseline_ml/corners_over_9_5": {
+      "n": 2288,
+      "brier_3class": 0.25011,
+      "by_competition": {
+        "BUNDESLIGA": {
+          "n": 356,
+          "brier": 0.24789
+        },
+        "EPL": {
+          "n": 436,
+          "brier": 0.25146
+        },
+        "LALIGA": {
+          "n": 463,
+          "brier": 0.25424
+        },
+        "LIGUE1": {
+          "n": 363,
+          "brier": 0.25196
+        },
+        "SERIEA": {
+          "n": 445,
+          "brier": 0.24503
+        },
+        "UCL": {
+          "n": 225,
+          "brier": 0.24953
+        }
+      },
+      "by_season": {
+        "2025": {
+          "n": 1922,
+          "brier": 0.25019
+        },
+        "2026": {
+          "n": 366,
+          "brier": 0.24967
+        }
+      },
+      "brier_skill_vs_prior": 0.3952
+    }
+  },
+  "paired_contrasts": {
+    "noul_1x2_vs_score_1x2": {
+      "n_paired": 2286,
+      "mean_diff": 0.00629,
+      "ci95_date_clustered": [
+        0.00358,
+        0.00905
+      ],
+      "excludes_zero": true
+    },
+    "noul_1x2_vs_choice_1x2": {
+      "n_paired": 2286,
+      "mean_diff": -0.19561,
+      "ci95_date_clustered": [
+        -0.2147,
+        -0.17658
+      ],
+      "excludes_zero": true
+    },
+    "noul_binary_vs_score_binary/over_2_5": {
+      "n_paired": 2286,
+      "mean_diff": 0.02211,
+      "ci95_date_clustered": [
+        0.01415,
+        0.03001
+      ],
+      "excludes_zero": true
+    },
+    "noul_binary_vs_choice_binary/over_2_5": {
+      "n_paired": 2286,
+      "mean_diff": 0.01619,
+      "ci95_date_clustered": [
+        0.01108,
+        0.02125
+      ],
+      "excludes_zero": true
+    },
+    "noul_binary_vs_score_binary/btts_yes": {
+      "n_paired": 2286,
+      "mean_diff": 0.01007,
+      "ci95_date_clustered": [
+        0.00663,
+        0.01368
+      ],
+      "excludes_zero": true
+    },
+    "noul_binary_vs_choice_binary/btts_yes": {
+      "n_paired": 2286,
+      "mean_diff": -0.00262,
+      "ci95_date_clustered": [
+        -0.00831,
+        0.00287
+      ],
+      "excludes_zero": false
+    },
+    "noul_binary_vs_score_binary/corners_over_9_5": {
+      "n_paired": 2286,
+      "mean_diff": -0.01061,
+      "ci95_date_clustered": [
+        -0.01817,
+        -0.00321
+      ],
+      "excludes_zero": true
+    },
+    "noul_binary_vs_choice_binary/corners_over_9_5": {
+      "n_paired": 2286,
+      "mean_diff": -0.01426,
+      "ci95_date_clustered": [
+        -0.0197,
+        -0.00906
+      ],
+      "excludes_zero": true
+    },
+    "noul_1x2_vs_elo": {
+      "n_paired": 2286,
+      "mean_diff": 0.0086,
+      "ci95_date_clustered": [
+        0.00321,
+        0.01384
+      ],
+      "excludes_zero": true
+    },
+    "noul_1x2_vs_ml": {
+      "n_paired": 2286,
+      "mean_diff": 0.0032,
+      "ci95_date_clustered": [
+        -0.00464,
+        0.01103
+      ],
+      "excludes_zero": false
+    },
+    "score_1x2_vs_elo": {
+      "n_paired": 2286,
+      "mean_diff": 0.0023,
+      "ci95_date_clustered": [
+        -0.00109,
+        0.00562
+      ],
+      "excludes_zero": false
+    },
+    "score_1x2_vs_ml": {
+      "n_paired": 2286,
+      "mean_diff": -0.0031,
+      "ci95_date_clustered": [
+        -0.0102,
+        0.00389
+      ],
+      "excludes_zero": false
+    },
+    "choice_1x2_vs_elo": {
+      "n_paired": 2286,
+      "mean_diff": 0.20421,
+      "ci95_date_clustered": [
+        0.18207,
+        0.22633
+      ],
+      "excludes_zero": true
+    },
+    "choice_1x2_vs_ml": {
+      "n_paired": 2286,
+      "mean_diff": 0.19881,
+      "ci95_date_clustered": [
+        0.17548,
+        0.22204
+      ],
+      "excludes_zero": true
+    }
+  },
+  "totals": {
+    "stream_records": 13716,
+    "total_input_tokens": 34765950,
+    "total_estimated_cost_usd": 1.4602
+  }
+}

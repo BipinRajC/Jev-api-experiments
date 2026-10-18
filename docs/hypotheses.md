@@ -1075,3 +1075,51 @@ SUPPORTED (conditions: 2026-10-19 UTC, `jev-1.13.0`, 48 repeat pairs per arm; me
 Experiment:
 
 023
+
+---
+
+## H070 — Choice does not trail the other primitives on locked retrospective 1X2
+
+Hypothesis:
+
+On all eligible retrospective fixtures, Choice's native 1X2 distribution is not significantly worse than Noul's, and Score vs Noul shows no significant difference.
+
+Status:
+
+REJECTED for Choice / SUPPORTED for Score's edge (conditions: 2026-10-19 UTC, `jev-1.13.0`, n=2,286 paired fixtures, QSET-020-v1; Choice Brier 0.794 vs Noul 0.598 — paired diff 0.196, date-clustered CI [0.177, 0.215]; Score 0.592 beats Noul by 0.006, CI [0.004, 0.009])
+
+Experiment:
+
+021
+
+---
+
+## H071 — A Jev arm beats the Elo baseline on retrospective 1X2
+
+Hypothesis:
+
+At least one Jev primitive arm achieves significantly better 1X2 Brier than the frozen Elo logistic baseline on the retrospective cohort.
+
+Status:
+
+REJECTED (conditions: 2026-10-19 UTC, n=2,286 paired; Score vs Elo diff +0.0023, CI [−0.0011, +0.0056] — a statistical tie; Noul vs Elo +0.0086, CI [0.0032, 0.0138] — Noul significantly worse; Choice far worse)
+
+Experiment:
+
+021
+
+---
+
+## H072 — Post-hoc calibration does not materially change Jev binary forecasts
+
+Hypothesis:
+
+Fitting a calibration map on earlier (2025/26) Jev predictions and applying it to the untouched 2026/27 fixtures shifts binary Brier by no more than 0.01.
+
+Status:
+
+REJECTED for Noul / SUPPORTED for Score (conditions: 2026-10-19 UTC, CALIB-021-v1, fit 2025/26 → evaluate 2026/27 n=366; Noul over-2.5 Brier 0.2691 → 0.2344 (−0.035); Noul BTTS −0.016; Score moves ≤ 0.003 — it is natively calibrated; Choice 1X2 0.736 → 0.586)
+
+Experiment:
+
+021

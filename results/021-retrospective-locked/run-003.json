@@ -1,0 +1,332 @@
+{
+  "experiment_id": "021-retrospective-locked",
+  "run_id": "run-003",
+  "timestamp_utc": "2026-10-18T21:17:06.234568+00:00",
+  "protocol_version": "021-protocol-v1",
+  "stream_path": "results/021-retrospective-locked/stream-001.jsonl",
+  "model_requested": "jev-1.13.0",
+  "git_sha": "a4d85be4f4c4df49968dc247d96b85a55cc8ec72",
+  "question_set_version": "QSET-020-v1",
+  "summary": {
+    "totals": {
+      "attempted_calls": 16002,
+      "successful_calls": 13716,
+      "failed_calls": 0,
+      "rejected_parses": 2286,
+      "distinct_fixtures": 2286,
+      "repeat_pairs": 0,
+      "total_input_tokens": 34765950,
+      "total_estimated_cost_usd": 1.46017
+    },
+    "arms": {
+      "noul_1x2": {
+        "n_calls": 2286,
+        "events": {
+          "home_win": {
+            "n": 2286,
+            "mean_prob": 0.4405,
+            "brier_binary": {
+              "n": 0,
+              "mean": null
+            },
+            "log_loss_fixed_floor": {
+              "n": 0,
+              "mean": null
+            }
+          },
+          "draw": {
+            "n": 2286,
+            "mean_prob": 0.2302,
+            "brier_binary": {
+              "n": 0,
+              "mean": null
+            },
+            "log_loss_fixed_floor": {
+              "n": 0,
+              "mean": null
+            }
+          },
+          "away_win": {
+            "n": 2286,
+            "mean_prob": 0.3247,
+            "brier_binary": {
+              "n": 0,
+              "mean": null
+            },
+            "log_loss_fixed_floor": {
+              "n": 0,
+              "mean": null
+            }
+          }
+        },
+        "one_x_two": {
+          "n": 2286,
+          "brier_3class": {
+            "n": 2286,
+            "mean": 0.5982,
+            "stdev": 0.39525
+          },
+          "log_loss_fixed_floor": {
+            "n": 2286,
+            "mean": 1.00415,
+            "stdev": 0.5837
+          }
+        }
+      },
+      "choice_binary": {
+        "n_calls": 2286,
+        "events": {
+          "over_2_5": {
+            "n": 2286,
+            "mean_prob": 0.5023,
+            "brier_binary": {
+              "n": 2286,
+              "mean": 0.24795,
+              "stdev": 0.12051
+            },
+            "log_loss_fixed_floor": {
+              "n": 2286,
+              "mean": 0.68926,
+              "stdev": 0.25621
+            }
+          },
+          "btts_yes": {
+            "n": 2286,
+            "mean_prob": 0.5434,
+            "brier_binary": {
+              "n": 2286,
+              "mean": 0.26219,
+              "stdev": 0.16227
+            },
+            "log_loss_fixed_floor": {
+              "n": 2286,
+              "mean": 0.72601,
+              "stdev": 0.37353
+            }
+          },
+          "corners_over_9_5": {
+            "n": 2286,
+            "mean_prob": 0.485,
+            "brier_binary": {
+              "n": 2286,
+              "mean": 0.26923,
+              "stdev": 0.17544
+            },
+            "log_loss_fixed_floor": {
+              "n": 2286,
+              "mean": 0.74046,
+              "stdev": 0.39963
+            }
+          }
+        },
+        "one_x_two": {
+          "n": 0,
+          "brier_3class": {
+            "n": 0,
+            "mean": null
+          },
+          "log_loss_fixed_floor": {
+            "n": 0,
+            "mean": null
+          }
+        }
+      },
+      "noul_binary": {
+        "n_calls": 2286,
+        "events": {
+          "over_2_5": {
+            "n": 2286,
+            "mean_prob": 0.4044,
+            "brier_binary": {
+              "n": 2286,
+              "mean": 0.26415,
+              "stdev": 0.12138
+            },
+            "log_loss_fixed_floor": {
+              "n": 2286,
+              "mean": 0.72283,
+              "stdev": 0.252
+            }
+          },
+          "btts_yes": {
+            "n": 2286,
+            "mean_prob": 0.4423,
+            "brier_binary": {
+              "n": 2286,
+              "mean": 0.25957,
+              "stdev": 0.09397
+            },
+            "log_loss_fixed_floor": {
+              "n": 2286,
+              "mean": 0.71376,
+              "stdev": 0.199
+            }
+          },
+          "corners_over_9_5": {
+            "n": 2286,
+            "mean_prob": 0.4205,
+            "brier_binary": {
+              "n": 2286,
+              "mean": 0.25497,
+              "stdev": 0.10896
+            },
+            "log_loss_fixed_floor": {
+              "n": 2286,
+              "mean": 0.70399,
+              "stdev": 0.22802
+            }
+          }
+        },
+        "one_x_two": {
+          "n": 0,
+          "brier_3class": {
+            "n": 0,
+            "mean": null
+          },
+          "log_loss_fixed_floor": {
+            "n": 0,
+            "mean": null
+          }
+        }
+      },
+      "score_binary": {
+        "n_calls": 2286,
+        "events": {
+          "over_2_5": {
+            "n": 2286,
+            "mean_prob": 0.589,
+            "brier_binary": {
+              "n": 2286,
+              "mean": 0.24204,
+              "stdev": 0.10515
+            },
+            "log_loss_fixed_floor": {
+              "n": 2286,
+              "mean": 0.67648,
+              "stdev": 0.21805
+            }
+          },
+          "btts_yes": {
+            "n": 2286,
+            "mean_prob": 0.5284,
+            "brier_binary": {
+              "n": 2286,
+              "mean": 0.24949,
+              "stdev": 0.08915
+            },
+            "log_loss_fixed_floor": {
+              "n": 2286,
+              "mean": 0.69252,
+              "stdev": 0.18309
+            }
+          },
+          "corners_over_9_5": {
+            "n": 2286,
+            "mean_prob": 0.6125,
+            "brier_binary": {
+              "n": 2286,
+              "mean": 0.26558,
+              "stdev": 0.12754
+            },
+            "log_loss_fixed_floor": {
+              "n": 2286,
+              "mean": 0.7258,
+              "stdev": 0.26391
+            }
+          }
+        },
+        "one_x_two": {
+          "n": 0,
+          "brier_3class": {
+            "n": 0,
+            "mean": null
+          },
+          "log_loss_fixed_floor": {
+            "n": 0,
+            "mean": null
+          }
+        }
+      },
+      "score_1x2": {
+        "n_calls": 2286,
+        "events": {
+          "home_win": {
+            "n": 2286,
+            "mean_prob": 0.4935,
+            "brier_binary": {
+              "n": 0,
+              "mean": null
+            },
+            "log_loss_fixed_floor": {
+              "n": 0,
+              "mean": null
+            }
+          },
+          "draw": {
+            "n": 2286,
+            "mean_prob": 0.258,
+            "brier_binary": {
+              "n": 0,
+              "mean": null
+            },
+            "log_loss_fixed_floor": {
+              "n": 0,
+              "mean": null
+            }
+          },
+          "away_win": {
+            "n": 2286,
+            "mean_prob": 0.3647,
+            "brier_binary": {
+              "n": 0,
+              "mean": null
+            },
+            "log_loss_fixed_floor": {
+              "n": 0,
+              "mean": null
+            }
+          }
+        },
+        "one_x_two": {
+          "n": 2286,
+          "brier_3class": {
+            "n": 2286,
+            "mean": 0.59191,
+            "stdev": 0.35602
+          },
+          "log_loss_fixed_floor": {
+            "n": 2286,
+            "mean": 0.99256,
+            "stdev": 0.4996
+          }
+        }
+      },
+      "choice_1x2": {
+        "n_calls": 2286,
+        "events": {},
+        "one_x_two": {
+          "n": 2286,
+          "brier_3class": {
+            "n": 2286,
+            "mean": 0.79382,
+            "stdev": 0.81128
+          },
+          "log_loss_fixed_floor": {
+            "n": 2286,
+            "mean": 1.66777,
+            "stdev": 1.85642
+          }
+        }
+      }
+    },
+    "repeat_spread": {},
+    "exclusions": [
+      {
+        "stage": "eligibility",
+        "reason": "failed one of label_valid_90 / corner label / corner_conflict / kickoff_disagreement / details_pending",
+        "n_excluded": 28
+      }
+    ]
+  },
+  "note": "Per-call records live in stream-001.jsonl (append-only); this file holds the run summary."
+}

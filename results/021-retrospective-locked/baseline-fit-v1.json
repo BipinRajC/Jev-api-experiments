@@ -1,0 +1,47 @@
+{
+  "baseline_version": "BASELINE-021-v1",
+  "prior_frequencies_dev": {
+    "p_home": 0.44359806272628954,
+    "p_draw": 0.24822494945220294,
+    "p_away": 0.3081769878215075,
+    "p_over_2_5": 0.5279070860958293,
+    "p_btts": 0.5297409131518315,
+    "p_corners_over": 0.5041613767809282,
+    "n": 21267
+  },
+  "elo_logit_classes": [
+    "A",
+    "D",
+    "H"
+  ],
+  "dixon_coles": {
+    "n_teams": 215,
+    "home_adv": 1.3724,
+    "rho": -0.04482,
+    "n_dev_matches": 21267
+  },
+  "corner_model": {
+    "model": "negative_binomial",
+    "p_over": 0.5129,
+    "dispersion": {
+      "mean": 9.838,
+      "variance": 11.6047,
+      "dispersion_ratio": 1.1796
+    },
+    "line": 9.5
+  },
+  "eval_performance": {
+    "prior_1x2_brier": 0.6453,
+    "prior_n": 2288,
+    "elo_1x2_brier": 0.58997,
+    "elo_n": 2288,
+    "dc_1x2_brier": 0.59116,
+    "dc_n": 2099,
+    "prior_over_2_5_brier": 0.24778,
+    "dc_over_2_5_brier": 0.24797,
+    "prior_btts_yes_brier": 0.24795,
+    "dc_btts_yes_brier": 0.2525,
+    "corner_prior_over_brier": 0.25054,
+    "corner_n": 2288
+  }
+}

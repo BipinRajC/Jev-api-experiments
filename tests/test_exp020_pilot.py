@@ -12,9 +12,19 @@ import pytest
 REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT / "experiments" / "020-football-pilot"))
 
+import importlib.util  # noqa: E402
+
 import parsing as P  # noqa: E402
 import questions as Q  # noqa: E402
 import selection as SEL  # noqa: E402
+
+_spec = importlib.util.spec_from_file_location(
+    "exp020_module",
+    REPO_ROOT / "experiments" / "020-football-pilot" / "experiment.py",
+)
+exp020 = importlib.util.module_from_spec(_spec)
+sys.modules["exp020_module"] = exp020  # allow `from exp020_module import ...` in tests
+_spec.loader.exec_module(exp020)
 
 
 # ---------------------------------------------------------------------------
@@ -117,7 +127,7 @@ class TestParsers:
         assert P.parse_choice_1x2({"home": 1.0})[1] is not None
 
     def test_parse_call_full_choice_1x2_body(self):
-        from experiment import parse_call
+        from exp020_module import parse_call
 
         body = {
             "answers": {
@@ -136,7 +146,7 @@ class TestParsers:
         assert parsed["one_x_two"]["confidence"] == 0.9
 
     def test_parse_call_rejects_missing_answer(self):
-        from experiment import parse_call
+        from exp020_module import parse_call
 
         body = {
             "answers": {
@@ -148,7 +158,7 @@ class TestParsers:
         assert parsed["validation"] == "rejected"  # away_win missing -> zero/absent sum
 
     def test_parse_call_score_binary(self):
-        from experiment import parse_call
+        from exp020_module import parse_call
 
         body = {
             "answers": {
@@ -189,7 +199,7 @@ class TestParsers:
 class TestAnalysis:
     def test_repeat_pairs_regression(self):
         """Regression: analyze() must build the r1 index before the r2 diff loop."""
-        from experiment import analyze
+        from exp020_module import analyze
 
         protocol = {
             "fixtures": [
@@ -242,7 +252,7 @@ class TestQuestionSet:
         assert "9.5" in Q.PROPOSITIONS["corners_over_9_5"]
 
     def test_arm_questions_cover_expected_events(self):
-        from experiment import arm_questions
+        from exp020_module import arm_questions
 
         assert set(arm_questions("noul_1x2")) == {"home_win", "draw", "away_win"}
         assert set(arm_questions("noul_binary")) == {

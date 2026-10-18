@@ -1,0 +1,89 @@
+{
+  "calibration_version": "CALIB-021-v1",
+  "train_season": 2025,
+  "eval_season": 2026,
+  "methods": "binary: isotonic + logistic-on-logit (logistic primary); 1x2: multinomial logistic on log-ratio margins",
+  "results": {
+    "choice_1x2/1x2": {
+      "n_train": 1920,
+      "n_eval": 366,
+      "brier_raw_26": 0.73633,
+      "brier_calibrated_26": 0.58615
+    },
+    "choice_binary/btts_yes": {
+      "n_train": 1920,
+      "n_eval": 366,
+      "brier_raw_26": 0.24541,
+      "brier_isotonic_26": 0.24296,
+      "brier_logistic_26": 0.24184
+    },
+    "choice_binary/corners_over_9_5": {
+      "n_train": 1920,
+      "n_eval": 366,
+      "brier_raw_26": 0.25133,
+      "brier_isotonic_26": 0.24872,
+      "brier_logistic_26": 0.24642
+    },
+    "choice_binary/over_2_5": {
+      "n_train": 1920,
+      "n_eval": 366,
+      "brier_raw_26": 0.24447,
+      "brier_isotonic_26": 0.23675,
+      "brier_logistic_26": 0.23603
+    },
+    "noul_1x2/1x2": {
+      "n_train": 1920,
+      "n_eval": 366,
+      "brier_raw_26": 0.57741,
+      "brier_calibrated_26": 0.57907
+    },
+    "noul_binary/btts_yes": {
+      "n_train": 1920,
+      "n_eval": 366,
+      "brier_raw_26": 0.25724,
+      "brier_isotonic_26": 0.24298,
+      "brier_logistic_26": 0.24161
+    },
+    "noul_binary/corners_over_9_5": {
+      "n_train": 1920,
+      "n_eval": 366,
+      "brier_raw_26": 0.25033,
+      "brier_isotonic_26": 0.24976,
+      "brier_logistic_26": 0.24716
+    },
+    "noul_binary/over_2_5": {
+      "n_train": 1920,
+      "n_eval": 366,
+      "brier_raw_26": 0.26911,
+      "brier_isotonic_26": 0.23401,
+      "brier_logistic_26": 0.23442
+    },
+    "score_1x2/1x2": {
+      "n_train": 1920,
+      "n_eval": 366,
+      "brier_raw_26": 0.57354,
+      "brier_calibrated_26": 0.5737
+    },
+    "score_binary/btts_yes": {
+      "n_train": 1920,
+      "n_eval": 366,
+      "brier_raw_26": 0.24205,
+      "brier_isotonic_26": 0.24086,
+      "brier_logistic_26": 0.2417
+    },
+    "score_binary/corners_over_9_5": {
+      "n_train": 1920,
+      "n_eval": 366,
+      "brier_raw_26": 0.2601,
+      "brier_isotonic_26": 0.24827,
+      "brier_logistic_26": 0.24685
+    },
+    "score_binary/over_2_5": {
+      "n_train": 1920,
+      "n_eval": 366,
+      "brier_raw_26": 0.22999,
+      "brier_isotonic_26": 0.23583,
+      "brier_logistic_26": 0.23273
+    }
+  }
+}
