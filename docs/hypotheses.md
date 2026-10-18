@@ -1155,3 +1155,67 @@ UNTESTED (registered 2026-10-19 with the research source docs/footyquant-math-re
 Experiment:
 
 026 (via 024 revision 2)
+
+---
+
+## H075 — Jev prices the extension line markets as well as it prices the core ones
+
+Hypothesis:
+
+Raw Score/Noul forecasts for the 027 lines (goals totals 1.5/3.5, corners 11.5) show Brier skill vs their frozen DC/NB baselines comparable to the core markets' skill pattern from 021 (ties or small gaps, with Noul binary miscalibrated before correction).
+
+Status:
+
+UNTESTED (registered 2026-10-19; evaluation only from settled prospective 024 records)
+
+Experiment:
+
+027 (via 024 revision 3)
+
+---
+
+## H076 — First-goal forecasts are informative
+
+Hypothesis:
+
+Jev's first-goal-by-team forecasts (three-way Choice and binary Noul/Score) achieve better Brier than the constant development-rate baseline on settled prospective fixtures.
+
+Status:
+
+UNTESTED (registered 2026-10-19; label construction verified on shot maps; evaluation only from settled prospective 024 records)
+
+Experiment:
+
+028 (via 024 revision 4)
+
+---
+
+## H077 — Player-prop forecasts beat trailing-rate baselines
+
+Hypothesis:
+
+For registered players (predeclared selection rule), Jev's to-score and shots-on-target forecasts beat trailing-rate Poisson/NB baselines on settled prospective fixtures.
+
+Status:
+
+UNTESTED (registered 2026-10-19; activation pending the as-of player-selection rule and the assist re-parse)
+
+Experiment:
+
+029
+
+---
+
+## H078 — Accumulator joint probabilities are calibrated under independence
+
+Hypothesis:
+
+Same-day multi-leg 1X2 accumulators built from calibrated per-leg forecasts realize win rates consistent with the independence-implied joint probability (no common-factor correlation beyond noise).
+
+Status:
+
+UNTESTED (registered 2026-10-19; retrospective analysis from the frozen 021 artifacts, then prospective via 024)
+
+Experiment:
+
+030

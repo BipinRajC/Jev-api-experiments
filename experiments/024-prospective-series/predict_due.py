@@ -59,6 +59,25 @@ _spec26 = importlib.util.spec_from_file_location(
 Q26 = importlib.util.module_from_spec(_spec26)
 _spec26.loader.exec_module(Q26)
 
+# Experiment 027 lines/totals extension (protocol revision 3).
+_spec27 = importlib.util.spec_from_file_location(
+    "exp027_questions",
+    REPO_ROOT / "experiments" / "027-lines-and-totals" / "questions.py",
+)
+Q27 = importlib.util.module_from_spec(_spec27)
+_spec27.loader.exec_module(Q27)
+
+# Experiment 028 first-goal-by-team extension (protocol revision 4).
+_spec28 = importlib.util.spec_from_file_location(
+    "exp028_questions",
+    REPO_ROOT / "experiments" / "028-first-goal" / "questions.py",
+)
+Q28 = importlib.util.module_from_spec(_spec28)
+sys.modules["exp028_questions"] = (
+    Q28  # so parse_first_goal_choice can be imported inside the runner
+)
+_spec28.loader.exec_module(Q28)
+
 from src.data.cli import DERIVED_DIR  # noqa: E402
 from src.jev_client import (  # noqa: E402
     DEFAULT_BASE_URL,
@@ -83,18 +102,34 @@ ARMS = (
     "noul_ext",
     "score_ext",
     "choice_ext",
+    # 027 lines/totals extension (QSET-027-v1): goals totals 1.5/3.5, corners 11.5
+    "noul_lines",
+    "score_lines",
+    "choice_lines",
+    # 028 first-goal-by-team extension (QSET-028-v1)
+    "noul_first",
+    "score_first",
+    "choice_first",
 )
+
+_EXT_BUILDERS = {
+    "noul_ext": (Q26.noul_ext_questions, Q26.QUESTION_SET_VERSION),
+    "score_ext": (Q26.score_ext_questions, Q26.QUESTION_SET_VERSION),
+    "choice_ext": (Q26.choice_ext_questions, Q26.QUESTION_SET_VERSION),
+    "noul_lines": (Q27.noul_lines_questions, Q27.QUESTION_SET_VERSION),
+    "score_lines": (Q27.score_lines_questions, Q27.QUESTION_SET_VERSION),
+    "choice_lines": (Q27.choice_lines_questions, Q27.QUESTION_SET_VERSION),
+    "noul_first": (Q28.noul_first_goal_questions, Q28.QUESTION_SET_VERSION),
+    "score_first": (Q28.score_first_goal_questions, Q28.QUESTION_SET_VERSION),
+    "choice_first": (Q28.choice_first_goal_question, Q28.QUESTION_SET_VERSION),
+}
 
 
 def arm_questions_for(arm: str) -> tuple[dict[str, dict[str, Any]], str]:
     """Return (questions, question_set_version) for an arm."""
-    if arm in ("noul_ext", "score_ext", "choice_ext"):
-        builder = {
-            "noul_ext": Q26.noul_ext_questions,
-            "score_ext": Q26.score_ext_questions,
-            "choice_ext": Q26.choice_ext_questions,
-        }[arm]
-        return builder(), Q26.QUESTION_SET_VERSION
+    if arm in _EXT_BUILDERS:
+        builder, qset = _EXT_BUILDERS[arm]
+        return builder(), qset
     return exp020.arm_questions(arm), Q20.QUESTION_SET_VERSION
 
 
@@ -293,6 +328,17 @@ def run_fixture(client: JevClient, model: str, fixture: dict[str, Any]) -> None:
         input_tokens = usage.get("input_tokens")
         try:
             parsed = exp020.parse_call(arm, result.body)
+            if arm == "choice_first":
+                # The three-way first-goal Choice needs its own parser.
+                from exp028_questions import parse_first_goal_choice
+
+                fg = parse_first_goal_choice(result.body)
+                parsed["first_goal"] = fg["first_goal"]
+                if fg["validation"] == "rejected":
+                    parsed["validation"] = "rejected"
+                    parsed["rejections"] = (
+                        parsed.get("rejections", []) + fg["rejections"]
+                    )
         except Exception as exc:
             append_record(
                 ATTEMPTS_PATH,

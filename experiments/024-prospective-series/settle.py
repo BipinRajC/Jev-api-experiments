@@ -89,6 +89,7 @@ def main(argv: list[str] | None = None) -> int:
         columns=["match_id", "fd_stat_HTHG", "fd_stat_HTAG"],
     )
     odds_rows = odds.set_index("match_id")
+
     done = settled_keys()
 
     predictions: dict[str, list[dict[str, Any]]] = {}
@@ -99,6 +100,37 @@ def main(argv: list[str] | None = None) -> int:
                 continue
             rec = json.loads(line)
             predictions.setdefault(rec["match_id"], []).append(rec)
+
+    # 028 first-goal labels from the parsed shot maps (null when no shot map).
+    import importlib.util
+
+    _spec28s = importlib.util.spec_from_file_location(
+        "exp028_settle",
+        REPO_ROOT / "experiments" / "028-first-goal" / "questions.py",
+    )
+    Q28s = importlib.util.module_from_spec(_spec28s)
+    _spec28s.loader.exec_module(Q28s)
+    match_meta = pd.read_parquet(
+        DERIVED_DIR / "matches.parquet", columns=["match_id", "home_id", "away_id"]
+    )
+    wanted = list(predictions.keys())
+    shots = pd.read_parquet(
+        DERIVED_DIR / "shots.parquet",
+        columns=[
+            "match_id",
+            "team_id",
+            "minute",
+            "minute_added",
+            "period",
+            "event_type",
+            "is_own_goal",
+        ],
+    )
+    fg = Q28s.build_first_goal_labels(
+        shots, match_meta[match_meta["match_id"].isin(wanted)]
+    )
+    first_goal_by_match = dict(zip(fg["match_id"], fg["first_goal"]))
+
 
     settled = skipped = 0
     labels_hash = labels_sha256(labels_path)
@@ -147,6 +179,8 @@ def main(argv: list[str] | None = None) -> int:
             "corner_conflict": bool(row["corner_conflict"])
             if pd.notna(row["corner_conflict"])
             else False,
+            # 028 first-goal label (from shot maps; null when no shot map exists)
+            "first_goal": first_goal_by_match.get(match_id),
             # 026 extension-market labels (derived; null when the gate fails)
             "home_team_over_1_5": (goals_home >= 2)
             if valid and goals_home is not None
