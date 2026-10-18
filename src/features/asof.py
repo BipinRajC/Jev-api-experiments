@@ -32,7 +32,7 @@ FM_ROLLING = (
     ("shots_on_target", "sot_for"),
     ("possession", "possession"),
     ("passes_accurate_pct", "pass_pct"),
-    ("corners", "corners_for"),
+    ("corners_90", "corners_for"),
     ("yellow_cards", "yellow"),
     ("big_chances", "big_chances_for"),
     ("lineup_rating", "lineup_rating"),
@@ -82,6 +82,13 @@ def _clean(value: Any) -> Any:
     return None if _isnan(value) else value
 
 
+def _cutoff_for(m: dict[str, Any]) -> datetime:
+    saved = m.get("cutoff_utc")
+    if saved is None or pd.isna(saved):
+        return m["kickoff_utc"] - CUTOFF_BEFORE
+    return pd.Timestamp(saved).to_pydatetime()
+
+
 @dataclass
 class Played:
     kickoff: datetime
@@ -103,6 +110,7 @@ class AsOfEngine:
         self.hist: dict[str, list[Played]] = defaultdict(list)
         self.tables: dict[tuple[str, int], dict[str, list[int]]] = defaultdict(dict)  # (comp, season) -> team -> [P,W,D,L,GF,GA,PTS]
         self.team_league: dict[str, str] = {}
+        self.season_league: dict[tuple[str, int], str] = {}
         self.members: dict[tuple[str, int], set[str]] = defaultdict(set)
         self.h2h: dict[frozenset[str], list[tuple[datetime, str, int, int]]] = defaultdict(list)
         self.player_ratings: dict[str, list[float]] = defaultdict(list)
@@ -118,7 +126,7 @@ class AsOfEngine:
         key = (league, season_start)
         if key in self._mean_cache:
             return self._mean_cache[key]
-        teams = self.members.get((league, season_start - 1)) or self.members.get((league, season_start))
+        teams = self.members.get((league, season_start - 1))
         ratings = [self.elo[t] for t in teams or () if t in self.elo]
         if not ratings:
             return None  # nothing known yet: do not cache, a later call may know more
@@ -127,7 +135,7 @@ class AsOfEngine:
 
     def _elo_for(self, team: str, competition: str, season_start: int) -> float:
         """Current Elo of a team, applying the once-per-season pull toward its league mean lazily."""
-        league = self.team_league.get(team) or (competition if competition not in EUROPE else None)
+        league = self.season_league.get((team, season_start)) or self.team_league.get(team) or (competition if competition not in EUROPE else None)
         if team not in self.elo:
             mean = self._league_mean(league, season_start) if league else None
             self.elo[team] = (mean + self.params.newcomer_offset) if mean is not None else self.params.start
@@ -140,9 +148,28 @@ class AsOfEngine:
         return self.elo[team]
 
     # ---------- events ----------
+    def seed_memberships(self, records: list[dict[str, Any]]) -> None:
+        """League participants are known before a season starts, including clubs with zero games."""
+        for m in records:
+            comp, season = m["competition"], m["season_start"]
+            if comp in EUROPE:
+                continue
+            table = self.tables[(comp, season)]
+            for team in (m["home_id"], m["away_id"]):
+                table.setdefault(team, [0, 0, 0, 0, 0, 0, 0])
+                self.members[(comp, season)].add(team)
+                self.season_league[(team, season)] = comp
+
     def apply_result(self, m: dict[str, Any], stats: dict[str, dict[str, Any]], us: dict[str, dict[str, Any]],
                      starters: dict[str, list[str]], ratings: dict[str, dict[str, float]]) -> None:
         home, away, comp, season = m["home_id"], m["away_id"], m["competition"], m["season_start"]
+        if m.get("decided_by") in {"afterextratime_short", "penalties_short"}:
+            # Periods.All includes 120-minute performance. Only regulation corners reconstructed
+            # from first and second half have the same 90-minute unit as other matches.
+            stats = {team: {"corners_90": value["corners_90"]} for team, value in stats.items() if not _isnan(value.get("corners_90"))}
+        else:
+            stats = {team: value | ({"corners_90": value["corners"]} if "corners_90" not in value and not _isnan(value.get("corners")) else {})
+                     for team, value in stats.items()}
         elo_h, elo_a = self._elo_for(home, comp, season), self._elo_for(away, comp, season)
         g_home, g_away = _clean(m["goals_90_home"]), _clean(m["goals_90_away"])
         if g_home is None or g_away is None:
@@ -219,7 +246,7 @@ class AsOfEngine:
                 out[f"{side}_{name}_{label}"] = _mean([p.us[column] for p in window if not _isnan(p.us.get(column))])
 
         # domestic league standing (official table, as of the cutoff)
-        league = comp if comp not in EUROPE else self.team_league.get(team)
+        league = comp if comp not in EUROPE else self.season_league.get((team, season)) or self.team_league.get(team)
         row = self.tables.get((league, season), {}).get(team) if league else None
         out[f"{side}_dom_league"] = league
         if row:
@@ -227,7 +254,7 @@ class AsOfEngine:
             better = sum(1 for r in table.values() if (r[6], r[4] - r[5], r[4]) > (row[6], row[4] - row[5], row[4]))
             out.update({f"{side}_dom_pos": better + 1, f"{side}_dom_played": row[0], f"{side}_dom_pts": row[6],
                         f"{side}_dom_gd": row[4] - row[5], f"{side}_dom_gf": row[4], f"{side}_dom_ga": row[5],
-                        f"{side}_dom_ppg": row[6] / row[0]})
+                        f"{side}_dom_ppg": row[6] / row[0] if row[0] else float("nan")})
         else:
             out.update({f"{side}_{k}": float("nan") for k in ("dom_pos", "dom_played", "dom_pts", "dom_gd", "dom_gf", "dom_ga", "dom_ppg")})
 
@@ -244,7 +271,7 @@ class AsOfEngine:
         return out
 
     def query(self, m: dict[str, Any], starters: dict[str, list[str]]) -> dict[str, Any]:
-        cutoff = m["kickoff_utc"] - CUTOFF_BEFORE
+        cutoff = _cutoff_for(m)
         home, away = m["home_id"], m["away_id"]
         row: dict[str, Any] = {"match_id": m["match_id"], "competition": m["competition"], "season_start": m["season_start"],
                                "round": m.get("round"), "kickoff_utc": m["kickoff_utc"], "cutoff_utc": cutoff,
@@ -273,8 +300,11 @@ def build_features(
     *,
     targets: set[str] = frozenset(TARGETS),
     params: EloParams | None = None,
+    lineups_asof: pd.DataFrame | None = None,
+    future_queries: pd.DataFrame | None = None,
+    future_only: bool = False,
 ) -> pd.DataFrame:
-    """One row per target match with as-of features and (separately named) labels."""
+    """One chronological pass over finished results and optional unplayed fixture queries."""
     stats_by_match: dict[str, dict[str, dict[str, Any]]] = defaultdict(dict)
     for rec in team_stats.to_dict("records"):
         stats_by_match[rec["match_id"]][rec["team_id"]] = rec
@@ -292,24 +322,48 @@ def build_features(
     records = matches.sort_values(["kickoff_utc", "match_id"]).to_dict("records")
     for r in records:
         r["kickoff_utc"] = pd.Timestamp(r["kickoff_utc"]).to_pydatetime()
+    upcoming_records = future_queries.sort_values(["kickoff_utc", "match_id"]).to_dict("records") if future_queries is not None and not future_queries.empty else []
+    for r in upcoming_records:
+        r["kickoff_utc"] = pd.Timestamp(r["kickoff_utc"]).to_pydatetime()
+    cutoffs = {r["match_id"]: _cutoff_for(r) for r in records + upcoming_records}
+    verified_lineups: dict[str, dict[str, list[str]]] = defaultdict(dict)
+    if lineups_asof is not None and not lineups_asof.empty:
+        snapshots: dict[tuple[str, str, datetime], list[str]] = defaultdict(list)
+        for rec in lineups_asof.itertuples(index=False):
+            captured = pd.Timestamp(rec.observed_at_utc).to_pydatetime()
+            if rec.confirmed and rec.match_id in cutoffs and captured <= cutoffs[rec.match_id]:
+                snapshots[(rec.match_id, rec.team_id, captured)].append(str(rec.player_id))
+        latest: dict[tuple[str, str], tuple[datetime, list[str]]] = {}
+        for (match_id, team_id, captured), player_ids in snapshots.items():
+            key = (match_id, team_id)
+            if key not in latest or captured > latest[key][0]:
+                latest[key] = (captured, list(dict.fromkeys(player_ids)))
+        for (match_id, team_id), (_, player_ids) in latest.items():
+            verified_lineups[match_id][team_id] = player_ids
     events: list[tuple[datetime, int, int]] = []
     for i, r in enumerate(records):
         events.append((r["kickoff_utc"] + FINISHED_AFTER, 0, i))  # RESULT sorts before QUERY at ties
+        if not future_only and r["competition"] in targets:
+            events.append((_cutoff_for(r), 1, i))
+    for i, r in enumerate(upcoming_records):
         if r["competition"] in targets:
-            events.append((r["kickoff_utc"] - CUTOFF_BEFORE, 1, i))
+            events.append((_cutoff_for(r), 2, i))
     events.sort()
 
     engine = AsOfEngine(params)
+    engine.seed_memberships(records)
     rows: list[dict[str, Any]] = []
     for _, kind, i in events:
-        m = records[i]
+        m = upcoming_records[i] if kind == 2 else records[i]
         mid = m["match_id"]
         if kind == 0:
             engine.apply_result(m, stats_by_match.get(mid, {}), us_by_match.get(mid, {}),
                                 starters_by_match.get(mid, {}), ratings_by_match.get(mid, {}))
         else:
-            rows.append(engine.query(m, starters_by_match.get(mid, {})))
+            rows.append(engine.query(m, verified_lineups.get(mid, {})))
     features = pd.DataFrame(rows)
+    if future_only:
+        return features.sort_values(["kickoff_utc", "match_id"]).reset_index(drop=True) if not features.empty else features
     labels = matches[["match_id", "goals_90_home", "goals_90_away", "result_unreliable", "decided_by"]].copy()
     labels["result_90"] = pd.Series(
         ["H" if h > a else "D" if h == a else "A" for h, a in zip(labels["goals_90_home"], labels["goals_90_away"])],
@@ -317,3 +371,19 @@ def build_features(
     ).where(labels["goals_90_home"].notna() & labels["goals_90_away"].notna())
     labels = labels.rename(columns={"goals_90_home": "y_goals_home", "goals_90_away": "y_goals_away", "decided_by": "y_decided_by"})
     return features.merge(labels, on="match_id", how="left").sort_values(["kickoff_utc", "match_id"]).reset_index(drop=True)
+
+
+def build_upcoming_features(
+    matches: pd.DataFrame,
+    team_stats: pd.DataFrame,
+    us_team: pd.DataFrame,
+    players: pd.DataFrame,
+    upcoming: pd.DataFrame,
+    *,
+    lineups_asof: pd.DataFrame | None = None,
+) -> pd.DataFrame:
+    """Pre-match features for future fixtures; there is no result event or label for them."""
+    return build_features(
+        matches, team_stats, us_team, players,
+        lineups_asof=lineups_asof, future_queries=upcoming, future_only=True,
+    )

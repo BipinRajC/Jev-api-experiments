@@ -35,7 +35,8 @@ def features(rows: list[dict], **kwargs) -> pd.DataFrame:
     kwargs.setdefault("players", players)
     df = pd.DataFrame(rows)
     df["kickoff_utc"] = pd.to_datetime(df["kickoff_utc"], utc=True)
-    return asof.build_features(df, kwargs["team_stats"], kwargs["us_team"], kwargs["players"])
+    extra = {"lineups_asof": kwargs["lineups_asof"]} if "lineups_asof" in kwargs else {}
+    return asof.build_features(df, kwargs["team_stats"], kwargs["us_team"], kwargs["players"], **extra)
 
 
 def feature_columns(df: pd.DataFrame) -> pd.DataFrame:
@@ -49,9 +50,61 @@ def test_a_match_still_in_progress_at_the_cutoff_is_not_counted() -> None:
         match("evening", T0 + timedelta(hours=5), "A", "D", 1, 1),  # cutoff 16:30: A's win counted
     ]
     f = features(rows).set_index("match_id")
-    assert f.loc["same_day_3pm", "away_dom_played"] != f.loc["same_day_3pm", "away_dom_played"]  # NaN: A has no completed match
+    assert f.loc["same_day_3pm", "away_dom_played"] == 0  # A is in the league, but its result is not yet counted
     assert f.loc["evening", "home_dom_played"] == 1 and f.loc["evening", "home_dom_pts"] == 3
     assert f.loc["evening", "home_elo"] > 1500
+
+
+def test_explicit_conservative_cutoff_precedes_a_delayed_kickoff() -> None:
+    early = match("early", T0, "A", "B", 3, 0)
+    delayed = match("delayed", T0 + timedelta(hours=4), "A", "C", 0, 0)
+    delayed["cutoff_utc"] = T0 + timedelta(hours=2)  # before early result is considered finished
+
+    f = features([early, delayed]).set_index("match_id")
+
+    assert f.loc["delayed", "cutoff_utc"] == delayed["cutoff_utc"]
+    assert f.loc["delayed", "home_elo"] == 1500.0
+
+
+def test_opening_round_table_includes_clubs_before_their_first_result() -> None:
+    rows = [
+        match("a", T0, "A", "B", 1, 0),
+        match("b", T0, "C", "D", 0, 0),
+    ]
+
+    f = features(rows).set_index("match_id")
+
+    assert f.loc["a", "home_dom_played"] == 0
+    assert f.loc["a", "home_dom_pos"] == 1
+    assert pd.isna(f.loc["a", "home_dom_ppg"])
+    assert f.loc["b", "away_dom_played"] == 0
+
+
+def test_ucl_club_has_domestic_membership_before_first_league_result() -> None:
+    european = match("ucl", T0, "A", "X", 1, 0, comp="UCL")
+    domestic = match("domestic", T0 + timedelta(days=1), "A", "B", 2, 1, comp="EPL")
+
+    f = features([european, domestic]).set_index("match_id")
+
+    assert f.loc["ucl", "home_dom_league"] == "EPL"
+    assert f.loc["ucl", "home_dom_played"] == 0
+
+
+def test_extra_time_all_period_stats_do_not_inflate_90_minute_rolling_features() -> None:
+    extra = match("extra", T0, "A", "B", 2, 1, comp="UCL")
+    extra["decided_by"] = "afterextratime_short"
+    extra["goals_90_home"], extra["goals_90_away"] = 1, 1
+    later = match("later", T0 + timedelta(days=7), "A", "C", 0, 0, comp="UCL")
+    stats = pd.DataFrame([
+        {"match_id": "extra", "team_id": "A", "xg": 3.0, "shots": 20, "corners": 9, "corners_90": 8},
+        {"match_id": "extra", "team_id": "B", "xg": 1.5, "shots": 10, "corners": 1, "corners_90": 0},
+    ])
+
+    f = features([extra, later], team_stats=stats).set_index("match_id")
+
+    assert pd.isna(f.loc["later", "home_fm_xg_for_5"])
+    assert pd.isna(f.loc["later", "home_shots_for_5"])
+    assert f.loc["later", "home_corners_for_5"] == 8
 
 
 def test_a_matchs_own_result_never_reaches_its_own_features() -> None:
@@ -154,7 +207,12 @@ def test_rolling_stats_lineups_and_head_to_head() -> None:
             {"match_id": "m3", "team_id": "A", "player_id": "p3", "starter": True, "rating": 5.0},
         ]
     )
-    f = features(rows, team_stats=stats, players=players).set_index("match_id")
+    verified_lineup = pd.DataFrame([
+        {"match_id": "m3", "team_id": "A", "player_id": pid, "confirmed": True,
+         "observed_at_utc": T0 + timedelta(days=14, minutes=-75)}
+        for pid in ("p1", "p3")
+    ])
+    f = features(rows, team_stats=stats, players=players, lineups_asof=verified_lineup).set_index("match_id")
     m3 = f.loc["m3"]
     assert np.isclose(m3["home_fm_xg_for_5"], 1.75) and np.isclose(m3["home_fm_xg_against_5"], 0.75)
     assert np.isclose(m3["home_shots_for_5"], 11.0)
@@ -164,6 +222,98 @@ def test_rolling_stats_lineups_and_head_to_head() -> None:
     assert m3["h2h_n"] == 2 and np.isclose(m3["h2h_home_ppg"], 2.0)
     assert np.isclose(m3["home_rest_days"], 7.0 - 1.0 / 24)  # last match 7 days earlier, cutoff is 1h before kickoff
     assert f.loc["m1", "home_xi_known_players"] == 0 and f.loc["m3", "home_xi_known_players"] == 2
+
+
+def test_completed_match_lineup_is_not_assumed_available_at_cutoff() -> None:
+    rows = [
+        match("past", T0, "A", "B", 1, 0),
+        match("next", T0 + timedelta(days=7), "A", "C", 2, 0),
+    ]
+    players = pd.DataFrame([
+        {"match_id": "past", "team_id": "A", "player_id": "p1", "starter": True, "rating": 8.0},
+        {"match_id": "next", "team_id": "A", "player_id": "p1", "starter": True, "rating": 9.0},
+    ])
+
+    f = features(rows, players=players).set_index("match_id")
+
+    assert pd.isna(f.loc["next", "home_xi_prior_rating"])
+    assert pd.isna(f.loc["next", "home_xi_continuity"])
+    assert f.loc["next", "home_xi_known_players"] == 0
+
+
+def test_lineup_observed_after_the_cutoff_is_ignored() -> None:
+    rows = [match("past", T0, "A", "B", 1, 0), match("next", T0 + timedelta(days=7), "A", "C", 2, 0)]
+    players = pd.DataFrame([
+        {"match_id": "past", "team_id": "A", "player_id": "p1", "starter": True, "rating": 8.0},
+    ])
+    late = pd.DataFrame([{
+        "match_id": "next", "team_id": "A", "player_id": "p1", "confirmed": True,
+        "observed_at_utc": T0 + timedelta(days=7, minutes=-30),
+    }])
+
+    f = features(rows, players=players, lineups_asof=late).set_index("match_id")
+
+    assert pd.isna(f.loc["next", "home_xi_prior_rating"])
+
+
+def test_feature_build_writes_separate_label_free_model_inputs(tmp_path) -> None:
+    from src.features import build
+
+    rows = pd.DataFrame([match("m1", T0, "A", "B", 2, 1)])
+    rows["kickoff_utc"] = pd.to_datetime(rows["kickoff_utc"], utc=True)
+    stats, us, players = empty_inputs()
+    for name, table in (("matches", rows), ("team_stats", stats), ("understat_team_match", us), ("players", players)):
+        table.to_parquet(tmp_path / f"{name}.parquet", index=False)
+
+    build.run(tmp_path)
+
+    safe = pd.read_parquet(tmp_path / "model_inputs.parquet")
+    assert safe.match_id.tolist() == ["m1"]
+    assert not any(c.startswith("y_") or c in {"result_90", "result_unreliable"} for c in safe.columns)
+    assert "home_elo" in safe
+
+
+def test_feature_build_writes_future_inputs_without_outcomes(tmp_path) -> None:
+    from src.features import build
+
+    past = pd.DataFrame([match("past", T0, "A", "B", 2, 0)])
+    past["kickoff_utc"] = pd.to_datetime(past["kickoff_utc"], utc=True)
+    kickoff = T0 + timedelta(days=7)
+    upcoming = pd.DataFrame([{
+        "match_id": "future", "competition": "EPL", "season_start": 2024, "round": "2",
+        "kickoff_utc": kickoff, "cutoff_utc": kickoff - timedelta(minutes=60),
+        "home_id": "A", "away_id": "C",
+    }])
+    stats, us, players = empty_inputs()
+    for name, table in (("matches", past), ("team_stats", stats), ("understat_team_match", us),
+                        ("players", players), ("upcoming", upcoming)):
+        table.to_parquet(tmp_path / f"{name}.parquet", index=False)
+
+    build.run(tmp_path)
+
+    future = pd.read_parquet(tmp_path / "upcoming_inputs.parquet")
+    assert future.match_id.tolist() == ["future"]
+    assert "result_90" not in future and "y_goals_home" not in future
+    assert future.iloc[0]["home_elo"] > 1500
+
+
+def test_upcoming_fixture_uses_prior_results_without_any_future_label() -> None:
+    past = pd.DataFrame([match("past", T0, "A", "B", 2, 0)])
+    past["kickoff_utc"] = pd.to_datetime(past["kickoff_utc"], utc=True)
+    kickoff = T0 + timedelta(days=7)
+    upcoming = pd.DataFrame([{
+        "match_id": "future", "competition": "EPL", "season_start": 2024, "round": "2",
+        "kickoff_utc": kickoff, "cutoff_utc": kickoff - timedelta(minutes=60),
+        "home_id": "A", "away_id": "C",
+    }])
+    stats, us, players = empty_inputs()
+
+    f = asof.build_upcoming_features(past, stats, us, players, upcoming).set_index("match_id")
+
+    assert f.index.tolist() == ["future"]
+    assert f.loc["future", "home_elo"] > 1500
+    assert f.loc["future", "cutoff_utc"] == kickoff - timedelta(minutes=60)
+    assert "result_90" not in f and "y_goals_home" not in f
 
 
 def test_european_match_uses_the_clubs_domestic_table_and_a_bigger_k() -> None:
