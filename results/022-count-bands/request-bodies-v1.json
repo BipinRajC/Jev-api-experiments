@@ -1,0 +1,139 @@
+{
+  "experiment_id": "022-count-bands",
+  "note": "Exact request question payloads per arm for the scored calls in stream-001.jsonl/run-001.json. The runner omitted per-trial request_questions (fixed for later experiments); the payloads are deterministic from QSET-022-v1 and were identical for every fixture in the run.",
+  "questions_module_sha256": "b7a240c65bc3d8cd506222f66828e145175fc6f649cad87579786ae97ee05560",
+  "request_bodies": {
+    "noul_thresholds": {
+      "over_2_5": {
+        "type": "noul",
+        "instructions": "Is the following proposition true? The match has at least 3 total goals after 90 minutes plus stoppage time."
+      },
+      "corners_over_9_5": {
+        "type": "noul",
+        "instructions": "Is the following proposition true? The match has more than 9.5 total corners during 90 minutes plus stoppage time."
+      }
+    },
+    "score_goal_bands": {
+      "score_goal_bands": {
+        "type": "score",
+        "instructions": "How many total goals will the match have after 90 minutes plus stoppage time, excluding extra time and penalties? Answer on the labelled scale.",
+        "criteria": [
+          {
+            "score": 0,
+            "label": "0 goals"
+          },
+          {
+            "score": 1,
+            "label": "1 goal"
+          },
+          {
+            "score": 2,
+            "label": "2 goals"
+          },
+          {
+            "score": 3,
+            "label": "3 goals"
+          },
+          {
+            "score": 4,
+            "label": "4 goals"
+          },
+          {
+            "score": 5,
+            "label": "5 goals"
+          },
+          {
+            "score": 6,
+            "label": "6 goals"
+          },
+          {
+            "score": 7,
+            "label": "7 or more goals"
+          }
+        ]
+      }
+    },
+    "score_corner_bands": {
+      "score_corner_bands": {
+        "type": "score",
+        "instructions": "How many total corners will the match have during 90 minutes plus stoppage time? Answer on the labelled scale.",
+        "criteria": [
+          {
+            "score": 0,
+            "label": "5 or fewer corners"
+          },
+          {
+            "score": 1,
+            "label": "6 corners"
+          },
+          {
+            "score": 2,
+            "label": "7 corners"
+          },
+          {
+            "score": 3,
+            "label": "8 corners"
+          },
+          {
+            "score": 4,
+            "label": "9 corners"
+          },
+          {
+            "score": 5,
+            "label": "10 corners"
+          },
+          {
+            "score": 6,
+            "label": "11 corners"
+          },
+          {
+            "score": 7,
+            "label": "12 corners"
+          },
+          {
+            "score": 8,
+            "label": "13 corners"
+          },
+          {
+            "score": 9,
+            "label": "14 or more corners"
+          }
+        ]
+      }
+    },
+    "choice_goal_bands": {
+      "choice_goal_bands": {
+        "type": "choice",
+        "instructions": "How many total goals will the match have after 90 minutes plus stoppage time, excluding extra time and penalties? Choose the most likely band.",
+        "criteria": {
+          "g0": "0 goals",
+          "g1": "1 goal",
+          "g2": "2 goals",
+          "g3": "3 goals",
+          "g4": "4 goals",
+          "g5": "5 goals",
+          "g6": "6 goals",
+          "g7": "7 or more goals"
+        }
+      }
+    },
+    "choice_corner_bands": {
+      "choice_corner_bands": {
+        "type": "choice",
+        "instructions": "How many total corners will the match have during 90 minutes plus stoppage time? Choose the most likely band.",
+        "criteria": {
+          "c0": "5 or fewer corners",
+          "c1": "6 corners",
+          "c2": "7 corners",
+          "c3": "8 corners",
+          "c4": "9 corners",
+          "c5": "10 corners",
+          "c6": "11 corners",
+          "c7": "12 corners",
+          "c8": "13 corners",
+          "c9": "14 or more corners"
+        }
+      }
+    }
+  }
+}

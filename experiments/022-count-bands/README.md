@@ -78,7 +78,10 @@ outcome frequency, one-hot incidence, tokens/latency/failures.
 
 **Date:** 2026-10-18/19 UTC. **Model returned:** `jev-1.13.0` on all 240 calls.
 **Artifacts:** `results/022-count-bands/protocol-v1.json`, `states-001.json`,
-`stream-001.jsonl`, `run-001.json`.
+`stream-001.jsonl`, `run-001.json`, `request-bodies-v1.json` (exact request payloads —
+the scored trials omit per-trial `request_questions`; the payloads are deterministic
+from QSET-022-v1 and identical for every fixture; runners from 023 onward embed them
+per trial).
 
 ### Over/under Brier at the same line (paired, n=48)
 
