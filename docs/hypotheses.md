@@ -995,3 +995,35 @@ INCONCLUSIVE (conditions: 2026-10-18/19 UTC, `jev-1.13.0`, n=48 paired completed
 Experiment:
 
 020
+
+---
+
+## H065 — Band-derived over/under probabilities match direct threshold questions
+
+Hypothesis:
+
+Deriving the over/under probability from a full Score/Choice count-band distribution performs within 0.05 binary Brier of a direct Noul threshold question at the same line.
+
+Status:
+
+REJECTED for Score bands (conditions: 2026-10-19 UTC, `jev-1.13.0`, n=48 paired completed 2025/26 fixtures, QSET-022-v1; corners over 9.5: paired Noul−ScoreBands diff +0.124, 95% CI [+0.025, +0.225]; over 2.5 contrasts directionally the same but not significant at n=48. Choice bands worse but not significantly)
+
+Experiment:
+
+022
+
+---
+
+## H066 — Band arms produce informative count distributions
+
+Hypothesis:
+
+Score and Choice count-band distributions carry genuine count signal (mean RPS better than a uniform distribution over the same bands).
+
+Status:
+
+SUPPORTED (conditions: 2026-10-19 UTC, `jev-1.13.0`, n=48 paired fixtures; Choice RPS 0.145 goals / 0.189 corners, Score 0.150 / 0.223, both well below uniform 0.313 / 0.344; 0/48 one-hot band answers, unlike Choice 1X2 in 020)
+
+Experiment:
+
+022

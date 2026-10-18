@@ -382,3 +382,19 @@ Only findings measured in this repository.
 - **Limitations:** n=48 (exploratory; no winner claim). Retrospective cohort — Jev may know these results; contamination could not be ruled out. No calibration map fitted (no earlier out-of-sample football predictions exist; raw scores only). Binary-event Brier scales are not comparable with the 1X2 Brier scale. Corners line 9.5 selected from 2014/15–2024/25 development data (over rate 0.514). A `pandas` merge on `competition` initially produced duplicate-column suffixes and was fixed before scoring; run-001.json's embedded summary undercounted `repeat_pairs` due to an analysis-loop ordering bug, corrected in `analysis-run001-v2.json` (trials untouched); a regression test covers it.
 - **Confidence in the finding:** High on pipeline reliability and Choice overconfidence (large paired gap); low on all primitive rankings (n=48, retrospective).
 - **Implications:** For 021+, keep Noul and Score as primary arms; run Choice 1X2 only as a separately labelled arm and consider its `confidence`/`choice` fields rather than its near-one-hot distribution. Freeze the same question set for the locked retrospective run. Set up prospective capture (024) promptly.
+
+---
+
+## F029 — Native count-band outputs carry count signal but are worse threshold probabilities than direct Noul questions
+
+- **Related hypothesis:** H065, H066
+- **Experiment(s):** 022 (`results/022-count-bands/run-001.json`, `stream-001.jsonl`)
+- **Conditions:** 2026-10-19 UTC; `jev-1.13.0`; the 020 pilot's 48 fixtures and frozen states as a predeclared paired sample; QSET-022-v1 (8 goal bands, 10 corner bands locked from 2014/15–2024/25 development data); 240 calls, 0 failures, 0 rejections; 566,410 input tokens, $0.0238.
+- **Evidence:**
+  - Over/under Brier (paired, n=48): goals — Noul direct **0.2462** vs Score bands 0.3255, Choice bands 0.2719; corners — Noul **0.2669** vs Score bands 0.3912, Choice bands 0.2851. Paired Noul−ScoreBands corners diff +0.124 (CI [+0.025, +0.225]).
+  - Band RPS: Choice 0.1447 (goals), 0.1894 (corners); Score 0.1498, 0.2232 — both well below uniform (0.313/0.344); 0/48 one-hot answers.
+  - Derived over-probabilities miscalibrated high for band arms (Score mean P(over 2.5) 0.675 vs frequency 0.396); direct Noul 0.398 vs 0.396.
+- **Interpretation:** Score/Choice band distributions encode real count information (best as count features), but deriving a threshold probability by tail summation loses to simply asking the threshold question directly. Unlike Choice's 1X2 output, granular band options avoid one-hot collapse.
+- **Limitations:** n=48; retrospective; single band granularity; no calibration map (none admissible). Two earlier 240-call batches were lost to post-loop crashes before run files existed (~$0.05 wasted); the final runner streams append-only to disk with resume and a pre-call label self-check.
+- **Confidence in the finding:** Moderate on the corners Noul-vs-ScoreBands rejection; low on the ranking between Choice and Score bands.
+- **Implications:** For 021+ thresholds, prefer direct Noul questions. If count distributions are needed, Choice band arms are candidates, but calibration work (on development-cohort predictions only) is required before any threshold use.
