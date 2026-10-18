@@ -1,0 +1,11 @@
+[Unit]
+Description=FootyQuant daily data update (new matches, current-season files, odds snapshot)
+
+[Service]
+Type=oneshot
+WorkingDirectory=/home/bipin/jev-api-experiments
+Nice=10
+StandardOutput=append:/home/bipin/jev-api-experiments/logs/daily.log
+StandardError=append:/home/bipin/jev-api-experiments/logs/daily.log
+# Hold off suspend while running; flock prevents overlapping runs.
+ExecStart=/usr/bin/systemd-inhibit --what=sleep --why="FootyQuant daily update" --mode=block /usr/bin/flock -n /tmp/footyquant-daily.lock /home/bipin/jev-api-experiments/.venv/bin/python -m src.data.cli daily

@@ -1,0 +1,11 @@
+[Unit]
+Description=Run the FootyQuant daily data update every day
+
+[Timer]
+OnCalendar=*-*-* 07:30:00
+# A missed run fires when the user timer becomes active again.
+Persistent=true
+RandomizedDelaySec=300
+
+[Install]
+WantedBy=timers.target
