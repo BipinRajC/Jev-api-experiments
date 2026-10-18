@@ -5,3 +5,6 @@ pytest>=8,<9
 duckdb>=1.1,<2
 pandas>=2.2,<4
 pyarrow>=17,<27
+numpy>=1.26
+scipy>=1.11
+scikit-learn>=1.4
